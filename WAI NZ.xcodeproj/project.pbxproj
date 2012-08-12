@@ -134,6 +134,7 @@
 				A12A549815D741980025D32A /* WAAppDelegate.h */,
 				A12A549915D741980025D32A /* WAAppDelegate.m */,
 				A12A54BC15D7420B0025D32A /* Controllers */,
+				A12A54E115D7478A0025D32A /* Models */,
 				A12A549015D741980025D32A /* Supporting Files */,
 			);
 			path = "WAI NZ";
@@ -229,6 +230,13 @@
 				A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */,
 			);
 			name = "Submission Photo Gallery";
+			sourceTree = "<group>";
+		};
+		A12A54E115D7478A0025D32A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
