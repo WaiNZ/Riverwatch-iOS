@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		A1C0C53015D7779600A25C58 /* Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A1C0C53115D7779600A25C58 /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildPhases = (
+				A1C0C53415D7779C00A25C58 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Documentation;
+			productName = Documentation;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		A12A548A15D741980025D32A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A548915D741980025D32A /* UIKit.framework */; };
 		A12A548C15D741980025D32A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A548B15D741980025D32A /* Foundation.framework */; };
@@ -28,6 +42,7 @@
 		A12A54DA15D743480025D32A /* WASubmissionDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54D815D743480025D32A /* WASubmissionDescriptionViewController.xib */; };
 		A12A54DF15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A54DD15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m */; };
 		A12A54E015D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */; };
+		A1C0C57815D77A2F00A25C58 /* Tools in Resources */ = {isa = PBXBuildFile; fileRef = A1C0C57715D77A2F00A25C58 /* Tools */; };
 		A1EB129115D76037004ECF71 /* WAFakeImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +89,7 @@
 		A12A54DC15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionPhotoGalleryViewController.h; sourceTree = "<group>"; };
 		A12A54DD15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionPhotoGalleryViewController.m; sourceTree = "<group>"; };
 		A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionPhotoGalleryViewController.xib; sourceTree = "<group>"; };
+		A1C0C57715D77A2F00A25C58 /* Tools */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tools; sourceTree = SOURCE_ROOT; };
 		A1EB128E15D76037004ECF71 /* WAFakeImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAFakeImagePickerController.h; sourceTree = "<group>"; };
 		A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAFakeImagePickerController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,6 +168,7 @@
 				A12A549215D741980025D32A /* InfoPlist.strings */,
 				A12A549515D741980025D32A /* main.m */,
 				A12A549715D741980025D32A /* WAI NZ-Prefix.pch */,
+				A1C0C57715D77A2F00A25C58 /* Tools */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -317,6 +334,7 @@
 			targets = (
 				A12A548415D741980025D32A /* WAI NZ */,
 				A12A549F15D741990025D32A /* WAI NZTests */,
+				A1C0C53015D7779600A25C58 /* Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -332,6 +350,7 @@
 				A12A54D415D743110025D32A /* WASubmissionOverviewViewController.xib in Resources */,
 				A12A54DA15D743480025D32A /* WASubmissionDescriptionViewController.xib in Resources */,
 				A12A54E015D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib in Resources */,
+				A1C0C57815D77A2F00A25C58 /* Tools in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +377,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		A1C0C53415D7779C00A25C58 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "WHOAMI=`whoami`\nmkdir -p /private/var/tmp/$WHOAMI/appledoc/\n\n\"$PROJECT_DIR/Tools/appledoc/appledoc\" \\\n--templates \"$PROJECT_DIR/Tools/appledoc/Templates\" \\\n--project-name \"WAI NZ\" \\\n--project-company \"Water Action Initiative New Zealand\" \\\n--company-id \"nz.ac.victoria.ecs.engr302.${PRODUCT_NAME:rfc1034identifier}\" \\\n--output \"/private/var/tmp/$WHOAMI/appledoc/\" \\\n--ignore \"*.m\" \\\n--logformat xcode \\\n--no-repeat-first-par \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n\"$PROJECT_DIR\"\n\nexit 0 # always ok";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -522,6 +554,20 @@
 			};
 			name = Release;
 		};
+		A1C0C53215D7779600A25C58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A1C0C53315D7779600A25C58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -551,6 +597,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		A1C0C53115D7779600A25C58 /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1C0C53215D7779600A25C58 /* Debug */,
+				A1C0C53315D7779600A25C58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
