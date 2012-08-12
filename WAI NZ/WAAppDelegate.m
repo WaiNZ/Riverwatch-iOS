@@ -8,11 +8,15 @@
 
 #import "WAAppDelegate.h"
 
+#import "WAHomeViewController.h"
+
 @implementation WAAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
+    WAHomeViewController *homeController = [[WAHomeViewController alloc] init];
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:homeController];
+	self.window.rootViewController = navController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
