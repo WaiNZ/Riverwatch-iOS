@@ -22,4 +22,5 @@
     return YES;
 }
 
+@synthesize window;
 @end
