@@ -37,17 +37,32 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - Actions
+
 - (IBAction)takePhoto:(id)sender {
     UIImagePickerController *photoPicker = [[UIImagePickerController alloc] init];
     //check if the camera is available
     
     photoPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+	photoPicker.delegate = self;
     
     [self presentModalViewController:photoPicker animated:YES];
 }
 
 - (IBAction)choosePhoto:(id)sender {
     
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+	// TODO: create submission object with photo
+	// TODO: push on submission overview controller with submission object
+	[picker dismissModalViewControllerAnimated:YES];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+	[picker dismissModalViewControllerAnimated:YES];
 }
 
 @end

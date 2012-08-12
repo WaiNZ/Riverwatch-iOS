@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WAHomeViewController : UIViewController {
+@interface WAHomeViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
     
 }
 

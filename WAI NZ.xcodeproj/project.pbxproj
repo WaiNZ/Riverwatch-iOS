@@ -28,6 +28,7 @@
 		A12A54DA15D743480025D32A /* WASubmissionDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54D815D743480025D32A /* WASubmissionDescriptionViewController.xib */; };
 		A12A54DF15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A54DD15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m */; };
 		A12A54E015D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */; };
+		A1EB129115D76037004ECF71 /* WAFakeImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A1099B9015D76A4200855724 /* WASimulatorData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WASimulatorData.h; sourceTree = "<group>"; };
 		A12A548515D741980025D32A /* WAI NZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WAI NZ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A12A548915D741980025D32A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A12A548B15D741980025D32A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -72,6 +74,8 @@
 		A12A54DC15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionPhotoGalleryViewController.h; sourceTree = "<group>"; };
 		A12A54DD15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionPhotoGalleryViewController.m; sourceTree = "<group>"; };
 		A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionPhotoGalleryViewController.xib; sourceTree = "<group>"; };
+		A1EB128E15D76037004ECF71 /* WAFakeImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAFakeImagePickerController.h; sourceTree = "<group>"; };
+		A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAFakeImagePickerController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,7 @@
 			children = (
 				A12A549815D741980025D32A /* WAAppDelegate.h */,
 				A12A549915D741980025D32A /* WAAppDelegate.m */,
+				A1EB128C15D76019004ECF71 /* Utilities */,
 				A12A54BC15D7420B0025D32A /* Controllers */,
 				A12A54E115D7478A0025D32A /* Models */,
 				A12A549015D741980025D32A /* Supporting Files */,
@@ -237,6 +242,16 @@
 			children = (
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		A1EB128C15D76019004ECF71 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A1EB128E15D76037004ECF71 /* WAFakeImagePickerController.h */,
+				A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */,
+				A1099B9015D76A4200855724 /* WASimulatorData.h */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,6 +373,7 @@
 				A12A54D315D743110025D32A /* WASubmissionOverviewViewController.m in Sources */,
 				A12A54D915D743480025D32A /* WASubmissionDescriptionViewController.m in Sources */,
 				A12A54DF15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m in Sources */,
+				A1EB129115D76037004ECF71 /* WAFakeImagePickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
