@@ -1,0 +1,532 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A12A548A15D741980025D32A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A548915D741980025D32A /* UIKit.framework */; };
+		A12A548C15D741980025D32A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A548B15D741980025D32A /* Foundation.framework */; };
+		A12A548E15D741980025D32A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A548D15D741980025D32A /* CoreGraphics.framework */; };
+		A12A549415D741980025D32A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A12A549215D741980025D32A /* InfoPlist.strings */; };
+		A12A549615D741980025D32A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A549515D741980025D32A /* main.m */; };
+		A12A549A15D741980025D32A /* WAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A549915D741980025D32A /* WAAppDelegate.m */; };
+		A12A54A215D741990025D32A /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A54A115D741990025D32A /* SenTestingKit.framework */; };
+		A12A54A315D741990025D32A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A548915D741980025D32A /* UIKit.framework */; };
+		A12A54A415D741990025D32A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A548B15D741980025D32A /* Foundation.framework */; };
+		A12A54AC15D741990025D32A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A12A54AA15D741990025D32A /* InfoPlist.strings */; };
+		A12A54AF15D741990025D32A /* WAI_NZTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A54AE15D741990025D32A /* WAI_NZTests.m */; };
+		A12A54C215D742360025D32A /* WAHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A54C015D742360025D32A /* WAHomeViewController.m */; };
+		A12A54C315D742360025D32A /* WAHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54C115D742360025D32A /* WAHomeViewController.xib */; };
+		A12A54CE15D742EA0025D32A /* WASubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A54CC15D742EA0025D32A /* WASubmitViewController.m */; };
+		A12A54CF15D742EA0025D32A /* WASubmitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54CD15D742EA0025D32A /* WASubmitViewController.xib */; };
+		A12A54D315D743110025D32A /* WASubmissionOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A54D115D743110025D32A /* WASubmissionOverviewViewController.m */; };
+		A12A54D415D743110025D32A /* WASubmissionOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54D215D743110025D32A /* WASubmissionOverviewViewController.xib */; };
+		A12A54D915D743480025D32A /* WASubmissionDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A54D715D743480025D32A /* WASubmissionDescriptionViewController.m */; };
+		A12A54DA15D743480025D32A /* WASubmissionDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54D815D743480025D32A /* WASubmissionDescriptionViewController.xib */; };
+		A12A54DF15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A54DD15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m */; };
+		A12A54E015D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A12A54A515D741990025D32A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A12A547C15D741980025D32A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A12A548415D741980025D32A;
+			remoteInfo = "WAI NZ";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A12A548515D741980025D32A /* WAI NZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WAI NZ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A12A548915D741980025D32A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A12A548B15D741980025D32A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A12A548D15D741980025D32A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A12A549115D741980025D32A /* WAI NZ-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WAI NZ-Info.plist"; sourceTree = "<group>"; };
+		A12A549315D741980025D32A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A12A549515D741980025D32A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A12A549715D741980025D32A /* WAI NZ-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WAI NZ-Prefix.pch"; sourceTree = "<group>"; };
+		A12A549815D741980025D32A /* WAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WAAppDelegate.h; sourceTree = "<group>"; };
+		A12A549915D741980025D32A /* WAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WAAppDelegate.m; sourceTree = "<group>"; };
+		A12A54A015D741990025D32A /* WAI NZTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WAI NZTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A12A54A115D741990025D32A /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		A12A54A915D741990025D32A /* WAI NZTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WAI NZTests-Info.plist"; sourceTree = "<group>"; };
+		A12A54AB15D741990025D32A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A12A54AD15D741990025D32A /* WAI_NZTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WAI_NZTests.h; sourceTree = "<group>"; };
+		A12A54AE15D741990025D32A /* WAI_NZTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WAI_NZTests.m; sourceTree = "<group>"; };
+		A12A54BF15D742360025D32A /* WAHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAHomeViewController.h; sourceTree = "<group>"; };
+		A12A54C015D742360025D32A /* WAHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAHomeViewController.m; sourceTree = "<group>"; };
+		A12A54C115D742360025D32A /* WAHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WAHomeViewController.xib; sourceTree = "<group>"; };
+		A12A54CB15D742EA0025D32A /* WASubmitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmitViewController.h; sourceTree = "<group>"; };
+		A12A54CC15D742EA0025D32A /* WASubmitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmitViewController.m; sourceTree = "<group>"; };
+		A12A54CD15D742EA0025D32A /* WASubmitViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmitViewController.xib; sourceTree = "<group>"; };
+		A12A54D015D743110025D32A /* WASubmissionOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionOverviewViewController.h; sourceTree = "<group>"; };
+		A12A54D115D743110025D32A /* WASubmissionOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionOverviewViewController.m; sourceTree = "<group>"; };
+		A12A54D215D743110025D32A /* WASubmissionOverviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionOverviewViewController.xib; sourceTree = "<group>"; };
+		A12A54D615D743480025D32A /* WASubmissionDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionDescriptionViewController.h; sourceTree = "<group>"; };
+		A12A54D715D743480025D32A /* WASubmissionDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionDescriptionViewController.m; sourceTree = "<group>"; };
+		A12A54D815D743480025D32A /* WASubmissionDescriptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionDescriptionViewController.xib; sourceTree = "<group>"; };
+		A12A54DC15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionPhotoGalleryViewController.h; sourceTree = "<group>"; };
+		A12A54DD15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionPhotoGalleryViewController.m; sourceTree = "<group>"; };
+		A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionPhotoGalleryViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A12A548215D741980025D32A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A12A548A15D741980025D32A /* UIKit.framework in Frameworks */,
+				A12A548C15D741980025D32A /* Foundation.framework in Frameworks */,
+				A12A548E15D741980025D32A /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A12A549C15D741990025D32A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A12A54A215D741990025D32A /* SenTestingKit.framework in Frameworks */,
+				A12A54A315D741990025D32A /* UIKit.framework in Frameworks */,
+				A12A54A415D741990025D32A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A12A547A15D741980025D32A = {
+			isa = PBXGroup;
+			children = (
+				A12A548F15D741980025D32A /* WAI NZ */,
+				A12A54A715D741990025D32A /* WAI NZTests */,
+				A12A548815D741980025D32A /* Frameworks */,
+				A12A548615D741980025D32A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A12A548615D741980025D32A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A12A548515D741980025D32A /* WAI NZ.app */,
+				A12A54A015D741990025D32A /* WAI NZTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A12A548815D741980025D32A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A12A548915D741980025D32A /* UIKit.framework */,
+				A12A548B15D741980025D32A /* Foundation.framework */,
+				A12A548D15D741980025D32A /* CoreGraphics.framework */,
+				A12A54A115D741990025D32A /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A12A548F15D741980025D32A /* WAI NZ */ = {
+			isa = PBXGroup;
+			children = (
+				A12A549815D741980025D32A /* WAAppDelegate.h */,
+				A12A549915D741980025D32A /* WAAppDelegate.m */,
+				A12A54BC15D7420B0025D32A /* Controllers */,
+				A12A549015D741980025D32A /* Supporting Files */,
+			);
+			path = "WAI NZ";
+			sourceTree = "<group>";
+		};
+		A12A549015D741980025D32A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A12A549115D741980025D32A /* WAI NZ-Info.plist */,
+				A12A549215D741980025D32A /* InfoPlist.strings */,
+				A12A549515D741980025D32A /* main.m */,
+				A12A549715D741980025D32A /* WAI NZ-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A12A54A715D741990025D32A /* WAI NZTests */ = {
+			isa = PBXGroup;
+			children = (
+				A12A54AD15D741990025D32A /* WAI_NZTests.h */,
+				A12A54AE15D741990025D32A /* WAI_NZTests.m */,
+				A12A54A815D741990025D32A /* Supporting Files */,
+			);
+			path = "WAI NZTests";
+			sourceTree = "<group>";
+		};
+		A12A54A815D741990025D32A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A12A54A915D741990025D32A /* WAI NZTests-Info.plist */,
+				A12A54AA15D741990025D32A /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A12A54BC15D7420B0025D32A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A12A54BE15D742180025D32A /* Home */,
+				A12A54C415D742520025D32A /* Submission Overview */,
+				A12A54D515D743200025D32A /* Submission Description */,
+				A12A54DB15D7435B0025D32A /* Submission Photo Gallery */,
+				A12A54CA15D742790025D32A /* Submitting */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A12A54BE15D742180025D32A /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				A12A54BF15D742360025D32A /* WAHomeViewController.h */,
+				A12A54C015D742360025D32A /* WAHomeViewController.m */,
+				A12A54C115D742360025D32A /* WAHomeViewController.xib */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		A12A54C415D742520025D32A /* Submission Overview */ = {
+			isa = PBXGroup;
+			children = (
+				A12A54D015D743110025D32A /* WASubmissionOverviewViewController.h */,
+				A12A54D115D743110025D32A /* WASubmissionOverviewViewController.m */,
+				A12A54D215D743110025D32A /* WASubmissionOverviewViewController.xib */,
+			);
+			name = "Submission Overview";
+			sourceTree = "<group>";
+		};
+		A12A54CA15D742790025D32A /* Submitting */ = {
+			isa = PBXGroup;
+			children = (
+				A12A54CB15D742EA0025D32A /* WASubmitViewController.h */,
+				A12A54CC15D742EA0025D32A /* WASubmitViewController.m */,
+				A12A54CD15D742EA0025D32A /* WASubmitViewController.xib */,
+			);
+			name = Submitting;
+			sourceTree = "<group>";
+		};
+		A12A54D515D743200025D32A /* Submission Description */ = {
+			isa = PBXGroup;
+			children = (
+				A12A54D615D743480025D32A /* WASubmissionDescriptionViewController.h */,
+				A12A54D715D743480025D32A /* WASubmissionDescriptionViewController.m */,
+				A12A54D815D743480025D32A /* WASubmissionDescriptionViewController.xib */,
+			);
+			name = "Submission Description";
+			sourceTree = "<group>";
+		};
+		A12A54DB15D7435B0025D32A /* Submission Photo Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				A12A54DC15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.h */,
+				A12A54DD15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m */,
+				A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */,
+			);
+			name = "Submission Photo Gallery";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A12A548415D741980025D32A /* WAI NZ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A12A54B215D741990025D32A /* Build configuration list for PBXNativeTarget "WAI NZ" */;
+			buildPhases = (
+				A12A548115D741980025D32A /* Sources */,
+				A12A548215D741980025D32A /* Frameworks */,
+				A12A548315D741980025D32A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WAI NZ";
+			productName = "WAI NZ";
+			productReference = A12A548515D741980025D32A /* WAI NZ.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A12A549F15D741990025D32A /* WAI NZTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A12A54B515D741990025D32A /* Build configuration list for PBXNativeTarget "WAI NZTests" */;
+			buildPhases = (
+				A12A549B15D741990025D32A /* Sources */,
+				A12A549C15D741990025D32A /* Frameworks */,
+				A12A549D15D741990025D32A /* Resources */,
+				A12A549E15D741990025D32A /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A12A54A615D741990025D32A /* PBXTargetDependency */,
+			);
+			name = "WAI NZTests";
+			productName = "WAI NZTests";
+			productReference = A12A54A015D741990025D32A /* WAI NZTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A12A547C15D741980025D32A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = WA;
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Water Action Initiative New Zealand";
+			};
+			buildConfigurationList = A12A547F15D741980025D32A /* Build configuration list for PBXProject "WAI NZ" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A12A547A15D741980025D32A;
+			productRefGroup = A12A548615D741980025D32A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A12A548415D741980025D32A /* WAI NZ */,
+				A12A549F15D741990025D32A /* WAI NZTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A12A548315D741980025D32A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A12A549415D741980025D32A /* InfoPlist.strings in Resources */,
+				A12A54C315D742360025D32A /* WAHomeViewController.xib in Resources */,
+				A12A54CF15D742EA0025D32A /* WASubmitViewController.xib in Resources */,
+				A12A54D415D743110025D32A /* WASubmissionOverviewViewController.xib in Resources */,
+				A12A54DA15D743480025D32A /* WASubmissionDescriptionViewController.xib in Resources */,
+				A12A54E015D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A12A549D15D741990025D32A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A12A54AC15D741990025D32A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A12A549E15D741990025D32A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A12A548115D741980025D32A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A12A549615D741980025D32A /* main.m in Sources */,
+				A12A549A15D741980025D32A /* WAAppDelegate.m in Sources */,
+				A12A54C215D742360025D32A /* WAHomeViewController.m in Sources */,
+				A12A54CE15D742EA0025D32A /* WASubmitViewController.m in Sources */,
+				A12A54D315D743110025D32A /* WASubmissionOverviewViewController.m in Sources */,
+				A12A54D915D743480025D32A /* WASubmissionDescriptionViewController.m in Sources */,
+				A12A54DF15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A12A549B15D741990025D32A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A12A54AF15D741990025D32A /* WAI_NZTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A12A54A615D741990025D32A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A12A548415D741980025D32A /* WAI NZ */;
+			targetProxy = A12A54A515D741990025D32A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A12A549215D741980025D32A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A12A549315D741980025D32A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A12A54AA15D741990025D32A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A12A54AB15D741990025D32A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A12A54B015D741990025D32A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A12A54B115D741990025D32A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A12A54B315D741990025D32A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WAI NZ/WAI NZ-Prefix.pch";
+				INFOPLIST_FILE = "WAI NZ/WAI NZ-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A12A54B415D741990025D32A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WAI NZ/WAI NZ-Prefix.pch";
+				INFOPLIST_FILE = "WAI NZ/WAI NZ-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		A12A54B615D741990025D32A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/WAI NZ.app/WAI NZ";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WAI NZ/WAI NZ-Prefix.pch";
+				INFOPLIST_FILE = "WAI NZTests/WAI NZTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		A12A54B715D741990025D32A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/WAI NZ.app/WAI NZ";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WAI NZ/WAI NZ-Prefix.pch";
+				INFOPLIST_FILE = "WAI NZTests/WAI NZTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A12A547F15D741980025D32A /* Build configuration list for PBXProject "WAI NZ" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A12A54B015D741990025D32A /* Debug */,
+				A12A54B115D741990025D32A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A12A54B215D741990025D32A /* Build configuration list for PBXNativeTarget "WAI NZ" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A12A54B315D741990025D32A /* Debug */,
+				A12A54B415D741990025D32A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A12A54B515D741990025D32A /* Build configuration list for PBXNativeTarget "WAI NZTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A12A54B615D741990025D32A /* Debug */,
+				A12A54B715D741990025D32A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A12A547C15D741980025D32A /* Project object */;
+}
