@@ -41,7 +41,7 @@
 
 - (IBAction)takePhoto:(id)sender {
     UIImagePickerController *photoPicker = [[UIImagePickerController alloc] init];
-    //check if the camera is available
+    // TODO: check if the camera is available
     
     photoPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
 	photoPicker.delegate = self;

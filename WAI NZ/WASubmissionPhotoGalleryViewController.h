@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ * This controller manages the gallery view for viewing the photos attached to a WAI NZ submission.
+ */
 @interface WASubmissionPhotoGalleryViewController : UIViewController
 
 @end

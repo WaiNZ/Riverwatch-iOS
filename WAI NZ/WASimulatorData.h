@@ -11,6 +11,7 @@
 
 #if TARGET_IPHONE_SIMULATOR
 
+/** Image data that contains a JPEG representation of a cow in a river */
 static const UInt8 kWACowData[] ={
 	255,216,255,224,0,16,74,70,73,70,0,
 	1,1,0,0,1,0,1,0,0,255,

@@ -13,7 +13,4 @@
 	#import <Foundation/Foundation.h>
 #endif
 
-#if TARGET_IPHONE_SIMULATOR
-	#import "WAFakeImagePickerController.h"
-	#define UIImagePickerController WAFakeImagePickerController
-#endif
+#import "WAFakeImagePickerController.h"

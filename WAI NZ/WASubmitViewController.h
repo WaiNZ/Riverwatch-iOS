@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ * This controller manages the uploading of a submission to WAI NZ
+ * and presents a user interface to monitor the progress and report on any errors.
+ *
+ * When the submission is complete this controller will pop the
+ * entire navigation stack.
+ */
 @interface WASubmitViewController : UIViewController
 
 @end
