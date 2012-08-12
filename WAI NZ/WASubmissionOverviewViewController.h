@@ -11,6 +11,6 @@
 /**
  * This class provides an interface for editing a submission before submitting it.
  */
-@interface WASubmissionOverviewViewController : UIViewController
+@interface WASubmissionOverviewViewController : UITableViewController
 
 @end
