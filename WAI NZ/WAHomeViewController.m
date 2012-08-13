@@ -8,6 +8,8 @@
 
 #import "WAHomeViewController.h"
 
+#import "WASubmissionOverviewViewController.h"
+
 @interface WAHomeViewController ()
 
 @end
@@ -58,6 +60,10 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	// TODO: create submission object with photo
 	// TODO: push on submission overview controller with submission object
+	
+	WASubmissionOverviewViewController *controller = [[WASubmissionOverviewViewController alloc] init];
+	[self.navigationController pushViewController:controller animated:NO];
+	
 	[picker dismissModalViewControllerAnimated:YES];
 }
 
