@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		A10C5C1615DB054B0028767F /* WASubmissionOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A10C5C1415DB054B0028767F /* WASubmissionOverviewViewController.m */; };
+		A10C5C1715DB054B0028767F /* WASubmissionOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A10C5C1515DB054B0028767F /* WASubmissionOverviewViewController.xib */; };
 		A12A548A15D741980025D32A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A548915D741980025D32A /* UIKit.framework */; };
 		A12A548C15D741980025D32A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A548B15D741980025D32A /* Foundation.framework */; };
 		A12A548E15D741980025D32A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A548D15D741980025D32A /* CoreGraphics.framework */; };
@@ -36,8 +38,6 @@
 		A12A54C315D742360025D32A /* WAHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54C115D742360025D32A /* WAHomeViewController.xib */; };
 		A12A54CE15D742EA0025D32A /* WASubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A54CC15D742EA0025D32A /* WASubmitViewController.m */; };
 		A12A54CF15D742EA0025D32A /* WASubmitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54CD15D742EA0025D32A /* WASubmitViewController.xib */; };
-		A12A54D315D743110025D32A /* WASubmissionOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A54D115D743110025D32A /* WASubmissionOverviewViewController.m */; };
-		A12A54D415D743110025D32A /* WASubmissionOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54D215D743110025D32A /* WASubmissionOverviewViewController.xib */; };
 		A12A54D915D743480025D32A /* WASubmissionDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A54D715D743480025D32A /* WASubmissionDescriptionViewController.m */; };
 		A12A54DA15D743480025D32A /* WASubmissionDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54D815D743480025D32A /* WASubmissionDescriptionViewController.xib */; };
 		A12A54DF15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A54DD15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m */; };
@@ -58,6 +58,9 @@
 
 /* Begin PBXFileReference section */
 		A1099B9015D76A4200855724 /* WASimulatorData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WASimulatorData.h; sourceTree = "<group>"; };
+		A10C5C1315DB054B0028767F /* WASubmissionOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionOverviewViewController.h; sourceTree = "<group>"; };
+		A10C5C1415DB054B0028767F /* WASubmissionOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionOverviewViewController.m; sourceTree = "<group>"; };
+		A10C5C1515DB054B0028767F /* WASubmissionOverviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionOverviewViewController.xib; sourceTree = "<group>"; };
 		A12A548515D741980025D32A /* WAI NZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WAI NZ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A12A548915D741980025D32A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A12A548B15D741980025D32A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -80,9 +83,6 @@
 		A12A54CB15D742EA0025D32A /* WASubmitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmitViewController.h; sourceTree = "<group>"; };
 		A12A54CC15D742EA0025D32A /* WASubmitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmitViewController.m; sourceTree = "<group>"; };
 		A12A54CD15D742EA0025D32A /* WASubmitViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmitViewController.xib; sourceTree = "<group>"; };
-		A12A54D015D743110025D32A /* WASubmissionOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionOverviewViewController.h; sourceTree = "<group>"; };
-		A12A54D115D743110025D32A /* WASubmissionOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionOverviewViewController.m; sourceTree = "<group>"; };
-		A12A54D215D743110025D32A /* WASubmissionOverviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionOverviewViewController.xib; sourceTree = "<group>"; };
 		A12A54D615D743480025D32A /* WASubmissionDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionDescriptionViewController.h; sourceTree = "<group>"; };
 		A12A54D715D743480025D32A /* WASubmissionDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionDescriptionViewController.m; sourceTree = "<group>"; };
 		A12A54D815D743480025D32A /* WASubmissionDescriptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionDescriptionViewController.xib; sourceTree = "<group>"; };
@@ -217,9 +217,9 @@
 		A12A54C415D742520025D32A /* Submission Overview */ = {
 			isa = PBXGroup;
 			children = (
-				A12A54D015D743110025D32A /* WASubmissionOverviewViewController.h */,
-				A12A54D115D743110025D32A /* WASubmissionOverviewViewController.m */,
-				A12A54D215D743110025D32A /* WASubmissionOverviewViewController.xib */,
+				A10C5C1315DB054B0028767F /* WASubmissionOverviewViewController.h */,
+				A10C5C1415DB054B0028767F /* WASubmissionOverviewViewController.m */,
+				A10C5C1515DB054B0028767F /* WASubmissionOverviewViewController.xib */,
 			);
 			name = "Submission Overview";
 			sourceTree = "<group>";
@@ -347,10 +347,10 @@
 				A12A549415D741980025D32A /* InfoPlist.strings in Resources */,
 				A12A54C315D742360025D32A /* WAHomeViewController.xib in Resources */,
 				A12A54CF15D742EA0025D32A /* WASubmitViewController.xib in Resources */,
-				A12A54D415D743110025D32A /* WASubmissionOverviewViewController.xib in Resources */,
 				A12A54DA15D743480025D32A /* WASubmissionDescriptionViewController.xib in Resources */,
 				A12A54E015D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib in Resources */,
 				A1C0C57815D77A2F00A25C58 /* Tools in Resources */,
+				A10C5C1715DB054B0028767F /* WASubmissionOverviewViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,10 +402,10 @@
 				A12A549A15D741980025D32A /* WAAppDelegate.m in Sources */,
 				A12A54C215D742360025D32A /* WAHomeViewController.m in Sources */,
 				A12A54CE15D742EA0025D32A /* WASubmitViewController.m in Sources */,
-				A12A54D315D743110025D32A /* WASubmissionOverviewViewController.m in Sources */,
 				A12A54D915D743480025D32A /* WASubmissionDescriptionViewController.m in Sources */,
 				A12A54DF15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m in Sources */,
 				A1EB129115D76037004ECF71 /* WAFakeImagePickerController.m in Sources */,
+				A10C5C1615DB054B0028767F /* WASubmissionOverviewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
