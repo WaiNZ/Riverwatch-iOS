@@ -2,7 +2,7 @@
 //  WASubmissionOverviewViewController.m
 //  WAI NZ
 //
-//  Created by Melby Ruarus on 12/08/12.
+//  Created by Melby Ruarus on 15/08/12.
 //  Copyright (c) 2012 Water Action Initiative New Zealand. All rights reserved.
 //
 
@@ -14,17 +14,22 @@
 
 @implementation WASubmissionOverviewViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.navigationItem.title = @"Submission";
-    }
-    return self;
+- (id)init {
+	self = [self initWithStyle:UITableViewStyleGrouped];
+	if(self) {
+		// Set up
+	}
+	return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+ 
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload {
@@ -53,10 +58,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	if(!cell) {
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+	}
     
     // Configure the cell...
-    
+	
     return cell;
 }
 
