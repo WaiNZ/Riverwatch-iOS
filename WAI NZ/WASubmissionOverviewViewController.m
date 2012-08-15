@@ -17,7 +17,7 @@
 @implementation WASubmissionOverviewViewController
 
 - (id)init {
-	self = [self initWithStyle:UITableViewStyleGrouped];
+	self = [self initWithNibName:@"WASubmissionOverviewViewController" bundle:nil];
 	if(self) {
 		// Set up
 		self.navigationItem.title = @"Submission";
@@ -56,10 +56,10 @@
 - (IBAction)sliderChanged:(id)sender {
 	[mainTableView beginUpdates];
 	if(!slider.on){
-		[mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
+		[mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
 	else {
-		[mainTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
+		[mainTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
 	[mainTableView endUpdates];
 }
