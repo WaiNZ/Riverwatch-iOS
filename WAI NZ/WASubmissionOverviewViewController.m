@@ -20,6 +20,7 @@
 	self = [self initWithStyle:UITableViewStyleGrouped];
 	if(self) {
 		// Set up
+		self.navigationItem.title = @"Submission";
 	}
 	return self;
 }
