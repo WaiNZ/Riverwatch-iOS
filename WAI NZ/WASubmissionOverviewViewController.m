@@ -7,6 +7,8 @@
 //
 
 #import "WASubmissionOverviewViewController.h"
+#import "WASubmissionDescriptionViewController.h"
+#import "WASubmitViewController.h"
 
 @interface WASubmissionOverviewViewController ()
 
@@ -114,13 +116,16 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    if(indexPath.section == 0 && indexPath.row ==0){
+		WASubmissionDescriptionViewController *controller = [[WASubmissionDescriptionViewController alloc] init];
+		[self.navigationController pushViewController: controller animated:YES];
+	}
+	else if (indexPath.section == 2 && indexPath.row ==0){
+		WASubmitViewController *controller = [[WASubmitViewController alloc] init];
+		[self.navigationController pushViewController: controller animated:YES];
+		[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	}
+	
 }
 
 #pragma mark - textField delegate
