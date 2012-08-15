@@ -37,6 +37,8 @@
 - (void)viewDidUnload {
 	slider = nil;
 	emailField = nil;
+	mainTableView = nil;
+	emailCell = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -44,6 +46,18 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - Actions
+- (IBAction)sliderChanged:(id)sender {
+	[mainTableView beginUpdates];
+	if(!slider.on){
+		[mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
+	}
+	else {
+		[mainTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
+	}
+	[mainTableView endUpdates];
 }
 
 #pragma mark - Table view data source
@@ -59,7 +73,7 @@
 		case 0:
 			return 1;
 		case 1:
-			return 2;
+			return slider.on? 1:2;
 		case 2:
 			return 1;
 		default:
@@ -98,8 +112,7 @@
 					cell.accessoryView = slider;
 					break;
 				case 1:
-					emailField.frame = CGRectInset(cell.contentView.bounds, 10, 5);
-					[cell.contentView addSubview:emailField];
+					cell = emailCell;
 					break;
 			}
 			break;
