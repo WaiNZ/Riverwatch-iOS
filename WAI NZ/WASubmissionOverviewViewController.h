@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WASubmissionOverviewViewController : UITableViewController
-
+@interface WASubmissionOverviewViewController : UITableViewController <UITextFieldDelegate>
+{
+	
+	IBOutlet UITextField *emailField;
+	IBOutlet UISwitch *slider;
+}
 @end

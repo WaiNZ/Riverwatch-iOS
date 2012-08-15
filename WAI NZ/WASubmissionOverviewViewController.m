@@ -33,6 +33,8 @@
 }
 
 - (void)viewDidUnload {
+	slider = nil;
+	emailField = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -45,25 +47,66 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    switch (section) {
+		case 0:
+			return 1;
+		case 1:
+			return 2;
+		case 2:
+			return 1;
+		default:
+			return 0;
+			
+	}
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if(!cell) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+		if(indexPath.section==0&&indexPath.row==0){
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+		}
+		else{
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+		}
 	}
     
     // Configure the cell...
+	
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	
+	switch (indexPath.section) {
+		case 0:
+			cell.textLabel.text = @"Description";
+			cell.detailTextLabel.text = @"hi";
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+			break;
+		case 1:
+			switch (indexPath.row) {
+				case 0:
+					cell.textLabel.text = @"Anonymous";
+					cell.accessoryView = slider;
+					break;
+				case 1:
+					emailField.frame = CGRectInset(cell.contentView.bounds, 10, 5);
+					[cell.contentView addSubview:emailField];
+					break;
+			}
+			break;
+		case 2:
+			cell.textLabel.text = @"Submit";
+			cell.textLabel.textAlignment = UITextAlignmentCenter;
+			cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+			break;
+	}
 	
     return cell;
 }
@@ -78,6 +121,13 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+}
+
+#pragma mark - textField delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	[textField resignFirstResponder];
+	return NO;
 }
 
 @end

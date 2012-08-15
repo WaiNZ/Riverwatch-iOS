@@ -23,7 +23,6 @@
  */
 @interface WAFakeImagePickerController : UIViewController {
 	UIImage *image;
-    id<UIImagePickerControllerDelegate> delegate;
 }
 
 /** The source type for the picker, ignored */

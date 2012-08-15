@@ -83,6 +83,7 @@
 #pragma mark - Properties
 
 @synthesize sourceType;
+@synthesize delegate;
 @end
 
 #endif
