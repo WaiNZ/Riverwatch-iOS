@@ -33,6 +33,8 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	
+	mainTableView.tableHeaderView = topView;
 }
 
 - (void)viewDidUnload {
@@ -40,6 +42,7 @@
 	emailField = nil;
 	mainTableView = nil;
 	emailCell = nil;
+	topView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

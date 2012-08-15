@@ -15,5 +15,6 @@
 	IBOutlet UITableViewCell *emailCell;
 	IBOutlet UITextField *emailField;
 	IBOutlet UISwitch *slider;
+	IBOutlet UIView *topView;
 }
 @end
