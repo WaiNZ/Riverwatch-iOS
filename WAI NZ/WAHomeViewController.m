@@ -52,6 +52,13 @@
 }
 
 - (IBAction)choosePhoto:(id)sender {
+    UIImagePickerController *cameraRollPicker = [[UIImagePickerController alloc] init];
+    
+    cameraRollPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    cameraRollPicker.delegate = self;
+    
+    [self presentModalViewController: cameraRollPicker animated:YES];
     
 }
 

@@ -68,10 +68,10 @@
 
 - (void)select {
 	if(delegate) {
-		if([delegate respondsToSelector:@selector(imagePickerController:didFinishPickingMediaWithInfo:)]) {
+		if([self.delegate respondsToSelector:@selector(imagePickerController:didFinishPickingMediaWithInfo:)]) {
 			[(id<WAFakeImagePickerControllerDelegate>)delegate imagePickerController:self didFinishPickingMediaWithInfo:@{UIImagePickerControllerOriginalImage: image}];
 		}
-		else if([delegate respondsToSelector:@selector(imagePickerController:didFinishPickingImage:editingInfo:)]) {
+		else if([self.delegate respondsToSelector:@selector(imagePickerController:didFinishPickingImage:editingInfo:)]) {
 			[(id<WAFakeImagePickerControllerDelegate>)delegate imagePickerController:self didFinishPickingImage:image editingInfo:nil];
 		}
 	}
@@ -83,7 +83,6 @@
 #pragma mark - Properties
 
 @synthesize sourceType;
-@synthesize delegate;
 @end
 
 #endif
