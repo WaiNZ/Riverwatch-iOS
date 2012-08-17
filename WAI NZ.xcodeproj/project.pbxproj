@@ -91,6 +91,7 @@
 		A12A54DC15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionPhotoGalleryViewController.h; sourceTree = "<group>"; };
 		A12A54DD15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionPhotoGalleryViewController.m; sourceTree = "<group>"; };
 		A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionPhotoGalleryViewController.xib; sourceTree = "<group>"; };
+		A16E9D9D15DBB2EC00E5353C /* MJGAvalibility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJGAvalibility.h; sourceTree = "<group>"; };
 		A1C0C57715D77A2F00A25C58 /* Tools */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tools; sourceTree = SOURCE_ROOT; };
 		A1EB128E15D76037004ECF71 /* WAFakeImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAFakeImagePickerController.h; sourceTree = "<group>"; };
 		A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAFakeImagePickerController.m; sourceTree = "<group>"; };
@@ -174,6 +175,7 @@
 				A12A549215D741980025D32A /* InfoPlist.strings */,
 				A12A549515D741980025D32A /* main.m */,
 				A12A549715D741980025D32A /* WAI NZ-Prefix.pch */,
+				A16E9D9D15DBB2EC00E5353C /* MJGAvalibility.h */,
 				A1C0C57715D77A2F00A25C58 /* Tools */,
 			);
 			name = "Supporting Files";
@@ -511,8 +513,14 @@
 		A12A54B315D741990025D32A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WAI NZ/WAI NZ-Prefix.pch";
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				INFOPLIST_FILE = "WAI NZ/WAI NZ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -523,8 +531,14 @@
 		A12A54B415D741990025D32A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = YES;
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WAI NZ/WAI NZ-Prefix.pch";
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				INFOPLIST_FILE = "WAI NZ/WAI NZ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
