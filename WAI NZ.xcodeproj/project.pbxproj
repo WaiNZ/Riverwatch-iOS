@@ -44,6 +44,8 @@
 		A12A54E015D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */; };
 		A1C0C57815D77A2F00A25C58 /* Tools in Resources */ = {isa = PBXBuildFile; fileRef = A1C0C57715D77A2F00A25C58 /* Tools */; };
 		A1EB129115D76037004ECF71 /* WAFakeImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */; };
+		E2A3B40615DB0A79008AABEC /* WASubmission.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A3B40515DB0A79008AABEC /* WASubmission.m */; };
+		E2A3B40A15DB0E93008AABEC /* WASubmissionPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A3B40915DB0E93008AABEC /* WASubmissionPhoto.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,10 @@
 		A1C0C57715D77A2F00A25C58 /* Tools */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tools; sourceTree = SOURCE_ROOT; };
 		A1EB128E15D76037004ECF71 /* WAFakeImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAFakeImagePickerController.h; sourceTree = "<group>"; };
 		A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAFakeImagePickerController.m; sourceTree = "<group>"; };
+		E2A3B40415DB0A79008AABEC /* WASubmission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmission.h; sourceTree = "<group>"; };
+		E2A3B40515DB0A79008AABEC /* WASubmission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmission.m; sourceTree = "<group>"; };
+		E2A3B40815DB0E93008AABEC /* WASubmissionPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionPhoto.h; sourceTree = "<group>"; };
+		E2A3B40915DB0E93008AABEC /* WASubmissionPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionPhoto.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +263,10 @@
 		A12A54E115D7478A0025D32A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E2A3B40415DB0A79008AABEC /* WASubmission.h */,
+				E2A3B40515DB0A79008AABEC /* WASubmission.m */,
+				E2A3B40815DB0E93008AABEC /* WASubmissionPhoto.h */,
+				E2A3B40915DB0E93008AABEC /* WASubmissionPhoto.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -406,6 +416,8 @@
 				A12A54DF15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m in Sources */,
 				A1EB129115D76037004ECF71 /* WAFakeImagePickerController.m in Sources */,
 				A10C5C1615DB054B0028767F /* WASubmissionOverviewViewController.m in Sources */,
+				E2A3B40615DB0A79008AABEC /* WASubmission.m in Sources */,
+				E2A3B40A15DB0E93008AABEC /* WASubmissionPhoto.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
