@@ -7,6 +7,7 @@
 //
 
 #import "WASubmissionDescriptionViewController.h"
+#import "WASubmission.h"
 
 @interface WASubmissionDescriptionViewController ()
 
@@ -14,11 +15,13 @@
 
 @implementation WASubmissionDescriptionViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (id)initWithSubmission:(WASubmission *)_submission {
+    self = [super init];
     if (self) {
         // Custom initialization
+        submission = _submission;
 		self.navigationItem.title = @"Description";
+        descriptionText.text=submission.descriptionText;
     }
     return self;
 }
@@ -29,6 +32,7 @@
 }
 
 - (void)viewDidUnload {
+    descriptionText = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

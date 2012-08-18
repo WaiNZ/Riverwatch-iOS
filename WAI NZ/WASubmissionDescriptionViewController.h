@@ -14,7 +14,13 @@
  * This controller provides the text editing screen for the description field of a submission.
  */
 @interface WASubmissionDescriptionViewController : UIViewController{
+    
     WASubmission *submission;
+    __unsafe_unretained IBOutlet UITextView *descriptionText;
+
+    
 }
+- (id)initWithSubmission:(WASubmission *)_submission;
+
 
 @end

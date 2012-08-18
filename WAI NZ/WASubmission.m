@@ -15,7 +15,7 @@
     if (self) {
         photos = [[NSMutableArray alloc] init];
         tags = [[NSMutableArray alloc] init];
-        description = [[NSString alloc] init];
+        descriptionText = [[NSString alloc] init];
         email = [[NSString alloc] init];
         isAnonymous = NO;
         location = nil;

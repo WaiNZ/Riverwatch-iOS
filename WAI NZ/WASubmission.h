@@ -14,7 +14,7 @@
 {
     NSMutableArray *photos;
     NSMutableArray *tags;
-    NSString *description;
+    NSString *descriptionText;
     NSString *email;
     BOOL isAnonymous;
     CLLocation *location;
@@ -41,7 +41,7 @@
 
 
 
-@property(strong) NSString *description;
+@property(strong) NSString *descriptionText;
 @property(strong) NSString *email;
 @property BOOL isAnonymous;
 @property(strong) CLLocation *location;
