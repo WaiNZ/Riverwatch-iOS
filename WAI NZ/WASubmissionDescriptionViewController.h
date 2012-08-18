@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class WASubmission;
+
 /**
  * This controller provides the text editing screen for the description field of a submission.
  */
-@interface WASubmissionDescriptionViewController : UIViewController
+@interface WASubmissionDescriptionViewController : UIViewController{
+    WASubmission *submission;
+}
 
 @end
