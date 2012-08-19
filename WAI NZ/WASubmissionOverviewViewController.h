@@ -10,7 +10,7 @@
 
 @class WASubmission;
 
-@interface WASubmissionOverviewViewController : UITableViewController <UITextFieldDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
+@interface WASubmissionOverviewViewController : UITableViewController <UINavigationControllerDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
 {
 	
 	__unsafe_unretained IBOutlet UITableView *mainTableView;
