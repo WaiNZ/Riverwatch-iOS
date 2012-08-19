@@ -69,14 +69,24 @@
 	// TODO: create submission object with photo
 	// TODO: push on submission overview controller with submission object
 	
-	WASubmission *submission = [[WASubmission alloc] init];
-	submission.descriptionText = @"I saw Old McDonald's cow crapping in the river ";
-	submission.email = @"syzygy@dt.net.nz";
-	submission.anonymous = NO;
-	WASubmissionOverviewViewController *controller = [[WASubmissionOverviewViewController alloc] initWithSubmission:submission];
-	[self.navigationController pushViewController:controller animated:NO];
-	
-	[picker dismissModalViewControllerAnimated:YES];
+	[WASubmissionPhoto photoWithMediaPickingInfo:info
+									 resultBlock:^(WASubmissionPhoto *photo) {
+										 WASubmission *submission = [[WASubmission alloc] init];
+										 submission.descriptionText = @"I saw Old McDonald's cow crapping in the river ";
+										 submission.email = @"syzygy@dt.net.nz";
+										 submission.anonymous = NO;
+										 [submission addSubmissionPhoto:photo];
+										 
+										 WASubmissionOverviewViewController *controller = [[WASubmissionOverviewViewController alloc] initWithSubmission:submission];
+										 [self.navigationController pushViewController:controller animated:NO];
+										 
+										 [picker dismissModalViewControllerAnimated:YES];
+									 }
+									failureBlock:^(NSError *error) {
+										// TODO: error;
+										
+										[picker dismissModalViewControllerAnimated:YES];
+									}];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

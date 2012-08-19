@@ -16,5 +16,9 @@
     CLLocation *location;
 }
 
++ (void)photoWithMediaPickingInfo:(NSDictionary *)dict
+					  resultBlock:(void (^)(WASubmissionPhoto *photo))resultBlock
+					 failureBlock:(void (^)(NSError *error))failureBlock;
+
 - (id)initWithPhoto:(UIImage *)image timestamp:(time_t)timestamp location:(CLLocation *)location;
 @end

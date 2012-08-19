@@ -44,6 +44,8 @@
 		A12A54E015D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */; };
 		A1C0C57815D77A2F00A25C58 /* Tools in Resources */ = {isa = PBXBuildFile; fileRef = A1C0C57715D77A2F00A25C58 /* Tools */; };
 		A1EB129115D76037004ECF71 /* WAFakeImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */; };
+		A1F0299C15E08FAF00BC9B28 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0299B15E08FAF00BC9B28 /* AssetsLibrary.framework */; };
+		A1F029A015E0956700BC9B28 /* NSDate+TimeConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F0299F15E0956700BC9B28 /* NSDate+TimeConversions.m */; };
 		E2A3B40615DB0A79008AABEC /* WASubmission.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A3B40515DB0A79008AABEC /* WASubmission.m */; };
 		E2A3B40A15DB0E93008AABEC /* WASubmissionPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A3B40915DB0E93008AABEC /* WASubmissionPhoto.m */; };
 /* End PBXBuildFile section */
@@ -95,6 +97,9 @@
 		A1C0C57715D77A2F00A25C58 /* Tools */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tools; sourceTree = SOURCE_ROOT; };
 		A1EB128E15D76037004ECF71 /* WAFakeImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAFakeImagePickerController.h; sourceTree = "<group>"; };
 		A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAFakeImagePickerController.m; sourceTree = "<group>"; };
+		A1F0299B15E08FAF00BC9B28 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		A1F0299E15E0956700BC9B28 /* NSDate+TimeConversions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeConversions.h"; sourceTree = "<group>"; };
+		A1F0299F15E0956700BC9B28 /* NSDate+TimeConversions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeConversions.m"; sourceTree = "<group>"; };
 		E2A3B40415DB0A79008AABEC /* WASubmission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmission.h; sourceTree = "<group>"; };
 		E2A3B40515DB0A79008AABEC /* WASubmission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmission.m; sourceTree = "<group>"; };
 		E2A3B40815DB0E93008AABEC /* WASubmissionPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionPhoto.h; sourceTree = "<group>"; };
@@ -106,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1F0299C15E08FAF00BC9B28 /* AssetsLibrary.framework in Frameworks */,
 				A12A548A15D741980025D32A /* UIKit.framework in Frameworks */,
 				A12A548C15D741980025D32A /* Foundation.framework in Frameworks */,
 				A12A548E15D741980025D32A /* CoreGraphics.framework in Frameworks */,
@@ -147,6 +153,7 @@
 		A12A548815D741980025D32A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A1F0299B15E08FAF00BC9B28 /* AssetsLibrary.framework */,
 				A12A548915D741980025D32A /* UIKit.framework */,
 				A12A548B15D741980025D32A /* Foundation.framework */,
 				A12A548D15D741980025D32A /* CoreGraphics.framework */,
@@ -279,6 +286,8 @@
 				A1EB128E15D76037004ECF71 /* WAFakeImagePickerController.h */,
 				A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */,
 				A1099B9015D76A4200855724 /* WASimulatorData.h */,
+				A1F0299E15E0956700BC9B28 /* NSDate+TimeConversions.h */,
+				A1F0299F15E0956700BC9B28 /* NSDate+TimeConversions.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -420,6 +429,7 @@
 				A10C5C1615DB054B0028767F /* WASubmissionOverviewViewController.m in Sources */,
 				E2A3B40615DB0A79008AABEC /* WASubmission.m in Sources */,
 				E2A3B40A15DB0E93008AABEC /* WASubmissionPhoto.m in Sources */,
+				A1F029A015E0956700BC9B28 /* NSDate+TimeConversions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
