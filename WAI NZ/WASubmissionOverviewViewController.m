@@ -14,6 +14,9 @@
 
 #import <UIKit/UITableView.h>
 
+static const int kTakePhotoButton = 0;
+static const int kUseExistingPhotoButton = 1;
+
 
 @interface WASubmissionOverviewViewController ()
 
@@ -154,7 +157,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0 && indexPath.row ==0){
-		WASubmissionDescriptionViewController *controller = [[WASubmissionDescriptionViewController alloc] init];
+		WASubmissionDescriptionViewController *controller = [[WASubmissionDescriptionViewController alloc] initWithSubmission:submission];
 		[self.navigationController pushViewController: controller animated:YES];
 	}
 	else if (indexPath.section == 2 && indexPath.row ==0){
