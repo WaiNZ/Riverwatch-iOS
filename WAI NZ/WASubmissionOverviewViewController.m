@@ -71,7 +71,7 @@ static const int kUseExistingPhotoButton = 1;
 	else {
 		[mainTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
-	submission.isAnonymous = slider.on;
+	submission.anonymous = slider.on;
 	[mainTableView endUpdates];
 }
 
@@ -98,7 +98,7 @@ static const int kUseExistingPhotoButton = 1;
 		case 0:
 			return 1;
 		case 1:
-			return submission.isAnonymous?1:2;
+			return submission.anonymous?1:2;
 		case 2:
 			return 1;
 		default:
@@ -135,7 +135,7 @@ static const int kUseExistingPhotoButton = 1;
 				case 0:
 					cell.textLabel.text = @"Anonymous";
 					cell.accessoryView = slider;
-					slider.on = submission.isAnonymous;
+					slider.on = submission.anonymous;
 					break;
 				case 1:
 					cell = emailCell;

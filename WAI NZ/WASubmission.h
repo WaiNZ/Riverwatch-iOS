@@ -16,7 +16,7 @@
     NSMutableArray *tags;
     NSString *descriptionText;
     NSString *email;
-    BOOL isAnonymous;
+    BOOL anonymous;
     CLLocation *location;
     time_t timestamp;
     NSString *udid;
@@ -41,10 +41,10 @@
 
 
 
-@property(strong) NSString *descriptionText;
-@property(strong) NSString *email;
-@property BOOL isAnonymous;
-@property(strong) CLLocation *location;
-@property time_t timestamp;
-@property(strong) NSString *udid;
+@property (nonatomic, strong) NSString *descriptionText;
+@property (nonatomic, strong) NSString *email;
+@property (nonatomic, getter=isAnonymus) BOOL anonymous;
+@property (nonatomic, strong) CLLocation *location;
+@property (nonatomic) time_t timestamp;
+@property (nonatomic, strong) NSString *udid;
 @end

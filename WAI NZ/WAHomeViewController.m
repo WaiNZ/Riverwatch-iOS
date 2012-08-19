@@ -72,7 +72,7 @@
 	WASubmission *submission = [[WASubmission alloc] init];
 	submission.descriptionText = @"I saw Old McDonald's cow crapping in the river ";
 	submission.email = @"syzygy@dt.net.nz";
-	submission.isAnonymous = NO;
+	submission.anonymous = NO;
 	WASubmissionOverviewViewController *controller = [[WASubmissionOverviewViewController alloc] initWithSubmission:submission];
 	[self.navigationController pushViewController:controller animated:NO];
 	

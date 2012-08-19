@@ -17,7 +17,7 @@
         tags = [[NSMutableArray alloc] init];
         descriptionText = [[NSString alloc] init];
         email = [[NSString alloc] init];
-        isAnonymous = NO;
+        anonymous = NO;
         location = nil;
         time(&timestamp);
         
@@ -57,5 +57,10 @@
     return [tags count];
 }
 
-
+@synthesize descriptionText;
+@synthesize email;
+@synthesize anonymous;
+@synthesize location;
+@synthesize timestamp;
+@synthesize udid;
 @end
