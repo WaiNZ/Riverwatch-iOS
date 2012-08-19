@@ -10,6 +10,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import "WASubmissionPhoto.h"
 
+extern NSString *const kWASubmissionUpdatedNotification;
+
 @interface WASubmission : NSObject
 {
     NSMutableArray *photos;
@@ -43,8 +45,8 @@
 
 @property (nonatomic, strong) NSString *descriptionText;
 @property (nonatomic, strong) NSString *email;
-@property (nonatomic, getter=isAnonymus) BOOL anonymous;
+@property (nonatomic, getter=isAnonymous) BOOL anonymous;
 @property (nonatomic, strong) CLLocation *location;
-@property (nonatomic) time_t timestamp;
-@property (nonatomic, strong) NSString *udid;
+@property (nonatomic, readonly) time_t timestamp;
+@property (nonatomic, readonly) NSString *udid;
 @end

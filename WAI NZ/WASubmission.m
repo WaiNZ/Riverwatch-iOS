@@ -8,6 +8,10 @@
 
 #import "WASubmission.h"
 
+#define POST_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] postNotificationName:kWASubmissionUpdatedNotification object:self]
+
+NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotification";
+
 @implementation WASubmission
 
 - (id)init {
@@ -15,8 +19,8 @@
     if (self) {
         photos = [[NSMutableArray alloc] init];
         tags = [[NSMutableArray alloc] init];
-        descriptionText = [[NSString alloc] init];
-        email = [[NSString alloc] init];
+        descriptionText = @"";
+        email = @"";
         anonymous = NO;
         location = nil;
         time(&timestamp);
@@ -27,10 +31,12 @@
 
 - (void)addSubmissionPhoto:(WASubmissionPhoto *)photo {
     [photos addObject:photo];
+	POST_UPDATE_NOTIFICATION;
 }
 
 - (void)removeSubmissionPhoto:(int)index {
     [photos removeObjectAtIndex:index];
+	POST_UPDATE_NOTIFICATION;
 }
 
 - (WASubmissionPhoto *)getSubmissionPhoto:(int)index {
@@ -43,10 +49,12 @@
 
 - (void)addTag:(NSString *)tag {
     [tags addObject:tag];
+	POST_UPDATE_NOTIFICATION;
 }
 
 - (void)removeTag:(int)index {
     [tags removeObjectAtIndex:index];
+	POST_UPDATE_NOTIFICATION;
 }
 
 - (NSString *)getTag:(int)index {
@@ -55,6 +63,31 @@
 
 - (int)numberOfTags {
     return [tags count];
+}
+
+- (void)setDescriptionText:(NSString *)_descriptionText {
+	descriptionText = _descriptionText;
+	POST_UPDATE_NOTIFICATION;
+}
+
+- (void)setEmail:(NSString *)_email {
+	email = _email;
+	POST_UPDATE_NOTIFICATION;
+}
+
+- (void)setAnonymous:(BOOL)_anonymous {
+	anonymous = _anonymous;
+	POST_UPDATE_NOTIFICATION;
+}
+
+- (void)setLocation:(CLLocation *)_location {
+	location = _location;
+	POST_UPDATE_NOTIFICATION;
+}
+
+- (void)setTimestamp:(time_t)_timestamp {
+	timestamp = _timestamp;
+	POST_UPDATE_NOTIFICATION;
 }
 
 @synthesize descriptionText;

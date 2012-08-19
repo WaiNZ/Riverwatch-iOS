@@ -14,6 +14,9 @@
 
 #import <UIKit/UITableView.h>
 
+#define ENABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submissionUpdated) name:kWASubmissionUpdatedNotification object:submission];
+#define DISABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] removeObserver:self name:kWASubmissionUpdatedNotification object:submission]
+
 static const int kTakePhotoButton = 0;
 static const int kUseExistingPhotoButton = 1;
 
@@ -31,18 +34,17 @@ static const int kUseExistingPhotoButton = 1;
 		// Set up
 		submission = _submission;
 		self.navigationItem.title = @"Submission";
+		ENABLE_SUBMISSION_UPDATE_NOTIFICATION;
 	}
 	return self;
 }
 
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
 	mainTableView.tableHeaderView = topView;
 }
@@ -71,7 +73,9 @@ static const int kUseExistingPhotoButton = 1;
 	else {
 		[mainTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
+	DISABLE_SUBMISSION_UPDATE_NOTIFICATION;
 	submission.anonymous = slider.on;
+	ENABLE_SUBMISSION_UPDATE_NOTIFICATION;
 	[mainTableView endUpdates];
 }
 
@@ -83,6 +87,10 @@ static const int kUseExistingPhotoButton = 1;
                                                  otherButtonTitles:@"Take a photo", @"Add an exisiting photo",nil ];
     [addSheet showInView:self.view];
     
+}
+
+- (void)submissionUpdated {
+	[mainTableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -173,6 +181,13 @@ static const int kUseExistingPhotoButton = 1;
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	[textField resignFirstResponder];
 	return NO;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+	DISABLE_SUBMISSION_UPDATE_NOTIFICATION;
+	submission.email = [textField.text stringByReplacingCharactersInRange:range withString:string];
+	ENABLE_SUBMISSION_UPDATE_NOTIFICATION;
+	return YES;
 }
 
 #pragma mark - UIActionSheetDelegate
