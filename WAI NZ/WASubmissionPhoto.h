@@ -22,7 +22,7 @@
 
 - (id)initWithPhoto:(UIImage *)image timestamp:(time_t)timestamp location:(CLLocation *)location;
 
-@property (readonly) CLLocation *location;
-@property (readonly) time_t timestamp;
-@property (readonly) UIImage *image;
+@property (atomic, readonly) CLLocation *location;
+@property (atomic, readonly) time_t timestamp;
+@property (atomic, readonly) UIImage *image;
 @end
