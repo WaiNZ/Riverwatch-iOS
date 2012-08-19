@@ -21,7 +21,7 @@
         // Custom initialization
         submission = _submission;
 		self.navigationItem.title = @"Description";
-        descriptionText.text=submission.descriptionText;
+
     }
     return self;
 }
@@ -29,6 +29,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    descriptionText.text=submission.descriptionText;
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [descriptionText becomeFirstResponder];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    submission.descriptionText = descriptionText.text;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidUnload {
@@ -40,6 +53,32 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - keyboard
+
+-(void) keyboardDidShow:(NSNotification *)notif {
+    originalDescriptionTextFrame = descriptionText.frame;
+    
+    // TODO: support other rotations
+    CGFloat keyboardSlideDuration = [[[notif userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    CGRect keyboardFrame = [[[notif userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    
+    [UIView animateWithDuration:keyboardSlideDuration
+                     animations:^{
+                         CGRect frame = descriptionText.frame;
+                         frame.size.height -= keyboardFrame.size.height;
+                         descriptionText.frame = frame;
+                     }];
+}
+
+-(void) keyboardDidHide:(NSNotification *)notif {
+    CGFloat keyboardSlideDuration = [[[notif userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    
+    [UIView animateWithDuration:keyboardSlideDuration
+                     animations:^{
+                         descriptionText.frame = originalDescriptionTextFrame;
+                     }];
 }
 
 @end
