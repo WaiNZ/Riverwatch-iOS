@@ -9,6 +9,7 @@
 #import "WAHomeViewController.h"
 
 #import "WASubmissionOverviewViewController.h"
+#import "WASubmission.h"
 
 @interface WAHomeViewController ()
 
@@ -68,7 +69,11 @@
 	// TODO: create submission object with photo
 	// TODO: push on submission overview controller with submission object
 	
-	WASubmissionOverviewViewController *controller = [[WASubmissionOverviewViewController alloc] init];
+	WASubmission *submission = [[WASubmission alloc] init];
+	submission.descriptionText = @"I saw Old McDonald's cow crapping in the river ";
+	submission.email = @"syzygy@dt.net.nz";
+	submission.isAnonymous = NO;
+	WASubmissionOverviewViewController *controller = [[WASubmissionOverviewViewController alloc] initWithSubmission:submission];
 	[self.navigationController pushViewController:controller animated:NO];
 	
 	[picker dismissModalViewControllerAnimated:YES];

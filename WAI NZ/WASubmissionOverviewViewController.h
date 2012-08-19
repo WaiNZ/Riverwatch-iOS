@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class WASubmission;
+
 @interface WASubmissionOverviewViewController : UITableViewController <UITextFieldDelegate>
 {
 	
@@ -16,5 +18,9 @@
 	IBOutlet UITextField *emailField;
 	IBOutlet UISwitch *slider;
 	IBOutlet UIView *topView;
+	WASubmission *submission;
 }
+
+- (id)initWithSubmission:(WASubmission *)_submission;
+
 @end

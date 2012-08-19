@@ -9,8 +9,11 @@
 #import "WASubmissionOverviewViewController.h"
 #import "WASubmissionDescriptionViewController.h"
 #import "WASubmitViewController.h"
+#import "WASubmission.h"
+
 
 #import <UIKit/UITableView.h>
+
 
 @interface WASubmissionOverviewViewController ()
 
@@ -18,10 +21,11 @@
 
 @implementation WASubmissionOverviewViewController
 
-- (id)init {
+- (id)initWithSubmission:(WASubmission *)_submission {
 	self = [self initWithNibName:@"WASubmissionOverviewViewController" bundle:nil];
 	if(self) {
 		// Set up
+		submission = _submission;
 		self.navigationItem.title = @"Submission";
 	}
 	return self;
@@ -63,6 +67,7 @@
 	else {
 		[mainTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
+	submission.isAnonymous = slider.on;
 	[mainTableView endUpdates];
 }
 
@@ -79,7 +84,7 @@
 		case 0:
 			return 1;
 		case 1:
-			return slider.on? 1:2;
+			return submission.isAnonymous?1:2;
 		case 2:
 			return 1;
 		default:
@@ -107,7 +112,7 @@
 	switch (indexPath.section) {
 		case 0:
 			cell.textLabel.text = @"Description";
-			cell.detailTextLabel.text = @"hi";
+			cell.detailTextLabel.text = submission.descriptionText;
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 			break;
@@ -116,9 +121,11 @@
 				case 0:
 					cell.textLabel.text = @"Anonymous";
 					cell.accessoryView = slider;
+					slider.on = submission.isAnonymous;
 					break;
 				case 1:
 					cell = emailCell;
+					emailField.text = submission.email;
 					break;
 			}
 			break;
