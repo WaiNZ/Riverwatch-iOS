@@ -53,6 +53,7 @@
 }
 
 - (IBAction)choosePhoto:(id)sender {
+	// TODO: check for < 6.0 and notify user that location services are required if not enabled
     UIImagePickerController *cameraRollPicker = [[UIImagePickerController alloc] init];
     
     cameraRollPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
