@@ -76,4 +76,7 @@
 	}
 }
 
+@synthesize location;
+@synthesize timestamp;
+@synthesize image;
 @end

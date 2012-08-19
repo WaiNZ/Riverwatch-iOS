@@ -56,7 +56,6 @@
     UIImagePickerController *cameraRollPicker = [[UIImagePickerController alloc] init];
     
     cameraRollPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
     cameraRollPicker.delegate = self;
     
     [self presentModalViewController: cameraRollPicker animated:YES];
@@ -75,6 +74,7 @@
 										 submission.descriptionText = @"I saw Old McDonald's cow crapping in the river ";
 										 submission.email = @"syzygy@dt.net.nz";
 										 submission.anonymous = NO;
+										 submission.location = photo.location;
 										 [submission addSubmissionPhoto:photo];
 										 
 										 WASubmissionOverviewViewController *controller = [[WASubmissionOverviewViewController alloc] initWithSubmission:submission];

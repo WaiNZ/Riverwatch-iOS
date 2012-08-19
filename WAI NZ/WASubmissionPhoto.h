@@ -21,4 +21,8 @@
 					 failureBlock:(void (^)(NSError *error))failureBlock;
 
 - (id)initWithPhoto:(UIImage *)image timestamp:(time_t)timestamp location:(CLLocation *)location;
+
+@property (readonly) CLLocation *location;
+@property (readonly) time_t timestamp;
+@property (readonly) UIImage *image;
 @end
