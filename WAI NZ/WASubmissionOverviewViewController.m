@@ -12,8 +12,12 @@
 
 #import <UIKit/UITableView.h>
 
+static const int kTakePhotoButton = 0;
+static const int kUseExistingPhotoButton = 1;
+
 @interface WASubmissionOverviewViewController ()
 
+-(void) addAdditionalPhoto;
 @end
 
 @implementation WASubmissionOverviewViewController
@@ -64,6 +68,16 @@
 		[mainTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
 	[mainTableView endUpdates];
+}
+
+- (void) addAdditionalPhoto {
+    UIActionSheet *addSheet = [[UIActionSheet alloc] initWithTitle:@"Add a photo"
+                                                          delegate:self
+                                                 cancelButtonTitle:@"Cancel"
+                                            destructiveButtonTitle:nil
+                                                 otherButtonTitles:@"Take a photo", @"Add an exisiting photo",nil ];
+    [addSheet showInView:self.view];
+    
 }
 
 #pragma mark - Table view data source
@@ -152,6 +166,37 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	[textField resignFirstResponder];
 	return NO;
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    //0 is the topmost (Take a photo) button
+    if(buttonIndex==kTakePhotoButton){
+        UIImagePickerController *cameraRollPicker = [[UIImagePickerController alloc] init];
+        cameraRollPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        cameraRollPicker.delegate = self;
+        [self presentModalViewController: cameraRollPicker animated:YES];
+    }
+    //1 is the topmost (Use an existing photo) button
+    else if(buttonIndex==kUseExistingPhotoButton){
+        UIImagePickerController *photoPicker = [[UIImagePickerController alloc] init];
+        // TODO: check if the camera is available
+        photoPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        photoPicker.delegate = self;
+        [self presentModalViewController:photoPicker animated:YES];
+    }
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    //TODO: Adding the actual photo
+	[picker dismissModalViewControllerAnimated:YES];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+	[picker dismissModalViewControllerAnimated:YES];
 }
 
 @end

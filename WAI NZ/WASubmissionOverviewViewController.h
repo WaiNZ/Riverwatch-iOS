@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WASubmissionOverviewViewController : UITableViewController <UITextFieldDelegate>
+@interface WASubmissionOverviewViewController : UITableViewController <UITextFieldDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate>
 {
 	
 	__unsafe_unretained IBOutlet UITableView *mainTableView;
