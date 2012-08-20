@@ -79,7 +79,7 @@ static const int kUseExistingPhotoButton = 1;
 	[mainTableView endUpdates];
 }
 
-- (void) addAdditionalPhoto {
+- (IBAction) addAdditionalPhoto:(id)sender {
     UIActionSheet *addSheet = [[UIActionSheet alloc] initWithTitle:@"Add a photo"
                                                           delegate:self
                                                  cancelButtonTitle:@"Cancel"
