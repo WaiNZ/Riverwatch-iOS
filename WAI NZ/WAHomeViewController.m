@@ -69,7 +69,7 @@
 #if TARGET_IPHONE_SIMULATOR
 	time_t now;
 	time(&now);
-	WASubmissionPhoto *photo = [[WASubmissionPhoto alloc] initWithPhoto:[info objectForKey:UIImagePickerControllerEditedImage]
+	WASubmissionPhoto *photo = [[WASubmissionPhoto alloc] initWithPhoto:[info objectForKey:UIImagePickerControllerOriginalImage]
 															  timestamp:now
 															   location:nil];
 	WASubmission *submission = [[WASubmission alloc] init];

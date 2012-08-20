@@ -24,6 +24,7 @@ static const int kUseExistingPhotoButton = 1;
 @interface WASubmissionOverviewViewController ()
 
 -(void) addAdditionalPhoto;
+-(void) loadPhotoViews;
 @end
 
 @implementation WASubmissionOverviewViewController
@@ -45,7 +46,7 @@ static const int kUseExistingPhotoButton = 1;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
+	[self loadPhotoViews];
 	mainTableView.tableHeaderView = topView;
 }
 
@@ -55,6 +56,7 @@ static const int kUseExistingPhotoButton = 1;
 	mainTableView = nil;
 	emailCell = nil;
 	topView = nil;
+    photoScrollView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -92,6 +94,27 @@ static const int kUseExistingPhotoButton = 1;
 - (void)submissionUpdated {
 	[mainTableView reloadData];
 }
+
+#pragma mark - Photo Scroll generation
+
+- (void) loadPhotoViews {
+    CGRect frame = CGRectMake(8, 4, 98, 98);
+    for(int n = 0;n<submission.numberOfSubmissionPhotos;n++){
+        WASubmissionPhoto *photo = [submission getSubmissionPhoto:n];
+        UIView *notmyview = [[UIView alloc] initWithFrame:frame];
+        [photoScrollView addSubview:notmyview];
+        frame.origin.x += 102;
+        notmyview.backgroundColor=[UIColor whiteColor];
+        UIImageView *photoView = [[UIImageView alloc] initWithFrame:CGRectInset(notmyview.bounds, 4, 4)];
+        [notmyview addSubview:photoView];
+        photoView.image = photo.image;
+        photoView.contentMode=UIViewContentModeScaleAspectFill;
+        photoView.clipsToBounds = YES;
+        
+    }
+    photoScrollView.contentSize=CGSizeMake(frame.origin.x +4, frame.size.height);
+}
+
 
 #pragma mark - Table view data source
 

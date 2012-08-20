@@ -19,6 +19,7 @@
 	IBOutlet UISwitch *slider;
 	IBOutlet UIView *topView;
 	WASubmission *submission;
+    __unsafe_unretained IBOutlet UIScrollView *photoScrollView;
 }
 
 - (id)initWithSubmission:(WASubmission *)_submission;
