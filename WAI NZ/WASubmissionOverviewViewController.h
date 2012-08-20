@@ -20,6 +20,7 @@
 	IBOutlet UIView *topView;
 	WASubmission *submission;
     __unsafe_unretained IBOutlet UIScrollView *photoScrollView;
+	IBOutlet UIView *addPhotoView;
 }
 
 - (id)initWithSubmission:(WASubmission *)_submission;

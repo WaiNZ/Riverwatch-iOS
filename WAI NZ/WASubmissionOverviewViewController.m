@@ -57,6 +57,7 @@ static const int kUseExistingPhotoButton = 1;
 	emailCell = nil;
 	topView = nil;
     photoScrollView = nil;
+	addPhotoView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -93,25 +94,37 @@ static const int kUseExistingPhotoButton = 1;
 
 - (void)submissionUpdated {
 	[mainTableView reloadData];
+	[self loadPhotoViews];
 }
 
-#pragma mark - Photo Scroll generation
+#pragma mark - Utilities
 
 - (void) loadPhotoViews {
+	[photoScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+	
     CGRect frame = CGRectMake(8, 4, 98, 98);
+	static const CGFloat kPhotoSpacing = 102;
+	
     for(int n = 0;n<submission.numberOfSubmissionPhotos;n++){
         WASubmissionPhoto *photo = [submission getSubmissionPhoto:n];
         UIView *notmyview = [[UIView alloc] initWithFrame:frame];
         [photoScrollView addSubview:notmyview];
-        frame.origin.x += 102;
+		
         notmyview.backgroundColor=[UIColor whiteColor];
         UIImageView *photoView = [[UIImageView alloc] initWithFrame:CGRectInset(notmyview.bounds, 4, 4)];
         [notmyview addSubview:photoView];
         photoView.image = photo.image;
         photoView.contentMode=UIViewContentModeScaleAspectFill;
         photoView.clipsToBounds = YES;
+		
+		frame.origin.x += kPhotoSpacing;
         
     }
+	addPhotoView.frame = frame;
+	[photoScrollView addSubview:addPhotoView];
+	
+	frame.origin.x += kPhotoSpacing;
+	
     photoScrollView.contentSize=CGSizeMake(frame.origin.x +4, frame.size.height);
 }
 
@@ -218,26 +231,35 @@ static const int kUseExistingPhotoButton = 1;
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     //0 is the topmost (Take a photo) button
     if(buttonIndex==kTakePhotoButton){
-        UIImagePickerController *cameraRollPicker = [[UIImagePickerController alloc] init];
-        cameraRollPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        cameraRollPicker.delegate = self;
-        [self presentModalViewController: cameraRollPicker animated:YES];
-    }
-    //1 is the topmost (Use an existing photo) button
-    else if(buttonIndex==kUseExistingPhotoButton){
-        UIImagePickerController *photoPicker = [[UIImagePickerController alloc] init];
+		UIImagePickerController *photoPicker = [[UIImagePickerController alloc] init];
         // TODO: check if the camera is available
         photoPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         photoPicker.delegate = self;
         [self presentModalViewController:photoPicker animated:YES];
+    }
+    //1 is the topmost (Use an existing photo) button
+    else if(buttonIndex==kUseExistingPhotoButton){
+        UIImagePickerController *cameraRollPicker = [[UIImagePickerController alloc] init];
+        cameraRollPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        cameraRollPicker.delegate = self;
+        [self presentModalViewController: cameraRollPicker animated:YES];
     }
 }
 
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    //TODO: Adding the actual photo
-	[picker dismissModalViewControllerAnimated:YES];
+    [WASubmissionPhoto photoWithMediaPickingInfo:info
+									 resultBlock:^(WASubmissionPhoto *photo) {
+										 [submission addSubmissionPhoto:photo];
+										 
+										 [picker dismissModalViewControllerAnimated:YES];
+									 }
+									failureBlock:^(NSError *error) {
+										// TODO: error;
+										
+										[picker dismissModalViewControllerAnimated:YES];
+									}];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

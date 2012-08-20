@@ -26,6 +26,8 @@
 + (void)photoWithMediaPickingInfo:(NSDictionary *)dict
 					  resultBlock:(void (^)(WASubmissionPhoto *photo))resultBlock
 					 failureBlock:(void (^)(NSError *error))failureBlock {
+	// TODO: test dates work on all version of iOS
+	
 	// Extract the image object
 	UIImage *_image = [dict objectForKey:UIImagePickerControllerOriginalImage];
 	// Declare variables to hold date/location information
@@ -44,19 +46,25 @@
 	if((metadata = [dict objectForKey:@"UIImagePickerControllerMediaMetadata"])) { // TODO: check 4.0 support
 		// If the dictionary contains metadata info - i.e. user took a photo
 		
+		NSString *dateString;
+		
 		// Get the date from the Exif dictionary
 		NSDictionary *exif = [metadata objectForKey:@"{Exif}"];
-		date = [exif objectForKey:@"DateTimeOriginal"];
+		dateString = [exif objectForKey:@"DateTimeOriginal"];
 		
-		if(!date) {
+		if(!dateString) {
 			// If the date wasn't in the Exif
 			
 			// Get the date from the TIFF dictionary
 			NSDictionary *tiff = [metadata objectForKey:@"{TIFF}"];
-			date = [tiff objectForKey:@"DateTime"];
+			dateString = [tiff objectForKey:@"DateTime"];
 			
 			// TODO: no date!!! error
 		}
+		
+		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+		[dateFormatter setDateFormat:@"yyyy:MM:dd HH:mm:ss"];
+		date = [dateFormatter dateFromString:dateString];
 		
 		// All good
 		success();
@@ -102,6 +110,11 @@
 			// Unrecognized image selection!
 			
 			// TODO: error!!!!!
+			
+#if TARGET_IPHONE_SIMULATOR
+			date = [NSDate date];
+			success();
+#endif
 		}
 	}
 }
