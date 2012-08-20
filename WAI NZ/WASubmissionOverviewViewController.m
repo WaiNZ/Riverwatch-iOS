@@ -23,7 +23,6 @@ static const int kUseExistingPhotoButton = 1;
 
 @interface WASubmissionOverviewViewController ()
 
--(void) addAdditionalPhoto;
 -(void) loadPhotoViews;
 @end
 
