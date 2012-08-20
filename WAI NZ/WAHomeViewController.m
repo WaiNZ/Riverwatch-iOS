@@ -66,9 +66,23 @@
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-	// TODO: create submission object with photo
-	// TODO: push on submission overview controller with submission object
+#if TARGET_IPHONE_SIMULATOR
+	time_t now;
+	time(&now);
+	WASubmissionPhoto *photo = [[WASubmissionPhoto alloc] initWithPhoto:[info objectForKey:UIImagePickerControllerEditedImage]
+															  timestamp:now
+															   location:nil];
+	WASubmission *submission = [[WASubmission alloc] init];
+	submission.descriptionText = @"I saw Old McDonald's cow crapping in the river ";
+	submission.email = @"syzygy@dt.net.nz";
+	submission.anonymous = NO;
+	submission.location = photo.location;
+	[submission addSubmissionPhoto:photo];
 	
+	WASubmissionOverviewViewController *controller = [[WASubmissionOverviewViewController alloc] initWithSubmission:submission];
+	[self.navigationController pushViewController:controller animated:NO];
+	[picker dismissModalViewControllerAnimated:YES];
+#else
 	[WASubmissionPhoto photoWithMediaPickingInfo:info
 									 resultBlock:^(WASubmissionPhoto *photo) {
 										 WASubmission *submission = [[WASubmission alloc] init];
@@ -88,6 +102,7 @@
 										
 										[picker dismissModalViewControllerAnimated:YES];
 									}];
+#endif
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
