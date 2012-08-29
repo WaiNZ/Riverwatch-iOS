@@ -7,6 +7,10 @@
 //
 
 #import "WASubmissionPhotoGalleryViewController.h"
+#import "WASubmission.h"
+
+static const CGFloat photoSpacer = 20;
+#define PHOTO_PAN_MAX (self.view.bounds.size.width + photoSpacer)
 
 @interface WASubmissionPhotoGalleryViewController ()
 
@@ -14,20 +18,33 @@
 
 @implementation WASubmissionPhotoGalleryViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
+- (id)initWithSubmission:(WASubmission *)_submission {
+	self = [self init];
+	if(self) {
+		// Set up
+		submission = _submission;
+		self.navigationItem.title = @"Photos";
+	}
+   
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+	leftView = view1;
+	centerView = view2;
+	rightView = view3;
+	centerView.frame = self.view.bounds;
+	[self.view addSubview:centerView];
+	centerView.image = [submission getSubmissionPhoto:currentPhoto].image;
+	
 }
 
 - (void)viewDidUnload {
+	view2 = nil;
+	view1 = nil;
+	view3 = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -35,6 +52,90 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)_setOffset:(CGFloat)offset {
+	// Set frames of left, center, right views
+	CGRect leftFrame = self.view.bounds;
+	leftFrame.origin.x = -leftFrame.size.width + offset - photoSpacer;
+	leftView.frame = leftFrame;
+	
+	CGRect centerFrame = self.view.bounds;
+	centerFrame.origin.x = 0 + offset;
+	centerView.frame = centerFrame;
+	
+	CGRect rightFrame = self.view.bounds;
+	rightFrame.origin.x = +rightFrame.size.width + offset + photoSpacer;
+	rightView.frame = rightFrame;
+}
+
+- (IBAction)viewPanned:(UIPanGestureRecognizer *)sender {
+	CGFloat offset = [sender translationInView:self.view].x;
+	
+	switch (sender.state) {
+		case UIGestureRecognizerStateBegan: {
+			// Add side views and configure them
+			[self _setOffset:0];
+			
+			canSwipeLeft = currentPhoto>0;
+			canSwipeRight = currentPhoto<submission.numberOfSubmissionPhotos-1;
+			
+			if(canSwipeLeft){
+				[self.view addSubview:leftView];
+				leftView.image = [submission getSubmissionPhoto:currentPhoto-1].image;
+			}
+		
+			if(canSwipeRight){
+				[self.view addSubview:rightView];
+				rightView.image = [submission getSubmissionPhoto:currentPhoto+1].image;
+			}
+			
+			break;
+		}
+		case UIGestureRecognizerStateChanged: {
+			if(!canSwipeLeft && offset>0){
+				offset/=2.5;
+			}
+			if(!canSwipeRight && offset<0){
+				offset/=2.5;
+			}
+			[self _setOffset:offset];
+			break;
+		}
+		case UIGestureRecognizerStateCancelled:
+		case UIGestureRecognizerStateEnded: {
+			[UIView animateWithDuration:kAnimationDuration
+							 animations:^{
+								 if(canSwipeLeft && offset>self.view.bounds.size.width/2){
+									 [self _setOffset:PHOTO_PAN_MAX];
+									 UIImageView *temp = centerView;
+									 centerView = leftView;
+									 leftView = temp;
+									 currentPhoto--;
+								 }
+								 else if (canSwipeRight && offset<-self.view.bounds.size.width/2){
+									 [self _setOffset:-PHOTO_PAN_MAX];
+									 UIImageView *temp = centerView;
+									 centerView = rightView;
+									 rightView = temp;
+									 currentPhoto++;
+								 }
+								 else {
+									 [self _setOffset:0];
+								 }
+								 
+							 }
+							 completion:^(BOOL done){
+								 [leftView removeFromSuperview];
+								 [rightView removeFromSuperview];
+								 leftView.image = nil;
+								 rightView.image = nil;
+							 }];
+			break;
+		}
+		default:
+			break;
+	}
 }
 
 @end

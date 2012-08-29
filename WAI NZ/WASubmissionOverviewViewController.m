@@ -93,7 +93,7 @@ static const int kUseExistingPhotoButton = 1;
 }
 
 -( IBAction) photoTapped:(UITapGestureRecognizer *)sender{
-	WASubmissionPhotoGalleryViewController *gallery = [[WASubmissionPhotoGalleryViewController alloc] init];
+	WASubmissionPhotoGalleryViewController *gallery = [[WASubmissionPhotoGalleryViewController alloc] initWithSubmission:submission];
 	[self.navigationController pushViewController:gallery animated:YES];
 	
 	
