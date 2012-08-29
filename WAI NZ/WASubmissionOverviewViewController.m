@@ -10,6 +10,7 @@
 #import "WASubmissionDescriptionViewController.h"
 #import "WASubmitViewController.h"
 #import "WASubmission.h"
+#import "WASubmissionPhotoGalleryViewController.h"
 
 
 #import <UIKit/UITableView.h>
@@ -91,6 +92,14 @@ static const int kUseExistingPhotoButton = 1;
     
 }
 
+-( IBAction) photoTapped:(UITapGestureRecognizer *)sender{
+	WASubmissionPhotoGalleryViewController *gallery = [[WASubmissionPhotoGalleryViewController alloc] init];
+	[self.navigationController pushViewController:gallery animated:YES];
+	
+	
+	
+}
+
 - (void)submissionUpdated {
 	[mainTableView reloadData];
 	[self loadPhotoViews];
@@ -115,6 +124,9 @@ static const int kUseExistingPhotoButton = 1;
         photoView.image = photo.image;
         photoView.contentMode=UIViewContentModeScaleAspectFill;
         photoView.clipsToBounds = YES;
+		
+		UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoTapped:)];
+		[notmyview addGestureRecognizer:tap];
 		
 		frame.origin.x += kPhotoSpacing;
         
