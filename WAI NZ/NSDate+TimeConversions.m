@@ -11,7 +11,7 @@
 @implementation NSDate (TimeConversions)
 
 - (time_t)UNIXTimestamp {
-	return [self timeIntervalSince1970]/1000;
+	return [self timeIntervalSince1970];
 }
 
 @end
