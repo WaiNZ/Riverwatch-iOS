@@ -10,7 +10,12 @@
 @class WASubmission;
 
 /**
- * This controller manages the gallery view for viewing the photos attached to a WAI NZ submission.
+ This controller manages the gallery view for viewing the photos
+ attached to a WAI NZ submission. From this controller it is possible
+ for the user to delete photos from the submission as well.
+ 
+ Instances of WASubmissionPhotoGalleryViewController must be created
+ using the -initWithSubmission: constructor.
  */
 @interface WASubmissionPhotoGalleryViewController : UIViewController{
 	
@@ -31,7 +36,12 @@
 	
 }
 
+/**
+ Initilize this WASubmissionPhotoGalleryViewController with the specified
+ submission.
+ 
+ @param _submission the submission to view and edit the photos of
+ */
 - (id)initWithSubmission:(WASubmission *)_submission;
-
 
 @end

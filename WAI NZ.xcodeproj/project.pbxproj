@@ -404,9 +404,9 @@
 		A1EB128C15D76019004ECF71 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				A1099B9015D76A4200855724 /* WASimulatorData.h */,
 				A1EB128E15D76037004ECF71 /* WAFakeImagePickerController.h */,
 				A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */,
-				A1099B9015D76A4200855724 /* WASimulatorData.h */,
 				A1F0299E15E0956700BC9B28 /* NSDate+TimeConversions.h */,
 				A1F0299F15E0956700BC9B28 /* NSDate+TimeConversions.m */,
 				A1B8DE4E15EDC0FD0030AFCE /* UIAlertView+Blocks.h */,
@@ -583,7 +583,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "WHOAMI=`whoami`\nmkdir -p /private/var/tmp/$WHOAMI/appledoc/\nOUTPUT=\"/private/var/tmp/$WHOAMI/appledoc/\"\nCOMPANY_ID=\"nz.ac.victoria.ecs.engr302\"\n\n\"$PROJECT_DIR/Tools/appledoc/appledoc\" \\\n--templates \"$PROJECT_DIR/Tools/appledoc/Templates\" \\\n--project-name \"WAI NZ\" \\\n--project-company \"Water Action Initiative New Zealand\" \\\n--company-id \"$COMPANY_ID\" \\\n--output \"$OUTPUT\" \\\n--ignore \"*.m\" \\\n--ignore \"WAI NZTests\" \\\n--logformat xcode \\\n--no-repeat-first-par \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--exit-threshold 3 \\\n\"$PROJECT_DIR\"\n\nexit $?";
+			shellScript = "WHOAMI=`whoami`\nmkdir -p /private/var/tmp/$WHOAMI/appledoc/\nOUTPUT=\"/private/var/tmp/$WHOAMI/appledoc/\"\nCOMPANY_ID=\"nz.ac.victoria.ecs.engr302\"\n\n\"$PROJECT_DIR/Tools/appledoc/appledoc\" \\\n--templates \"$PROJECT_DIR/Tools/appledoc/Templates\" \\\n--project-name \"WAI NZ\" \\\n--project-company \"Water Action Initiative New Zealand\" \\\n--company-id \"$COMPANY_ID\" \\\n--output \"$OUTPUT\" \\\n--ignore \"*.m\" \\\n--ignore \"WAI NZTests\" \\\n--ignore \"RestKit\" \\\n--logformat xcode \\\n--no-repeat-first-par \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--exit-threshold 3 \\\n\"$PROJECT_DIR\"\n\nexit $?";
 		};
 /* End PBXShellScriptBuildPhase section */
 

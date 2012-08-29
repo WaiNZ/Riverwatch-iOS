@@ -66,6 +66,7 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 }
 
 - (void)removeSubmissionPhotoAtIndex:(int)index withConfirmation:(void (^)(int index))callback{
+	// TODO: Bit icky having this code in a model object, MVC all the way. Maybe categoryize it?
 	if(index>=0 &&index<photos.count){
 		if(photos.count>1){
 			UIAlertView *confirmDelete = [[UIAlertView alloc] initWithTitle:@"Confirm deletion"

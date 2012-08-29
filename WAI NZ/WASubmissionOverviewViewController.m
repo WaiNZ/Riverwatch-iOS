@@ -107,7 +107,7 @@ static const int kUseExistingPhotoButton = 1;
 
 #pragma mark - Utilities
 
-- (void) loadPhotoViews {
+- (void)loadPhotoViews {
 	[photoScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 	
     CGRect frame = CGRectMake(8, 4, 98, 98);
