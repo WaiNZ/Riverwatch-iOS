@@ -7,48 +7,43 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
 #import "WASubmissionPhoto.h"
+#import "WAGeolocation.h"
+
+@class RKObjectMapping;
 
 extern NSString *const kWASubmissionUpdatedNotification;
 
-@interface WASubmission : NSObject
-{
+@interface WASubmission : NSObject {
     NSMutableArray *photos;
     NSMutableArray *tags;
     NSString *descriptionText;
     NSString *email;
     BOOL anonymous;
-    CLLocation *location;
-    time_t timestamp;
+    WAGeolocation *location;
+	time_t timestamp;
     NSString *udid;
     
 }
 
++ (RKObjectMapping *)objectMapping;
+
 - (void)addSubmissionPhoto:(WASubmissionPhoto *)photo;
-
 - (void)removeSubmissionPhoto:(int)index;
-
-- (void) removeSubmissionPhotoAtIndex:(int)index withConfirmation:(void (^)(int index))callback;
-
-- (WASubmissionPhoto *)getSubmissionPhoto:(int)index;
-
-- (int)numberOfSubmissionPhotos;
-
+- (void)removeSubmissionPhotoAtIndex:(int)index withConfirmation:(void (^)(int index))callback;
+- (WASubmissionPhoto *)submissionPhotoAtIndex:(int)index;
 - (void)addTag:(NSString *)tag;
-
 - (void)removeTag:(int)index;
-
-- (NSString *)getTag:(int)index;
-
-- (int)numberOfTags;
+- (NSString *)tagAtIndex:(int)index;
 
 
 
 @property (nonatomic, strong) NSString *descriptionText;
 @property (nonatomic, strong) NSString *email;
 @property (nonatomic, getter=isAnonymous) BOOL anonymous;
-@property (nonatomic, strong) CLLocation *location;
+@property (nonatomic, strong) WAGeolocation *location;
 @property (nonatomic, readonly) time_t timestamp;
 @property (nonatomic, readonly) NSString *udid;
+@property (nonatomic, readonly) NSInteger numberOfSubmissionPhotos;
+@property (nonatomic, readonly) NSInteger numberOfTags;
 @end

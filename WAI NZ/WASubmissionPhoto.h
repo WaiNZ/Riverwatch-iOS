@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
+#import "WAGeolocation.h"
+
+@class RKObjectMapping;
 
 /**
  * A photo data object that encapsulates the image data, timestamp,
@@ -16,9 +18,11 @@
 @interface WASubmissionPhoto : NSObject 
 {
     UIImage *image;
-    time_t timestamp;
-    CLLocation *location;
+    NSNumber *timestamp;
+    WAGeolocation *location;
 }
+
++ (RKObjectMapping *)objectMapping;
 
 /**
  * A convenience method for creating a WASubmissionPhoto from
@@ -55,14 +59,14 @@
  * 
  * @param image the image
  * @param timestamp the UNIX time at which the photo was taken
- * @param location the location the the photo was taken at: optional.
+ * @param location the location the the photo was taken at - optional.
  */
-- (id)initWithPhoto:(UIImage *)image timestamp:(time_t)timestamp location:(CLLocation *)location;
+- (id)initWithPhoto:(UIImage *)image timestamp:(time_t)timestamp location:(WAGeolocation *)location;
 
 /** The location this photo was taken at, may be nil */
-@property (atomic, readonly) CLLocation *location;
+@property (atomic, readonly) WAGeolocation *location;
 /** The UNIX time the photo was taken at */
-@property (atomic, readonly) time_t timestamp;
+@property (atomic, readonly) NSNumber *timestamp;
 /** The image data for this photo */
 @property (atomic, readonly) UIImage *image;
 @end

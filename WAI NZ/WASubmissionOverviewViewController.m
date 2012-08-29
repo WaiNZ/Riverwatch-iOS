@@ -114,7 +114,7 @@ static const int kUseExistingPhotoButton = 1;
 	static const CGFloat kPhotoSpacing = 102;
 	
     for(int n = 0;n<submission.numberOfSubmissionPhotos;n++){
-        WASubmissionPhoto *photo = [submission getSubmissionPhoto:n];
+        WASubmissionPhoto *photo = [submission submissionPhotoAtIndex:n];
         UIView *notmyview = [[UIView alloc] initWithFrame:frame];
         [photoScrollView addSubview:notmyview];
 		
@@ -216,7 +216,7 @@ static const int kUseExistingPhotoButton = 1;
 		[self.navigationController pushViewController: controller animated:YES];
 	}
 	else if (indexPath.section == 2 && indexPath.row ==0){
-		WASubmitViewController *controller = [[WASubmitViewController alloc] init];
+		WASubmitViewController *controller = [[WASubmitViewController alloc] initWithSubmission:submission];
 		[self.navigationController pushViewController: controller animated:YES];
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}

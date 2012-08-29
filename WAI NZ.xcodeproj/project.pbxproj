@@ -42,12 +42,20 @@
 		A12A54DA15D743480025D32A /* WASubmissionDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54D815D743480025D32A /* WASubmissionDescriptionViewController.xib */; };
 		A12A54DF15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A54DD15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m */; };
 		A12A54E015D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */; };
+		A17C324E15EE1A3B00A458C0 /* WAGeolocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A17C324D15EE1A3B00A458C0 /* WAGeolocation.m */; };
 		A1B8C9DD15E466720027D9D3 /* icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B8C9D815E466720027D9D3 /* icon_57.png */; };
 		A1B8C9DE15E466720027D9D3 /* icon_72.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B8C9D915E466720027D9D3 /* icon_72.png */; };
 		A1B8C9DF15E466720027D9D3 /* icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B8C9DA15E466720027D9D3 /* icon_114.png */; };
 		A1B8C9E015E466720027D9D3 /* icon_144.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B8C9DB15E466720027D9D3 /* icon_144.png */; };
 		A1B8C9E115E466720027D9D3 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = A1B8C9DC15E466720027D9D3 /* iTunesArtwork */; };
 		A1B8DE5015EDC0FD0030AFCE /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B8DE4F15EDC0FD0030AFCE /* UIAlertView+Blocks.m */; };
+		A1B90F7715EDDA68003419AF /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B90F6C15EDDA58003419AF /* libRestKit.a */; };
+		A1B90F8615EDDD34003419AF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B90F8515EDDD34003419AF /* SystemConfiguration.framework */; };
+		A1B90F8815EDDD41003419AF /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B90F8715EDDD41003419AF /* CFNetwork.framework */; };
+		A1B90F8A15EDDD48003419AF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B90F8915EDDD48003419AF /* CoreData.framework */; };
+		A1B90F8C15EDDD4F003419AF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B90F8B15EDDD4F003419AF /* Security.framework */; };
+		A1B90F8E15EDDFCD003419AF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B90F8D15EDDFCD003419AF /* QuartzCore.framework */; };
+		A1B90F9D15EDDFF0003419AF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B90F9C15EDDFF0003419AF /* MobileCoreServices.framework */; };
 		A1C0C57815D77A2F00A25C58 /* Tools in Resources */ = {isa = PBXBuildFile; fileRef = A1C0C57715D77A2F00A25C58 /* Tools */; };
 		A1EB129115D76037004ECF71 /* WAFakeImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */; };
 		A1F0299C15E08FAF00BC9B28 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0299B15E08FAF00BC9B28 /* AssetsLibrary.framework */; };
@@ -63,6 +71,48 @@
 			proxyType = 1;
 			remoteGlobalIDString = A12A548415D741980025D32A;
 			remoteInfo = "WAI NZ";
+		};
+		A1B90F6B15EDDA58003419AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1B90F6015EDDA58003419AF /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160D1614564E810060A5C5;
+			remoteInfo = RestKit;
+		};
+		A1B90F6D15EDDA58003419AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1B90F6015EDDA58003419AF /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160D2614564E820060A5C5;
+			remoteInfo = RestKitTests;
+		};
+		A1B90F6F15EDDA58003419AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1B90F6015EDDA58003419AF /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160E62145651060060A5C5;
+			remoteInfo = RestKitFramework;
+		};
+		A1B90F7115EDDA58003419AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1B90F6015EDDA58003419AF /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160E78145651060060A5C5;
+			remoteInfo = RestKitFrameworkTests;
+		};
+		A1B90F7315EDDA58003419AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1B90F6015EDDA58003419AF /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 259C301615128079003066A2;
+			remoteInfo = RestKitResources;
+		};
+		A1B90F7515EDDA63003419AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1B90F6015EDDA58003419AF /* RestKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 25160D1514564E810060A5C5;
+			remoteInfo = RestKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -100,6 +150,8 @@
 		A12A54DD15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionPhotoGalleryViewController.m; sourceTree = "<group>"; };
 		A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionPhotoGalleryViewController.xib; sourceTree = "<group>"; };
 		A16E9D9D15DBB2EC00E5353C /* MJGAvalibility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJGAvalibility.h; sourceTree = "<group>"; };
+		A17C324C15EE1A3B00A458C0 /* WAGeolocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAGeolocation.h; sourceTree = "<group>"; };
+		A17C324D15EE1A3B00A458C0 /* WAGeolocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAGeolocation.m; sourceTree = "<group>"; };
 		A1B8C9D815E466720027D9D3 /* icon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_57.png; sourceTree = "<group>"; };
 		A1B8C9D915E466720027D9D3 /* icon_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_72.png; sourceTree = "<group>"; };
 		A1B8C9DA15E466720027D9D3 /* icon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_114.png; sourceTree = "<group>"; };
@@ -107,6 +159,13 @@
 		A1B8C9DC15E466720027D9D3 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		A1B8DE4E15EDC0FD0030AFCE /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		A1B8DE4F15EDC0FD0030AFCE /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		A1B90F6015EDDA58003419AF /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
+		A1B90F8515EDDD34003419AF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A1B90F8715EDDD41003419AF /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		A1B90F8915EDDD48003419AF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A1B90F8B15EDDD4F003419AF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A1B90F8D15EDDFCD003419AF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A1B90F9C15EDDFF0003419AF /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A1C0C57715D77A2F00A25C58 /* Tools */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tools; sourceTree = SOURCE_ROOT; };
 		A1EB128E15D76037004ECF71 /* WAFakeImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAFakeImagePickerController.h; sourceTree = "<group>"; };
 		A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAFakeImagePickerController.m; sourceTree = "<group>"; };
@@ -124,6 +183,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1B90F9D15EDDFF0003419AF /* MobileCoreServices.framework in Frameworks */,
+				A1B90F8E15EDDFCD003419AF /* QuartzCore.framework in Frameworks */,
+				A1B90F8C15EDDD4F003419AF /* Security.framework in Frameworks */,
+				A1B90F8A15EDDD48003419AF /* CoreData.framework in Frameworks */,
+				A1B90F8815EDDD41003419AF /* CFNetwork.framework in Frameworks */,
+				A1B90F8615EDDD34003419AF /* SystemConfiguration.framework in Frameworks */,
+				A1B90F7715EDDA68003419AF /* libRestKit.a in Frameworks */,
 				A1F0299C15E08FAF00BC9B28 /* AssetsLibrary.framework in Frameworks */,
 				A12A548A15D741980025D32A /* UIKit.framework in Frameworks */,
 				A12A548C15D741980025D32A /* Foundation.framework in Frameworks */,
@@ -147,6 +213,7 @@
 		A12A547A15D741980025D32A = {
 			isa = PBXGroup;
 			children = (
+				A1B90F6015EDDA58003419AF /* RestKit.xcodeproj */,
 				A12A548F15D741980025D32A /* WAI NZ */,
 				A12A54A715D741990025D32A /* WAI NZTests */,
 				A12A548815D741980025D32A /* Frameworks */,
@@ -166,6 +233,12 @@
 		A12A548815D741980025D32A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A1B90F9C15EDDFF0003419AF /* MobileCoreServices.framework */,
+				A1B90F8D15EDDFCD003419AF /* QuartzCore.framework */,
+				A1B90F8B15EDDD4F003419AF /* Security.framework */,
+				A1B90F8915EDDD48003419AF /* CoreData.framework */,
+				A1B90F8715EDDD41003419AF /* CFNetwork.framework */,
+				A1B90F8515EDDD34003419AF /* SystemConfiguration.framework */,
 				A1F0299B15E08FAF00BC9B28 /* AssetsLibrary.framework */,
 				A12A548915D741980025D32A /* UIKit.framework */,
 				A12A548B15D741980025D32A /* Foundation.framework */,
@@ -286,6 +359,8 @@
 		A12A54E115D7478A0025D32A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A17C324C15EE1A3B00A458C0 /* WAGeolocation.h */,
+				A17C324D15EE1A3B00A458C0 /* WAGeolocation.m */,
 				E2A3B40415DB0A79008AABEC /* WASubmission.h */,
 				E2A3B40515DB0A79008AABEC /* WASubmission.m */,
 				E2A3B40815DB0E93008AABEC /* WASubmissionPhoto.h */,
@@ -312,6 +387,18 @@
 				A1B8C9DC15E466720027D9D3 /* iTunesArtwork */,
 			);
 			name = Icons;
+			sourceTree = "<group>";
+		};
+		A1B90F6115EDDA58003419AF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1B90F6C15EDDA58003419AF /* libRestKit.a */,
+				A1B90F6E15EDDA58003419AF /* RestKitTests.octest */,
+				A1B90F7015EDDA58003419AF /* RestKit.framework */,
+				A1B90F7215EDDA58003419AF /* RestKitFrameworkTests.octest */,
+				A1B90F7415EDDA58003419AF /* RestKitResources.bundle */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		A1EB128C15D76019004ECF71 /* Utilities */ = {
@@ -342,6 +429,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A1B90F7615EDDA63003419AF /* PBXTargetDependency */,
 			);
 			name = "WAI NZ";
 			productName = "WAI NZ";
@@ -387,6 +475,12 @@
 			mainGroup = A12A547A15D741980025D32A;
 			productRefGroup = A12A548615D741980025D32A /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A1B90F6115EDDA58003419AF /* Products */;
+					ProjectRef = A1B90F6015EDDA58003419AF /* RestKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				A12A548415D741980025D32A /* WAI NZ */,
@@ -395,6 +489,44 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A1B90F6C15EDDA58003419AF /* libRestKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRestKit.a;
+			remoteRef = A1B90F6B15EDDA58003419AF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A1B90F6E15EDDA58003419AF /* RestKitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitTests.octest;
+			remoteRef = A1B90F6D15EDDA58003419AF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A1B90F7015EDDA58003419AF /* RestKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RestKit.framework;
+			remoteRef = A1B90F6F15EDDA58003419AF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A1B90F7215EDDA58003419AF /* RestKitFrameworkTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitFrameworkTests.octest;
+			remoteRef = A1B90F7115EDDA58003419AF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A1B90F7415EDDA58003419AF /* RestKitResources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitResources.bundle;
+			remoteRef = A1B90F7315EDDA58003419AF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A12A548315D741980025D32A /* Resources */ = {
@@ -472,6 +604,7 @@
 				E2A3B40A15DB0E93008AABEC /* WASubmissionPhoto.m in Sources */,
 				A1F029A015E0956700BC9B28 /* NSDate+TimeConversions.m in Sources */,
 				A1B8DE5015EDC0FD0030AFCE /* UIAlertView+Blocks.m in Sources */,
+				A17C324E15EE1A3B00A458C0 /* WAGeolocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +623,11 @@
 			isa = PBXTargetDependency;
 			target = A12A548415D741980025D32A /* WAI NZ */;
 			targetProxy = A12A54A515D741990025D32A /* PBXContainerItemProxy */;
+		};
+		A1B90F7615EDDA63003419AF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RestKit;
+			targetProxy = A1B90F7515EDDA63003419AF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -573,8 +711,10 @@
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../Headers\"";
 				INFOPLIST_FILE = "WAI NZ/WAI NZ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -591,8 +731,10 @@
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../Headers\"";
 				INFOPLIST_FILE = "WAI NZ/WAI NZ-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

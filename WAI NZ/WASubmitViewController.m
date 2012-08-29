@@ -8,11 +8,25 @@
 
 #import "WASubmitViewController.h"
 
+#import "WASubmission.h"
+
+static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
+
 @interface WASubmitViewController ()
 
 @end
 
 @implementation WASubmitViewController
+
+#pragma mark - Init/Dealloc
+
+- (id)initWithSubmission:(WASubmission *)_submission {
+	self = [self init];
+	if(self) {
+		submission = _submission;
+	}
+	return self;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -23,49 +37,19 @@
     return self;
 }
 
+#pragma mark - View lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     inProgressStatusMessage.text = @"Uploading...";
     self.navigationItem.hidesBackButton = YES;
-
-    
-    
 }
 
-- (void) viewDidAppear:(BOOL)animated {
-    if (self.view == inProgressView) {
-        prog = 0.01;
-        pass = rand() % 100;
+- (void)viewDidAppear:(BOOL)animated {
+    if(self.view == inProgressView) {
         [self sendSubmission];
     }
-}
-
-static float prog = 0.01;
-static int pass = 0.01;
-
-
-- (void) sendSubmission {
-    prog += 0.01;
-    progressBar.progress = prog;
-    if (pass > 30 || prog*100 <= 100-pass) {
-        if (prog <= 1)[self performSelector:@selector(sendSubmission) withObject:nil afterDelay:0.01];
-        else {
-            self.view = successfulView;
-            self.navigationItem.title = @"Done!";
-            self.navigationItem.rightBarButtonItem = doneButton;
-        }
-    }
-    else {
-        if (prog <= (1-pass))[self performSelector:@selector(sendSubmission) withObject:nil afterDelay:0.01];
-        else {
-            self.view = unsuccessfulView;
-            self.navigationItem.title = @"Oh dear...";
-            self.navigationItem.hidesBackButton = NO;
-
-        }
-    }
-    
 }
 
 - (void)viewDidUnload {
@@ -87,15 +71,43 @@ static int pass = 0.01;
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - Utilities
+
+- (void)sendSubmission {
+	submissionProgress = 0;
+	
+	[[RKObjectManager sharedManager] postObject:submission
+									 usingBlock:^(RKObjectLoader *loader) {
+										 loader.delegate = self;
+									 }];
+}
+
+#pragma mark - Actions
+
 - (IBAction)doneButtonPressed:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)retryButtonPressed:(id)sender {
-    prog = 0.01;
-    pass = rand() % 100;
     self.view = inProgressView;
     self.navigationItem.hidesBackButton = YES;
     [self sendSubmission];
 }
+
+#pragma mark - RKObjectLoaderDelegate
+
+- (void)request:(RKRequest *)request didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
+	submissionProgress = ((float)totalBytesWritten)/((float)totalBytesExpectedToWrite);
+	if(submissionProgress > lastSubmissionProgress + kSubmissionUpdateInterval || submissionProgress >= 0.99999) {
+		lastSubmissionProgress = submissionProgress;
+		progressBar.progress = submissionProgress;
+	}
+}
+
+- (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error {
+	self.view = unsuccessfulView;
+	self.navigationItem.title = @"Oh dear...";
+	self.navigationItem.hidesBackButton = NO;
+}
+
 @end
