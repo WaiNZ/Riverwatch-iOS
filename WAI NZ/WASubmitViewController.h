@@ -15,6 +15,23 @@
  * When the submission is complete this controller will pop the
  * entire navigation stack.
  */
-@interface WASubmitViewController : UIViewController
+@interface WASubmitViewController : UIViewController {
+    
+    __unsafe_unretained IBOutlet UILabel *successfulStatusMessage;
+    __unsafe_unretained IBOutlet UILabel *inProgressStatusMessage;
+    __unsafe_unretained IBOutlet UIButton *retryButton;
+    __unsafe_unretained IBOutlet UIProgressView *progressBar;
+    __unsafe_unretained IBOutlet UILabel *unsuccessfulStatusMessage;
+    
+    IBOutlet UIBarButtonItem *doneButton;
+    //views
+    
+    IBOutlet UIView *unsuccessfulView;
+    IBOutlet UIView *successfulView;
+    IBOutlet UIView *inProgressView;
 
+}
+- (IBAction)doneButtonPressed:(id)sender;
+
+- (IBAction)retryButtonPressed:(id)sender;
 @end
