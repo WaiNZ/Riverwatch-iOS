@@ -8,6 +8,8 @@
 
 #import "WASubmission.h"
 
+#import "UIAlertView+Blocks.h"
+
 #define POST_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] postNotificationName:kWASubmissionUpdatedNotification object:self]
 
 NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotification";
@@ -38,6 +40,40 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
     [photos removeObjectAtIndex:index];
 	POST_UPDATE_NOTIFICATION;
 }
+
+- (void) removeSubmissionPhotoAtIndex:(int)index withConfirmation:(void (^)(int index))callback{
+	if(index>=0 &&index<photos.count){
+		if(photos.count>1){
+			UIAlertView *confirmDelete = [[UIAlertView alloc] initWithTitle:@"Confirm deletion"
+																	message:@"Are you sure you wish to delete this image? This can't be undone."
+															  okButtonTitle:@"Delete"
+														  cancelButtonTitle:@"Cancel"
+															dismissCallback:^(NSInteger buttonIndex) {
+																if(buttonIndex == 0) {
+																	// Dont care
+																}
+																if(buttonIndex == 1) {
+																	[self removeSubmissionPhoto:index];
+																	if(callback) {
+																		callback(index);
+																	}
+																}
+															}];
+			
+			[confirmDelete show];
+		}
+		else {
+			UIAlertView *cantDeleteLastPhoto = [[UIAlertView alloc] initWithTitle:@"Can't delete last photo"
+																		  message:@"Every submission to WAI NZ must include at least one photo, you are attempting to delete the last one."
+																		 delegate:nil
+																cancelButtonTitle:@"Ok"
+																otherButtonTitles:nil];
+			
+			[cantDeleteLastPhoto show];
+		}
+	}
+}
+
 
 - (WASubmissionPhoto *)getSubmissionPhoto:(int)index {
     return [photos objectAtIndex:index];

@@ -66,15 +66,15 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUIPanGestureRecognizer" id="454970032"/>
-			<object class="IBUIImageView" id="712347687">
+			<object class="IBUIPanGestureRecognizer" id="343238492"/>
+			<object class="IBUIImageView" id="599969341">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<string key="NSFrameSize">{240, 128}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
-				<object class="NSColor" key="IBUIBackgroundColor" id="962329312">
+				<object class="NSColor" key="IBUIBackgroundColor" id="1011172658">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MCAwIDAAA</bytes>
 				</object>
@@ -82,26 +82,26 @@
 				<bool key="IBUIUserInteractionEnabled">NO</bool>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUIImageView" id="418877848">
+			<object class="IBUIImageView" id="71855587">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<string key="NSFrameSize">{240, 128}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
-				<reference key="IBUIBackgroundColor" ref="962329312"/>
+				<reference key="IBUIBackgroundColor" ref="1011172658"/>
 				<int key="IBUIContentMode">1</int>
 				<bool key="IBUIUserInteractionEnabled">NO</bool>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUIImageView" id="423625706">
+			<object class="IBUIImageView" id="71485544">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<string key="NSFrameSize">{240, 128}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
-				<reference key="IBUIBackgroundColor" ref="962329312"/>
+				<reference key="IBUIBackgroundColor" ref="1011172658"/>
 				<int key="IBUIContentMode">1</int>
 				<bool key="IBUIUserInteractionEnabled">NO</bool>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -121,7 +121,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">view1</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="712347687"/>
+						<reference key="destination" ref="599969341"/>
 					</object>
 					<int key="connectionID">11</int>
 				</object>
@@ -129,7 +129,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">view3</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="423625706"/>
+						<reference key="destination" ref="71485544"/>
 					</object>
 					<int key="connectionID">13</int>
 				</object>
@@ -137,7 +137,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">view2</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="418877848"/>
+						<reference key="destination" ref="71855587"/>
 					</object>
 					<int key="connectionID">14</int>
 				</object>
@@ -145,7 +145,7 @@
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
 						<string key="label">gestureRecognizers</string>
 						<reference key="source" ref="191373211"/>
-						<reference key="destination" ref="454970032"/>
+						<reference key="destination" ref="343238492"/>
 						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
@@ -154,7 +154,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">viewPanned:</string>
-						<reference key="source" ref="454970032"/>
+						<reference key="source" ref="343238492"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">7</int>
@@ -187,22 +187,22 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">5</int>
-						<reference key="object" ref="454970032"/>
+						<reference key="object" ref="343238492"/>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">8</int>
-						<reference key="object" ref="712347687"/>
+						<reference key="object" ref="599969341"/>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">9</int>
-						<reference key="object" ref="418877848"/>
+						<reference key="object" ref="71855587"/>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">12</int>
-						<reference key="object" ref="423625706"/>
+						<reference key="object" ref="71485544"/>
 						<reference key="parent" ref="0"/>
 					</object>
 				</array>
@@ -222,7 +222,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">14</int>
+			<int key="maxID">16</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

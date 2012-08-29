@@ -24,6 +24,10 @@ static const CGFloat photoSpacer = 20;
 		// Set up
 		submission = _submission;
 		self.navigationItem.title = @"Photos";
+		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Delete"
+																				  style:UIBarButtonItemStyleBordered
+																				 target:self
+																				 action:@selector(deleteCurrentPhoto:)];
 	}
    
     return self;
@@ -69,8 +73,46 @@ static const CGFloat photoSpacer = 20;
 	rightView.frame = rightFrame;
 }
 
+- (IBAction)deleteCurrentPhoto:(id)sender{
+	[submission removeSubmissionPhotoAtIndex:currentPhoto
+							withConfirmation:^(int photoIndex) {
+								CGFloat edge = 0;
+								__unsafe_unretained UIImageView **viewToShift = &rightView;
+								if(photoIndex == submission.numberOfSubmissionPhotos) {
+									edge = self.view.bounds.size.width;
+									viewToShift = &leftView;
+									currentPhoto--;
+								}
+								
+								CGPoint oldCenter = centerView.center;
+								[self _setOffset:0];
+								(*viewToShift).image = [submission getSubmissionPhoto:currentPhoto].image;
+								[self.view addSubview:(*viewToShift)];
+								[UIView animateWithDuration:kAnimationDuration
+												 animations:^{
+													 centerView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+													 centerView.center = CGPointMake(edge, self.view.bounds.size.height/2);
+													 (*viewToShift).center = oldCenter;
+												 }
+												 completion:^(BOOL done) {
+													 UIImageView *temp = centerView;
+													 centerView = (*viewToShift);
+													 (*viewToShift) = temp;
+													 
+													 [leftView removeFromSuperview];
+													 [rightView removeFromSuperview];
+													 leftView.image = nil;
+													 rightView.image = nil;
+													 
+													 temp.transform = CGAffineTransformIdentity;
+													 temp.center = oldCenter;
+												 }];
+							}];
+}
+
 - (IBAction)viewPanned:(UIPanGestureRecognizer *)sender {
 	CGFloat offset = [sender translationInView:self.view].x;
+	CGFloat velocity = [sender velocityInView:self.view].x;
 	
 	switch (sender.state) {
 		case UIGestureRecognizerStateBegan: {
@@ -106,14 +148,14 @@ static const CGFloat photoSpacer = 20;
 		case UIGestureRecognizerStateEnded: {
 			[UIView animateWithDuration:kAnimationDuration
 							 animations:^{
-								 if(canSwipeLeft && offset>self.view.bounds.size.width/2){
+								 if(canSwipeLeft && (offset>self.view.bounds.size.width/2 || velocity > kFlickVelocity)){
 									 [self _setOffset:PHOTO_PAN_MAX];
 									 UIImageView *temp = centerView;
 									 centerView = leftView;
 									 leftView = temp;
 									 currentPhoto--;
 								 }
-								 else if (canSwipeRight && offset<-self.view.bounds.size.width/2){
+								 else if (canSwipeRight && (offset<-self.view.bounds.size.width/2 || velocity < -kFlickVelocity)){
 									 [self _setOffset:-PHOTO_PAN_MAX];
 									 UIImageView *temp = centerView;
 									 centerView = rightView;
@@ -124,12 +166,15 @@ static const CGFloat photoSpacer = 20;
 									 [self _setOffset:0];
 								 }
 								 
+								 sender.enabled = NO;
 							 }
 							 completion:^(BOOL done){
 								 [leftView removeFromSuperview];
 								 [rightView removeFromSuperview];
 								 leftView.image = nil;
 								 rightView.image = nil;
+								 
+								 sender.enabled = YES;
 							 }];
 			break;
 		}

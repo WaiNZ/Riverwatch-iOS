@@ -18,3 +18,4 @@
 #import "WAFakeImagePickerController.h"
 
 static const NSTimeInterval kAnimationDuration = 0.4;
+static const CGFloat kFlickVelocity = 400;

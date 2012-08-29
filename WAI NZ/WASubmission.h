@@ -29,6 +29,8 @@ extern NSString *const kWASubmissionUpdatedNotification;
 
 - (void)removeSubmissionPhoto:(int)index;
 
+- (void) removeSubmissionPhotoAtIndex:(int)index withConfirmation:(void (^)(int index))callback;
+
 - (WASubmissionPhoto *)getSubmissionPhoto:(int)index;
 
 - (int)numberOfSubmissionPhotos;

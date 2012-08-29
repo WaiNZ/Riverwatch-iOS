@@ -47,6 +47,7 @@
 		A1B8C9DF15E466720027D9D3 /* icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B8C9DA15E466720027D9D3 /* icon_114.png */; };
 		A1B8C9E015E466720027D9D3 /* icon_144.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B8C9DB15E466720027D9D3 /* icon_144.png */; };
 		A1B8C9E115E466720027D9D3 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = A1B8C9DC15E466720027D9D3 /* iTunesArtwork */; };
+		A1B8DE5015EDC0FD0030AFCE /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B8DE4F15EDC0FD0030AFCE /* UIAlertView+Blocks.m */; };
 		A1C0C57815D77A2F00A25C58 /* Tools in Resources */ = {isa = PBXBuildFile; fileRef = A1C0C57715D77A2F00A25C58 /* Tools */; };
 		A1EB129115D76037004ECF71 /* WAFakeImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */; };
 		A1F0299C15E08FAF00BC9B28 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0299B15E08FAF00BC9B28 /* AssetsLibrary.framework */; };
@@ -104,6 +105,8 @@
 		A1B8C9DA15E466720027D9D3 /* icon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_114.png; sourceTree = "<group>"; };
 		A1B8C9DB15E466720027D9D3 /* icon_144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_144.png; sourceTree = "<group>"; };
 		A1B8C9DC15E466720027D9D3 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		A1B8DE4E15EDC0FD0030AFCE /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
+		A1B8DE4F15EDC0FD0030AFCE /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
 		A1C0C57715D77A2F00A25C58 /* Tools */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tools; sourceTree = SOURCE_ROOT; };
 		A1EB128E15D76037004ECF71 /* WAFakeImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAFakeImagePickerController.h; sourceTree = "<group>"; };
 		A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAFakeImagePickerController.m; sourceTree = "<group>"; };
@@ -319,6 +322,8 @@
 				A1099B9015D76A4200855724 /* WASimulatorData.h */,
 				A1F0299E15E0956700BC9B28 /* NSDate+TimeConversions.h */,
 				A1F0299F15E0956700BC9B28 /* NSDate+TimeConversions.m */,
+				A1B8DE4E15EDC0FD0030AFCE /* UIAlertView+Blocks.h */,
+				A1B8DE4F15EDC0FD0030AFCE /* UIAlertView+Blocks.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -466,6 +471,7 @@
 				E2A3B40615DB0A79008AABEC /* WASubmission.m in Sources */,
 				E2A3B40A15DB0E93008AABEC /* WASubmissionPhoto.m in Sources */,
 				A1F029A015E0956700BC9B28 /* NSDate+TimeConversions.m in Sources */,
+				A1B8DE5015EDC0FD0030AFCE /* UIAlertView+Blocks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
