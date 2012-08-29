@@ -108,7 +108,9 @@ static const int kUseExistingPhotoButton = 1;
 #pragma mark - Utilities
 
 - (void)loadPhotoViews {
-	[photoScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+	for(UIView *view in photoScrollView.subviews) {
+		[view removeFromSuperview]; // TODO: be carefull of scrollbars!
+	}
 	
     CGRect frame = CGRectMake(8, 4, 98, 98);
 	static const CGFloat kPhotoSpacing = 102;

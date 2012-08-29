@@ -17,6 +17,7 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 
 @interface WASubmission ()
 @property (nonatomic, assign) NSNumber *_rk_timestamp;
+@property (nonatomic, assign) NSDictionary *_rk_councilSubmission;
 @end
 
 @implementation WASubmission
@@ -29,6 +30,7 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	[mapping mapKeyPath:@"udid" toAttribute:@"udid"];
 	[mapping mapKeyPath:@"photo_data" toRelationship:@"photos" withMapping:[WASubmissionPhoto objectMapping]];
 	[mapping mapKeyPath:@"geolocation" toRelationship:@"location" withMapping:[WAGeolocation objectMapping]];
+	[mapping mapKeyPath:@"council_submission" toAttribute:@"_rk_councilSubmission"];
 	
 	return mapping;
 }
@@ -159,6 +161,23 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 
 - (void)set_rk_timestamp:(NSNumber *)_timestamp {
 	timestamp = _timestamp.longValue;
+}
+
+- (NSDictionary *)_rk_councilSubmission {
+	if(anonymous) {
+		return @{@"anonymous": @(anonymous)};
+	}
+	else {
+		return @{
+			@"anonymous": @(anonymous),
+			@"email_address": email
+		};
+	}
+}
+
+- (void)set_rk_councilSubmission:(NSDictionary *)_rk_councilSubmission {
+	anonymous = [[_rk_councilSubmission objectForKey:@"anonymous"] boolValue];
+	email = [_rk_councilSubmission objectForKey:@"email_address"];
 }
 
 @synthesize descriptionText;
