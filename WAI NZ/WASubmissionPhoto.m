@@ -10,14 +10,25 @@
 
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "NSDate+TimeConversions.h"
+#import <RestKit/RestKit.h>
+#import <RestKit/NSData+Base64.h>
 
 @implementation WASubmissionPhoto
 
-- (id)initWithPhoto:(UIImage *)photo timestamp:(time_t)time location:(CLLocation *)loc {
++ (RKObjectMapping *)objectMapping {
+	RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[WASubmissionPhoto class]];
+	[mapping mapKeyPath:@"timestamp" toAttribute:@"timestamp"];
+	[mapping mapKeyPath:@"data" toAttribute:@"base64String"];
+	[mapping mapKeyPath:@"geolocation" toRelationship:@"location" withMapping:[WAGeolocation objectMapping]];
+	
+	return mapping;
+}
+
+- (id)initWithPhoto:(UIImage *)photo timestamp:(time_t)time location:(WAGeolocation *)loc {
     self = [super init];
     if (self) {
         image = photo;
-        timestamp = time;
+        timestamp = @(time);
         location = loc;
     }
     return self;
@@ -33,7 +44,7 @@
 	// Declare variables to hold date/location information
 	// These are prefixed with __block so that they can be modified asynchronously by the callbacks from ALAssetsLibrary
 	__block NSDate *date = nil;
-	__block CLLocation *location = nil;
+	__block WAGeolocation *location = nil;
 	
 	// Delcare a helper block to avoide having to type this code multiple times
 	void (^success)(void) = ^{
@@ -95,7 +106,7 @@
 						 // Get the optional location
 						 id tmpLocation = [asset valueForProperty:ALAssetPropertyLocation];
 						 if(tmpLocation != ALErrorInvalidProperty) {
-							 location = tmpLocation;
+							 location = [WAGeolocation geolocationWithCLLocation:tmpLocation];
 						 }
 						 
 						 // All good
@@ -118,6 +129,14 @@
 		}
 	}
 }
+
+#pragma mark - Getters/Setters
+
+- (NSString *)base64String {
+	return [UIImageJPEGRepresentation(image, kJPEGCompressionQuality) base64EncodedString];
+}
+
+#pragma mark - Properties
 
 @synthesize location;
 @synthesize timestamp;

@@ -7,16 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RestKit/RestKit.h>
+
+@class WASubmission;
 
 /**
- * This controller manages the uploading of a submission to WAI NZ
- * and presents a user interface to monitor the progress and report on any errors.
- *
- * When the submission is complete this controller will pop the
- * entire navigation stack.
+ This controller manages the uploading of a submission to WAI NZ
+ and presents a user interface to monitor the progress and report on any errors.
+ 
+ When the submission is complete this controller will pop the
+ entire navigation stack.
  */
-@interface WASubmitViewController : UIViewController {
-    
+@interface WASubmitViewController : UIViewController <RKObjectLoaderDelegate> {
     __unsafe_unretained IBOutlet UILabel *successfulStatusMessage;
     __unsafe_unretained IBOutlet UILabel *inProgressStatusMessage;
     __unsafe_unretained IBOutlet UIButton *retryButton;
@@ -30,8 +32,18 @@
     IBOutlet UIView *successfulView;
     IBOutlet UIView *inProgressView;
 
+	WASubmission *submission;
+	
+	CGFloat lastSubmissionProgress;
+	CGFloat submissionProgress;
 }
-- (IBAction)doneButtonPressed:(id)sender;
 
-- (IBAction)retryButtonPressed:(id)sender;
+/**
+ Initilize this WASubmitViewController with the specified
+ submission.
+ 
+ @param _submission the submission to submit
+ */
+- (id)initWithSubmission:(WASubmission *)_submission;
+
 @end

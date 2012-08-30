@@ -10,9 +10,20 @@
 
 #import "WAHomeViewController.h"
 
+#import <RestKit/RestKit.h>
+#import "WASubmission.h"
+
 @implementation WAAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	// Restkit setup
+	[RKObjectManager setSharedManager:[RKObjectManager managerWithBaseURLString:kRootURL]];
+	[RKObjectManager sharedManager].serializationMIMEType = RKMIMETypeJSON;
+	[[RKObjectManager sharedManager].router routeClass:[WASubmission class] toResourcePath:kResourceSubmitPath forMethod:RKRequestMethodPOST];
+	[[RKObjectManager sharedManager].mappingProvider setSerializationMapping:[[WASubmission objectMapping] inverseMapping] forClass:[WASubmission class]];
+	
+	
+	// Normal setup
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     WAHomeViewController *homeController = [[WAHomeViewController alloc] init];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:homeController];

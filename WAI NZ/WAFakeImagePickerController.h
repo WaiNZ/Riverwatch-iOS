@@ -13,13 +13,13 @@
 #import <UIKit/UIKit.h>
 
 /**
- * A class that mimics UIImagePickerController for use in the simulator.
- * This class is not currently a full copy of UIImagePickerController so certain
- * methods and properties do not exist.
- *
- * Use of this class should be automatic, as when WAFakeImagePickerController.h
- * is imported all instances of UIImagePickerController will become instances of
- * WAFakeImagePickerController.
+ A class that mimics UIImagePickerController for use in the simulator.
+ This class is not currently a full copy of UIImagePickerController so certain
+ methods and properties do not exist.
+ 
+ Use of this class should be automatic, as when WAFakeImagePickerController.h
+ is imported all instances of UIImagePickerController will become instances of
+ WAFakeImagePickerController.
  */
 @interface WAFakeImagePickerController : UIViewController {
 	UIImage *image;

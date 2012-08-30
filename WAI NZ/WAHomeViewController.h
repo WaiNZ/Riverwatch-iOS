@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /**
- * The home controller for the WAI NZ application. This controller is the first screen presented to the user.
+ The home controller for the WAI NZ application. This controller is the first screen presented to the user.
  */
 @interface WAHomeViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
     

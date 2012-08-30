@@ -11,7 +11,11 @@
 @class WASubmission;
 
 /**
- * This controller provides the text editing screen for the description field of a submission.
+ This controller provides the text editing screen for the description
+ field of a submission.
+ 
+ This controller must be initilized using the -initWithSubmission:
+ constructor.
  */
 @interface WASubmissionDescriptionViewController : UIViewController{
     
@@ -21,7 +25,13 @@
 
     
 }
-- (id)initWithSubmission:(WASubmission *)_submission;
 
+/**
+ Initilize this WASubmissionDescriptionViewController with the specified
+ submission.
+ 
+ @param _submission the submission to edit the description on
+ */
+- (id)initWithSubmission:(WASubmission *)_submission;
 
 @end

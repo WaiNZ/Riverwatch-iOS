@@ -9,12 +9,31 @@
 #import "WASubmission.h"
 
 #import "UIAlertView+Blocks.h"
+#import <RestKit/RestKit.h>
 
 #define POST_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] postNotificationName:kWASubmissionUpdatedNotification object:self]
 
 NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotification";
 
+@interface WASubmission ()
+@property (nonatomic, assign) NSNumber *_rk_timestamp;
+@property (nonatomic, assign) NSDictionary *_rk_councilSubmission;
+@end
+
 @implementation WASubmission
+
++ (RKObjectMapping *)objectMapping {
+	RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[WASubmission class]];
+	[mapping mapKeyPath:@"timestamp" toAttribute:@"_rk_timestamp"];
+	[mapping mapKeyPath:@"user_description" toAttribute:@"descriptionText"];
+	[mapping mapKeyPath:@"tags" toAttribute:@"tags"];
+	[mapping mapKeyPath:@"udid" toAttribute:@"udid"];
+	[mapping mapKeyPath:@"photo_data" toRelationship:@"photos" withMapping:[WASubmissionPhoto objectMapping]];
+	[mapping mapKeyPath:@"geolocation" toRelationship:@"location" withMapping:[WAGeolocation objectMapping]];
+	[mapping mapKeyPath:@"council_submission" toAttribute:@"_rk_councilSubmission"];
+	
+	return mapping;
+}
 
 - (id)init {
     self = [super init];
@@ -26,10 +45,12 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
         anonymous = NO;
         location = nil;
         time(&timestamp);
-        
+		udid = @"";
     }
     return self;
 }
+
+#pragma mark - Getters/Setters
 
 - (void)addSubmissionPhoto:(WASubmissionPhoto *)photo {
     [photos addObject:photo];
@@ -37,11 +58,17 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 }
 
 - (void)removeSubmissionPhoto:(int)index {
-    [photos removeObjectAtIndex:index];
-	POST_UPDATE_NOTIFICATION;
+	if(photos.count > 1) {
+		[photos removeObjectAtIndex:index];
+		POST_UPDATE_NOTIFICATION;
+	}
+	else {
+		// TODO: assert, exception, warning...?
+	}
 }
 
-- (void) removeSubmissionPhotoAtIndex:(int)index withConfirmation:(void (^)(int index))callback{
+- (void)removeSubmissionPhotoAtIndex:(int)index withConfirmation:(void (^)(int index))callback{
+	// TODO: Bit icky having this code in a model object, MVC all the way. Maybe categoryize it?
 	if(index>=0 &&index<photos.count){
 		if(photos.count>1){
 			UIAlertView *confirmDelete = [[UIAlertView alloc] initWithTitle:@"Confirm deletion"
@@ -75,7 +102,7 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 }
 
 
-- (WASubmissionPhoto *)getSubmissionPhoto:(int)index {
+- (WASubmissionPhoto *)submissionPhotoAtIndex:(int)index {
     return [photos objectAtIndex:index];
 }
 
@@ -93,7 +120,7 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	POST_UPDATE_NOTIFICATION;
 }
 
-- (NSString *)getTag:(int)index {
+- (NSString *)tagAtIndex:(int)index {
     return [tags objectAtIndex:index];
 }
 
@@ -116,7 +143,7 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	POST_UPDATE_NOTIFICATION;
 }
 
-- (void)setLocation:(CLLocation *)_location {
+- (void)setLocation:(WAGeolocation *)_location {
 	location = _location;
 	POST_UPDATE_NOTIFICATION;
 }
@@ -124,6 +151,33 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 - (void)setTimestamp:(time_t)_timestamp {
 	timestamp = _timestamp;
 	POST_UPDATE_NOTIFICATION;
+}
+
+#pragma mark - Private Getters/Setters
+
+- (NSNumber *)_rk_timestamp {
+	return @(timestamp);
+}
+
+- (void)set_rk_timestamp:(NSNumber *)_timestamp {
+	timestamp = _timestamp.longValue;
+}
+
+- (NSDictionary *)_rk_councilSubmission {
+	if(anonymous) {
+		return @{@"anonymous": @(anonymous)};
+	}
+	else {
+		return @{
+			@"anonymous": @(anonymous),
+			@"email_address": email
+		};
+	}
+}
+
+- (void)set_rk_councilSubmission:(NSDictionary *)_rk_councilSubmission {
+	anonymous = [[_rk_councilSubmission objectForKey:@"anonymous"] boolValue];
+	email = [_rk_councilSubmission objectForKey:@"email_address"];
 }
 
 @synthesize descriptionText;
