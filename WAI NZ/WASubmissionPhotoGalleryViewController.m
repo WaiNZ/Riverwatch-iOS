@@ -23,11 +23,13 @@ static const CGFloat photoSpacer = 20;
 	if(self) {
 		// Set up
 		submission = _submission;
+        
 		self.navigationItem.title = @"Photos";
 		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Delete"
 																				  style:UIBarButtonItemStyleBordered
 																				 target:self
 																				 action:@selector(deleteCurrentPhoto:)];
+        
 	}
    
     return self;
@@ -42,17 +44,30 @@ static const CGFloat photoSpacer = 20;
 	centerView.frame = self.view.bounds;
 	[self.view addSubview:centerView];
 	centerView.image = [submission getSubmissionPhoto:currentPhoto].image;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+    self.navigationController.navigationBar.translucent = YES;
 	
 }
 
 - (void)viewDidUnload {
-	view2 = nil;
+    view2 = nil;
 	view1 = nil;
 	view3 = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    self.navigationController.navigationBar.tintColor = nil;
+    self.navigationController.navigationBar.translucent = NO;
+
+
+}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
