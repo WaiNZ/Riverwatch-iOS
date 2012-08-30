@@ -43,10 +43,9 @@ static const CGFloat photoSpacer = 20;
 	rightView = view3;
 	centerView.frame = self.view.bounds;
 	[self.view addSubview:centerView];
-	centerView.image = [submission getSubmissionPhoto:currentPhoto].image;
+	centerView.image = [submission submissionPhotoAtIndex:currentPhoto].image;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
-    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 	
 }
 
@@ -62,8 +61,7 @@ static const CGFloat photoSpacer = 20;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    self.navigationController.navigationBar.tintColor = nil;
-    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.barStyle  = UIBarStyleDefault;
 
 
 }
