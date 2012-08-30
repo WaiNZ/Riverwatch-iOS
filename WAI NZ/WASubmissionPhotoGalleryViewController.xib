@@ -69,7 +69,7 @@
 			<object class="IBUIPanGestureRecognizer" id="343238492"/>
 			<object class="IBUIImageView" id="599969341">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">292</int>
+				<int key="NSvFlags">274</int>
 				<string key="NSFrameSize">{240, 128}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
@@ -229,17 +229,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">WASubmissionPhotoGalleryViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">viewPanned:</string>
-						<string key="NS.object.0">UIPanGestureRecognizer</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">viewPanned:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">viewPanned:</string>
-							<string key="candidateClassName">UIPanGestureRecognizer</string>
-						</object>
-					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="view1">UIImageView</string>
 						<string key="view2">UIImageView</string>
