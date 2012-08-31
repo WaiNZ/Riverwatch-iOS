@@ -8,6 +8,7 @@
 
 #import "WASubmissionPhotoGalleryViewController.h"
 #import "WASubmission.h"
+#import "UINavigationBar+Animation.h"
 
 static const CGFloat photoSpacer = 20;
 #define PHOTO_PAN_MAX (self.view.bounds.size.width + photoSpacer)
@@ -42,10 +43,7 @@ static const CGFloat photoSpacer = 20;
 	centerView = view2;
 	rightView = view3;
 	
-	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-	
-	centerView.frame = self.view.bounds;
+	centerView.frame = self.subviewFrame;
 	[self.view addSubview:centerView];
 	centerView.image = [submission submissionPhotoAtIndex:currentPhoto].image;
 }
@@ -60,11 +58,19 @@ static const CGFloat photoSpacer = 20;
 
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:animated];
+    oldBarStyle = self.navigationController.navigationBar.barStyle;
+	[self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent animated:animated];
+	
+	[super viewWillAppear:animated];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    self.navigationController.navigationBar.barStyle  = UIBarStyleDefault;
-
-
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:animated];
+    [self.navigationController.navigationBar setBarStyle:oldBarStyle animated:animated];
+	
+	[super viewWillDisappear:animated];
 }
 
 
@@ -72,17 +78,27 @@ static const CGFloat photoSpacer = 20;
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (CGRect)subviewFrame {
+	// TODO: other orrientations, etc
+	CGRect bounds = self.view.bounds;
+	bounds.origin.y = -20;
+	bounds.size.height += 20;
+	return bounds;
+}
+
 - (void)_setOffset:(CGFloat)offset {
 	// Set frames of left, center, right views
-	CGRect leftFrame = self.view.bounds;
+	CGRect bounds = self.subviewFrame;
+	
+	CGRect leftFrame = bounds;
 	leftFrame.origin.x = -leftFrame.size.width + offset - photoSpacer;
 	leftView.frame = leftFrame;
 	
-	CGRect centerFrame = self.view.bounds;
+	CGRect centerFrame = bounds;
 	centerFrame.origin.x = 0 + offset;
 	centerView.frame = centerFrame;
 	
-	CGRect rightFrame = self.view.bounds;
+	CGRect rightFrame = bounds;
 	rightFrame.origin.x = +rightFrame.size.width + offset + photoSpacer;
 	rightView.frame = rightFrame;
 }

@@ -34,6 +34,7 @@
 	BOOL canSwipeLeft;
 	BOOL canSwipeRight;
 	
+	UIBarStyle oldBarStyle;
 }
 
 /**
