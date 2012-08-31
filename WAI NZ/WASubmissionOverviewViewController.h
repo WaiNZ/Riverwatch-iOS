@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @class WASubmission;
 
@@ -27,7 +29,7 @@
  Of these the all but the time the submission was made can be edited by the
  user.
  */
-@interface WASubmissionOverviewViewController : UITableViewController <UINavigationControllerDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate> {
+@interface WASubmissionOverviewViewController : UITableViewController <UINavigationControllerDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate, MKMapViewDelegate> {
 	__unsafe_unretained IBOutlet UITableView *mainTableView;
 	IBOutlet UITableViewCell *emailCell;
 	IBOutlet UITextField *emailField;
@@ -36,6 +38,12 @@
 	WASubmission *submission;
     __unsafe_unretained IBOutlet UIScrollView *photoScrollView;
 	IBOutlet UIView *addPhotoView;
+    IBOutlet MKMapView *mapView;
+    __unsafe_unretained IBOutlet UIButton *cowButton;
+    __unsafe_unretained IBOutlet UIButton *runoffButton;
+    __unsafe_unretained IBOutlet UIButton *pollutionButton;    
+    __unsafe_unretained IBOutlet UILabel *photoLabel;
+    __unsafe_unretained IBOutlet UILabel *timestampLabel;
 }
 
 /**

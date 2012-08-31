@@ -47,6 +47,10 @@ static const int kUseExistingPhotoButton = 1;
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self loadPhotoViews];
+    [self updatePhotoText];
+    [self updateTimestampText];
+ 
+    [self updateMapView];
 	mainTableView.tableHeaderView = topView;
 }
 
@@ -58,6 +62,12 @@ static const int kUseExistingPhotoButton = 1;
 	topView = nil;
     photoScrollView = nil;
 	addPhotoView = nil;
+    mapView = nil;
+    cowButton = nil;
+    runoffButton = nil;
+    pollutionButton = nil;
+    photoLabel = nil;
+    timestampLabel = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -99,13 +109,107 @@ static const int kUseExistingPhotoButton = 1;
 	
 	
 }
+//TODO: BUTTONS SHOULD STAY COLOURED ON PRESS
+- (IBAction)cowTagSelected:(id)sender {
+    if([submission containsTag:@"cow"]){
+        [submission removeTag:@"cow"];
+        NSLog(@"cow tag got removed");
+    }
+    else{
+        [submission addTag:@"cow"];
+        NSLog(@"cow tag got added");
+    }
+}
+
+- (IBAction)runoffTagSelected:(id)sender {
+    if([submission containsTag:@"runoff"]){
+        [submission removeTag:@"runoff"];
+        NSLog(@"runoff tag got removed");
+        
+    }
+    else{
+        [submission addTag:@"runoff"];
+        NSLog(@"runoff tag got added");
+    }
+}
+
+- (IBAction)pollutionTagSelected:(id)sender {
+    if([submission containsTag:@"pollution"]){
+        [submission removeTag:@"pollution"];
+        NSLog(@"pollution tag got removed");
+    }
+    else{
+        [submission addTag:@"pollution"];
+        NSLog(@"pollution tag got added");
+    }
+}
+
 
 - (void)submissionUpdated {
 	[mainTableView reloadData];
 	[self loadPhotoViews];
+    [self updatePhotoText];
+    [self updateTimestampText];
+    [self updateMapView];
 }
 
 #pragma mark - Utilities
+
+- (void)updatePhotoText {
+    NSString *newText;
+    if([submission numberOfSubmissionPhotos]>1){
+        newText = [NSMutableString stringWithFormat:@"%d photos attached", [submission numberOfSubmissionPhotos]];
+    }
+    else{
+        newText = [NSMutableString stringWithFormat:@"%d photo attached", [submission numberOfSubmissionPhotos]];
+    }
+    [photoLabel setText:newText];
+}
+
+- (void) updateTimestampText {
+    NSDateFormatter *formatter;
+    NSString        *dateString;
+    dateString = @"Observed at ";
+    formatter = [[NSDateFormatter alloc] init];
+    //[formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
+    [formatter setDateFormat:@"h:mma EEEE MMMM dd"];
+    NSDate *newDate = [NSDate dateWithTimeIntervalSince1970:submission.timestamp];
+    dateString = [dateString stringByAppendingString:[formatter stringFromDate:newDate]];
+    
+    NSDateFormatter *monthDayFormatter = [[NSDateFormatter alloc] init];
+    [monthDayFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [monthDayFormatter setDateFormat:@"dd"];
+    int date_day = [[monthDayFormatter stringFromDate:newDate] intValue];
+    NSString *suffix_string = @"|st|nd|rd|th|th|th|th|th|th|th|th|th|th|th|th|th|th|th|th|th|st|nd|rd|th|th|th|th|th|th|th|st";
+    NSArray *suffixes = [suffix_string componentsSeparatedByString: @"|"];
+    NSString *suffix = [suffixes objectAtIndex:date_day];
+    dateString = [dateString stringByAppendingString:suffix];
+    
+    dateString = [dateString stringByAppendingString:@" at the following location"];
+    
+    [timestampLabel setText:dateString];
+}
+
+- (void) updateMapView{
+//    WAGeolocation *loc = submission.location;
+    MKCoordinateRegion region;
+    MKCoordinateSpan span;
+    span.latitudeDelta = .01;
+    span.longitudeDelta = .01;
+    CLLocationCoordinate2D location;
+    //location.latitude = loc.latitude;
+    location.latitude = -41.3;
+    //location.longitude = loc.longitude;
+    location.longitude = 174.9;
+    region.span = span;
+    region.center = location;
+    [mapView setRegion:region animated:YES];
+    NSLog(@"lat is: %f", mapView.region.center.latitude);
+    NSLog(@"long is: %f", mapView.region.center.longitude);
+    mapView.centerCoordinate = location;
+    
+    
+}
 
 - (void)loadPhotoViews {
 	for(UIView *view in photoScrollView.subviews) {
