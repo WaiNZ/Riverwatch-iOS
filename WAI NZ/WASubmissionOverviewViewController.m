@@ -252,7 +252,7 @@ static const int kUseExistingPhotoButton = 1;
     }
     //1 is the topmost (Use an existing photo) button
     else if(buttonIndex==kUseExistingPhotoButton){
-        UIImagePickerController *cameraRollPicker = [[UIImagePickerController alloc] init];
+        UIImagePickerController *cameraRollPicker = [[UIImagePickerController_Always alloc] init];
         cameraRollPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         cameraRollPicker.delegate = self;
         [self presentModalViewController: cameraRollPicker animated:YES];
