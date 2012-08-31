@@ -18,11 +18,10 @@
 - (void)setBarStyle:(UIBarStyle)barStyle animated:(BOOL)animated {
 	// From http://stackoverflow.com/questions/645232/transitioning-uinavigationbar-colors
 	
-    if (animated && self.barStyle != barStyle) {
+    if(animated && self.barStyle != barStyle) {
         CATransition *transition = [CATransition animation];
         transition.duration = [UINavigationBar pushPopAnimationDuration];
-        transition.timingFunction = [CAMediaTimingFunction
-									 functionWithName:kCAMediaTimingFunctionEaseIn];
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
         [self.layer addAnimation:transition forKey:nil];
     }
 	

@@ -8,7 +8,7 @@
 #import "UIImage+Alpha.h"
 
 // Private helper methods
-@interface UIImage ()
+@interface UIImage (Private)
 - (UIImage *)resizedImage:(CGSize)newSize
                 transform:(CGAffineTransform)transform
            drawTransposed:(BOOL)transpose
@@ -166,6 +166,9 @@
             transform = CGAffineTransformTranslate(transform, 0, newSize.height);
             transform = CGAffineTransformRotate(transform, -M_PI_2);
             break;
+			
+		default: // Do Nothing
+			break;
     }
     
     switch (self.imageOrientation) {
@@ -180,6 +183,9 @@
             transform = CGAffineTransformTranslate(transform, newSize.height, 0);
             transform = CGAffineTransformScale(transform, -1, 1);
             break;
+			
+		default: // Do Nothing
+			break;
     }
     
     return transform;

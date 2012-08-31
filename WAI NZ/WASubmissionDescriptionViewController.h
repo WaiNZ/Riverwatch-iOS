@@ -18,7 +18,6 @@
  constructor.
  */
 @interface WASubmissionDescriptionViewController : UIViewController{
-    
     WASubmission *submission;
     __unsafe_unretained IBOutlet UITextView *descriptionText;
     CGRect originalDescriptionTextFrame;

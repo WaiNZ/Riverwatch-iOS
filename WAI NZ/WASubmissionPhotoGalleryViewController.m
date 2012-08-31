@@ -30,7 +30,6 @@ static const CGFloat photoSpacer = 20;
 																				  style:UIBarButtonItemStyleBordered
 																				 target:self
 																				 action:@selector(deleteCurrentPhoto:)];
-        
 	}
    
     return self;
@@ -38,7 +37,7 @@ static const CGFloat photoSpacer = 20;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+	
 	leftView = view1;
 	centerView = view2;
 	rightView = view3;
@@ -55,13 +54,12 @@ static const CGFloat photoSpacer = 20;
     view2 = nil;
 	view1 = nil;
 	view3 = nil;
+	
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+	// Change the status/navigation bar style
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:animated];
     oldBarStyle = self.navigationController.navigationBar.barStyle;
 	[self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent animated:animated];
@@ -70,6 +68,7 @@ static const CGFloat photoSpacer = 20;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+	// Restore the status/navigation bar style
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:animated];
     [self.navigationController.navigationBar setBarStyle:oldBarStyle animated:animated];
 	
@@ -107,8 +106,10 @@ static const CGFloat photoSpacer = 20;
 }
 
 - (IBAction)deleteCurrentPhoto:(id)sender{
+	// Try to remove the photo
 	[submission removeSubmissionPhotoAtIndex:currentPhoto
 							withConfirmation:^(int photoIndex) {
+								// Figure out positions of view
 								CGFloat edge = 0;
 								__unsafe_unretained UIScrollView **viewToShift = &rightView;
 								__unsafe_unretained UIImageView **imageViewToShift = &rightImageView;
@@ -119,17 +120,24 @@ static const CGFloat photoSpacer = 20;
 									currentPhoto--;
 								}
 								
+								// Save view positions and set them to what is needed for animations
 								CGPoint oldCenter = centerView.center;
 								[self _setOffset:0];
 								(*imageViewToShift).image = [submission submissionPhotoAtIndex:currentPhoto].image;
 								[self.view addSubview:(*viewToShift)];
+								
 								[UIView animateWithDuration:kAnimationDuration
 												 animations:^{
+													 // Photo deletion
+													 
+													 // Scale the view
 													 centerView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+													 // Reposition the two views
 													 centerView.center = CGPointMake(edge, self.view.bounds.size.height/2);
 													 (*viewToShift).center = oldCenter;
 												 }
 												 completion:^(BOOL done) {
+													 // Reset view positions and swap left/right/center etc
 													 UIView *oldCenterView = centerView;
 													 SWAP(centerImageView, *imageViewToShift);
 													 SWAP(centerView, *viewToShift);
@@ -154,6 +162,7 @@ static const CGFloat photoSpacer = 20;
 			[self hideBars];
 			
 			// Add side views and configure them
+			
 			[self _setOffset:0];
 			
 			canSwipeLeft = currentPhoto>0;
@@ -172,43 +181,57 @@ static const CGFloat photoSpacer = 20;
 			break;
 		}
 		case UIGestureRecognizerStateChanged: {
+			// If there are no photos left/right scrolling is less
 			if(!canSwipeLeft && offset>0){
 				offset/=2.5;
 			}
 			if(!canSwipeRight && offset<0){
 				offset/=2.5;
 			}
+			
+			// Move the views
 			[self _setOffset:offset];
 			break;
 		}
 		case UIGestureRecognizerStateCancelled:
 		case UIGestureRecognizerStateEnded: {
+			// Do the flollowing animated
 			[UIView animateWithDuration:kAnimationDuration
 							 animations:^{
-								 if(canSwipeLeft && (offset>self.view.bounds.size.width/2 || velocity > kFlickVelocity)){
+								 if(canSwipeLeft && (offset>self.view.bounds.size.width/2 || velocity > kFlickVelocity)) {
+									 // Move the views
 									 [self _setOffset:PHOTO_PAN_MAX];
+									 
+									 // Swap views
 									 SWAP(centerView, leftView);
 									 SWAP(centerImageView, leftImageView);
 									 currentPhoto--;
 								 }
-								 else if (canSwipeRight && (offset<-self.view.bounds.size.width/2 || velocity < -kFlickVelocity)){
+								 else if (canSwipeRight && (offset<-self.view.bounds.size.width/2 || velocity < -kFlickVelocity)) {
+									 // Move the views
 									 [self _setOffset:-PHOTO_PAN_MAX];
+									 
+									 // Swap views
 									 SWAP(centerView, rightView);
 									 SWAP(centerImageView, rightImageView);
 									 currentPhoto++;
 								 }
 								 else {
+									 // Bounce back
 									 [self _setOffset:0];
 								 }
 								 
+								 // Disable the swipe during animation
 								 sender.enabled = NO;
 							 }
-							 completion:^(BOOL done){
+							 completion:^(BOOL done) {
+								 // Remove the offscreen views
 								 [leftView removeFromSuperview];
 								 [rightView removeFromSuperview];
 								 leftImageView.image = nil;
 								 rightImageView.image = nil;
 								 
+								 // Reenable swipe
 								 sender.enabled = YES;
 							 }];
 			break;

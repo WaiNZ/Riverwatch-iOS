@@ -83,13 +83,13 @@ extern NSString *const kWASubmissionUpdatedNotification;
  */
 - (void)addTag:(NSString *)tag;
 /**
- Remove the tag at the specified index
+ Remove the specified tag
  
- @param index the index of the tag to remove
+ @param tag the tag to remove
  
  // TODO: exception
  */
-- (void)removeTag:(NSString *) tag;
+- (void)removeTag:(NSString *)tag;
 /**
  Get the tag at the specified index
  
@@ -106,7 +106,13 @@ extern NSString *const kWASubmissionUpdatedNotification;
  @param photoScaleSize the scale size to set all the photos to
  */
 - (void)setPhotoScaleSize:(WASubmissionPhotoSize)photoScaleSize;
--(BOOL) containsTag:(NSString *)tag;
+/**
+ Check to see if a tag is attached to the submission
+ 
+ @param tag the tag to check for
+ @return YES if the submission is tagged with the specified tag, NO otherwise
+ */
+- (BOOL)containsTag:(NSString *)tag;
 
 // TODO: -verify
 

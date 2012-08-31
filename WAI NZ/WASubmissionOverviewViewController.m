@@ -48,11 +48,12 @@ static const int kUseExistingPhotoButton = 1;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
 	[self loadPhotoViews];
     [self updatePhotoText];
     [self updateTimestampText];
- 
     [self updateMapView];
+	
 	mainTableView.tableHeaderView = topView;
 }
 
@@ -82,19 +83,22 @@ static const int kUseExistingPhotoButton = 1;
 #pragma mark - Actions
 - (IBAction)sliderChanged:(id)sender {
 	[mainTableView beginUpdates];
+	// Update the table
 	if(!slider.on){
 		[mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
 	else {
 		[mainTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
+	// Make sure we dont end up resursing
 	DISABLE_SUBMISSION_UPDATE_NOTIFICATION;
 	submission.anonymous = slider.on;
 	ENABLE_SUBMISSION_UPDATE_NOTIFICATION;
 	[mainTableView endUpdates];
 }
 
-- (IBAction) addAdditionalPhoto:(id)sender {
+- (IBAction)addAdditionalPhoto:(id)sender {
+	// Show the action sheet asking about source of the image
     UIActionSheet *addSheet = [[UIActionSheet alloc] initWithTitle:@"Add a photo"
                                                           callback:^(NSInteger buttonIndex) {
 															  //0 is the topmost (Take a photo) button
@@ -115,18 +119,15 @@ static const int kUseExistingPhotoButton = 1;
 														  }
                                                  cancelButtonTitle:@"Cancel"
                                             destructiveButtonTitle:nil
-                                                 otherButtonTitles:@"Take a photo", @"Add an exisiting photo",nil ];
+                                                 otherButtonTitles:@"Take a photo", @"Add an exisiting photo", nil];
     [addSheet showInView:self.view];
-    
 }
 
--( IBAction) photoTapped:(UITapGestureRecognizer *)sender{
+- (IBAction)photoTapped:(UITapGestureRecognizer *)sender {
 	WASubmissionPhotoGalleryViewController *gallery = [[WASubmissionPhotoGalleryViewController alloc] initWithSubmission:submission andPhotoIndex:sender.view.tag];
 	[self.navigationController pushViewController:gallery animated:YES];
-	
-	
-	
 }
+
 //TODO: BUTTONS SHOULD STAY COLOURED ON PRESS
 - (IBAction)cowTagSelected:(id)sender {
     if([submission containsTag:@"cow"]){
@@ -165,6 +166,7 @@ static const int kUseExistingPhotoButton = 1;
 
 - (void)submissionUpdated {
 	[mainTableView reloadData];
+	
 	[self loadPhotoViews];
     [self updatePhotoText];
     [self updateTimestampText];
@@ -184,9 +186,9 @@ static const int kUseExistingPhotoButton = 1;
     [photoLabel setText:newText];
 }
 
-- (void) updateTimestampText {
+- (void)updateTimestampText {
     NSDateFormatter *formatter;
-    NSString        *dateString;
+    NSString *dateString;
     dateString = @"Observed at ";
     formatter = [[NSDateFormatter alloc] init];
     //[formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
@@ -225,8 +227,6 @@ static const int kUseExistingPhotoButton = 1;
     NSLog(@"lat is: %f", mapView.region.center.latitude);
     NSLog(@"long is: %f", mapView.region.center.longitude);
     mapView.centerCoordinate = location;
-    
-    
 }
 
 - (void)loadPhotoViews {
@@ -237,30 +237,35 @@ static const int kUseExistingPhotoButton = 1;
     CGRect frame = CGRectMake(8, 4, 98, 98);
 	static const CGFloat kPhotoSpacing = 102;
 	
-    for(int n = 0;n<submission.numberOfSubmissionPhotos;n++){
+    for(int n = 0;n<submission.numberOfSubmissionPhotos;n++) {
         WASubmissionPhoto *photo = [submission submissionPhotoAtIndex:n];
+		
+		// Create the background view
         UIView *notmyview = [[UIView alloc] initWithFrame:frame];
         [photoScrollView addSubview:notmyview];
+        notmyview.backgroundColor = [UIColor whiteColor];
 		
-        notmyview.backgroundColor=[UIColor whiteColor];
+		// Create the image view
         UIImageView *photoView = [[UIImageView alloc] initWithFrame:CGRectInset(notmyview.bounds, 4, 4)];
         [notmyview addSubview:photoView];
         photoView.image = photo.image;
         photoView.contentMode=UIViewContentModeScaleAspectFill;
         photoView.clipsToBounds = YES;
 		
+		// Add a gesture recognizer
 		UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoTapped:)];
 		[notmyview addGestureRecognizer:tap];
 		notmyview.tag = n;
 		frame.origin.x += kPhotoSpacing;
-        
     }
+	
+	// Add the add photo view using the latest rect from the for loop
 	addPhotoView.frame = frame;
 	[photoScrollView addSubview:addPhotoView];
 	
+	// Update the content size of the scrollview
 	frame.origin.x += kPhotoSpacing;
-	
-    photoScrollView.contentSize=CGSizeMake(frame.origin.x +4, frame.size.height);
+    photoScrollView.contentSize = CGSizeMake(frame.origin.x +4, frame.size.height);
 }
 
 
@@ -290,10 +295,10 @@ static const int kUseExistingPhotoButton = 1;
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if(!cell) {
-		if(indexPath.section==0&&indexPath.row==0){
+		if(indexPath.section == 0 && indexPath.row == 0) {
 			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
 		}
-		else{
+		else {
 			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 		}
 	}
@@ -337,9 +342,9 @@ static const int kUseExistingPhotoButton = 1;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0 && indexPath.row ==0){
 		WASubmissionDescriptionViewController *controller = [[WASubmissionDescriptionViewController alloc] initWithSubmission:submission];
-		[self.navigationController pushViewController: controller animated:YES];
+		[self.navigationController pushViewController:controller animated:YES];
 	}
-	else if (indexPath.section == 2 && indexPath.row ==0){
+	else if(indexPath.section == 2 && indexPath.row == 0) {
 		size_t actualSize = 0;
 		for(int n=0;n<submission.numberOfSubmissionPhotos;n++) {
 			actualSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeActual];
@@ -357,7 +362,7 @@ static const int kUseExistingPhotoButton = 1;
 				largeSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeLarge];
 			}
 			
-			
+			// TODO: make this much nicer
 			UIActionSheet *sizeActionSheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"This submission is %@B. You can reduce the submission size by scaling images to one of the sizes below.", @(actualSize).formatSI]
 																		 callback:^(NSInteger buttonIndex) {
 																			 switch(buttonIndex) {
@@ -377,6 +382,7 @@ static const int kUseExistingPhotoButton = 1;
 																					 return;
 																			 }
 																			 
+																			 // Go submit the submission object to the backend
 																			 WASubmitViewController *controller = [[WASubmitViewController alloc] initWithSubmission:submission];
 																			 [self.navigationController pushViewController: controller animated:YES];
 																			 [tableView deselectRowAtIndexPath:indexPath animated:YES];

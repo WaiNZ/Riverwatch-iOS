@@ -76,6 +76,7 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 - (void)sendSubmission {
 	submissionProgress = 0;
 	
+	// Post to the server!
 	[[RKObjectManager sharedManager] postObject:submission
 									 usingBlock:^(RKObjectLoader *loader) {
 										 loader.delegate = self;
@@ -97,8 +98,10 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 #pragma mark - RKObjectLoaderDelegate
 
 - (void)request:(RKRequest *)request didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
+	// Update the progress
 	submissionProgress = ((float)totalBytesWritten)/((float)totalBytesExpectedToWrite);
 	if(submissionProgress > lastSubmissionProgress + kSubmissionUpdateInterval || submissionProgress >= 0.99999) {
+		// Dont kill UI performance by updating too frequently
 		lastSubmissionProgress = submissionProgress;
 		progressBar.progress = submissionProgress;
 	}

@@ -22,6 +22,9 @@
 
 /* Begin PBXBuildFile section */
 		A10A5B4715F08843001A8184 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A10A5B4615F08843001A8184 /* UIActionSheet+Blocks.m */; };
+		A10A5B5D15F0E8B8001A8184 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = A10A5B5815F0E8B8001A8184 /* UIImage+Alpha.m */; };
+		A10A5B5E15F0E8B8001A8184 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A10A5B5A15F0E8B8001A8184 /* UIImage+Resize.m */; };
+		A10A5B5F15F0E8B8001A8184 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A10A5B5C15F0E8B8001A8184 /* UIImage+RoundedCorner.m */; };
 		A10C5C1615DB054B0028767F /* WASubmissionOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A10C5C1415DB054B0028767F /* WASubmissionOverviewViewController.m */; };
 		A10C5C1715DB054B0028767F /* WASubmissionOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A10C5C1515DB054B0028767F /* WASubmissionOverviewViewController.xib */; };
 		A12A548A15D741980025D32A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A548915D741980025D32A /* UIKit.framework */; };
@@ -46,9 +49,6 @@
 		A17C324E15EE1A3B00A458C0 /* WAGeolocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A17C324D15EE1A3B00A458C0 /* WAGeolocation.m */; };
 		A189878315F084340037A4DD /* NSNumber+FormatSI.m in Sources */ = {isa = PBXBuildFile; fileRef = A189878215F084340037A4DD /* NSNumber+FormatSI.m */; };
 		A1B7B59315F06083002CEE04 /* UINavigationBar+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B7B59215F06083002CEE04 /* UINavigationBar+Animation.m */; };
-		A1B7B5B315F07A49002CEE04 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B7B5B015F07928002CEE04 /* UIImage+RoundedCorner.m */; };
-		A1B7B5B415F07A4D002CEE04 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B7B5AB15F07713002CEE04 /* UIImage+Resize.m */; };
-		A1B7B5B515F07A4D002CEE04 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B7B5AE15F07928002CEE04 /* UIImage+Alpha.m */; };
 		A1B8C9DD15E466720027D9D3 /* icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B8C9D815E466720027D9D3 /* icon_57.png */; };
 		A1B8C9DE15E466720027D9D3 /* icon_72.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B8C9D915E466720027D9D3 /* icon_72.png */; };
 		A1B8C9DF15E466720027D9D3 /* icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B8C9DA15E466720027D9D3 /* icon_114.png */; };
@@ -127,6 +127,12 @@
 		A1099B9015D76A4200855724 /* WASimulatorData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WASimulatorData.h; sourceTree = "<group>"; };
 		A10A5B4515F08843001A8184 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
 		A10A5B4615F08843001A8184 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
+		A10A5B5715F0E8B8001A8184 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		A10A5B5815F0E8B8001A8184 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		A10A5B5915F0E8B8001A8184 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		A10A5B5A15F0E8B8001A8184 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		A10A5B5B15F0E8B8001A8184 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		A10A5B5C15F0E8B8001A8184 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		A10C5C1315DB054B0028767F /* WASubmissionOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionOverviewViewController.h; sourceTree = "<group>"; };
 		A10C5C1415DB054B0028767F /* WASubmissionOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionOverviewViewController.m; sourceTree = "<group>"; };
 		A10C5C1515DB054B0028767F /* WASubmissionOverviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionOverviewViewController.xib; sourceTree = "<group>"; };
@@ -165,12 +171,6 @@
 		A189878215F084340037A4DD /* NSNumber+FormatSI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+FormatSI.m"; sourceTree = "<group>"; };
 		A1B7B59115F06083002CEE04 /* UINavigationBar+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Animation.h"; sourceTree = "<group>"; };
 		A1B7B59215F06083002CEE04 /* UINavigationBar+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Animation.m"; sourceTree = "<group>"; };
-		A1B7B5AA15F07713002CEE04 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
-		A1B7B5AB15F07713002CEE04 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
-		A1B7B5AD15F07928002CEE04 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
-		A1B7B5AE15F07928002CEE04 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
-		A1B7B5AF15F07928002CEE04 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
-		A1B7B5B015F07928002CEE04 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		A1B8C9D815E466720027D9D3 /* icon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_57.png; sourceTree = "<group>"; };
 		A1B8C9D915E466720027D9D3 /* icon_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_72.png; sourceTree = "<group>"; };
 		A1B8C9DA15E466720027D9D3 /* icon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_114.png; sourceTree = "<group>"; };
@@ -231,10 +231,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A10A5B5615F0DB8E001A8184 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				A10A5B5715F0E8B8001A8184 /* UIImage+Alpha.h */,
+				A10A5B5815F0E8B8001A8184 /* UIImage+Alpha.m */,
+				A10A5B5915F0E8B8001A8184 /* UIImage+Resize.h */,
+				A10A5B5A15F0E8B8001A8184 /* UIImage+Resize.m */,
+				A10A5B5B15F0E8B8001A8184 /* UIImage+RoundedCorner.h */,
+				A10A5B5C15F0E8B8001A8184 /* UIImage+RoundedCorner.m */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
 		A12A547A15D741980025D32A = {
 			isa = PBXGroup;
 			children = (
-				E2B761F815F0553800D18C67 /* MapKit.framework */,
 				A1B90F6015EDDA58003419AF /* RestKit.xcodeproj */,
 				A12A548F15D741980025D32A /* WAI NZ */,
 				A12A54A715D741990025D32A /* WAI NZTests */,
@@ -255,6 +267,7 @@
 		A12A548815D741980025D32A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E2B761F815F0553800D18C67 /* MapKit.framework */,
 				A1B90F9C15EDDFF0003419AF /* MobileCoreServices.framework */,
 				A1B90F8D15EDDFCD003419AF /* QuartzCore.framework */,
 				A1B90F8B15EDDD4F003419AF /* Security.framework */,
@@ -435,16 +448,11 @@
 				A1B8DE4F15EDC0FD0030AFCE /* UIAlertView+Blocks.m */,
 				A1B7B59115F06083002CEE04 /* UINavigationBar+Animation.h */,
 				A1B7B59215F06083002CEE04 /* UINavigationBar+Animation.m */,
-				A1B7B5AA15F07713002CEE04 /* UIImage+Resize.h */,
-				A1B7B5AB15F07713002CEE04 /* UIImage+Resize.m */,
-				A1B7B5AD15F07928002CEE04 /* UIImage+Alpha.h */,
-				A1B7B5AE15F07928002CEE04 /* UIImage+Alpha.m */,
-				A1B7B5AF15F07928002CEE04 /* UIImage+RoundedCorner.h */,
-				A1B7B5B015F07928002CEE04 /* UIImage+RoundedCorner.m */,
 				A189878115F084340037A4DD /* NSNumber+FormatSI.h */,
 				A189878215F084340037A4DD /* NSNumber+FormatSI.m */,
 				A10A5B4515F08843001A8184 /* UIActionSheet+Blocks.h */,
 				A10A5B4615F08843001A8184 /* UIActionSheet+Blocks.m */,
+				A10A5B5615F0DB8E001A8184 /* Vendor */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -617,7 +625,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "WHOAMI=`whoami`\nmkdir -p /private/var/tmp/$WHOAMI/appledoc/\nOUTPUT=\"/private/var/tmp/$WHOAMI/appledoc/\"\nCOMPANY_ID=\"nz.ac.victoria.ecs.engr302\"\n\n\"$PROJECT_DIR/Tools/appledoc/appledoc\" \\\n--templates \"$PROJECT_DIR/Tools/appledoc/Templates\" \\\n--project-name \"WAI NZ\" \\\n--project-company \"Water Action Initiative New Zealand\" \\\n--company-id \"$COMPANY_ID\" \\\n--output \"$OUTPUT\" \\\n--ignore \"*.m\" \\\n--ignore \"WAI NZTests\" \\\n--ignore \"RestKit\" \\\n--logformat xcode \\\n--no-repeat-first-par \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--exit-threshold 3 \\\n\"$PROJECT_DIR\"\n\nexit $?";
+			shellScript = "WHOAMI=`whoami`\nmkdir -p /private/var/tmp/$WHOAMI/appledoc/\nOUTPUT=\"/private/var/tmp/$WHOAMI/appledoc/\"\nCOMPANY_ID=\"nz.ac.victoria.ecs.engr302\"\n\n\"$PROJECT_DIR/Tools/appledoc/appledoc\" \\\n--templates \"$PROJECT_DIR/Tools/appledoc/Templates\" \\\n--project-name \"WAI NZ\" \\\n--project-company \"Water Action Initiative New Zealand\" \\\n--company-id \"$COMPANY_ID\" \\\n--output \"$OUTPUT\" \\\n--ignore \"*.m\" \\\n--ignore \"WAI NZTests\" \\\n--ignore \"RestKit\" \\\n--ignore \"WAI NZ/Vendor\" \\\n--logformat xcode \\\n--no-repeat-first-par \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--exit-threshold 3 \\\n\"$PROJECT_DIR\"\n\nexit $?";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -640,11 +648,11 @@
 				A1B8DE5015EDC0FD0030AFCE /* UIAlertView+Blocks.m in Sources */,
 				A17C324E15EE1A3B00A458C0 /* WAGeolocation.m in Sources */,
 				A1B7B59315F06083002CEE04 /* UINavigationBar+Animation.m in Sources */,
-				A1B7B5B315F07A49002CEE04 /* UIImage+RoundedCorner.m in Sources */,
-				A1B7B5B415F07A4D002CEE04 /* UIImage+Resize.m in Sources */,
-				A1B7B5B515F07A4D002CEE04 /* UIImage+Alpha.m in Sources */,
 				A189878315F084340037A4DD /* NSNumber+FormatSI.m in Sources */,
 				A10A5B4715F08843001A8184 /* UIActionSheet+Blocks.m in Sources */,
+				A10A5B5D15F0E8B8001A8184 /* UIImage+Alpha.m in Sources */,
+				A10A5B5E15F0E8B8001A8184 /* UIImage+Resize.m in Sources */,
+				A10A5B5F15F0E8B8001A8184 /* UIImage+RoundedCorner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

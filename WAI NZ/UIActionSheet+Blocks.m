@@ -54,6 +54,8 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 		self.cancelButtonIndex = [self addButtonWithTitle:cancelButtonTitle];
 	}
 	
+	// TODO: Implemenet destructiveButtonTitle
+	
 	return self;
 }
 

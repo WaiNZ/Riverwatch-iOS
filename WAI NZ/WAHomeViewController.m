@@ -65,8 +65,10 @@
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+	// Create a submission photo - this is async
 	[WASubmissionPhoto photoWithMediaPickingInfo:info
 									 resultBlock:^(WASubmissionPhoto *photo) {
+										 // Configure the submission with the photo
 										 WASubmission *submission = [[WASubmission alloc] init];
 										 submission.descriptionText = @"I saw Old McDonald's cow crapping in the river ";
 										 submission.email = @"syzygy@dt.net.nz";
@@ -74,6 +76,7 @@
 										 submission.location = photo.location;
 										 [submission addSubmissionPhoto:photo];
 										 
+										 // Show the overview screen
 										 WASubmissionOverviewViewController *controller = [[WASubmissionOverviewViewController alloc] initWithSubmission:submission];
 										 [self.navigationController pushViewController:controller animated:NO];
 										 

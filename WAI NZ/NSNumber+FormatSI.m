@@ -12,13 +12,16 @@
 
 - (NSString *)formatSI {
 	double value = [self doubleValue];
-	static const char suffixes[] = { 0, 'k', 'M', 'G', 'T', 'P', 'E'};
+	static const char suffixes[] = {0, 'k', 'M', 'G', 'T', 'P', 'E'};
 	int suffix = 0;
 	
-	while (value > 999) {
+	while(value < 1000) {
 		value /= 1000.0;
 		++suffix;
-		if (suffix >= sizeof(suffixes)) return @">999 E";
+		
+		if(suffix >= sizeof(suffixes)) {
+			return @">999 E";
+		}
 	}
 	
 	if(value < 10) {

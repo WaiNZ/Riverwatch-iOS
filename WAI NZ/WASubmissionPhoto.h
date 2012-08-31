@@ -79,7 +79,7 @@ typedef enum {
 /**
  Estimate of the file size after the image is resized
  
- @param the resize size to estimate for
+ @param photoScale the resize size to estimate for
  */
 - (size_t)estimatedFileSize:(WASubmissionPhotoSize)photoScale;
 

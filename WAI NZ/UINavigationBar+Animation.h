@@ -8,9 +8,22 @@
 
 
 
+/**
+ Additions to UINavigationBar to help with animations
+ */
 @interface UINavigationBar (Animation)
 
+/**
+ The duration of a push pop animation for a navigation controller
+ */
 + (NSTimeInterval)pushPopAnimationDuration;
+
+/**
+ Set the bar style of the navigation bar, optionally animated
+ 
+ @param barStyle the UIBarStyle to set on the bar
+ @param animated whether the status bar change should be animated
+ */
 - (void)setBarStyle:(UIBarStyle)barStyle animated:(BOOL)animated;
 
 @end
