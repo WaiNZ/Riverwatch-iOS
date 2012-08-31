@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 Water Action Initiative New Zealand. All rights reserved.
 //
 
+@compatibility_alias UIImagePickerController_Always UIImagePickerController;
+
 #if TARGET_IPHONE_SIMULATOR
 
 #import <UIKit/UIKit.h>
-
-@compatibility_alias UIImagePickerController_asad UIImagePickerController;
 
 /**
  A class that mimics UIImagePickerController for use in the simulator.
@@ -33,7 +33,6 @@
 
 #if !NO_WAFakeImagePickerController
 	#define UIImagePickerController WAFakeImagePickerController
-	#define UIImagePickerController_Always UIImagePickerController_asad
 #endif
 
 #endif

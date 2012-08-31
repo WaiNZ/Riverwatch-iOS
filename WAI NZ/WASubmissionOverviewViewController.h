@@ -27,7 +27,7 @@
  Of these the all but the time the submission was made can be edited by the
  user.
  */
-@interface WASubmissionOverviewViewController : UITableViewController <UINavigationControllerDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate> {
+@interface WASubmissionOverviewViewController : UITableViewController <UINavigationControllerDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate> {
 	__unsafe_unretained IBOutlet UITableView *mainTableView;
 	IBOutlet UITableViewCell *emailCell;
 	IBOutlet UITextField *emailField;

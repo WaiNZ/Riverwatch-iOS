@@ -11,6 +11,13 @@
 
 @class RKObjectMapping;
 
+typedef enum {
+	kWASubmissionPhotoSizeActual = 0,
+	kWASubmissionPhotoSizeSmall = 1,
+	kWASubmissionPhotoSizeMedium = 2,
+	kWASubmissionPhotoSizeLarge = 3
+} WASubmissionPhotoSize;
+
 /**
  A photo data object that encapsulates the image data, timestamp,
  and location if available for a submission
@@ -20,6 +27,8 @@
     UIImage *image;
     NSNumber *timestamp;
     WAGeolocation *location;
+	WASubmissionPhotoSize photoScaleSize;
+	CGSize size;
 }
 
 /**
@@ -67,10 +76,21 @@
  */
 - (id)initWithPhoto:(UIImage *)image timestamp:(time_t)timestamp location:(WAGeolocation *)location;
 
+/**
+ Estimate of the file size after the image is resized
+ 
+ @param the resize size to estimate for
+ */
+- (size_t)estimatedFileSize:(WASubmissionPhotoSize)photoScale;
+
 /** The location this photo was taken at, may be nil */
 @property (atomic, readonly) WAGeolocation *location;
 /** The UNIX time the photo was taken at */
 @property (atomic, readonly) NSNumber *timestamp;
 /** The image data for this photo */
 @property (atomic, readonly) UIImage *image;
+/** The size used for scalling with restkit */
+@property (atomic, assign) WASubmissionPhotoSize photoScaleSize;
+/** The size of the image, does not include resizing */
+@property (nonatomic, readonly) CGSize size;
 @end

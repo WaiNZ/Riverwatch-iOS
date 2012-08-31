@@ -100,6 +100,13 @@ extern NSString *const kWASubmissionUpdatedNotification;
  */
 - (NSString *)tagAtIndex:(int)index;
 
+/**
+ Set the submission photo size of all the photos in the submission
+ 
+ @param photoScaleSize the scale size to set all the photos to
+ */
+- (void)setPhotoScaleSize:(WASubmissionPhotoSize)photoScaleSize;
+
 // TODO: -verify
 
 /** The description the user has entered */

@@ -153,6 +153,12 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	POST_UPDATE_NOTIFICATION;
 }
 
+- (void)setPhotoScaleSize:(WASubmissionPhotoSize)photoScaleSize {
+	for(WASubmissionPhoto *photo in photos) {
+		photo.photoScaleSize = photoScaleSize;
+	}
+}
+
 #pragma mark - Private Getters/Setters
 
 - (NSNumber *)_rk_timestamp {

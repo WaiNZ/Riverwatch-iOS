@@ -11,6 +11,8 @@
 #import "WASubmitViewController.h"
 #import "WASubmission.h"
 #import "WASubmissionPhotoGalleryViewController.h"
+#import "NSNumber+FormatSI.h"
+#import "UIActionSheet+Blocks.h"
 
 
 #import <UIKit/UITableView.h>
@@ -84,7 +86,23 @@ static const int kUseExistingPhotoButton = 1;
 
 - (IBAction) addAdditionalPhoto:(id)sender {
     UIActionSheet *addSheet = [[UIActionSheet alloc] initWithTitle:@"Add a photo"
-                                                          delegate:self
+                                                          callback:^(NSInteger buttonIndex) {
+															  //0 is the topmost (Take a photo) button
+															  if(buttonIndex==kTakePhotoButton){
+																  UIImagePickerController *photoPicker = [[UIImagePickerController alloc] init];
+																  // TODO: check if the camera is available
+																  photoPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+																  photoPicker.delegate = self;
+																  [self presentModalViewController:photoPicker animated:YES];
+															  }
+															  //1 is the topmost (Use an existing photo) button
+															  else if(buttonIndex==kUseExistingPhotoButton){
+																  UIImagePickerController *cameraRollPicker = [[UIImagePickerController_Always alloc] init];
+																  cameraRollPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+																  cameraRollPicker.delegate = self;
+																  [self presentModalViewController: cameraRollPicker animated:YES];
+															  }
+														  }
                                                  cancelButtonTitle:@"Cancel"
                                             destructiveButtonTitle:nil
                                                  otherButtonTitles:@"Take a photo", @"Add an exisiting photo",nil ];
@@ -218,9 +236,60 @@ static const int kUseExistingPhotoButton = 1;
 		[self.navigationController pushViewController: controller animated:YES];
 	}
 	else if (indexPath.section == 2 && indexPath.row ==0){
-		WASubmitViewController *controller = [[WASubmitViewController alloc] initWithSubmission:submission];
-		[self.navigationController pushViewController: controller animated:YES];
-		[tableView deselectRowAtIndexPath:indexPath animated:YES];
+		size_t actualSize = 0;
+		for(int n=0;n<submission.numberOfSubmissionPhotos;n++) {
+			actualSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeActual];
+		}
+		
+		if(actualSize > kSubmissionSizeScaleThreshhold || YES) {
+			// TODO: exclude upscalling
+			
+			size_t smallSize = 0;
+			size_t mediumSize = 0;
+			size_t largeSize = 0;
+			for(int n=0;n<submission.numberOfSubmissionPhotos;n++) {
+				smallSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeSmall];
+				mediumSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeMedium];
+				largeSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeLarge];
+			}
+			
+			
+			UIActionSheet *sizeActionSheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"This submission is %@B. You can reduce the submission size by scaling images to one of the sizes below.", @(actualSize).formatSI]
+																		 callback:^(NSInteger buttonIndex) {
+																			 switch(buttonIndex) {
+																				 case 0:
+																					 submission.photoScaleSize = kWASubmissionPhotoSizeSmall;
+																					 break;
+																				 case 1:
+																					 submission.photoScaleSize = kWASubmissionPhotoSizeMedium;
+																					 break;
+																				 case 2:
+																					 submission.photoScaleSize = kWASubmissionPhotoSizeLarge;
+																					 break;
+																				 case 3:
+																					 submission.photoScaleSize = kWASubmissionPhotoSizeActual;
+																					 break;
+																				 default:
+																					 return;
+																			 }
+																			 
+																			 WASubmitViewController *controller = [[WASubmitViewController alloc] initWithSubmission:submission];
+																			 [self.navigationController pushViewController: controller animated:YES];
+																			 [tableView deselectRowAtIndexPath:indexPath animated:YES];
+																		 }
+																cancelButtonTitle:@"Cancel"
+														   destructiveButtonTitle:nil
+																otherButtonTitles:[NSString stringWithFormat:@"Small (%@B)", @(smallSize).formatSI],
+											  [NSString stringWithFormat:@"Medium (%@B)", @(mediumSize).formatSI],
+											  [NSString stringWithFormat:@"Large (%@B)", @(largeSize).formatSI],
+											  [NSString stringWithFormat:@"Actual size (%@B)", @(actualSize).formatSI], nil];
+			[sizeActionSheet showInView:self.view];
+		}
+		else {
+			WASubmitViewController *controller = [[WASubmitViewController alloc] initWithSubmission:submission];
+			[self.navigationController pushViewController: controller animated:YES];
+			[tableView deselectRowAtIndexPath:indexPath animated:YES];
+		}
 	}
 	
 }
@@ -237,26 +306,6 @@ static const int kUseExistingPhotoButton = 1;
 	submission.email = [textField.text stringByReplacingCharactersInRange:range withString:string];
 	ENABLE_SUBMISSION_UPDATE_NOTIFICATION;
 	return YES;
-}
-
-#pragma mark - UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
-    //0 is the topmost (Take a photo) button
-    if(buttonIndex==kTakePhotoButton){
-		UIImagePickerController *photoPicker = [[UIImagePickerController alloc] init];
-        // TODO: check if the camera is available
-        photoPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        photoPicker.delegate = self;
-        [self presentModalViewController:photoPicker animated:YES];
-    }
-    //1 is the topmost (Use an existing photo) button
-    else if(buttonIndex==kUseExistingPhotoButton){
-        UIImagePickerController *cameraRollPicker = [[UIImagePickerController_Always alloc] init];
-        cameraRollPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        cameraRollPicker.delegate = self;
-        [self presentModalViewController: cameraRollPicker animated:YES];
-    }
 }
 
 #pragma mark - UIImagePickerControllerDelegate

@@ -7,6 +7,7 @@
 //
 
 #import "UINavigationBar+Animation.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation UINavigationBar (Animation)
 
