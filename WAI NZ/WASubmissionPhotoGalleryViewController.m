@@ -41,12 +41,13 @@ static const CGFloat photoSpacer = 20;
 	leftView = view1;
 	centerView = view2;
 	rightView = view3;
+	
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+	
 	centerView.frame = self.view.bounds;
 	[self.view addSubview:centerView];
 	centerView.image = [submission submissionPhotoAtIndex:currentPhoto].image;
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-	
 }
 
 - (void)viewDidUnload {
