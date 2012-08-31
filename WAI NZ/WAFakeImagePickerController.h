@@ -8,9 +8,9 @@
 
 #if TARGET_IPHONE_SIMULATOR
 
-#define UIImagePickerController WAFakeImagePickerController
-
 #import <UIKit/UIKit.h>
+
+@compatibility_alias UIImagePickerController_asad UIImagePickerController;
 
 /**
  A class that mimics UIImagePickerController for use in the simulator.
@@ -30,5 +30,10 @@
 /** The delegate, notified when a photo is picked or the picker cancels */
 @property (nonatomic, unsafe_unretained) id<UIImagePickerControllerDelegate> delegate;
 @end
+
+#if !NO_WAFakeImagePickerController
+	#define UIImagePickerController WAFakeImagePickerController
+	#define UIImagePickerController_Always UIImagePickerController_asad
+#endif
 
 #endif

@@ -54,13 +54,12 @@
 
 - (IBAction)choosePhoto:(id)sender {
 	// TODO: check for < 6.0 and notify user that location services are required if not enabled
-    UIImagePickerController *cameraRollPicker = [[UIImagePickerController alloc] init];
+    UIImagePickerController *cameraRollPicker = [[UIImagePickerController_Always alloc] init];
     
     cameraRollPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     cameraRollPicker.delegate = self;
     
     [self presentModalViewController: cameraRollPicker animated:YES];
-    
 }
 
 #pragma mark - UIImagePickerControllerDelegate
