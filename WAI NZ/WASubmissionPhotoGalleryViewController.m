@@ -146,6 +146,8 @@ static const CGFloat photoSpacer = 20;
 	
 	switch (sender.state) {
 		case UIGestureRecognizerStateBegan: {
+			[self hideBars];
+			
 			// Add side views and configure them
 			[self _setOffset:0];
 			
@@ -212,20 +214,33 @@ static const CGFloat photoSpacer = 20;
 			break;
 	}
 }
-- (IBAction)tapOnView:(id)sender {
+
+- (void)showBars {
+	[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+	[UIView animateWithDuration:kStatusbarFadeAnimationDuration
+					 animations:^{
+						 self.navigationController.navigationBar.alpha = 1;
+					 }];
+}
+
+- (void)hideBars {
+	[UIView animateWithDuration:kStatusbarFadeAnimationDuration
+					 animations:^{
+						 self.navigationController.navigationBar.alpha = 0;
+					 }];
+	[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+}
+
+- (void)toggleBars {
 	if ([UIApplication sharedApplication].statusBarHidden) {
-		[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
-		[UIView animateWithDuration:kStatusbarFadeAnimationDuration
-						 animations:^{
-							 self.navigationController.navigationBar.alpha = 1;
-						 }];
+		[self showBars];
 	} else {
-		[UIView animateWithDuration:kStatusbarFadeAnimationDuration
-						 animations:^{
-							 self.navigationController.navigationBar.alpha = 0;
-						 }];
-		[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+		[self hideBars];
 	}
+}
+
+- (IBAction)tapOnView:(id)sender {
+	[self toggleBars];
 }
 
 @end
