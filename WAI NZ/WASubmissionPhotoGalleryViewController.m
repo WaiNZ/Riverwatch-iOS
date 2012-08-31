@@ -42,10 +42,13 @@ static const CGFloat photoSpacer = 20;
 	leftView = view1;
 	centerView = view2;
 	rightView = view3;
+	leftImageView = imageView1;
+	centerImageView = imageView2;
+	rightImageView = imageView3;
 	
 	centerView.frame = self.subviewFrame;
 	[self.view addSubview:centerView];
-	centerView.image = [submission submissionPhotoAtIndex:currentPhoto].image;
+	centerImageView.image = [submission submissionPhotoAtIndex:currentPhoto].image;
 }
 
 - (void)viewDidUnload {
@@ -107,16 +110,18 @@ static const CGFloat photoSpacer = 20;
 	[submission removeSubmissionPhotoAtIndex:currentPhoto
 							withConfirmation:^(int photoIndex) {
 								CGFloat edge = 0;
-								__unsafe_unretained UIImageView **viewToShift = &rightView;
+								__unsafe_unretained UIScrollView **viewToShift = &rightView;
+								__unsafe_unretained UIImageView **imageViewToShift = &rightImageView;
 								if(photoIndex == submission.numberOfSubmissionPhotos) {
 									edge = self.view.bounds.size.width;
 									viewToShift = &leftView;
+									imageViewToShift = &leftImageView;
 									currentPhoto--;
 								}
 								
 								CGPoint oldCenter = centerView.center;
 								[self _setOffset:0];
-								(*viewToShift).image = [submission submissionPhotoAtIndex:currentPhoto].image;
+								(*imageViewToShift).image = [submission submissionPhotoAtIndex:currentPhoto].image;
 								[self.view addSubview:(*viewToShift)];
 								[UIView animateWithDuration:kAnimationDuration
 												 animations:^{
@@ -125,17 +130,17 @@ static const CGFloat photoSpacer = 20;
 													 (*viewToShift).center = oldCenter;
 												 }
 												 completion:^(BOOL done) {
-													 UIImageView *temp = centerView;
-													 centerView = (*viewToShift);
-													 (*viewToShift) = temp;
+													 UIView *oldCenterView = centerView;
+													 SWAP(centerImageView, *imageViewToShift);
+													 SWAP(centerView, *viewToShift);
 													 
 													 [leftView removeFromSuperview];
 													 [rightView removeFromSuperview];
-													 leftView.image = nil;
-													 rightView.image = nil;
+													 leftImageView.image = nil;
+													 rightImageView.image = nil;
 													 
-													 temp.transform = CGAffineTransformIdentity;
-													 temp.center = oldCenter;
+													 oldCenterView.transform = CGAffineTransformIdentity;
+													 oldCenterView.center = oldCenter;
 												 }];
 							}];
 }
@@ -156,12 +161,12 @@ static const CGFloat photoSpacer = 20;
 			
 			if(canSwipeLeft){
 				[self.view addSubview:leftView];
-				leftView.image = [submission submissionPhotoAtIndex:currentPhoto-1].image;
+				leftImageView.image = [submission submissionPhotoAtIndex:currentPhoto-1].image;
 			}
 		
 			if(canSwipeRight){
 				[self.view addSubview:rightView];
-				rightView.image = [submission submissionPhotoAtIndex:currentPhoto+1].image;
+				rightImageView.image = [submission submissionPhotoAtIndex:currentPhoto+1].image;
 			}
 			
 			break;
@@ -182,16 +187,14 @@ static const CGFloat photoSpacer = 20;
 							 animations:^{
 								 if(canSwipeLeft && (offset>self.view.bounds.size.width/2 || velocity > kFlickVelocity)){
 									 [self _setOffset:PHOTO_PAN_MAX];
-									 UIImageView *temp = centerView;
-									 centerView = leftView;
-									 leftView = temp;
+									 SWAP(centerView, leftView);
+									 SWAP(centerImageView, leftImageView);
 									 currentPhoto--;
 								 }
 								 else if (canSwipeRight && (offset<-self.view.bounds.size.width/2 || velocity < -kFlickVelocity)){
 									 [self _setOffset:-PHOTO_PAN_MAX];
-									 UIImageView *temp = centerView;
-									 centerView = rightView;
-									 rightView = temp;
+									 SWAP(centerView, rightView);
+									 SWAP(centerImageView, rightImageView);
 									 currentPhoto++;
 								 }
 								 else {
@@ -203,8 +206,8 @@ static const CGFloat photoSpacer = 20;
 							 completion:^(BOOL done){
 								 [leftView removeFromSuperview];
 								 [rightView removeFromSuperview];
-								 leftView.image = nil;
-								 rightView.image = nil;
+								 leftImageView.image = nil;
+								 rightImageView.image = nil;
 								 
 								 sender.enabled = YES;
 							 }];
@@ -241,6 +244,16 @@ static const CGFloat photoSpacer = 20;
 
 - (IBAction)tapOnView:(id)sender {
 	[self toggleBars];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+	if(scrollView == centerView) {
+		return centerImageView;
+	}
+	
+	return nil;
 }
 
 @end
