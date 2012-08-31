@@ -212,5 +212,20 @@ static const CGFloat photoSpacer = 20;
 			break;
 	}
 }
+- (IBAction)tapOnView:(id)sender {
+	if ([UIApplication sharedApplication].statusBarHidden) {
+		[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+		[UIView animateWithDuration:kStatusbarFadeAnimationDuration
+						 animations:^{
+							 self.navigationController.navigationBar.alpha = 1;
+						 }];
+	} else {
+		[UIView animateWithDuration:kStatusbarFadeAnimationDuration
+						 animations:^{
+							 self.navigationController.navigationBar.alpha = 0;
+						 }];
+		[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+	}
+}
 
 @end
