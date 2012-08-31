@@ -115,8 +115,14 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	POST_UPDATE_NOTIFICATION;
 }
 
-- (void)removeTag:(int)index {
-    [tags removeObjectAtIndex:index];
+- (void)removeTag: (NSString *)tag {
+    for(int i = 0;i<[tags count];i++){
+        if([[tags objectAtIndex:i] isEqualToString:tag]){
+            [tags removeObjectAtIndex:i];
+            break;
+        }
+    }
+
 	POST_UPDATE_NOTIFICATION;
 }
 
@@ -126,6 +132,17 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 
 - (int)numberOfTags {
     return [tags count];
+}
+
+-(BOOL) containsTag:(NSString *)tag{
+    for(int i = 0;i<[tags count];i++){
+        if([[tags objectAtIndex:i] isEqualToString:tag]){
+            return TRUE;
+        }
+    }
+    return FALSE;
+    
+   // return [tags containsObject:tag];
 }
 
 - (void)setDescriptionText:(NSString *)_descriptionText {

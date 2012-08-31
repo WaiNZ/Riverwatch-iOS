@@ -89,7 +89,7 @@ extern NSString *const kWASubmissionUpdatedNotification;
  
  // TODO: exception
  */
-- (void)removeTag:(int)index;
+- (void)removeTag:(NSString *) tag;
 /**
  Get the tag at the specified index
  
