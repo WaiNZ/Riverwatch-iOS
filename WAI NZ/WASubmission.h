@@ -106,6 +106,7 @@ extern NSString *const kWASubmissionUpdatedNotification;
  @param photoScaleSize the scale size to set all the photos to
  */
 - (void)setPhotoScaleSize:(WASubmissionPhotoSize)photoScaleSize;
+-(BOOL) containsTag:(NSString *)tag;
 
 // TODO: -verify
 
