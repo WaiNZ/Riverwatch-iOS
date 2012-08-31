@@ -39,10 +39,11 @@
 
 /**
  Initilize this WASubmissionPhotoGalleryViewController with the specified
- submission.
+ submission and selected photo.
  
  @param _submission the submission to view and edit the photos of
+ @param index the id of the photo to display
  */
-- (id)initWithSubmission:(WASubmission *)_submission;
+- (id)initWithSubmission:(WASubmission *)_submission andPhotoIndex:(int)index;
 
 @end

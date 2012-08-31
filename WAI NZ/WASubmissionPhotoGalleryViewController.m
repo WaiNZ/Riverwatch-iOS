@@ -19,12 +19,12 @@ static const CGFloat photoSpacer = 20;
 
 @implementation WASubmissionPhotoGalleryViewController
 
-- (id)initWithSubmission:(WASubmission *)_submission {
+- (id)initWithSubmission:(WASubmission *)_submission andPhotoIndex:(int)index {
 	self = [self init];
 	if(self) {
 		// Set up
 		submission = _submission;
-        
+        currentPhoto = index;
 		self.navigationItem.title = @"Photos";
 		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Delete"
 																				  style:UIBarButtonItemStyleBordered

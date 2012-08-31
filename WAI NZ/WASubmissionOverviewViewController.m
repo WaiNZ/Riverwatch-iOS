@@ -93,7 +93,7 @@ static const int kUseExistingPhotoButton = 1;
 }
 
 -( IBAction) photoTapped:(UITapGestureRecognizer *)sender{
-	WASubmissionPhotoGalleryViewController *gallery = [[WASubmissionPhotoGalleryViewController alloc] initWithSubmission:submission];
+	WASubmissionPhotoGalleryViewController *gallery = [[WASubmissionPhotoGalleryViewController alloc] initWithSubmission:submission andPhotoIndex:sender.view.tag];
 	[self.navigationController pushViewController:gallery animated:YES];
 	
 	
@@ -129,7 +129,7 @@ static const int kUseExistingPhotoButton = 1;
 		
 		UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoTapped:)];
 		[notmyview addGestureRecognizer:tap];
-		
+		notmyview.tag = n;
 		frame.origin.x += kPhotoSpacing;
         
     }
