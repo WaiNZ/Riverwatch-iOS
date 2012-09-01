@@ -52,7 +52,7 @@ static const int kUseExistingPhotoButton = 1;
 	[self loadPhotoViews];
     [self updatePhotoText];
     [self updateTimestampText];
-    [self updateMapView];
+    [self updateMapView:NO];
 	
 	mainTableView.tableHeaderView = topView;
 }
@@ -220,6 +220,9 @@ static const int kUseExistingPhotoButton = 1;
 						 
 						 // Reanable scrolling
 						 mainTableView.scrollEnabled = YES;
+						 
+						 // Center map
+						 [self updateMapView:YES];
 					 }];
 }
 
@@ -229,7 +232,7 @@ static const int kUseExistingPhotoButton = 1;
 	[self loadPhotoViews];
     [self updatePhotoText];
     [self updateTimestampText];
-    [self updateMapView];
+    [self updateMapView:YES];
 }
 
 #pragma mark - Utilities
@@ -269,23 +272,29 @@ static const int kUseExistingPhotoButton = 1;
     [timestampLabel setText:dateString];
 }
 
-- (void) updateMapView{
-//    WAGeolocation *loc = submission.location;
+- (void)updateMapView:(BOOL)animated {
+    WAGeolocation *loc = submission.location;
+	
     MKCoordinateRegion region;
-    MKCoordinateSpan span;
-    span.latitudeDelta = .01;
-    span.longitudeDelta = .01;
-    CLLocationCoordinate2D location;
-    //location.latitude = loc.latitude;
-    location.latitude = -41.3;
-    //location.longitude = loc.longitude;
-    location.longitude = 174.9;
-    region.span = span;
-    region.center = location;
-    [mapView setRegion:region animated:YES];
+	if(loc) {
+		region.span.latitudeDelta = .01;
+		region.span.longitudeDelta = .01;
+		
+		region.center.latitude = loc.latitude;
+		region.center.longitude = loc.longitude;
+	}
+	else {
+		region.span.latitudeDelta = 4;
+		region.span.longitudeDelta = 4;
+		
+		region.center.latitude = -41.3;
+		region.center.longitude = 174.9;
+	}
+	
+    [mapView setRegion:region animated:animated];
+	
     NSLog(@"lat is: %f", mapView.region.center.latitude);
     NSLog(@"long is: %f", mapView.region.center.longitude);
-    mapView.centerCoordinate = location;
 }
 
 - (void)loadPhotoViews {
