@@ -522,6 +522,7 @@ static const int kUseExistingPhotoButton = 1;
 	}
 	pinView.draggable = YES;
 	pinView.canShowCallout = NO;
+	pinView.selected = YES;
 	
 	return pinView;
 }
