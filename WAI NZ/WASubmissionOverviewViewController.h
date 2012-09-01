@@ -48,6 +48,7 @@
 	__unsafe_unretained IBOutlet UIView *mapTapInterceptor;
 	IBOutlet UIView *shadeView;
 	__unsafe_unretained IBOutlet UIView *shadeViewTop;
+	UIStatusBarStyle oldStatusBarStyle;
 }
 
 /**

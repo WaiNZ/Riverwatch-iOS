@@ -191,6 +191,9 @@ static const int kUseExistingPhotoButton = 1;
 	// Disable scrolling
 	mainTableView.scrollEnabled = NO;
 	
+	oldStatusBarStyle = [UIApplication sharedApplication].statusBarStyle;
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:YES];
+	
 	// Do the animation!
 	[UIView animateWithDuration:kAnimationDuration
 					 animations:^{
@@ -206,6 +209,8 @@ static const int kUseExistingPhotoButton = 1;
 - (IBAction)shadeViewTapped:(id)sender {
 	// Prepare the frame for the animation
 	CGRect smallMapFrame = [self.view.window convertRect:mapContainerView.bounds fromView:mapContainerView];
+	
+	[[UIApplication sharedApplication] setStatusBarStyle:oldStatusBarStyle animated:YES];
 	
 	// Animate back
 	[UIView animateWithDuration:kAnimationDuration
