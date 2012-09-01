@@ -16,6 +16,10 @@
 #import <QuartzCore/QuartzCore.h>
 #import "WAStyleHelper.h"
 
+
+#import <UIKit/UITableView.h>
+#import <QuartzCore/QuartzCore.h>
+
 #define ENABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submissionUpdated) name:kWASubmissionUpdatedNotification object:submission];
 #define DISABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] removeObserver:self name:kWASubmissionUpdatedNotification object:submission]
 
@@ -137,15 +141,24 @@ static const int kUseExistingPhotoButton = 1;
 	[self.navigationController pushViewController:gallery animated:YES];
 }
 
+
 //TODO: BUTTONS SHOULD STAY COLOURED ON PRESS
 - (IBAction)cowTagSelected:(id)sender {
     if([submission containsTag:@"cow"]){
         [submission removeTag:@"cow"];
         NSLog(@"cow tag got removed");
+        [cowButton setBackgroundImage:nil forState:UIControlStateNormal];
+        UIColor *defaultColor = [UIColor colorWithRed:0.196 green:0.3098 blue:0.52 alpha:1.0];
+        [cowButton setTitleColor:defaultColor forState:UIControlStateNormal];
     }
     else{
         [submission addTag:@"cow"];
         NSLog(@"cow tag got added");
+        [[cowButton layer] setCornerRadius:8.0];
+        [[cowButton layer] setMasksToBounds:YES];
+        [[cowButton layer] setBorderWidth:1.0];
+        [cowButton setBackgroundImage:[UIImage imageNamed:@"icon_144.png"] forState:UIControlStateNormal];
+        [cowButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
 }
 
@@ -153,11 +166,18 @@ static const int kUseExistingPhotoButton = 1;
     if([submission containsTag:@"runoff"]){
         [submission removeTag:@"runoff"];
         NSLog(@"runoff tag got removed");
-        
+        [runoffButton setBackgroundImage:nil forState:UIControlStateNormal];
+        UIColor *defaultColor = [UIColor colorWithRed:0.196 green:0.3098 blue:0.52 alpha:1.0];
+        [runoffButton setTitleColor:defaultColor forState:UIControlStateNormal];
     }
     else{
         [submission addTag:@"runoff"];
         NSLog(@"runoff tag got added");
+        [[runoffButton layer] setCornerRadius:8.0];
+        [[runoffButton layer] setMasksToBounds:YES];
+        [[runoffButton layer] setBorderWidth:1.0];
+        [runoffButton setBackgroundImage:[UIImage imageNamed:@"icon_144.png"] forState:UIControlStateNormal];
+        [runoffButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
 }
 
@@ -165,10 +185,18 @@ static const int kUseExistingPhotoButton = 1;
     if([submission containsTag:@"pollution"]){
         [submission removeTag:@"pollution"];
         NSLog(@"pollution tag got removed");
+        [pollutionButton setBackgroundImage:nil forState:UIControlStateNormal];
+        UIColor *defaultColor = [UIColor colorWithRed:0.196 green:0.3098 blue:0.52 alpha:1.0];
+        [pollutionButton setTitleColor:defaultColor forState:UIControlStateNormal];
     }
     else{
         [submission addTag:@"pollution"];
         NSLog(@"pollution tag got added");
+        [[pollutionButton layer] setCornerRadius:8.0];
+        [[pollutionButton layer] setMasksToBounds:YES];
+        [[pollutionButton layer] setBorderWidth:1.0];
+        [pollutionButton setBackgroundImage:[UIImage imageNamed:@"icon_144.png"] forState:UIControlStateNormal];
+        [pollutionButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
 }
 
@@ -287,7 +315,7 @@ static const int kUseExistingPhotoButton = 1;
     NSString *suffix = [suffixes objectAtIndex:date_day];
     dateString = [dateString stringByAppendingString:suffix];
     
-    dateString = [dateString stringByAppendingString:@""];
+    dateString = [dateString stringByAppendingString:@" at the following location: "];
     
     [timestampLabel setText:dateString];
 	[WAStyleHelper topAlignLabel:timestampLabel];
