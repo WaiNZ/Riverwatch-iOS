@@ -278,19 +278,15 @@ static const int kUseExistingPhotoButton = 1;
     WAGeolocation *loc = submission.location;
 	
     MKCoordinateRegion region;
+	region.center = submission.coordinate;
+	
 	if(loc) {
 		region.span.latitudeDelta = .01;
 		region.span.longitudeDelta = .01;
-		
-		region.center.latitude = loc.latitude;
-		region.center.longitude = loc.longitude;
 	}
 	else {
 		region.span.latitudeDelta = 4;
 		region.span.longitudeDelta = 4;
-		
-		region.center.latitude = -41.3;
-		region.center.longitude = 174.9;
 	}
 	
     [mapView setRegion:region animated:animated];
@@ -520,6 +516,7 @@ static const int kUseExistingPhotoButton = 1;
 		pinView.annotation = annotation;
 	}
 	pinView.draggable = YES;
+	pinView.canShowCallout = NO;
 	
 	return pinView;
 }

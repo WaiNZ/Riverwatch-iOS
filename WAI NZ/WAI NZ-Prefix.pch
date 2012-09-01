@@ -13,9 +13,11 @@
 #ifdef __OBJC__
 	#import <UIKit/UIKit.h>
 	#import <Foundation/Foundation.h>
-#endif
+	#import "WAFakeImagePickerController.h"
+	#import <MapKit/MapKit.h>
 
-#import "WAFakeImagePickerController.h"
+	static const MKCoordinateRegion kNewZealandRegion = { .center = { .latitude = -41.47566, .longitude = 174.515076 }, .span = { .latitudeDelta = 10, .longitudeDelta = 14 } };
+#endif
 
 static const NSTimeInterval kAnimationDuration = 0.368;
 static const NSTimeInterval kStatusbarFadeAnimationDuration = 0.368;

@@ -53,7 +53,12 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 #pragma mark - MKAnnotation
 
 - (CLLocationCoordinate2D)coordinate {
-	return location.coordinate;
+	if(location) {
+		return location.coordinate;
+	}
+	else {
+		return kNewZealandRegion.center;
+	}
 }
 
 - (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
@@ -61,7 +66,7 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 		location = [[WAGeolocation alloc] init];
 	}
 	
-	[location setCoordinate:newCoordinate];
+	location.coordinate = newCoordinate;
 }
 
 #pragma mark - Getters/Setters
