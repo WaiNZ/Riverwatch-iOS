@@ -71,6 +71,9 @@ static const int kUseExistingPhotoButton = 1;
     pollutionButton = nil;
     photoLabel = nil;
     timestampLabel = nil;
+	mapContainerView = nil;
+	shadeView = nil;
+	mapTapInterceptor = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -163,6 +166,62 @@ static const int kUseExistingPhotoButton = 1;
     }
 }
 
+- (IBAction)editMap:(id)sender {
+	// View for greying out the background
+	CGRect shadeViewFrame = CGRectZero;
+	shadeViewFrame.size = mainTableView.contentSize;
+	shadeView.frame = shadeViewFrame;
+	shadeView.alpha = 0;
+	[self.view addSubview:shadeView];
+	
+	// Move the mapView on top of the rest of the views
+	CGRect mapFrameInView = [self.view convertRect:mapView.frame fromView:mapView.superview];
+	[mapView removeFromSuperview];
+	mapView.frame = mapFrameInView;
+	[self.view addSubview:mapView];
+	
+	// Prepare the frame for the animation
+	CGRect largeMapFrame = self.view.bounds;
+	largeMapFrame.origin = CGPointZero;
+	largeMapFrame.origin.y += 50; // Space for text
+	largeMapFrame.size.height -= 50;
+	
+	// Disable scrolling
+	mainTableView.scrollEnabled = NO;
+	
+	// Do the animation!
+	[UIView animateWithDuration:kAnimationDuration
+					 animations:^{
+						 mapView.frame = largeMapFrame;
+						 shadeView.alpha = 1;
+						 mainTableView.contentOffset = CGPointZero;
+					 }];
+}
+
+/**
+ Comming back from a map editing session
+ */
+- (IBAction)shadeViewTapped:(id)sender {
+	// Prepare the frame for the animation
+	CGRect smallMapFrame = [self.view convertRect:mapContainerView.bounds fromView:mapContainerView];
+	
+	// Animate back
+	[UIView animateWithDuration:kAnimationDuration
+					 animations:^{
+						 mapView.frame = smallMapFrame;
+						 shadeView.alpha = 0;
+					 }
+					 completion:^(BOOL finished) {
+						 // Restore the old view heirachy
+						 [shadeView removeFromSuperview];
+						 [mapView removeFromSuperview];
+						 mapView.frame = mapContainerView.bounds;
+						 [mapContainerView insertSubview:mapView belowSubview:mapTapInterceptor];
+						 
+						 // Reanable scrolling
+						 mainTableView.scrollEnabled = YES;
+					 }];
+}
 
 - (void)submissionUpdated {
 	[mainTableView reloadData];
