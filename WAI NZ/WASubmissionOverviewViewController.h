@@ -49,6 +49,7 @@
 	IBOutlet UIView *shadeView;
 	__unsafe_unretained IBOutlet UIView *shadeViewTop;
 	UIStatusBarStyle oldStatusBarStyle;
+	__unsafe_unretained IBOutlet UIView *mapSidePanel;
 }
 
 /**

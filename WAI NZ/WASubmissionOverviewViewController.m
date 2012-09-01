@@ -13,9 +13,8 @@
 #import "WASubmissionPhotoGalleryViewController.h"
 #import "NSNumber+FormatSI.h"
 #import "UIActionSheet+Blocks.h"
-
-
-#import <UIKit/UITableView.h>
+#import <QuartzCore/QuartzCore.h>
+#import "WAStyleHelper.h"
 
 #define ENABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submissionUpdated) name:kWASubmissionUpdatedNotification object:submission];
 #define DISABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] removeObserver:self name:kWASubmissionUpdatedNotification object:submission]
@@ -49,6 +48,9 @@ static const int kUseExistingPhotoButton = 1;
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	mapContainerView.layer.borderColor = mainTableView.separatorColor.CGColor;
+	mapContainerView.layer.borderWidth = 1;
+	
 	[mapView addAnnotation:submission];
 	
 	[self loadPhotoViews];
@@ -77,6 +79,7 @@ static const int kUseExistingPhotoButton = 1;
 	shadeView = nil;
 	mapTapInterceptor = nil;
 	shadeViewTop = nil;
+	mapSidePanel = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -90,7 +93,7 @@ static const int kUseExistingPhotoButton = 1;
 - (IBAction)sliderChanged:(id)sender {
 	[mainTableView beginUpdates];
 	// Update the table
-	if(!slider.on){
+	if(slider.on){
 		[mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
 	else {
@@ -98,7 +101,7 @@ static const int kUseExistingPhotoButton = 1;
 	}
 	// Make sure we dont end up resursing
 	DISABLE_SUBMISSION_UPDATE_NOTIFICATION;
-	submission.anonymous = slider.on;
+	submission.anonymous = !slider.on;
 	ENABLE_SUBMISSION_UPDATE_NOTIFICATION;
 	[mainTableView endUpdates];
 }
@@ -209,6 +212,10 @@ static const int kUseExistingPhotoButton = 1;
 - (IBAction)shadeViewTapped:(id)sender {
 	// Prepare the frame for the animation
 	CGRect smallMapFrame = [self.view.window convertRect:mapContainerView.bounds fromView:mapContainerView];
+	CGRect sidePanelToFrame = mapSidePanel.frame;
+	CGRect sidePanelFromFrame = sidePanelToFrame;
+	sidePanelFromFrame.origin.x += sidePanelFromFrame.size.width;
+	mapSidePanel.frame = sidePanelFromFrame;
 	
 	[[UIApplication sharedApplication] setStatusBarStyle:oldStatusBarStyle animated:YES];
 	
@@ -230,6 +237,12 @@ static const int kUseExistingPhotoButton = 1;
 						 
 						 // Center map
 						 [self updateMapView:YES];
+						 
+						 // Animate in sidepanel
+						 [UIView animateWithDuration:kAnimationDuration
+										  animations:^{
+											  mapSidePanel.frame = sidePanelToFrame;
+										  }];
 					 }];
 }
 
@@ -258,10 +271,10 @@ static const int kUseExistingPhotoButton = 1;
 - (void)updateTimestampText {
     NSDateFormatter *formatter;
     NSString *dateString;
-    dateString = @"Observed at ";
+    dateString = @"";
     formatter = [[NSDateFormatter alloc] init];
     //[formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
-    [formatter setDateFormat:@"h:mma EEEE MMMM dd"];
+    [formatter setDateFormat:@"h:mma EEEE MMM d"];
     NSDate *newDate = [NSDate dateWithTimeIntervalSince1970:submission.timestamp];
     dateString = [dateString stringByAppendingString:[formatter stringFromDate:newDate]];
     
@@ -274,9 +287,10 @@ static const int kUseExistingPhotoButton = 1;
     NSString *suffix = [suffixes objectAtIndex:date_day];
     dateString = [dateString stringByAppendingString:suffix];
     
-    dateString = [dateString stringByAppendingString:@" at the following location"];
+    dateString = [dateString stringByAppendingString:@""];
     
     [timestampLabel setText:dateString];
+	[WAStyleHelper topAlignLabel:timestampLabel];
 }
 
 - (void)updateMapView:(BOOL)animated {
@@ -305,7 +319,7 @@ static const int kUseExistingPhotoButton = 1;
 		[view removeFromSuperview]; // TODO: be carefull of scrollbars!
 	}
 	
-    CGRect frame = CGRectMake(8, 4, 98, 98);
+    CGRect frame = CGRectMake(10, 4, 98, 98);
 	static const CGFloat kPhotoSpacing = 102;
 	
     for(int n = 0;n<submission.numberOfSubmissionPhotos;n++) {
@@ -315,6 +329,8 @@ static const int kUseExistingPhotoButton = 1;
         UIView *notmyview = [[UIView alloc] initWithFrame:frame];
         [photoScrollView addSubview:notmyview];
         notmyview.backgroundColor = [UIColor whiteColor];
+		notmyview.layer.borderColor = mainTableView.separatorColor.CGColor;
+		notmyview.layer.borderWidth = 1;
 		
 		// Create the image view
         UIImageView *photoView = [[UIImageView alloc] initWithFrame:CGRectInset(notmyview.bounds, 4, 4)];
@@ -332,6 +348,8 @@ static const int kUseExistingPhotoButton = 1;
 	
 	// Add the add photo view using the latest rect from the for loop
 	addPhotoView.frame = frame;
+	addPhotoView.layer.borderColor = mainTableView.separatorColor.CGColor;
+	addPhotoView.layer.borderWidth = 1;
 	[photoScrollView addSubview:addPhotoView];
 	
 	// Update the content size of the scrollview
@@ -387,9 +405,9 @@ static const int kUseExistingPhotoButton = 1;
 		case 1:
 			switch (indexPath.row) {
 				case 0:
-					cell.textLabel.text = @"Anonymous";
+					cell.textLabel.text = @"Include my email";
 					cell.accessoryView = slider;
-					slider.on = submission.anonymous;
+					slider.on = !submission.anonymous;
 					break;
 				case 1:
 					cell = emailCell;
