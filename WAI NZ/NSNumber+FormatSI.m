@@ -15,12 +15,12 @@
 	static const char suffixes[] = {0, 'k', 'M', 'G', 'T', 'P', 'E'};
 	int suffix = 0;
 	
-	while(value < 1000) {
+	while(value >= 1000) {
 		value /= 1000.0;
 		++suffix;
 		
 		if(suffix >= sizeof(suffixes)) {
-			return @">999 E";
+			return @">999.9 E";
 		}
 	}
 	
