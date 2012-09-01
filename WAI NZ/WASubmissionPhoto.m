@@ -107,7 +107,7 @@
 						 
 						 // Get the optional location
 						 id tmpLocation = [asset valueForProperty:ALAssetPropertyLocation];
-						 if(tmpLocation != ALErrorInvalidProperty) {
+						 if(tmpLocation && tmpLocation != ALErrorInvalidProperty) {
 							 location = [WAGeolocation geolocationWithCLLocation:tmpLocation];
 						 }
 						 
