@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "WASubmissionPhoto.h"
 #import "WAGeolocation.h"
+#import <MapKit/MapKit.h>
 
 @class RKObjectMapping;
 
@@ -19,7 +20,7 @@ extern NSString *const kWASubmissionUpdatedNotification;
  
   TODO: constraints, last photo eg. verification
  */
-@interface WASubmission : NSObject {
+@interface WASubmission : NSObject <MKAnnotation> {
     NSMutableArray *photos;
     NSMutableArray *tags;
     NSString *descriptionText;

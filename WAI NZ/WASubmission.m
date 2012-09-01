@@ -50,6 +50,20 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
     return self;
 }
 
+#pragma mark - MKAnnotation
+
+- (CLLocationCoordinate2D)coordinate {
+	return location.coordinate;
+}
+
+- (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
+	if(!location) {
+		location = [[WAGeolocation alloc] init];
+	}
+	
+	[location setCoordinate:newCoordinate];
+}
+
 #pragma mark - Getters/Setters
 
 - (void)addSubmissionPhoto:(WASubmissionPhoto *)photo {

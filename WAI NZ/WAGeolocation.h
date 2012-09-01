@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
 @class RKObjectMapping;
 
@@ -25,7 +26,7 @@ typedef enum {
  to detail the source of the location information, be it user entered
  of from the device using GPS or WiFi triangulation see source.
  */
-@interface WAGeolocation : NSObject {
+@interface WAGeolocation : NSObject <MKAnnotation> {
 	CLLocationDegrees latitude;
 	CLLocationDegrees longitude;
 	

@@ -29,7 +29,7 @@
  Of these the all but the time the submission was made can be edited by the
  user.
  */
-@interface WASubmissionOverviewViewController : UITableViewController <UINavigationControllerDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate, MKMapViewDelegate> {
+@interface WASubmissionOverviewViewController : UITableViewController <UINavigationControllerDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,MKMapViewDelegate> {
 	__unsafe_unretained IBOutlet UITableView *mainTableView;
 	IBOutlet UITableViewCell *emailCell;
 	IBOutlet UITextField *emailField;
@@ -47,7 +47,6 @@
 	__unsafe_unretained IBOutlet UIView *mapContainerView;
 	__unsafe_unretained IBOutlet UIView *mapTapInterceptor;
 	IBOutlet UIView *shadeView;
-	MKPointAnnotation *mapPin;
 }
 
 /**
