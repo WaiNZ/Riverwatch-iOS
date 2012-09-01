@@ -56,7 +56,7 @@
 	// TODO: check for < 6.0 and notify user that location services are required if not enabled
     UIImagePickerController *cameraRollPicker = [[UIImagePickerController_Always alloc] init];
     
-    cameraRollPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    cameraRollPicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     cameraRollPicker.delegate = self;
     
     [self presentModalViewController: cameraRollPicker animated:YES];
