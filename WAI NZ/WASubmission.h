@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "WASubmissionPhoto.h"
 #import "WAGeolocation.h"
+#import <MapKit/MapKit.h>
 
 @class RKObjectMapping;
 
@@ -19,7 +20,7 @@ extern NSString *const kWASubmissionUpdatedNotification;
  
   TODO: constraints, last photo eg. verification
  */
-@interface WASubmission : NSObject {
+@interface WASubmission : NSObject <MKAnnotation> {
     NSMutableArray *photos;
     NSMutableArray *tags;
     NSString *descriptionText;
@@ -83,13 +84,13 @@ extern NSString *const kWASubmissionUpdatedNotification;
  */
 - (void)addTag:(NSString *)tag;
 /**
- Remove the tag at the specified index
+ Remove the specified tag
  
- @param index the index of the tag to remove
+ @param tag the tag to remove
  
  // TODO: exception
  */
-- (void)removeTag:(NSString *) tag;
+- (void)removeTag:(NSString *)tag;
 /**
  Get the tag at the specified index
  
@@ -100,7 +101,19 @@ extern NSString *const kWASubmissionUpdatedNotification;
  */
 - (NSString *)tagAtIndex:(int)index;
 
--(BOOL) containsTag:(NSString *)tag;
+/**
+ Set the submission photo size of all the photos in the submission
+ 
+ @param photoScaleSize the scale size to set all the photos to
+ */
+- (void)setPhotoScaleSize:(WASubmissionPhotoSize)photoScaleSize;
+/**
+ Check to see if a tag is attached to the submission
+ 
+ @param tag the tag to check for
+ @return YES if the submission is tagged with the specified tag, NO otherwise
+ */
+- (BOOL)containsTag:(NSString *)tag;
 
 // TODO: -verify
 

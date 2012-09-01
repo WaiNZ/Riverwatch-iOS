@@ -42,6 +42,18 @@
 	return self;
 }
 
+
+#pragma mark - MKAnnotation
+
+- (CLLocationCoordinate2D)coordinate {
+	return CLLocationCoordinate2DMake(latitude, longitude);
+}
+
+- (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
+	latitude = newCoordinate.latitude;
+	longitude = newCoordinate.longitude;
+}
+
 #pragma mark - Getters/Setters
 
 - (NSNumber *)_rk_latitude {

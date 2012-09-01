@@ -35,6 +35,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [descriptionText becomeFirstResponder];
+	
+	// Register for keyboard up/down
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
 }
@@ -57,7 +59,7 @@
 
 #pragma mark - keyboard
 
--(void) keyboardDidShow:(NSNotification *)notif {
+- (void)keyboardDidShow:(NSNotification *)notif {
     originalDescriptionTextFrame = descriptionText.frame;
     
     // TODO: support other rotations
@@ -72,7 +74,7 @@
                      }];
 }
 
--(void) keyboardDidHide:(NSNotification *)notif {
+- (void)keyboardDidHide:(NSNotification *)notif {
     CGFloat keyboardSlideDuration = [[[notif userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
     [UIView animateWithDuration:keyboardSlideDuration

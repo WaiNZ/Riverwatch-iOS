@@ -47,11 +47,17 @@ static const int kUseExistingPhotoButton = 1;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	mapContainerView.layer.borderColor = mainTableView.separatorColor.CGColor;
+	mapContainerView.layer.borderWidth = 1;
+	
+	[mapView addAnnotation:submission];
+	
 	[self loadPhotoViews];
     [self updatePhotoText];
     [self updateTimestampText];
- 
-    [self updateMapView];
+    [self updateMapView:NO];
+	
 	mainTableView.tableHeaderView = topView;
 }
 
@@ -82,30 +88,48 @@ static const int kUseExistingPhotoButton = 1;
 #pragma mark - Actions
 - (IBAction)sliderChanged:(id)sender {
 	[mainTableView beginUpdates];
-	if(!slider.on){
+	// Update the table
+	if(slider.on){
 		[mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
 	else {
 		[mainTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
+	// Make sure we dont end up resursing
 	DISABLE_SUBMISSION_UPDATE_NOTIFICATION;
-	submission.anonymous = slider.on;
+	submission.anonymous = !slider.on;
 	ENABLE_SUBMISSION_UPDATE_NOTIFICATION;
 	[mainTableView endUpdates];
 }
 
-- (IBAction) addAdditionalPhoto:(id)sender {
+- (IBAction)addAdditionalPhoto:(id)sender {
+	// Show the action sheet asking about source of the image
     UIActionSheet *addSheet = [[UIActionSheet alloc] initWithTitle:@"Add a photo"
-                                                          delegate:self
+                                                          callback:^(NSInteger buttonIndex) {
+															  //0 is the topmost (Take a photo) button
+															  if(buttonIndex==kTakePhotoButton){
+																  UIImagePickerController *photoPicker = [[UIImagePickerController alloc] init];
+																  // TODO: check if the camera is available
+																  photoPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+																  photoPicker.delegate = self;
+																  [self presentModalViewController:photoPicker animated:YES];
+															  }
+															  //1 is the topmost (Use an existing photo) button
+															  else if(buttonIndex==kUseExistingPhotoButton){
+																  UIImagePickerController *cameraRollPicker = [[UIImagePickerController_Always alloc] init];
+																  cameraRollPicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+																  cameraRollPicker.delegate = self;
+																  [self presentModalViewController: cameraRollPicker animated:YES];
+															  }
+														  }
                                                  cancelButtonTitle:@"Cancel"
                                             destructiveButtonTitle:nil
-                                                 otherButtonTitles:@"Take a photo", @"Add an exisiting photo",nil ];
+                                                 otherButtonTitles:@"Take a photo", @"Add an exisiting photo", nil];
     [addSheet showInView:self.view];
-    
 }
 
--( IBAction) photoTapped:(UITapGestureRecognizer *)sender{
-	WASubmissionPhotoGalleryViewController *gallery = [[WASubmissionPhotoGalleryViewController alloc] initWithSubmission:submission];
+- (IBAction)photoTapped:(UITapGestureRecognizer *)sender {
+	WASubmissionPhotoGalleryViewController *gallery = [[WASubmissionPhotoGalleryViewController alloc] initWithSubmission:submission andPhotoIndex:sender.view.tag];
 	[self.navigationController pushViewController:gallery animated:YES];
 }
 
@@ -187,13 +211,87 @@ static const int kUseExistingPhotoButton = 1;
     }
 }
 
+- (IBAction)editMap:(id)sender {
+	// View for greying out the background
+	CGRect shadeViewFrame = self.view.window.bounds;
+	shadeView.frame = shadeViewFrame;
+	shadeView.alpha = 0;
+	[self.view.window addSubview:shadeView];
+	
+	// Move the mapView on top of the rest of the views
+	CGRect mapFrameInView = [self.view.window convertRect:mapView.frame fromView:mapView.superview];
+	[mapView removeFromSuperview];
+	mapView.frame = mapFrameInView;
+	[self.view.window addSubview:mapView];
+	
+	// Prepare the frame for the animation
+	CGRect largeMapFrame = self.view.window.bounds;
+	largeMapFrame.origin = CGPointZero;
+	largeMapFrame.origin.y += CGRectGetMaxY(shadeViewTop.frame); // Space for text
+	largeMapFrame.size.height -= CGRectGetMaxY(shadeViewTop.frame);
+	
+	// Disable scrolling
+	mainTableView.scrollEnabled = NO;
+	
+	oldStatusBarStyle = [UIApplication sharedApplication].statusBarStyle;
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:YES];
+	
+	// Do the animation!
+	[UIView animateWithDuration:kAnimationDuration
+					 animations:^{
+						 mapView.frame = largeMapFrame;
+						 shadeView.alpha = 1;
+						 mainTableView.contentOffset = CGPointZero;
+					 }];
+}
+
+/**
+ Comming back from a map editing session
+ */
+- (IBAction)shadeViewTapped:(id)sender {
+	// Prepare the frame for the animation
+	CGRect smallMapFrame = [self.view.window convertRect:mapContainerView.bounds fromView:mapContainerView];
+	CGRect sidePanelToFrame = mapSidePanel.frame;
+	CGRect sidePanelFromFrame = sidePanelToFrame;
+	sidePanelFromFrame.origin.x += sidePanelFromFrame.size.width;
+	mapSidePanel.frame = sidePanelFromFrame;
+	
+	[[UIApplication sharedApplication] setStatusBarStyle:oldStatusBarStyle animated:YES];
+	
+	// Animate back
+	[UIView animateWithDuration:kAnimationDuration
+					 animations:^{
+						 mapView.frame = smallMapFrame;
+						 shadeView.alpha = 0;
+					 }
+					 completion:^(BOOL finished) {
+						 // Restore the old view heirachy
+						 [shadeView removeFromSuperview];
+						 [mapView removeFromSuperview];
+						 mapView.frame = mapContainerView.bounds;
+						 [mapContainerView insertSubview:mapView belowSubview:mapTapInterceptor];
+						 
+						 // Reanable scrolling
+						 mainTableView.scrollEnabled = YES;
+						 
+						 // Center map
+						 [self updateMapView:YES];
+						 
+						 // Animate in sidepanel
+						 [UIView animateWithDuration:kAnimationDuration
+										  animations:^{
+											  mapSidePanel.frame = sidePanelToFrame;
+										  }];
+					 }];
+}
 
 - (void)submissionUpdated {
 	[mainTableView reloadData];
+	
 	[self loadPhotoViews];
     [self updatePhotoText];
     [self updateTimestampText];
-    [self updateMapView];
+    [self updateMapView:YES];
 }
 
 #pragma mark - Utilities
@@ -209,13 +307,13 @@ static const int kUseExistingPhotoButton = 1;
     [photoLabel setText:newText];
 }
 
-- (void) updateTimestampText {
+- (void)updateTimestampText {
     NSDateFormatter *formatter;
-    NSString        *dateString;
-    dateString = @"Observed at ";
+    NSString *dateString;
+    dateString = @"";
     formatter = [[NSDateFormatter alloc] init];
     //[formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
-    [formatter setDateFormat:@"h:mma EEEE MMMM dd"];
+    [formatter setDateFormat:@"h:mma EEEE MMM d"];
     NSDate *newDate = [NSDate dateWithTimeIntervalSince1970:submission.timestamp];
     dateString = [dateString stringByAppendingString:[formatter stringFromDate:newDate]];
     
@@ -231,27 +329,28 @@ static const int kUseExistingPhotoButton = 1;
     dateString = [dateString stringByAppendingString:@" at the following location: "];
     
     [timestampLabel setText:dateString];
+	[WAStyleHelper topAlignLabel:timestampLabel];
 }
 
-- (void) updateMapView{
-//    WAGeolocation *loc = submission.location;
+- (void)updateMapView:(BOOL)animated {
+    WAGeolocation *loc = submission.location;
+	
     MKCoordinateRegion region;
-    MKCoordinateSpan span;
-    span.latitudeDelta = .01;
-    span.longitudeDelta = .01;
-    CLLocationCoordinate2D location;
-    //location.latitude = loc.latitude;
-    location.latitude = -41.3;
-    //location.longitude = loc.longitude;
-    location.longitude = 174.9;
-    region.span = span;
-    region.center = location;
-    [mapView setRegion:region animated:YES];
+	region.center = submission.coordinate;
+	
+	if(loc) {
+		region.span.latitudeDelta = .01;
+		region.span.longitudeDelta = .01;
+	}
+	else {
+		region.span.latitudeDelta = 4;
+		region.span.longitudeDelta = 4;
+	}
+	
+    [mapView setRegion:region animated:animated];
+		
     NSLog(@"lat is: %f", mapView.region.center.latitude);
     NSLog(@"long is: %f", mapView.region.center.longitude);
-    mapView.centerCoordinate = location;
-    
-    
 }
 
 - (void)loadPhotoViews {
@@ -259,33 +358,42 @@ static const int kUseExistingPhotoButton = 1;
 		[view removeFromSuperview]; // TODO: be carefull of scrollbars!
 	}
 	
-    CGRect frame = CGRectMake(8, 4, 98, 98);
+    CGRect frame = CGRectMake(10, 4, 98, 98);
 	static const CGFloat kPhotoSpacing = 102;
 	
-    for(int n = 0;n<submission.numberOfSubmissionPhotos;n++){
+    for(int n = 0;n<submission.numberOfSubmissionPhotos;n++) {
         WASubmissionPhoto *photo = [submission submissionPhotoAtIndex:n];
+		
+		// Create the background view
         UIView *notmyview = [[UIView alloc] initWithFrame:frame];
         [photoScrollView addSubview:notmyview];
+        notmyview.backgroundColor = [UIColor whiteColor];
+		notmyview.layer.borderColor = mainTableView.separatorColor.CGColor;
+		notmyview.layer.borderWidth = 1;
 		
-        notmyview.backgroundColor=[UIColor whiteColor];
+		// Create the image view
         UIImageView *photoView = [[UIImageView alloc] initWithFrame:CGRectInset(notmyview.bounds, 4, 4)];
         [notmyview addSubview:photoView];
         photoView.image = photo.image;
         photoView.contentMode=UIViewContentModeScaleAspectFill;
         photoView.clipsToBounds = YES;
 		
+		// Add a gesture recognizer
 		UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoTapped:)];
 		[notmyview addGestureRecognizer:tap];
-		
+		notmyview.tag = n;
 		frame.origin.x += kPhotoSpacing;
-        
     }
+	
+	// Add the add photo view using the latest rect from the for loop
 	addPhotoView.frame = frame;
+	addPhotoView.layer.borderColor = mainTableView.separatorColor.CGColor;
+	addPhotoView.layer.borderWidth = 1;
 	[photoScrollView addSubview:addPhotoView];
 	
+	// Update the content size of the scrollview
 	frame.origin.x += kPhotoSpacing;
-	
-    photoScrollView.contentSize=CGSizeMake(frame.origin.x +4, frame.size.height);
+    photoScrollView.contentSize = CGSizeMake(frame.origin.x +4, frame.size.height);
 }
 
 
@@ -307,7 +415,6 @@ static const int kUseExistingPhotoButton = 1;
 			return 1;
 		default:
 			return 0;
-			
 	}
 }
 
@@ -315,10 +422,10 @@ static const int kUseExistingPhotoButton = 1;
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if(!cell) {
-		if(indexPath.section==0&&indexPath.row==0){
+		if(indexPath.section == 0 && indexPath.row == 0) {
 			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
 		}
-		else{
+		else {
 			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 		}
 	}
@@ -337,9 +444,9 @@ static const int kUseExistingPhotoButton = 1;
 		case 1:
 			switch (indexPath.row) {
 				case 0:
-					cell.textLabel.text = @"Anonymous";
+					cell.textLabel.text = @"Include my email";
 					cell.accessoryView = slider;
-					slider.on = submission.anonymous;
+					slider.on = !submission.anonymous;
 					break;
 				case 1:
 					cell = emailCell;
@@ -362,12 +469,64 @@ static const int kUseExistingPhotoButton = 1;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0 && indexPath.row ==0){
 		WASubmissionDescriptionViewController *controller = [[WASubmissionDescriptionViewController alloc] initWithSubmission:submission];
-		[self.navigationController pushViewController: controller animated:YES];
+		[self.navigationController pushViewController:controller animated:YES];
 	}
-	else if (indexPath.section == 2 && indexPath.row ==0){
-		WASubmitViewController *controller = [[WASubmitViewController alloc] initWithSubmission:submission];
-		[self.navigationController pushViewController: controller animated:YES];
-		[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	else if(indexPath.section == 2 && indexPath.row == 0) {
+		size_t actualSize = 0;
+		for(int n=0;n<submission.numberOfSubmissionPhotos;n++) {
+			actualSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeActual];
+		}
+		
+		if(actualSize > kSubmissionSizeScaleThreshhold || YES) {
+			// TODO: exclude upscalling
+			
+			size_t smallSize = 0;
+			size_t mediumSize = 0;
+			size_t largeSize = 0;
+			for(int n=0;n<submission.numberOfSubmissionPhotos;n++) {
+				smallSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeSmall];
+				mediumSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeMedium];
+				largeSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeLarge];
+			}
+			
+			// TODO: make this much nicer
+			UIActionSheet *sizeActionSheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"This submission is %@B. You can reduce the submission size by scaling images to one of the sizes below.", @(actualSize).formatSI]
+																		 callback:^(NSInteger buttonIndex) {
+																			 switch(buttonIndex) {
+																				 case 0:
+																					 submission.photoScaleSize = kWASubmissionPhotoSizeSmall;
+																					 break;
+																				 case 1:
+																					 submission.photoScaleSize = kWASubmissionPhotoSizeMedium;
+																					 break;
+																				 case 2:
+																					 submission.photoScaleSize = kWASubmissionPhotoSizeLarge;
+																					 break;
+																				 case 3:
+																					 submission.photoScaleSize = kWASubmissionPhotoSizeActual;
+																					 break;
+																				 default:
+																					 return;
+																			 }
+																			 
+																			 // Go submit the submission object to the backend
+																			 WASubmitViewController *controller = [[WASubmitViewController alloc] initWithSubmission:submission];
+																			 [self.navigationController pushViewController: controller animated:YES];
+																			 [tableView deselectRowAtIndexPath:indexPath animated:YES];
+																		 }
+																cancelButtonTitle:@"Cancel"
+														   destructiveButtonTitle:nil
+																otherButtonTitles:[NSString stringWithFormat:@"Small (%@B)", @(smallSize).formatSI],
+											  [NSString stringWithFormat:@"Medium (%@B)", @(mediumSize).formatSI],
+											  [NSString stringWithFormat:@"Large (%@B)", @(largeSize).formatSI],
+											  [NSString stringWithFormat:@"Actual size (%@B)", @(actualSize).formatSI], nil];
+			[sizeActionSheet showInView:self.view];
+		}
+		else {
+			WASubmitViewController *controller = [[WASubmitViewController alloc] initWithSubmission:submission];
+			[self.navigationController pushViewController: controller animated:YES];
+			[tableView deselectRowAtIndexPath:indexPath animated:YES];
+		}
 	}
 	
 }
@@ -384,26 +543,6 @@ static const int kUseExistingPhotoButton = 1;
 	submission.email = [textField.text stringByReplacingCharactersInRange:range withString:string];
 	ENABLE_SUBMISSION_UPDATE_NOTIFICATION;
 	return YES;
-}
-
-#pragma mark - UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
-    //0 is the topmost (Take a photo) button
-    if(buttonIndex==kTakePhotoButton){
-		UIImagePickerController *photoPicker = [[UIImagePickerController alloc] init];
-        // TODO: check if the camera is available
-        photoPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        photoPicker.delegate = self;
-        [self presentModalViewController:photoPicker animated:YES];
-    }
-    //1 is the topmost (Use an existing photo) button
-    else if(buttonIndex==kUseExistingPhotoButton){
-        UIImagePickerController *cameraRollPicker = [[UIImagePickerController alloc] init];
-        cameraRollPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        cameraRollPicker.delegate = self;
-        [self presentModalViewController: cameraRollPicker animated:YES];
-    }
 }
 
 #pragma mark - UIImagePickerControllerDelegate
@@ -424,6 +563,25 @@ static const int kUseExistingPhotoButton = 1;
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
 	[picker dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - MKMapViewDelegate
+
+- (MKAnnotationView *)mapView:(MKMapView *)_mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+	static NSString *const AnnotationViewIdentifier = @"WASubmissionAnnotationViewIdentifier";
+	MKPinAnnotationView *pinView = (MKPinAnnotationView *)[_mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationViewIdentifier];
+	
+	if(!pinView) {
+		pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewIdentifier];
+	}
+	else {
+		pinView.annotation = annotation;
+	}
+	pinView.draggable = YES;
+	pinView.canShowCallout = NO;
+	pinView.selected = YES;
+	
+	return pinView;
 }
 
 @end

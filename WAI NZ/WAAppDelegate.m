@@ -21,6 +21,9 @@
 	[RKObjectManager sharedManager].serializationMIMEType = RKMIMETypeJSON;
 	[[RKObjectManager sharedManager].router routeClass:[WASubmission class] toResourcePath:kResourceSubmitPath forMethod:RKRequestMethodPOST];
 	[[RKObjectManager sharedManager].mappingProvider setSerializationMapping:[[WASubmission objectMapping] inverseMapping] forClass:[WASubmission class]];
+#if DEBUG
+	RKLogConfigureByName("RestKit/Network", RKLogLevelDebug);
+#endif
 	
 	
 	// Normal setup
@@ -28,7 +31,7 @@
     WAHomeViewController *homeController = [[WAHomeViewController alloc] init];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:homeController];
 	self.window.rootViewController = navController;
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
     return YES;
 }

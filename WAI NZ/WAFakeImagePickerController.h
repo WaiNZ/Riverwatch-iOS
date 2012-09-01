@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Water Action Initiative New Zealand. All rights reserved.
 //
 
-#if TARGET_IPHONE_SIMULATOR
+@compatibility_alias UIImagePickerController_Always UIImagePickerController;
 
-#define UIImagePickerController WAFakeImagePickerController
+#if TARGET_IPHONE_SIMULATOR
 
 #import <UIKit/UIKit.h>
 
@@ -30,5 +30,9 @@
 /** The delegate, notified when a photo is picked or the picker cancels */
 @property (nonatomic, unsafe_unretained) id<UIImagePickerControllerDelegate> delegate;
 @end
+
+#if !NO_WAFakeImagePickerController
+	#define UIImagePickerController WAFakeImagePickerController
+#endif
 
 #endif

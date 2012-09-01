@@ -8,6 +8,8 @@
 
 #if TARGET_IPHONE_SIMULATOR
 
+#define NO_WAFakeImagePickerController 1
+
 #import "WAFakeImagePickerController.h"
 
 #import "WASimulatorData.h"

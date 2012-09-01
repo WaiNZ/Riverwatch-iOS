@@ -17,16 +17,23 @@
  Instances of WASubmissionPhotoGalleryViewController must be created
  using the -initWithSubmission: constructor.
  */
-@interface WASubmissionPhotoGalleryViewController : UIViewController{
+@interface WASubmissionPhotoGalleryViewController : UIViewController <UIScrollViewDelegate> {
 	
-	IBOutlet UIImageView *view2;
+	IBOutlet UIScrollView *view2;
+	IBOutlet UIScrollView *view3;
+	IBOutlet UIScrollView *view1;
 	
-	IBOutlet UIImageView *view3;
-	IBOutlet UIImageView *view1;
+	__unsafe_unretained IBOutlet UIImageView *imageView1;
+	__unsafe_unretained IBOutlet UIImageView *imageView2;
+	__unsafe_unretained IBOutlet UIImageView *imageView3;
 	
-	__unsafe_unretained UIImageView *leftView;
-	__unsafe_unretained UIImageView *centerView;
-	__unsafe_unretained UIImageView *rightView;
+	__unsafe_unretained UIScrollView *leftView;
+	__unsafe_unretained UIScrollView *centerView;
+	__unsafe_unretained UIScrollView *rightView;
+	
+	__unsafe_unretained UIImageView *leftImageView;
+	__unsafe_unretained UIImageView *centerImageView;
+	__unsafe_unretained UIImageView *rightImageView;
 	
 	WASubmission *submission;
 	int currentPhoto;
@@ -34,14 +41,16 @@
 	BOOL canSwipeLeft;
 	BOOL canSwipeRight;
 	
+	UIBarStyle oldBarStyle;
 }
 
 /**
  Initilize this WASubmissionPhotoGalleryViewController with the specified
- submission.
+ submission and selected photo.
  
  @param _submission the submission to view and edit the photos of
+ @param index the id of the photo to display
  */
-- (id)initWithSubmission:(WASubmission *)_submission;
+- (id)initWithSubmission:(WASubmission *)_submission andPhotoIndex:(int)index;
 
 @end

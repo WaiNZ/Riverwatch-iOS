@@ -54,20 +54,21 @@
 
 - (IBAction)choosePhoto:(id)sender {
 	// TODO: check for < 6.0 and notify user that location services are required if not enabled
-    UIImagePickerController *cameraRollPicker = [[UIImagePickerController alloc] init];
+    UIImagePickerController *cameraRollPicker = [[UIImagePickerController_Always alloc] init];
     
-    cameraRollPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    cameraRollPicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     cameraRollPicker.delegate = self;
     
     [self presentModalViewController: cameraRollPicker animated:YES];
-    
 }
 
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+	// Create a submission photo - this is async
 	[WASubmissionPhoto photoWithMediaPickingInfo:info
 									 resultBlock:^(WASubmissionPhoto *photo) {
+										 // Configure the submission with the photo
 										 WASubmission *submission = [[WASubmission alloc] init];
 										 submission.descriptionText = @"I saw Old McDonald's cow crapping in the river ";
 										 submission.email = @"syzygy@dt.net.nz";
@@ -75,6 +76,7 @@
 										 submission.location = photo.location;
 										 [submission addSubmissionPhoto:photo];
 										 
+										 // Show the overview screen
 										 WASubmissionOverviewViewController *controller = [[WASubmissionOverviewViewController alloc] initWithSubmission:submission];
 										 [self.navigationController pushViewController:controller animated:NO];
 										 

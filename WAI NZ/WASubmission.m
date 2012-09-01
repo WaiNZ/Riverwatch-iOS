@@ -50,6 +50,25 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
     return self;
 }
 
+#pragma mark - MKAnnotation
+
+- (CLLocationCoordinate2D)coordinate {
+	if(location) {
+		return location.coordinate;
+	}
+	else {
+		return kNewZealandRegion.center;
+	}
+}
+
+- (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
+	if(!location) {
+		location = [[WAGeolocation alloc] init];
+	}
+	
+	location.coordinate = newCoordinate;
+}
+
 #pragma mark - Getters/Setters
 
 - (void)addSubmissionPhoto:(WASubmissionPhoto *)photo {
@@ -168,6 +187,12 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 - (void)setTimestamp:(time_t)_timestamp {
 	timestamp = _timestamp;
 	POST_UPDATE_NOTIFICATION;
+}
+
+- (void)setPhotoScaleSize:(WASubmissionPhotoSize)photoScaleSize {
+	for(WASubmissionPhoto *photo in photos) {
+		photo.photoScaleSize = photoScaleSize;
+	}
 }
 
 #pragma mark - Private Getters/Setters

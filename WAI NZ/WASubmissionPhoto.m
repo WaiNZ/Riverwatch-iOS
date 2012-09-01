@@ -12,6 +12,7 @@
 #import "NSDate+TimeConversions.h"
 #import <RestKit/RestKit.h>
 #import <RestKit/NSData+Base64.h>
+#import "UIImage+Resize.h"
 
 @implementation WASubmissionPhoto
 
@@ -30,6 +31,7 @@
         image = photo;
         timestamp = @(time);
         location = loc;
+		size = image.size;
     }
     return self;
 }
@@ -105,7 +107,7 @@
 						 
 						 // Get the optional location
 						 id tmpLocation = [asset valueForProperty:ALAssetPropertyLocation];
-						 if(tmpLocation != ALErrorInvalidProperty) {
+						 if(tmpLocation && tmpLocation != ALErrorInvalidProperty) {
 							 location = [WAGeolocation geolocationWithCLLocation:tmpLocation];
 						 }
 						 
@@ -132,8 +134,38 @@
 
 #pragma mark - Getters/Setters
 
+- (CGSize)estimatedImageSize:(WASubmissionPhotoSize)photoScale {
+	CGSize scaledSize;
+	switch(photoScale) {
+		case kWASubmissionPhotoSizeActual:
+			scaledSize = image.size;
+			break;
+		case kWASubmissionPhotoSizeSmall:
+			scaledSize = CGSizeMake(1024, 1024);
+			break;
+		case kWASubmissionPhotoSizeMedium:
+			scaledSize = CGSizeMake(1536, 1536);
+			break;
+		case kWASubmissionPhotoSizeLarge:
+			scaledSize = CGSizeMake(2048, 2048);
+			break;
+	}
+	return scaledSize;
+}
+
+- (size_t)estimatedFileSize:(WASubmissionPhotoSize)photoScale {
+	return 0.25 * [self estimatedImageSize:photoScale].width * [self estimatedImageSize:photoScale].height;
+}
+
 - (NSString *)base64String {
-	return [UIImageJPEGRepresentation(image, kJPEGCompressionQuality) base64EncodedString];
+	UIImage *scaledImage = image;
+	if(photoScaleSize != kWASubmissionPhotoSizeActual) {
+		scaledImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit
+												  bounds:[self estimatedImageSize:photoScaleSize]
+									interpolationQuality:kCGInterpolationDefault];
+	}
+	
+	return [UIImageJPEGRepresentation(scaledImage, kJPEGCompressionQuality) base64EncodedString];
 }
 
 #pragma mark - Properties
@@ -141,4 +173,6 @@
 @synthesize location;
 @synthesize timestamp;
 @synthesize image;
+@synthesize photoScaleSize;
+@synthesize size;
 @end
