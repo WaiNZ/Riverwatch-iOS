@@ -76,6 +76,7 @@ static const int kUseExistingPhotoButton = 1;
 	mapContainerView = nil;
 	shadeView = nil;
 	mapTapInterceptor = nil;
+	shadeViewTop = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -170,23 +171,22 @@ static const int kUseExistingPhotoButton = 1;
 
 - (IBAction)editMap:(id)sender {
 	// View for greying out the background
-	CGRect shadeViewFrame = CGRectZero;
-	shadeViewFrame.size = mainTableView.contentSize;
+	CGRect shadeViewFrame = self.view.window.bounds;
 	shadeView.frame = shadeViewFrame;
 	shadeView.alpha = 0;
-	[self.view addSubview:shadeView];
+	[self.view.window addSubview:shadeView];
 	
 	// Move the mapView on top of the rest of the views
-	CGRect mapFrameInView = [self.view convertRect:mapView.frame fromView:mapView.superview];
+	CGRect mapFrameInView = [self.view.window convertRect:mapView.frame fromView:mapView.superview];
 	[mapView removeFromSuperview];
 	mapView.frame = mapFrameInView;
-	[self.view addSubview:mapView];
+	[self.view.window addSubview:mapView];
 	
 	// Prepare the frame for the animation
-	CGRect largeMapFrame = self.view.bounds;
+	CGRect largeMapFrame = self.view.window.bounds;
 	largeMapFrame.origin = CGPointZero;
-	largeMapFrame.origin.y += 50; // Space for text
-	largeMapFrame.size.height -= 50;
+	largeMapFrame.origin.y += CGRectGetMaxY(shadeViewTop.frame); // Space for text
+	largeMapFrame.size.height -= CGRectGetMaxY(shadeViewTop.frame);
 	
 	// Disable scrolling
 	mainTableView.scrollEnabled = NO;
@@ -205,7 +205,7 @@ static const int kUseExistingPhotoButton = 1;
  */
 - (IBAction)shadeViewTapped:(id)sender {
 	// Prepare the frame for the animation
-	CGRect smallMapFrame = [self.view convertRect:mapContainerView.bounds fromView:mapContainerView];
+	CGRect smallMapFrame = [self.view.window convertRect:mapContainerView.bounds fromView:mapContainerView];
 	
 	// Animate back
 	[UIView animateWithDuration:kAnimationDuration
