@@ -84,7 +84,6 @@ static const int kUseExistingPhotoButton = 1;
 	mapTapInterceptor = nil;
 	shadeViewTop = nil;
 	mapSidePanel = nil;
-    removePhotoLabel = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
