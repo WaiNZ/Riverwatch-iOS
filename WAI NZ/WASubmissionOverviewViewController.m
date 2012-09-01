@@ -11,6 +11,10 @@
 #import "WASubmitViewController.h"
 #import "WASubmission.h"
 #import "WASubmissionPhotoGalleryViewController.h"
+#import "NSNumber+FormatSI.h"
+#import "UIActionSheet+Blocks.h"
+#import <QuartzCore/QuartzCore.h>
+#import "WAStyleHelper.h"
 
 
 #import <UIKit/UITableView.h>
@@ -75,6 +79,11 @@ static const int kUseExistingPhotoButton = 1;
     pollutionButton = nil;
     photoLabel = nil;
     timestampLabel = nil;
+	mapContainerView = nil;
+	shadeView = nil;
+	mapTapInterceptor = nil;
+	shadeViewTop = nil;
+	mapSidePanel = nil;
     removePhotoLabel = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -132,25 +141,6 @@ static const int kUseExistingPhotoButton = 1;
 	WASubmissionPhotoGalleryViewController *gallery = [[WASubmissionPhotoGalleryViewController alloc] initWithSubmission:submission andPhotoIndex:sender.view.tag];
 	[self.navigationController pushViewController:gallery animated:YES];
 }
-
-/*
-- (IBAction) removePhotoLabelTapped:(UITapGestureRecognizer *) sender{
-    int count = submission.numberOfSubmissionPhotos;
-    NSLog(@"The count of photos is: %d", count);
-}
-             
-- (void)removePhotos {
-		
-    for(int n = 1;n<=submission.numberOfSubmissionPhotos;n++){
-        //WASubmissionPhoto *photo = [submission submissionPhotoAtIndex:n];
-        NSLog(@"photo: %d",n);
-        [submission removeSubmissionPhoto:n];
-		
-		UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removePhotoLabelTapped:)];
-		[removePhotoLabel addGestureRecognizer:tap];
-    }
-}
-*/
 
 
 //TODO: BUTTONS SHOULD STAY COLOURED ON PRESS

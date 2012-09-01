@@ -44,7 +44,12 @@
     __unsafe_unretained IBOutlet UIButton *pollutionButton;    
     __unsafe_unretained IBOutlet UILabel *photoLabel;
     __unsafe_unretained IBOutlet UILabel *timestampLabel;
-    __unsafe_unretained IBOutlet UILabel *removePhotoLabel;
+	__unsafe_unretained IBOutlet UIView *mapContainerView;
+	__unsafe_unretained IBOutlet UIView *mapTapInterceptor;
+	IBOutlet UIView *shadeView;
+	__unsafe_unretained IBOutlet UIView *shadeViewTop;
+	UIStatusBarStyle oldStatusBarStyle;
+	__unsafe_unretained IBOutlet UIView *mapSidePanel;
 }
 
 /**
