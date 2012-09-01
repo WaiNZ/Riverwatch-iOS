@@ -9,6 +9,8 @@
 #import "WASubmitViewController.h"
 
 #import "WASubmission.h"
+#import "WASubmissionResponse.h"
+#import "RKObjectManager+WAI.h"
 
 static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 
@@ -77,10 +79,10 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 	submissionProgress = 0;
 	
 	// Post to the server!
-	[[RKObjectManager sharedManager] postObject:submission
-									 usingBlock:^(RKObjectLoader *loader) {
-										 loader.delegate = self;
-									 }];
+	[[RKObjectManager sharedManager] postObjectWithResponse:submission
+												 usingBlock:^(RKObjectLoader *loader) {
+													 loader.delegate = self;
+												 }];
 }
 
 #pragma mark - Actions
@@ -111,6 +113,10 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 	self.view = unsuccessfulView;
 	self.navigationItem.title = @"Oh dear...";
 	self.navigationItem.hidesBackButton = NO;
+}
+
+- (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObject:(id)object {
+	NSLog(@"%@", object);
 }
 
 @end

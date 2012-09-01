@@ -12,6 +12,7 @@
 
 #import <RestKit/RestKit.h>
 #import "WASubmission.h"
+#import "WASubmissionResponse.h"
 
 @implementation WAAppDelegate
 
@@ -21,6 +22,7 @@
 	[RKObjectManager sharedManager].serializationMIMEType = RKMIMETypeJSON;
 	[[RKObjectManager sharedManager].router routeClass:[WASubmission class] toResourcePath:kResourceSubmitPath forMethod:RKRequestMethodPOST];
 	[[RKObjectManager sharedManager].mappingProvider setSerializationMapping:[[WASubmission objectMapping] inverseMapping] forClass:[WASubmission class]];
+	[[RKObjectManager sharedManager].mappingProvider setObjectMapping:[WASubmissionResponse objectMapping] forResourcePathPattern:kResourceSubmitPath];
 #if DEBUG
 	RKLogConfigureByName("RestKit/Network", RKLogLevelDebug);
 #endif

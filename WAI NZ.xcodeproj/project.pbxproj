@@ -48,6 +48,8 @@
 		A12A54DF15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A54DD15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m */; };
 		A12A54E015D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */; };
 		A17B969315F1D4A1007E7E01 /* WAStyleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A17B969215F1D4A1007E7E01 /* WAStyleHelper.m */; };
+		A17B96A715F20CA8007E7E01 /* WASubmissionResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A17B96A615F20CA8007E7E01 /* WASubmissionResponse.m */; };
+		A17B96AB15F21B07007E7E01 /* RKObjectManager+WAI.m in Sources */ = {isa = PBXBuildFile; fileRef = A17B96AA15F21B07007E7E01 /* RKObjectManager+WAI.m */; };
 		A17C324E15EE1A3B00A458C0 /* WAGeolocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A17C324D15EE1A3B00A458C0 /* WAGeolocation.m */; };
 		A189878315F084340037A4DD /* NSNumber+FormatSI.m in Sources */ = {isa = PBXBuildFile; fileRef = A189878215F084340037A4DD /* NSNumber+FormatSI.m */; };
 		A1B7B59315F06083002CEE04 /* UINavigationBar+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B7B59215F06083002CEE04 /* UINavigationBar+Animation.m */; };
@@ -172,6 +174,10 @@
 		A16E9D9D15DBB2EC00E5353C /* MJGAvalibility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJGAvalibility.h; sourceTree = "<group>"; };
 		A17B969115F1D4A1007E7E01 /* WAStyleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAStyleHelper.h; sourceTree = "<group>"; };
 		A17B969215F1D4A1007E7E01 /* WAStyleHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAStyleHelper.m; sourceTree = "<group>"; };
+		A17B96A515F20CA8007E7E01 /* WASubmissionResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionResponse.h; sourceTree = "<group>"; };
+		A17B96A615F20CA8007E7E01 /* WASubmissionResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionResponse.m; sourceTree = "<group>"; };
+		A17B96A915F21B07007E7E01 /* RKObjectManager+WAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RKObjectManager+WAI.h"; sourceTree = "<group>"; };
+		A17B96AA15F21B07007E7E01 /* RKObjectManager+WAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RKObjectManager+WAI.m"; sourceTree = "<group>"; };
 		A17C324C15EE1A3B00A458C0 /* WAGeolocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAGeolocation.h; sourceTree = "<group>"; };
 		A17C324D15EE1A3B00A458C0 /* WAGeolocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAGeolocation.m; sourceTree = "<group>"; };
 		A189878115F084340037A4DD /* NSNumber+FormatSI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+FormatSI.h"; sourceTree = "<group>"; };
@@ -410,6 +416,8 @@
 				E2A3B40515DB0A79008AABEC /* WASubmission.m */,
 				E2A3B40815DB0E93008AABEC /* WASubmissionPhoto.h */,
 				E2A3B40915DB0E93008AABEC /* WASubmissionPhoto.m */,
+				A17B96A515F20CA8007E7E01 /* WASubmissionResponse.h */,
+				A17B96A615F20CA8007E7E01 /* WASubmissionResponse.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -466,6 +474,8 @@
 				A10A5B4615F08843001A8184 /* UIActionSheet+Blocks.m */,
 				A1035C6C15F18550001EE93E /* UIImageView+Layout.h */,
 				A1035C6D15F18550001EE93E /* UIImageView+Layout.m */,
+				A17B96A915F21B07007E7E01 /* RKObjectManager+WAI.h */,
+				A17B96AA15F21B07007E7E01 /* RKObjectManager+WAI.m */,
 				A10A5B5615F0DB8E001A8184 /* Vendor */,
 			);
 			name = Utilities;
@@ -669,6 +679,8 @@
 				A10A5B5F15F0E8B8001A8184 /* UIImage+RoundedCorner.m in Sources */,
 				A1035C6E15F18550001EE93E /* UIImageView+Layout.m in Sources */,
 				A17B969315F1D4A1007E7E01 /* WAStyleHelper.m in Sources */,
+				A17B96A715F20CA8007E7E01 /* WASubmissionResponse.m in Sources */,
+				A17B96AB15F21B07007E7E01 /* RKObjectManager+WAI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
