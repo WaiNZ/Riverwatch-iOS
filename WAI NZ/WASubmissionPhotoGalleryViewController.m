@@ -9,6 +9,7 @@
 #import "WASubmissionPhotoGalleryViewController.h"
 #import "WASubmission.h"
 #import "UINavigationBar+Animation.h"
+#import "UIImageView+Layout.h"
 
 static const CGFloat photoSpacer = 20;
 #define PHOTO_PAN_MAX (self.view.bounds.size.width + photoSpacer)
@@ -44,10 +45,6 @@ static const CGFloat photoSpacer = 20;
 	leftImageView = imageView1;
 	centerImageView = imageView2;
 	rightImageView = imageView3;
-	
-	centerView.frame = self.subviewFrame;
-	[self.view addSubview:centerView];
-	centerImageView.image = [submission submissionPhotoAtIndex:currentPhoto].image;
 }
 
 - (void)viewDidUnload {
@@ -59,12 +56,20 @@ static const CGFloat photoSpacer = 20;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	
 	// Change the status/navigation bar style
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:animated];
     oldBarStyle = self.navigationController.navigationBar.barStyle;
 	[self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent animated:animated];
 	
-	[super viewWillAppear:animated];
+	centerView.frame = self.subviewFrame;
+	[self.view addSubview:centerView];
+	centerImageView.image = [submission submissionPhotoAtIndex:currentPhoto].image;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[centerImageView fitToImage];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -123,7 +128,7 @@ static const CGFloat photoSpacer = 20;
 								// Save view positions and set them to what is needed for animations
 								CGPoint oldCenter = centerView.center;
 								[self _setOffset:0];
-								(*imageViewToShift).image = [submission submissionPhotoAtIndex:currentPhoto].image;
+								[(*imageViewToShift) setAndFitToImage:[submission submissionPhotoAtIndex:currentPhoto].image];
 								[self.view addSubview:(*viewToShift)];
 								
 								[UIView animateWithDuration:kAnimationDuration
@@ -170,12 +175,12 @@ static const CGFloat photoSpacer = 20;
 			
 			if(canSwipeLeft){
 				[self.view addSubview:leftView];
-				leftImageView.image = [submission submissionPhotoAtIndex:currentPhoto-1].image;
+				[leftImageView setAndFitToImage:[submission submissionPhotoAtIndex:currentPhoto-1].image];
 			}
 		
 			if(canSwipeRight){
 				[self.view addSubview:rightView];
-				rightImageView.image = [submission submissionPhotoAtIndex:currentPhoto+1].image;
+				[rightImageView setAndFitToImage:[submission submissionPhotoAtIndex:currentPhoto+1].image];
 			}
 			
 			break;
@@ -271,7 +276,7 @@ static const CGFloat photoSpacer = 20;
 
 #pragma mark - UIScrollViewDelegate
 
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {	
 	if(scrollView == centerView) {
 		return centerImageView;
 	}
@@ -279,4 +284,27 @@ static const CGFloat photoSpacer = 20;
 	return nil;
 }
 
+- (void)centerScrollViewContents {
+	// From http://www.raywenderlich.com/10518/how-to-use-uiscrollview-to-scroll-and-zoom-content
+    CGSize boundsSize = centerView.bounds.size;
+    CGRect contentsFrame = centerImageView.frame;
+	
+    if(contentsFrame.size.width < boundsSize.width) {
+        contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0f;
+    } else {
+        contentsFrame.origin.x = 0.0f;
+    }
+	
+    if(contentsFrame.size.height < boundsSize.height) {
+        contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0f;
+    } else {
+        contentsFrame.origin.y = 0.0f;
+    }
+	
+    centerImageView.frame = contentsFrame;
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+	[self centerScrollViewContents];
+}
 @end

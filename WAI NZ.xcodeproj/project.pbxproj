@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		A1035C6E15F18550001EE93E /* UIImageView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = A1035C6D15F18550001EE93E /* UIImageView+Layout.m */; };
 		A10A5B4715F08843001A8184 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A10A5B4615F08843001A8184 /* UIActionSheet+Blocks.m */; };
 		A10A5B5D15F0E8B8001A8184 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = A10A5B5815F0E8B8001A8184 /* UIImage+Alpha.m */; };
 		A10A5B5E15F0E8B8001A8184 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A10A5B5A15F0E8B8001A8184 /* UIImage+Resize.m */; };
@@ -124,6 +125,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A1035C6C15F18550001EE93E /* UIImageView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Layout.h"; sourceTree = "<group>"; };
+		A1035C6D15F18550001EE93E /* UIImageView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Layout.m"; sourceTree = "<group>"; };
 		A1099B9015D76A4200855724 /* WASimulatorData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WASimulatorData.h; sourceTree = "<group>"; };
 		A10A5B4515F08843001A8184 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
 		A10A5B4615F08843001A8184 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
@@ -452,6 +455,8 @@
 				A189878215F084340037A4DD /* NSNumber+FormatSI.m */,
 				A10A5B4515F08843001A8184 /* UIActionSheet+Blocks.h */,
 				A10A5B4615F08843001A8184 /* UIActionSheet+Blocks.m */,
+				A1035C6C15F18550001EE93E /* UIImageView+Layout.h */,
+				A1035C6D15F18550001EE93E /* UIImageView+Layout.m */,
 				A10A5B5615F0DB8E001A8184 /* Vendor */,
 			);
 			name = Utilities;
@@ -653,6 +658,7 @@
 				A10A5B5D15F0E8B8001A8184 /* UIImage+Alpha.m in Sources */,
 				A10A5B5E15F0E8B8001A8184 /* UIImage+Resize.m in Sources */,
 				A10A5B5F15F0E8B8001A8184 /* UIImage+RoundedCorner.m in Sources */,
+				A1035C6E15F18550001EE93E /* UIImageView+Layout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
