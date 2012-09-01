@@ -49,6 +49,9 @@ static const int kUseExistingPhotoButton = 1;
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	mapPin = [[MKPointAnnotation alloc] init];
+	[mapView addAnnotation:mapPin];
+	
 	[self loadPhotoViews];
     [self updatePhotoText];
     [self updateTimestampText];
@@ -74,6 +77,7 @@ static const int kUseExistingPhotoButton = 1;
 	mapContainerView = nil;
 	shadeView = nil;
 	mapTapInterceptor = nil;
+	mapPin = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -293,6 +297,8 @@ static const int kUseExistingPhotoButton = 1;
 	
     [mapView setRegion:region animated:animated];
 	
+	mapPin.coordinate = region.center;
+	
     NSLog(@"lat is: %f", mapView.region.center.latitude);
     NSLog(@"long is: %f", mapView.region.center.longitude);
 }
@@ -355,7 +361,6 @@ static const int kUseExistingPhotoButton = 1;
 			return 1;
 		default:
 			return 0;
-			
 	}
 }
 

@@ -47,6 +47,7 @@
 	__unsafe_unretained IBOutlet UIView *mapContainerView;
 	__unsafe_unretained IBOutlet UIView *mapTapInterceptor;
 	IBOutlet UIView *shadeView;
+	MKPointAnnotation *mapPin;
 }
 
 /**
