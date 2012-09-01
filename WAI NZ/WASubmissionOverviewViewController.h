@@ -44,6 +44,7 @@
     __unsafe_unretained IBOutlet UIButton *pollutionButton;    
     __unsafe_unretained IBOutlet UILabel *photoLabel;
     __unsafe_unretained IBOutlet UILabel *timestampLabel;
+    __unsafe_unretained IBOutlet UILabel *removePhotoLabel;
 }
 
 /**
@@ -52,5 +53,7 @@
  @param _submission the submission to display in this controller
  */
 - (id)initWithSubmission:(WASubmission *)_submission;
+
+
 
 @end
