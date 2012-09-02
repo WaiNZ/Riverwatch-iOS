@@ -315,7 +315,7 @@ static const int kUseExistingPhotoButton = 1;
     NSString *suffix = [suffixes objectAtIndex:date_day];
     dateString = [dateString stringByAppendingString:suffix];
     
-    dateString = [dateString stringByAppendingString:@" at the following location: "];
+    dateString = [dateString stringByAppendingString:@""];
     
     [timestampLabel setText:dateString];
 	[WAStyleHelper topAlignLabel:timestampLabel];
