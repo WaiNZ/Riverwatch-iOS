@@ -231,6 +231,11 @@ static const int kUseExistingPhotoButton = 1;
 						 mapView.frame = largeMapFrame;
 						 shadeView.alpha = 1;
 						 mainTableView.contentOffset = CGPointZero;
+					 }
+					 completion:^(BOOL done) {
+						 // Select pin
+						 editingMap = YES;
+						 [mapView selectAnnotation:submission animated:YES];
 					 }];
 }
 
@@ -239,6 +244,8 @@ static const int kUseExistingPhotoButton = 1;
  */
 - (IBAction)shadeViewTapped:(id)sender {
 	// Prepare the frame for the animation
+	editingMap = NO;
+	
 	CGRect smallMapFrame = [self.view.window convertRect:mapContainerView.bounds fromView:mapContainerView];
 	CGRect sidePanelToFrame = mapSidePanel.frame;
 	CGRect sidePanelFromFrame = sidePanelToFrame;
@@ -246,6 +253,9 @@ static const int kUseExistingPhotoButton = 1;
 	mapSidePanel.frame = sidePanelFromFrame;
 	
 	[[UIApplication sharedApplication] setStatusBarStyle:oldStatusBarStyle animated:YES];
+	
+	// Deselect pin
+	[mapView deselectAnnotation:submission animated:YES];
 	
 	// Animate back
 	[UIView animateWithDuration:kAnimationDuration
@@ -567,10 +577,16 @@ static const int kUseExistingPhotoButton = 1;
 		pinView.annotation = annotation;
 	}
 	pinView.draggable = YES;
-	pinView.canShowCallout = NO;
-	pinView.selected = YES;
+	pinView.canShowCallout = YES;
+	pinView.selected = editingMap;
 	
 	return pinView;
+}
+
+- (void)mapView:(MKMapView *)_mapView didDeselectAnnotationView:(MKAnnotationView *)view {
+	if(editingMap) {
+		[_mapView selectAnnotation:view.annotation animated:NO];
+	}
 }
 
 @end

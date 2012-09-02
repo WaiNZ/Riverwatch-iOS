@@ -69,6 +69,10 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	location.coordinate = newCoordinate;
 }
 
+- (NSString *)title {
+	return @"Drag me to specify the location";
+}
+
 #pragma mark - Getters/Setters
 
 - (void)addSubmissionPhoto:(WASubmissionPhoto *)photo {
