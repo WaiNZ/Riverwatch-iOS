@@ -61,6 +61,8 @@ static const CGFloat photoSpacer = 20;
 	// Change the status/navigation bar style
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:animated];
     oldBarStyle = self.navigationController.navigationBar.barStyle;
+	oldBarTint = self.navigationController.navigationBar.tintColor;
+	self.navigationController.navigationBar.tintColor = nil;
 	[self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent animated:animated];
 	
 	centerView.frame = self.subviewFrame;
@@ -76,6 +78,7 @@ static const CGFloat photoSpacer = 20;
 	// Restore the status/navigation bar style
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:animated];
     [self.navigationController.navigationBar setBarStyle:oldBarStyle animated:animated];
+	self.navigationController.navigationBar.tintColor = oldBarTint;
 	
 	[super viewWillDisappear:animated];
 }

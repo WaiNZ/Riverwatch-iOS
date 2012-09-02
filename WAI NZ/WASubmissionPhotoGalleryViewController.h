@@ -42,6 +42,7 @@
 	BOOL canSwipeRight;
 	
 	UIBarStyle oldBarStyle;
+	UIColor *oldBarTint;
 }
 
 /**
