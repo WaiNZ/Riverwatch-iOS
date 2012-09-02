@@ -27,7 +27,6 @@ extern NSString *const kWASubmissionUpdatedNotification;
     NSString *email;
     BOOL anonymous;
     WAGeolocation *location;
-	time_t timestamp;
     NSString *udid;
     
 }

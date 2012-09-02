@@ -31,7 +31,9 @@
     if (self) {
         
         //image = photo;
-        timestamp = @(time);
+		if(time != 0) {
+			timestamp = @(time);
+		}
         filename = @"Testing123";
         location = loc;
 		size = photo.size;

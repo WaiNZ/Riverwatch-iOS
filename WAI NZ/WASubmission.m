@@ -44,7 +44,6 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
         email = @"";
         anonymous = NO;
         location = nil;
-        time(&timestamp);
 		udid = @"";
     }
     return self;
@@ -188,11 +187,6 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	POST_UPDATE_NOTIFICATION;
 }
 
-- (void)setTimestamp:(time_t)_timestamp {
-	timestamp = _timestamp;
-	POST_UPDATE_NOTIFICATION;
-}
-
 - (void)setPhotoScaleSize:(WASubmissionPhotoSize)photoScaleSize {
 	for(WASubmissionPhoto *photo in photos) {
 		photo.photoScaleSize = photoScaleSize;
@@ -211,14 +205,23 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	return parts;
 }
 
+- (time_t)timestamp {
+	time_t ret = LONG_MAX;
+	for(WASubmissionPhoto *photo in photos) {
+		if(photo.timestamp) {
+			ret = MIN(ret, photo.timestamp.longValue);
+		}
+	}
+	return ret;
+}
+
 #pragma mark - Private Getters/Setters
 
 - (NSNumber *)_rk_timestamp {
-	return @(timestamp);
+	return @(self.timestamp);
 }
 
 - (void)set_rk_timestamp:(NSNumber *)_timestamp {
-	timestamp = _timestamp.longValue;
 }
 
 - (NSDictionary *)_rk_councilSubmission {
@@ -242,6 +245,5 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 @synthesize email;
 @synthesize anonymous;
 @synthesize location;
-@synthesize timestamp;
 @synthesize udid;
 @end

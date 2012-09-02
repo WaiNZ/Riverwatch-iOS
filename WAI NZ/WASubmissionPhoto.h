@@ -87,7 +87,7 @@ typedef enum {
 
 /** The location this photo was taken at, may be nil */
 @property (atomic, readonly) WAGeolocation *location;
-/** The UNIX time the photo was taken at */
+/** The UNIX time the photo was taken at, this will be nil if the photo doesn't have a timestamp */
 @property (atomic, readonly) NSNumber *timestamp;
 /** The fullsize image read from disk */
 @property (atomic, readonly) UIImage *fullsizeImage;

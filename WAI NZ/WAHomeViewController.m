@@ -70,9 +70,7 @@
 									 resultBlock:^(WASubmissionPhoto *photo) {
 										 // Configure the submission with the photo
 										 WASubmission *submission = [[WASubmission alloc] init];
-										 submission.descriptionText = @"I saw Old McDonald's cow crapping in the river ";
-										 submission.email = @"syzygy@dt.net.nz";
-										 submission.anonymous = NO;
+										 submission.anonymous = YES;
 										 submission.location = photo.location;
 										 [submission addSubmissionPhoto:photo];
 										 
