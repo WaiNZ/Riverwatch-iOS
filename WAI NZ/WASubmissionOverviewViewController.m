@@ -84,6 +84,7 @@ static const int kUseExistingPhotoButton = 1;
 	mapTapInterceptor = nil;
 	shadeViewTop = nil;
 	mapSidePanel = nil;
+	mapPleaseSpecifyView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -249,8 +250,18 @@ static const int kUseExistingPhotoButton = 1;
 	CGRect smallMapFrame = [self.view.window convertRect:mapContainerView.bounds fromView:mapContainerView];
 	CGRect sidePanelToFrame = mapSidePanel.frame;
 	CGRect sidePanelFromFrame = sidePanelToFrame;
-	sidePanelFromFrame.origin.x += sidePanelFromFrame.size.width;
+	CGFloat sidePanelOffset = sidePanelFromFrame.size.width + (submission.location?0:mapPleaseSpecifyView.frame.size.width);
+	sidePanelFromFrame.origin.x += sidePanelOffset;
 	mapSidePanel.frame = sidePanelFromFrame;
+	CGRect sidePleaseToFrame = mapPleaseSpecifyView.frame;
+	CGRect sidePleaseFromFrame = sidePleaseToFrame;
+	sidePleaseFromFrame.origin.x += sidePanelOffset;
+	mapPleaseSpecifyView.frame = sidePleaseFromFrame;
+	
+	if(submission.location) {
+		[mapPleaseSpecifyView removeFromSuperview];
+		mapPleaseSpecifyView = nil;
+	}
 	
 	[[UIApplication sharedApplication] setStatusBarStyle:oldStatusBarStyle animated:YES];
 	
@@ -280,6 +291,7 @@ static const int kUseExistingPhotoButton = 1;
 						 [UIView animateWithDuration:kAnimationDuration
 										  animations:^{
 											  mapSidePanel.frame = sidePanelToFrame;
+											  mapPleaseSpecifyView.frame = sidePleaseToFrame;
 										  }];
 					 }];
 }

@@ -50,6 +50,7 @@
 	__unsafe_unretained IBOutlet UIView *shadeViewTop;
 	UIStatusBarStyle oldStatusBarStyle;
 	__unsafe_unretained IBOutlet UIView *mapSidePanel;
+	__unsafe_unretained IBOutlet UIView *mapPleaseSpecifyView;
 	BOOL editingMap;
 }
 
