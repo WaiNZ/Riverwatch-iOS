@@ -145,20 +145,20 @@
 
 - (CGSize)estimatedImageSize:(WASubmissionPhotoSize)photoScale {
 	CGSize scaledSize;
-//	switch(photoScale) {
-//		case kWASubmissionPhotoSizeActual:
-//			scaledSize = image.size;
-//			break;
-//		case kWASubmissionPhotoSizeSmall:
-//			scaledSize = CGSizeMake(1024, 1024);
-//			break;
-//		case kWASubmissionPhotoSizeMedium:
-//			scaledSize = CGSizeMake(1536, 1536);
-//			break;
-//		case kWASubmissionPhotoSizeLarge:
-//			scaledSize = CGSizeMake(2048, 2048);
-//			break;
-//	}
+	switch(photoScale) {
+		case kWASubmissionPhotoSizeActual:
+			scaledSize = self.fullsizeImage.size;
+			break;
+		case kWASubmissionPhotoSizeSmall:
+			scaledSize = CGSizeMake(1024, 1024);
+			break;
+		case kWASubmissionPhotoSizeMedium:
+			scaledSize = CGSizeMake(1536, 1536);
+			break;
+		case kWASubmissionPhotoSizeLarge:
+			scaledSize = CGSizeMake(2048, 2048);
+			break;
+	}
 	return scaledSize;
 }
 
@@ -174,16 +174,16 @@
     return img;
 }
 
-//- (NSString *)base64String {
-//	UIImage *scaledImage = image;
-//	if(photoScaleSize != kWASubmissionPhotoSizeActual) {
-//		scaledImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit
-//												  bounds:[self estimatedImageSize:photoScaleSize]
-//									interpolationQuality:kCGInterpolationDefault];
-//	}
-//	
-//	return [UIImageJPEGRepresentation(scaledImage, kJPEGCompressionQuality) base64EncodedString];
-//}
+- (NSString *)base64String {
+	UIImage *scaledImage = self.fullsizeImage;
+	if(photoScaleSize != kWASubmissionPhotoSizeActual) {
+		scaledImage = [self.fullsizeImage resizedImageWithContentMode:UIViewContentModeScaleAspectFit
+															   bounds:[self estimatedImageSize:photoScaleSize]
+												 interpolationQuality:kCGInterpolationDefault];
+	}
+	
+	return [UIImageJPEGRepresentation(scaledImage, kJPEGCompressionQuality) base64EncodedString];
+}
 
 #pragma mark - Properties
 
