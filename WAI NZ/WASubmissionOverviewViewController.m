@@ -64,6 +64,11 @@ static const int kUseExistingPhotoButton = 1;
     [self updateMapView:NO];
 	
 	mainTableView.tableHeaderView = topView;
+	
+	if(submission.location) {
+		[mapPleaseSpecifyView removeFromSuperview];
+		mapPleaseSpecifyView = nil;
+	}
 }
 
 - (void)viewDidUnload {
