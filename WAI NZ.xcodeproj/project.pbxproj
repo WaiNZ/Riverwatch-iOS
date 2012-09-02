@@ -47,6 +47,8 @@
 		A12A54DA15D743480025D32A /* WASubmissionDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54D815D743480025D32A /* WASubmissionDescriptionViewController.xib */; };
 		A12A54DF15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A54DD15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m */; };
 		A12A54E015D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */; };
+		A16E121D15F30422006DC62C /* WASubmissionTagEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A16E121C15F30422006DC62C /* WASubmissionTagEditorViewController.m */; };
+		A16E122115F305AF006DC62C /* WASubmissionTagEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A16E122015F305AF006DC62C /* WASubmissionTagEditorViewController.xib */; };
 		A17B969315F1D4A1007E7E01 /* WAStyleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A17B969215F1D4A1007E7E01 /* WAStyleHelper.m */; };
 		A17B96A715F20CA8007E7E01 /* WASubmissionResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A17B96A615F20CA8007E7E01 /* WASubmissionResponse.m */; };
 		A17B96AB15F21B07007E7E01 /* RKObjectManager+WAI.m in Sources */ = {isa = PBXBuildFile; fileRef = A17B96AA15F21B07007E7E01 /* RKObjectManager+WAI.m */; };
@@ -171,6 +173,9 @@
 		A12A54DC15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionPhotoGalleryViewController.h; sourceTree = "<group>"; };
 		A12A54DD15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionPhotoGalleryViewController.m; sourceTree = "<group>"; };
 		A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionPhotoGalleryViewController.xib; sourceTree = "<group>"; };
+		A16E121B15F30422006DC62C /* WASubmissionTagEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionTagEditorViewController.h; sourceTree = "<group>"; };
+		A16E121C15F30422006DC62C /* WASubmissionTagEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionTagEditorViewController.m; sourceTree = "<group>"; };
+		A16E122015F305AF006DC62C /* WASubmissionTagEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionTagEditorViewController.xib; sourceTree = "<group>"; };
 		A16E9D9D15DBB2EC00E5353C /* MJGAvalibility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJGAvalibility.h; sourceTree = "<group>"; };
 		A17B969115F1D4A1007E7E01 /* WAStyleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAStyleHelper.h; sourceTree = "<group>"; };
 		A17B969215F1D4A1007E7E01 /* WAStyleHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAStyleHelper.m; sourceTree = "<group>"; };
@@ -352,6 +357,7 @@
 				A12A54C415D742520025D32A /* Submission Overview */,
 				A12A54D515D743200025D32A /* Submission Description */,
 				A12A54DB15D7435B0025D32A /* Submission Photo Gallery */,
+				A16E121A15F30400006DC62C /* Submission Tags */,
 				A12A54CA15D742790025D32A /* Submitting */,
 			);
 			name = Controllers;
@@ -420,6 +426,16 @@
 				A17B96A615F20CA8007E7E01 /* WASubmissionResponse.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		A16E121A15F30400006DC62C /* Submission Tags */ = {
+			isa = PBXGroup;
+			children = (
+				A16E121B15F30422006DC62C /* WASubmissionTagEditorViewController.h */,
+				A16E121C15F30422006DC62C /* WASubmissionTagEditorViewController.m */,
+				A16E122015F305AF006DC62C /* WASubmissionTagEditorViewController.xib */,
+			);
+			name = "Submission Tags";
 			sourceTree = "<group>";
 		};
 		A1B8C9D615E466550027D9D3 /* Images */ = {
@@ -611,6 +627,7 @@
 				A1B8C9DF15E466720027D9D3 /* icon_114.png in Resources */,
 				A1B8C9E015E466720027D9D3 /* icon_144.png in Resources */,
 				A1B8C9E115E466720027D9D3 /* iTunesArtwork in Resources */,
+				A16E122115F305AF006DC62C /* WASubmissionTagEditorViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,6 +698,7 @@
 				A17B969315F1D4A1007E7E01 /* WAStyleHelper.m in Sources */,
 				A17B96A715F20CA8007E7E01 /* WASubmissionResponse.m in Sources */,
 				A17B96AB15F21B07007E7E01 /* RKObjectManager+WAI.m in Sources */,
+				A16E121D15F30422006DC62C /* WASubmissionTagEditorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

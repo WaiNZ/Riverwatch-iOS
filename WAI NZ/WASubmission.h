@@ -115,6 +115,8 @@ extern NSString *const kWASubmissionUpdatedNotification;
  */
 - (BOOL)containsTag:(NSString *)tag;
 
+- (NSString *)tagsAsString;
+
 // TODO: -verify
 
 /** The description the user has entered */

@@ -38,10 +38,7 @@
 	WASubmission *submission;
     __unsafe_unretained IBOutlet UIScrollView *photoScrollView;
 	IBOutlet UIView *addPhotoView;
-    IBOutlet MKMapView *mapView;
-    __unsafe_unretained IBOutlet UIButton *cowButton;
-    __unsafe_unretained IBOutlet UIButton *runoffButton;
-    __unsafe_unretained IBOutlet UIButton *pollutionButton;    
+    IBOutlet MKMapView *mapView;   
     __unsafe_unretained IBOutlet UILabel *photoLabel;
     __unsafe_unretained IBOutlet UILabel *timestampLabel;
 	__unsafe_unretained IBOutlet UIView *mapContainerView;

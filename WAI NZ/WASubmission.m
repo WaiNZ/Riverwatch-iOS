@@ -199,6 +199,18 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	}
 }
 
+- (NSString *)tagsAsString {
+	NSMutableString *parts = [[NSMutableString alloc] init];
+	
+	NSString *seperator = @"";
+	for(NSString *string in tags){
+        [parts appendFormat:@"%@%@", seperator, string];
+		seperator = @", ";
+    }
+	
+	return parts;
+}
+
 #pragma mark - Private Getters/Setters
 
 - (NSNumber *)_rk_timestamp {

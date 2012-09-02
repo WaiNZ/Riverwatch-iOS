@@ -7,6 +7,7 @@
 //
 
 #import "WASubmissionOverviewViewController.h"
+
 #import "WASubmissionDescriptionViewController.h"
 #import "WASubmitViewController.h"
 #import "WASubmission.h"
@@ -15,10 +16,10 @@
 #import "UIActionSheet+Blocks.h"
 #import <QuartzCore/QuartzCore.h>
 #import "WAStyleHelper.h"
-
-
+#import "WASubmissionTagEditorViewController.h"
 #import <UIKit/UITableView.h>
 #import <QuartzCore/QuartzCore.h>
+#import "WASubmissionTagEditorViewController.h"
 
 #define ENABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submissionUpdated) name:kWASubmissionUpdatedNotification object:submission];
 #define DISABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] removeObserver:self name:kWASubmissionUpdatedNotification object:submission]
@@ -74,9 +75,6 @@ static const int kUseExistingPhotoButton = 1;
     photoScrollView = nil;
 	addPhotoView = nil;
     mapView = nil;
-    cowButton = nil;
-    runoffButton = nil;
-    pollutionButton = nil;
     photoLabel = nil;
     timestampLabel = nil;
 	mapContainerView = nil;
@@ -140,65 +138,6 @@ static const int kUseExistingPhotoButton = 1;
 - (IBAction)photoTapped:(UITapGestureRecognizer *)sender {
 	WASubmissionPhotoGalleryViewController *gallery = [[WASubmissionPhotoGalleryViewController alloc] initWithSubmission:submission andPhotoIndex:sender.view.tag];
 	[self.navigationController pushViewController:gallery animated:YES];
-}
-
-
-//TODO: BUTTONS SHOULD STAY COLOURED ON PRESS
-- (IBAction)cowTagSelected:(id)sender {
-    if([submission containsTag:@"cow"]){
-        [submission removeTag:@"cow"];
-        NSLog(@"cow tag got removed");
-        [cowButton setBackgroundImage:nil forState:UIControlStateNormal];
-        UIColor *defaultColor = [UIColor colorWithRed:0.196 green:0.3098 blue:0.52 alpha:1.0];
-        [cowButton setTitleColor:defaultColor forState:UIControlStateNormal];
-    }
-    else{
-        [submission addTag:@"cow"];
-        NSLog(@"cow tag got added");
-        [[cowButton layer] setCornerRadius:8.0];
-        [[cowButton layer] setMasksToBounds:YES];
-        [[cowButton layer] setBorderWidth:1.0];
-        [cowButton setBackgroundImage:[UIImage imageNamed:@"icon_144.png"] forState:UIControlStateNormal];
-        [cowButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }
-}
-
-- (IBAction)runoffTagSelected:(id)sender {
-    if([submission containsTag:@"runoff"]){
-        [submission removeTag:@"runoff"];
-        NSLog(@"runoff tag got removed");
-        [runoffButton setBackgroundImage:nil forState:UIControlStateNormal];
-        UIColor *defaultColor = [UIColor colorWithRed:0.196 green:0.3098 blue:0.52 alpha:1.0];
-        [runoffButton setTitleColor:defaultColor forState:UIControlStateNormal];
-    }
-    else{
-        [submission addTag:@"runoff"];
-        NSLog(@"runoff tag got added");
-        [[runoffButton layer] setCornerRadius:8.0];
-        [[runoffButton layer] setMasksToBounds:YES];
-        [[runoffButton layer] setBorderWidth:1.0];
-        [runoffButton setBackgroundImage:[UIImage imageNamed:@"icon_144.png"] forState:UIControlStateNormal];
-        [runoffButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }
-}
-
-- (IBAction)pollutionTagSelected:(id)sender {
-    if([submission containsTag:@"pollution"]){
-        [submission removeTag:@"pollution"];
-        NSLog(@"pollution tag got removed");
-        [pollutionButton setBackgroundImage:nil forState:UIControlStateNormal];
-        UIColor *defaultColor = [UIColor colorWithRed:0.196 green:0.3098 blue:0.52 alpha:1.0];
-        [pollutionButton setTitleColor:defaultColor forState:UIControlStateNormal];
-    }
-    else{
-        [submission addTag:@"pollution"];
-        NSLog(@"pollution tag got added");
-        [[pollutionButton layer] setCornerRadius:8.0];
-        [[pollutionButton layer] setMasksToBounds:YES];
-        [[pollutionButton layer] setBorderWidth:1.0];
-        [pollutionButton setBackgroundImage:[UIImage imageNamed:@"icon_144.png"] forState:UIControlStateNormal];
-        [pollutionButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }
 }
 
 - (IBAction)editMap:(id)sender {
@@ -412,7 +351,7 @@ static const int kUseExistingPhotoButton = 1;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -421,8 +360,10 @@ static const int kUseExistingPhotoButton = 1;
 		case 0:
 			return 1;
 		case 1:
-			return submission.anonymous?1:2;
+			return 1;
 		case 2:
+			return submission.anonymous?1:2;
+		case 3:
 			return 1;
 		default:
 			return 0;
@@ -430,10 +371,18 @@ static const int kUseExistingPhotoButton = 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
+	NSString *CellIdentifier;
+	
+	if((indexPath.section == 0 && indexPath.row == 0) || (indexPath.section == 1 && indexPath.row == 0)) {
+		CellIdentifier = @"WA_UITableViewCellStyleValue1_Cell";
+	}
+	else {
+		CellIdentifier = @"WA_UITableViewCellStyleDefault_Cell";
+	}
+	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if(!cell) {
-		if(indexPath.section == 0 && indexPath.row == 0) {
+		if((indexPath.section == 0 && indexPath.row == 0) || (indexPath.section == 1 && indexPath.row == 0)) {
 			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
 		}
 		else {
@@ -447,12 +396,18 @@ static const int kUseExistingPhotoButton = 1;
 	
 	switch (indexPath.section) {
 		case 0:
+			cell.textLabel.text = @"Tags";
+			cell.detailTextLabel.text = [submission tagsAsString];
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+			break;
+		case 1:
 			cell.textLabel.text = @"Description";
 			cell.detailTextLabel.text = submission.descriptionText;
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 			break;
-		case 1:
+		case 2:
 			switch (indexPath.row) {
 				case 0:
 					cell.textLabel.text = @"Include my email";
@@ -465,7 +420,7 @@ static const int kUseExistingPhotoButton = 1;
 					break;
 			}
 			break;
-		case 2:
+		case 3:
 			cell.textLabel.text = @"Submit";
 			cell.textLabel.textAlignment = UITextAlignmentCenter;
 			cell.selectionStyle = UITableViewCellSelectionStyleBlue;
@@ -478,11 +433,15 @@ static const int kUseExistingPhotoButton = 1;
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section == 0 && indexPath.row ==0){
+	if(indexPath.section == 0 && indexPath.row ==0){
+		WASubmissionTagEditorViewController *controller = [[WASubmissionTagEditorViewController alloc] initWithSubmission:submission];
+		[self.navigationController pushViewController:controller animated:YES];
+	}
+    if(indexPath.section == 1 && indexPath.row ==0){
 		WASubmissionDescriptionViewController *controller = [[WASubmissionDescriptionViewController alloc] initWithSubmission:submission];
 		[self.navigationController pushViewController:controller animated:YES];
 	}
-	else if(indexPath.section == 2 && indexPath.row == 0) {
+	else if(indexPath.section == 3 && indexPath.row == 0) {
 		size_t actualSize = 0;
 		for(int n=0;n<submission.numberOfSubmissionPhotos;n++) {
 			actualSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeActual];
