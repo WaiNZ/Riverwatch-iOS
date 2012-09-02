@@ -26,12 +26,12 @@
 #if DEBUG
 	RKLogConfigureByName("RestKit/Network", RKLogLevelDebug);
 #endif
-	
-	
+		
 	// Normal setup
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     WAHomeViewController *homeController = [[WAHomeViewController alloc] init];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:homeController];
+	navController.navigationBar.tintColor = [UIColor colorWithRed:32.0/255.0 green:58.0/255.0 blue:80.0/255.0 alpha:1];
 	self.window.rootViewController = navController;
     self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
