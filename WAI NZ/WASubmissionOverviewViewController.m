@@ -501,8 +501,7 @@ static const int kUseExistingPhotoButton = 1;
 			[self.navigationController pushViewController: controller animated:YES];
 			[tableView deselectRowAtIndexPath:indexPath animated:YES];
 		}
-	}
-	
+	}	
 }
 
 #pragma mark - textField delegate

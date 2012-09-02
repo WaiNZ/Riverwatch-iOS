@@ -76,6 +76,12 @@ extern NSString *const kWASubmissionUpdatedNotification;
  // TODO: exception, return nil...
  */
 - (WASubmissionPhoto *)submissionPhotoAtIndex:(int)index;
+
+/**
+ Clear the photo files form disk upon submission
+*/
+- (void)unloadPhotos;
+
 /**
  Add a tag to this submission
  

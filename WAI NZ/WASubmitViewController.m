@@ -77,7 +77,7 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 
 - (void)sendSubmission {
 	submissionProgress = 0;
-	
+    
 	// Post to the server!
 	[[RKObjectManager sharedManager] postObjectWithResponse:submission
 												 usingBlock:^(RKObjectLoader *loader) {
@@ -120,6 +120,7 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 	self.view = successfulView;
 	self.navigationItem.title = @"Done";
 	self.navigationItem.rightBarButtonItem = doneButton;
+    [submission unloadPhotos];
 }
 
 @end
