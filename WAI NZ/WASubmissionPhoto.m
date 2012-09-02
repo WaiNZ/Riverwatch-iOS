@@ -30,15 +30,17 @@
     self = [super init];
     if (self) {
         
-        image = photo;
+        //image = photo;
         timestamp = @(time);
+        filename = @"Testing123";
         location = loc;
-		size = image.size;
+		size = photo.size;
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *pathToDocuments=[paths objectAtIndex:0];
+        NSString *savedImagePath = [pathToDocuments stringByAppendingPathComponent:filename];
         NSData *photoData = UIImageJPEGRepresentation(photo, 0.9f);
-        [photoData writeToFile:pathToDocuments atomically:YES];
-        thumbImage = [photo thumbnailImage:(90*((WAAppDelegate *)[UIApplication sharedApplication].delegate).window.contentScaleFactor) transparentBorder:0 cornerRadius:0 interpolationQuality:kCGInterpolationDefault];
+        [photoData writeToFile:savedImagePath atomically:YES];
+        thumbImage = [photo thumbnailImage:(90) transparentBorder:0 cornerRadius:0 interpolationQuality:kCGInterpolationDefault];
     }
     return self;
 }
@@ -143,20 +145,20 @@
 
 - (CGSize)estimatedImageSize:(WASubmissionPhotoSize)photoScale {
 	CGSize scaledSize;
-	switch(photoScale) {
-		case kWASubmissionPhotoSizeActual:
-			scaledSize = image.size;
-			break;
-		case kWASubmissionPhotoSizeSmall:
-			scaledSize = CGSizeMake(1024, 1024);
-			break;
-		case kWASubmissionPhotoSizeMedium:
-			scaledSize = CGSizeMake(1536, 1536);
-			break;
-		case kWASubmissionPhotoSizeLarge:
-			scaledSize = CGSizeMake(2048, 2048);
-			break;
-	}
+//	switch(photoScale) {
+//		case kWASubmissionPhotoSizeActual:
+//			scaledSize = image.size;
+//			break;
+//		case kWASubmissionPhotoSizeSmall:
+//			scaledSize = CGSizeMake(1024, 1024);
+//			break;
+//		case kWASubmissionPhotoSizeMedium:
+//			scaledSize = CGSizeMake(1536, 1536);
+//			break;
+//		case kWASubmissionPhotoSizeLarge:
+//			scaledSize = CGSizeMake(2048, 2048);
+//			break;
+//	}
 	return scaledSize;
 }
 
@@ -164,22 +166,30 @@
 	return 0.25 * [self estimatedImageSize:photoScale].width * [self estimatedImageSize:photoScale].height;
 }
 
-- (NSString *)base64String {
-	UIImage *scaledImage = image;
-	if(photoScaleSize != kWASubmissionPhotoSizeActual) {
-		scaledImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit
-												  bounds:[self estimatedImageSize:photoScaleSize]
-									interpolationQuality:kCGInterpolationDefault];
-	}
-	
-	return [UIImageJPEGRepresentation(scaledImage, kJPEGCompressionQuality) base64EncodedString];
+- (UIImage *) fullsizeImage{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,     NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *getImagePath = [documentsDirectory stringByAppendingPathComponent:filename];
+    UIImage *img = [UIImage imageWithContentsOfFile:getImagePath];
+    return img;
 }
+
+//- (NSString *)base64String {
+//	UIImage *scaledImage = image;
+//	if(photoScaleSize != kWASubmissionPhotoSizeActual) {
+//		scaledImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit
+//												  bounds:[self estimatedImageSize:photoScaleSize]
+//									interpolationQuality:kCGInterpolationDefault];
+//	}
+//	
+//	return [UIImageJPEGRepresentation(scaledImage, kJPEGCompressionQuality) base64EncodedString];
+//}
 
 #pragma mark - Properties
 
 @synthesize location;
 @synthesize timestamp;
-@synthesize image;
+@synthesize thumbImage;
 @synthesize photoScaleSize;
 @synthesize size;
 @end

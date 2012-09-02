@@ -65,7 +65,7 @@ static const CGFloat photoSpacer = 20;
 	
 	centerView.frame = self.subviewFrame;
 	[self.view addSubview:centerView];
-	centerImageView.image = [submission submissionPhotoAtIndex:currentPhoto].image;
+	centerImageView.image = [submission submissionPhotoAtIndex:currentPhoto].fullsizeImage;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -128,7 +128,7 @@ static const CGFloat photoSpacer = 20;
 								// Save view positions and set them to what is needed for animations
 								CGPoint oldCenter = centerView.center;
 								[self _setOffset:0];
-								[(*imageViewToShift) setAndFitToImage:[submission submissionPhotoAtIndex:currentPhoto].image];
+								[(*imageViewToShift) setAndFitToImage:[submission submissionPhotoAtIndex:currentPhoto].fullsizeImage];
 								[self.view addSubview:(*viewToShift)];
 								
 								[UIView animateWithDuration:kAnimationDuration
@@ -175,12 +175,12 @@ static const CGFloat photoSpacer = 20;
 			
 			if(canSwipeLeft){
 				[self.view addSubview:leftView];
-				[leftImageView setAndFitToImage:[submission submissionPhotoAtIndex:currentPhoto-1].image];
+				[leftImageView setAndFitToImage:[submission submissionPhotoAtIndex:currentPhoto-1].fullsizeImage];
 			}
 		
 			if(canSwipeRight){
 				[self.view addSubview:rightView];
-				[rightImageView setAndFitToImage:[submission submissionPhotoAtIndex:currentPhoto+1].image];
+				[rightImageView setAndFitToImage:[submission submissionPhotoAtIndex:currentPhoto+1].fullsizeImage];
 			}
 			
 			break;
