@@ -19,6 +19,7 @@
 #import "WASubmissionTagEditorViewController.h"
 #import <UIKit/UITableView.h>
 #import <QuartzCore/QuartzCore.h>
+#import "WAImagePickerHelper.h"
 
 #define ENABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submissionUpdated) name:kWASubmissionUpdatedNotification object:submission];
 #define DISABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] removeObserver:self name:kWASubmissionUpdatedNotification object:submission]
@@ -127,10 +128,8 @@ static const int kUseExistingPhotoButton = 1;
 															  }
 															  //1 is the topmost (Use an existing photo) button
 															  else if(buttonIndex==kUseExistingPhotoButton){
-																  UIImagePickerController *cameraRollPicker = [[UIImagePickerController_Always alloc] init];
-																  cameraRollPicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-																  cameraRollPicker.delegate = self;
-																  [self presentModalViewController: cameraRollPicker animated:YES];
+																  [WAImagePickerHelper showImagePickerForCameraRollInController:self
+																											 withPickerDelegate:self];
 															  }
 														  }
                                                  cancelButtonTitle:@"Cancel"

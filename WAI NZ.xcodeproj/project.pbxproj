@@ -51,6 +51,7 @@
 		A168E23015F31A6800B181C8 /* lock-large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A168E22E15F31A6800B181C8 /* lock-large@2x.png */; };
 		A168E23615F31A9900B181C8 /* WACameraRollAccessDeniedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A168E23415F31A9900B181C8 /* WACameraRollAccessDeniedViewController.m */; };
 		A168E23715F31A9900B181C8 /* WACameraRollAccessDeniedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A168E23515F31A9900B181C8 /* WACameraRollAccessDeniedViewController.xib */; };
+		A168E23C15F321FC00B181C8 /* WAImagePickerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A168E23B15F321FC00B181C8 /* WAImagePickerHelper.m */; };
 		A16E121D15F30422006DC62C /* WASubmissionTagEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A16E121C15F30422006DC62C /* WASubmissionTagEditorViewController.m */; };
 		A16E122115F305AF006DC62C /* WASubmissionTagEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A16E122015F305AF006DC62C /* WASubmissionTagEditorViewController.xib */; };
 		A17B969315F1D4A1007E7E01 /* WAStyleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A17B969215F1D4A1007E7E01 /* WAStyleHelper.m */; };
@@ -182,6 +183,8 @@
 		A168E23315F31A9900B181C8 /* WACameraRollAccessDeniedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACameraRollAccessDeniedViewController.h; sourceTree = "<group>"; };
 		A168E23415F31A9900B181C8 /* WACameraRollAccessDeniedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACameraRollAccessDeniedViewController.m; sourceTree = "<group>"; };
 		A168E23515F31A9900B181C8 /* WACameraRollAccessDeniedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WACameraRollAccessDeniedViewController.xib; sourceTree = "<group>"; };
+		A168E23A15F321FC00B181C8 /* WAImagePickerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAImagePickerHelper.h; sourceTree = "<group>"; };
+		A168E23B15F321FC00B181C8 /* WAImagePickerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAImagePickerHelper.m; sourceTree = "<group>"; };
 		A16E121B15F30422006DC62C /* WASubmissionTagEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionTagEditorViewController.h; sourceTree = "<group>"; };
 		A16E121C15F30422006DC62C /* WASubmissionTagEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionTagEditorViewController.m; sourceTree = "<group>"; };
 		A16E122015F305AF006DC62C /* WASubmissionTagEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionTagEditorViewController.xib; sourceTree = "<group>"; };
@@ -522,6 +525,8 @@
 				A1035C6D15F18550001EE93E /* UIImageView+Layout.m */,
 				A17B96A915F21B07007E7E01 /* RKObjectManager+WAI.h */,
 				A17B96AA15F21B07007E7E01 /* RKObjectManager+WAI.m */,
+				A168E23A15F321FC00B181C8 /* WAImagePickerHelper.h */,
+				A168E23B15F321FC00B181C8 /* WAImagePickerHelper.m */,
 				A10A5B5615F0DB8E001A8184 /* Vendor */,
 			);
 			name = Utilities;
@@ -733,6 +738,7 @@
 				A17B96AB15F21B07007E7E01 /* RKObjectManager+WAI.m in Sources */,
 				A16E121D15F30422006DC62C /* WASubmissionTagEditorViewController.m in Sources */,
 				A168E23615F31A9900B181C8 /* WACameraRollAccessDeniedViewController.m in Sources */,
+				A168E23C15F321FC00B181C8 /* WAImagePickerHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
