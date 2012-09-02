@@ -25,6 +25,7 @@ typedef enum {
 @interface WASubmissionPhoto : NSObject 
 {
     UIImage *image;
+    UIImage *thumbImage;
     NSNumber *timestamp;
     WAGeolocation *location;
 	WASubmissionPhotoSize photoScaleSize;
@@ -89,6 +90,8 @@ typedef enum {
 @property (atomic, readonly) NSNumber *timestamp;
 /** The image data for this photo */
 @property (atomic, readonly) UIImage *image;
+/** The thumbnail image data for this photo */
+@property (atomic, readonly) UIImage *thumbImage;
 /** The size used for scalling with restkit */
 @property (atomic, assign) WASubmissionPhotoSize photoScaleSize;
 /** The size of the image, does not include resizing */

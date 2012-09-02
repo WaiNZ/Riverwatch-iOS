@@ -385,7 +385,7 @@ static const int kUseExistingPhotoButton = 1;
 		// Create the image view
         UIImageView *photoView = [[UIImageView alloc] initWithFrame:CGRectInset(notmyview.bounds, 4, 4)];
         [notmyview addSubview:photoView];
-        photoView.image = photo.image;
+        photoView.image = photo.thumbImage;
         photoView.contentMode=UIViewContentModeScaleAspectFill;
         photoView.clipsToBounds = YES;
 		
