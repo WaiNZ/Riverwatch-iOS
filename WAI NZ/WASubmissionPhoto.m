@@ -40,7 +40,7 @@
         NSString *savedImagePath = [pathToDocuments stringByAppendingPathComponent:filename];
         NSData *photoData = UIImageJPEGRepresentation(photo, 0.9f);
         [photoData writeToFile:savedImagePath atomically:YES];
-        thumbImage = [photo thumbnailImage:(90*((WAAppDelegate *)[UIApplication sharedApplication].delegate).window.contentScaleFactor) transparentBorder:0 cornerRadius:0 interpolationQuality:kCGInterpolationDefault];
+        thumbImage = [photo thumbnailImage:(90*((WAAppDelegate *)[UIApplication sharedApplication].delegate).window.screen.scale) transparentBorder:0 cornerRadius:0 interpolationQuality:kCGInterpolationDefault];
     }
     return self;
 }
