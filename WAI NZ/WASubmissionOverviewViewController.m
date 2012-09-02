@@ -374,28 +374,27 @@ static const int kUseExistingPhotoButton = 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSString *CellIdentifier;
+	NSString *cellIdentifier;
+	UITableViewCellStyle cellStyle;
 	
 	if((indexPath.section == 0 && indexPath.row == 0) || (indexPath.section == 1 && indexPath.row == 0)) {
-		CellIdentifier = @"WA_UITableViewCellStyleValue1_Cell";
+		cellIdentifier = @"WA_UITableViewCellStyleValue1_Cell";
+		cellStyle = UITableViewCellStyleValue1;
 	}
 	else {
-		CellIdentifier = @"WA_UITableViewCellStyleDefault_Cell";
+		cellIdentifier = @"WA_UITableViewCellStyleDefault_Cell";
+		cellStyle = UITableViewCellStyleDefault;
 	}
 	
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if(!cell) {
-		if((indexPath.section == 0 && indexPath.row == 0) || (indexPath.section == 1 && indexPath.row == 0)) {
-			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-		}
-		else {
-			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-		}
+		cell = [[UITableViewCell alloc] initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
 	}
     
     // Configure the cell...
 	
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	cell.textLabel.textAlignment = UITextAlignmentLeft;
 	
 	switch (indexPath.section) {
 		case 0:
@@ -445,62 +444,70 @@ static const int kUseExistingPhotoButton = 1;
 		[self.navigationController pushViewController:controller animated:YES];
 	}
 	else if(indexPath.section == 3 && indexPath.row == 0) {
-		size_t actualSize = 0;
-		for(int n=0;n<submission.numberOfSubmissionPhotos;n++) {
-			actualSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeActual];
-		}
+		[tableView deselectRowAtIndexPath:indexPath animated:YES];
 		
-		if(actualSize > kSubmissionSizeScaleThreshhold || YES) {
-			// TODO: exclude upscalling
-			
-			size_t smallSize = 0;
-			size_t mediumSize = 0;
-			size_t largeSize = 0;
-			for(int n=0;n<submission.numberOfSubmissionPhotos;n++) {
-				smallSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeSmall];
-				mediumSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeMedium];
-				largeSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeLarge];
-			}
-			
-			// TODO: make this much nicer
-			UIActionSheet *sizeActionSheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"This submission is %@B. You can reduce the submission size by scaling images to one of the sizes below.", @(actualSize).formatSI]
-																		 callback:^(NSInteger buttonIndex) {
-																			 switch(buttonIndex) {
-																				 case 0:
-																					 submission.photoScaleSize = kWASubmissionPhotoSizeSmall;
-																					 break;
-																				 case 1:
-																					 submission.photoScaleSize = kWASubmissionPhotoSizeMedium;
-																					 break;
-																				 case 2:
-																					 submission.photoScaleSize = kWASubmissionPhotoSizeLarge;
-																					 break;
-																				 case 3:
-																					 submission.photoScaleSize = kWASubmissionPhotoSizeActual;
-																					 break;
-																				 default:
-																					 return;
-																			 }
-																			 
-																			 // Go submit the submission object to the backend
-																			 WASubmitViewController *controller = [[WASubmitViewController alloc] initWithSubmission:submission];
-																			 [self.navigationController pushViewController: controller animated:YES];
-																			 [tableView deselectRowAtIndexPath:indexPath animated:YES];
-																		 }
-																cancelButtonTitle:@"Cancel"
-														   destructiveButtonTitle:nil
-																otherButtonTitles:[NSString stringWithFormat:@"Small (%@B)", @(smallSize).formatSI],
-											  [NSString stringWithFormat:@"Medium (%@B)", @(mediumSize).formatSI],
-											  [NSString stringWithFormat:@"Large (%@B)", @(largeSize).formatSI],
-											  [NSString stringWithFormat:@"Actual size (%@B)", @(actualSize).formatSI], nil];
-			[sizeActionSheet showInView:self.view];
+		UIAlertView *verificationAlert = [submission verify];
+		if(verificationAlert) {
+			[verificationAlert show];
 		}
 		else {
-			WASubmitViewController *controller = [[WASubmitViewController alloc] initWithSubmission:submission];
-			[self.navigationController pushViewController: controller animated:YES];
-			[tableView deselectRowAtIndexPath:indexPath animated:YES];
+			size_t actualSize = 0;
+			for(int n=0;n<submission.numberOfSubmissionPhotos;n++) {
+				actualSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeActual];
+			}
+			
+			if(actualSize > kSubmissionSizeScaleThreshhold || YES) {
+				// TODO: exclude upscalling
+				
+				size_t smallSize = 0;
+				size_t mediumSize = 0;
+				size_t largeSize = 0;
+				for(int n=0;n<submission.numberOfSubmissionPhotos;n++) {
+					smallSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeSmall];
+					mediumSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeMedium];
+					largeSize += [[submission submissionPhotoAtIndex:n] estimatedFileSize:kWASubmissionPhotoSizeLarge];
+				}
+				
+				// TODO: make this much nicer
+				UIActionSheet *sizeActionSheet = [[UIActionSheet alloc] initWithTitle:[NSString stringWithFormat:@"This submission is %@B. You can reduce the submission size by scaling images to one of the sizes below.", @(actualSize).formatSI]
+																			 callback:^(NSInteger buttonIndex) {
+																				 switch(buttonIndex) {
+																					 case 0:
+																						 submission.photoScaleSize = kWASubmissionPhotoSizeSmall;
+																						 break;
+																					 case 1:
+																						 submission.photoScaleSize = kWASubmissionPhotoSizeMedium;
+																						 break;
+																					 case 2:
+																						 submission.photoScaleSize = kWASubmissionPhotoSizeLarge;
+																						 break;
+																					 case 3:
+																						 submission.photoScaleSize = kWASubmissionPhotoSizeActual;
+																						 break;
+																					 default:
+																						 return;
+																				 }
+																				 
+																				 // Go submit the submission object to the backend
+																				 WASubmitViewController *controller = [[WASubmitViewController alloc] initWithSubmission:submission];
+																				 [self.navigationController pushViewController: controller animated:YES];
+																				 [tableView deselectRowAtIndexPath:indexPath animated:YES];
+																			 }
+																	cancelButtonTitle:@"Cancel"
+															   destructiveButtonTitle:nil
+																	otherButtonTitles:[NSString stringWithFormat:@"Small (%@B)", @(smallSize).formatSI],
+												  [NSString stringWithFormat:@"Medium (%@B)", @(mediumSize).formatSI],
+												  [NSString stringWithFormat:@"Large (%@B)", @(largeSize).formatSI],
+												  [NSString stringWithFormat:@"Actual size (%@B)", @(actualSize).formatSI], nil];
+				[sizeActionSheet showInView:self.view];
+			}
+			else {
+				WASubmitViewController *controller = [[WASubmitViewController alloc] initWithSubmission:submission];
+				[self.navigationController pushViewController: controller animated:YES];
+				[tableView deselectRowAtIndexPath:indexPath animated:YES];
+			}
 		}
-	}	
+	}
 }
 
 #pragma mark - textField delegate

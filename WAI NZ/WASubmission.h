@@ -122,7 +122,8 @@ extern NSString *const kWASubmissionUpdatedNotification;
 
 - (NSString *)tagsAsString;
 
-// TODO: -verify
+// TODO: category
+- (UIAlertView *)verify;
 
 /** The description the user has entered */
 @property (nonatomic, strong) NSString *descriptionText;

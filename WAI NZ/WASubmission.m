@@ -72,6 +72,33 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	return @"Drag me to specify the location";
 }
 
+#pragma mark - Actions
+
+- (UIAlertView *)verify {
+	if(!location) {
+		return [[UIAlertView alloc] initWithTitle:@"No location specified"
+										  message:@"Every submission to WAI NZ must include a location, please go back and specify where these photos were taken."
+										 delegate:nil
+								cancelButtonTitle:@"Ok"
+								otherButtonTitles:nil];
+	}
+	
+	if(location.latitude < kNewZealandRegion.center.latitude - kNewZealandRegion.span.latitudeDelta ||
+	   location.latitude > kNewZealandRegion.center.latitude + kNewZealandRegion.span.latitudeDelta ||
+	   location.latitude < kNewZealandRegion.center.longitude - kNewZealandRegion.span.longitudeDelta ||
+	   location.latitude > kNewZealandRegion.center.longitude + kNewZealandRegion.span.longitudeDelta) { // TODO: chattams?
+		return [[UIAlertView alloc] initWithTitle:@"Submissions from NZ only"
+										  message:@"WAI NZ only accepts submissions from New Zealand, sorry about that."
+										 delegate:nil
+								cancelButtonTitle:@"Ok"
+								otherButtonTitles:nil];
+	}
+	
+	// TODO: email address
+	
+	return nil;
+}
+
 #pragma mark - Getters/Setters
 
 - (void)addSubmissionPhoto:(WASubmissionPhoto *)photo {
