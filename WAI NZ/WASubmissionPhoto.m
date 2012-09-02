@@ -32,7 +32,7 @@
         
         //image = photo;
         timestamp = @(time);
-        filename = @"Testing123";
+        filename = [NSString stringWithFormat:@"%p",self];
         location = loc;
 		size = photo.size;
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -141,6 +141,25 @@
 	}
 }
 
+#pragma mark - Utilities
+
+- (UIImage *) retrieveFullsizeImage{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,     NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *getImagePath = [documentsDirectory stringByAppendingPathComponent:filename];
+    UIImage *img = [UIImage imageWithContentsOfFile:getImagePath];
+    return img;
+}
+
+-(void) removePhotoFromDisk{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *pathToDocuments=[paths objectAtIndex:0];
+    NSString *savedImagePath = [pathToDocuments stringByAppendingPathComponent:filename];
+    NSError *error = nil;
+    [fileManager removeItemAtPath:savedImagePath error:&error];
+}
+
 #pragma mark - Getters/Setters
 
 - (CGSize)estimatedImageSize:(WASubmissionPhotoSize)photoScale {
@@ -167,11 +186,10 @@
 }
 
 - (UIImage *) fullsizeImage{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,     NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *getImagePath = [documentsDirectory stringByAppendingPathComponent:filename];
-    UIImage *img = [UIImage imageWithContentsOfFile:getImagePath];
-    return img;
+    if(fullsizeImage==NULL){
+        fullsizeImage=[self retrieveFullsizeImage];
+    }
+        return fullsizeImage;
 }
 
 - (NSString *)base64String {

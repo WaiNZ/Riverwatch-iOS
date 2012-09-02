@@ -120,6 +120,7 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 	self.view = successfulView;
 	self.navigationItem.title = @"Done";
 	self.navigationItem.rightBarButtonItem = doneButton;
+    [submission unloadPhotos];
 }
 
 @end

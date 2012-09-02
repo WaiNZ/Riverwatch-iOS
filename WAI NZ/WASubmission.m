@@ -82,6 +82,7 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 
 - (void)removeSubmissionPhoto:(int)index {
 	if(photos.count > 1) {
+        [[photos objectAtIndex:index] removePhotoFromDisk];
 		[photos removeObjectAtIndex:index];
 		POST_UPDATE_NOTIFICATION;
 	}
@@ -132,6 +133,14 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 - (int)numberOfSubmissionPhotos {
     return [photos count];
 }
+
+- (void) unloadPhotos {
+    for(int i = 0;i<[photos count];i++){
+        [[photos objectAtIndex:i] removePhotoFromDisk];
+    }
+}
+
+
 
 - (void)addTag:(NSString *)tag {
     [tags addObject:tag];

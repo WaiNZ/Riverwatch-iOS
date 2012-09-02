@@ -85,6 +85,13 @@ typedef enum {
  */
 - (size_t)estimatedFileSize:(WASubmissionPhotoSize)photoScale;
 
+
+/**
+ Removes the contained photo from disk
+ */
+
+- (void) removePhotoFromDisk;
+
 /** The location this photo was taken at, may be nil */
 @property (atomic, readonly) WAGeolocation *location;
 /** The UNIX time the photo was taken at */
