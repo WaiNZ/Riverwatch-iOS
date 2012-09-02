@@ -102,10 +102,10 @@ static const int kUseExistingPhotoButton = 1;
 	[mainTableView beginUpdates];
 	// Update the table
 	if(slider.on){
-		[mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
+		[mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:2]] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
 	else {
-		[mainTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
+		[mainTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:2]] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
 	// Make sure we dont end up resursing
 	DISABLE_SUBMISSION_UPDATE_NOTIFICATION;
