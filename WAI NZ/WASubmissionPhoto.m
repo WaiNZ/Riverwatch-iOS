@@ -13,6 +13,7 @@
 #import <RestKit/RestKit.h>
 #import <RestKit/NSData+Base64.h>
 #import "UIImage+Resize.h"
+#import "WAAppDelegate.h"
 
 @implementation WASubmissionPhoto
 
@@ -28,10 +29,16 @@
 - (id)initWithPhoto:(UIImage *)photo timestamp:(time_t)time location:(WAGeolocation *)loc {
     self = [super init];
     if (self) {
+        
         image = photo;
         timestamp = @(time);
         location = loc;
 		size = image.size;
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *pathToDocuments=[paths objectAtIndex:0];
+        NSData *photoData = UIImageJPEGRepresentation(photo, 0.9f);
+        [photoData writeToFile:pathToDocuments atomically:YES];
+        thumbImage = [photo thumbnailImage:(90*((WAAppDelegate *)[UIApplication sharedApplication].delegate).window.contentScaleFactor) transparentBorder:0 cornerRadius:0 interpolationQuality:kCGInterpolationDefault];
     }
     return self;
 }
