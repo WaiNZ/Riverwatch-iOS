@@ -45,6 +45,16 @@ static const CGFloat photoSpacer = 20;
 	leftImageView = imageView1;
 	centerImageView = imageView2;
 	rightImageView = imageView3;
+    
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    
+    
+    [singleTap requireGestureRecognizerToFail:doubleTap];
+    
+    [doubleTap setNumberOfTapsRequired:2];
+    
+    [centerView addGestureRecognizer:doubleTap];
+    
 }
 
 - (void)viewDidUnload {
@@ -52,6 +62,7 @@ static const CGFloat photoSpacer = 20;
 	view1 = nil;
 	view3 = nil;
 	
+    singleTap = nil;
     [super viewDidUnload];
 }
 
@@ -306,5 +317,14 @@ static const CGFloat photoSpacer = 20;
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
 	[self centerScrollViewContents];
+}
+
+- (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
+    
+    if(centerView.zoomScale > centerView.minimumZoomScale)
+        [centerView setZoomScale:centerView.minimumZoomScale animated:YES];
+    else
+        [centerView setZoomScale:centerView.maximumZoomScale animated:YES];
+    [self hideBars];
 }
 @end

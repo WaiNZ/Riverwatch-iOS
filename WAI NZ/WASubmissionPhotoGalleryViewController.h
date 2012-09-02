@@ -19,6 +19,7 @@
  */
 @interface WASubmissionPhotoGalleryViewController : UIViewController <UIScrollViewDelegate> {
 	
+    IBOutlet UITapGestureRecognizer *singleTap;
 	IBOutlet UIScrollView *view2;
 	IBOutlet UIScrollView *view3;
 	IBOutlet UIScrollView *view1;
@@ -52,5 +53,8 @@
  @param index the id of the photo to display
  */
 - (id)initWithSubmission:(WASubmission *)_submission andPhotoIndex:(int)index;
+
+- (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer;
+
 
 @end
