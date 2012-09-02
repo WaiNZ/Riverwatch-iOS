@@ -117,6 +117,9 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObject:(id)object {
 	NSLog(@"%@", object);
+	self.view = successfulView;
+	self.navigationItem.title = @"Done";
+	self.navigationItem.rightBarButtonItem = doneButton;
 }
 
 @end
