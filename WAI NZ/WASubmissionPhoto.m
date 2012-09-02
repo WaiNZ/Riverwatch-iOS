@@ -212,4 +212,5 @@
 @synthesize thumbImage;
 @synthesize photoScaleSize;
 @synthesize size;
+@synthesize filename;
 @end
