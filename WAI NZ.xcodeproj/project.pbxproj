@@ -47,6 +47,10 @@
 		A12A54DA15D743480025D32A /* WASubmissionDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54D815D743480025D32A /* WASubmissionDescriptionViewController.xib */; };
 		A12A54DF15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12A54DD15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m */; };
 		A12A54E015D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */; };
+		A168E22F15F31A6800B181C8 /* lock-large.png in Resources */ = {isa = PBXBuildFile; fileRef = A168E22D15F31A6800B181C8 /* lock-large.png */; };
+		A168E23015F31A6800B181C8 /* lock-large@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A168E22E15F31A6800B181C8 /* lock-large@2x.png */; };
+		A168E23615F31A9900B181C8 /* WACameraRollAccessDeniedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A168E23415F31A9900B181C8 /* WACameraRollAccessDeniedViewController.m */; };
+		A168E23715F31A9900B181C8 /* WACameraRollAccessDeniedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A168E23515F31A9900B181C8 /* WACameraRollAccessDeniedViewController.xib */; };
 		A16E121D15F30422006DC62C /* WASubmissionTagEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A16E121C15F30422006DC62C /* WASubmissionTagEditorViewController.m */; };
 		A16E122115F305AF006DC62C /* WASubmissionTagEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A16E122015F305AF006DC62C /* WASubmissionTagEditorViewController.xib */; };
 		A17B969315F1D4A1007E7E01 /* WAStyleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A17B969215F1D4A1007E7E01 /* WAStyleHelper.m */; };
@@ -173,6 +177,11 @@
 		A12A54DC15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionPhotoGalleryViewController.h; sourceTree = "<group>"; };
 		A12A54DD15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionPhotoGalleryViewController.m; sourceTree = "<group>"; };
 		A12A54DE15D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionPhotoGalleryViewController.xib; sourceTree = "<group>"; };
+		A168E22D15F31A6800B181C8 /* lock-large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-large.png"; sourceTree = "<group>"; };
+		A168E22E15F31A6800B181C8 /* lock-large@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock-large@2x.png"; sourceTree = "<group>"; };
+		A168E23315F31A9900B181C8 /* WACameraRollAccessDeniedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACameraRollAccessDeniedViewController.h; sourceTree = "<group>"; };
+		A168E23415F31A9900B181C8 /* WACameraRollAccessDeniedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACameraRollAccessDeniedViewController.m; sourceTree = "<group>"; };
+		A168E23515F31A9900B181C8 /* WACameraRollAccessDeniedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WACameraRollAccessDeniedViewController.xib; sourceTree = "<group>"; };
 		A16E121B15F30422006DC62C /* WASubmissionTagEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionTagEditorViewController.h; sourceTree = "<group>"; };
 		A16E121C15F30422006DC62C /* WASubmissionTagEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionTagEditorViewController.m; sourceTree = "<group>"; };
 		A16E122015F305AF006DC62C /* WASubmissionTagEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionTagEditorViewController.xib; sourceTree = "<group>"; };
@@ -353,6 +362,7 @@
 		A12A54BC15D7420B0025D32A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A168E23215F31A7500B181C8 /* Camera Roll Access Denied */,
 				A12A54BE15D742180025D32A /* Home */,
 				A12A54C415D742520025D32A /* Submission Overview */,
 				A12A54D515D743200025D32A /* Submission Description */,
@@ -428,6 +438,25 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		A168E23115F31A6B00B181C8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A168E22D15F31A6800B181C8 /* lock-large.png */,
+				A168E22E15F31A6800B181C8 /* lock-large@2x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A168E23215F31A7500B181C8 /* Camera Roll Access Denied */ = {
+			isa = PBXGroup;
+			children = (
+				A168E23315F31A9900B181C8 /* WACameraRollAccessDeniedViewController.h */,
+				A168E23415F31A9900B181C8 /* WACameraRollAccessDeniedViewController.m */,
+				A168E23515F31A9900B181C8 /* WACameraRollAccessDeniedViewController.xib */,
+			);
+			name = "Camera Roll Access Denied";
+			sourceTree = "<group>";
+		};
 		A16E121A15F30400006DC62C /* Submission Tags */ = {
 			isa = PBXGroup;
 			children = (
@@ -441,6 +470,7 @@
 		A1B8C9D615E466550027D9D3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A168E23115F31A6B00B181C8 /* Resources */,
 				A1B8C9D715E4665E0027D9D3 /* Icons */,
 			);
 			name = Images;
@@ -628,6 +658,9 @@
 				A1B8C9E015E466720027D9D3 /* icon_144.png in Resources */,
 				A1B8C9E115E466720027D9D3 /* iTunesArtwork in Resources */,
 				A16E122115F305AF006DC62C /* WASubmissionTagEditorViewController.xib in Resources */,
+				A168E22F15F31A6800B181C8 /* lock-large.png in Resources */,
+				A168E23015F31A6800B181C8 /* lock-large@2x.png in Resources */,
+				A168E23715F31A9900B181C8 /* WACameraRollAccessDeniedViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,6 +732,7 @@
 				A17B96A715F20CA8007E7E01 /* WASubmissionResponse.m in Sources */,
 				A17B96AB15F21B07007E7E01 /* RKObjectManager+WAI.m in Sources */,
 				A16E121D15F30422006DC62C /* WASubmissionTagEditorViewController.m in Sources */,
+				A168E23615F31A9900B181C8 /* WACameraRollAccessDeniedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

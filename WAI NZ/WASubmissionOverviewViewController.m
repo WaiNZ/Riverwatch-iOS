@@ -19,7 +19,6 @@
 #import "WASubmissionTagEditorViewController.h"
 #import <UIKit/UITableView.h>
 #import <QuartzCore/QuartzCore.h>
-#import "WASubmissionTagEditorViewController.h"
 
 #define ENABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submissionUpdated) name:kWASubmissionUpdatedNotification object:submission];
 #define DISABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] removeObserver:self name:kWASubmissionUpdatedNotification object:submission]

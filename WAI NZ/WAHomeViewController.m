@@ -10,6 +10,9 @@
 
 #import "WASubmissionOverviewViewController.h"
 #import "WASubmission.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <CoreLocation/CoreLocation.h>
+#import "WACameraRollAccessDeniedViewController.h"
 
 @interface WAHomeViewController ()
 
@@ -53,13 +56,50 @@
 }
 
 - (IBAction)choosePhoto:(id)sender {
-	// TODO: check for < 6.0 and notify user that location services are required if not enabled
-    UIImagePickerController *cameraRollPicker = [[UIImagePickerController_Always alloc] init];
-    
-    cameraRollPicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    cameraRollPicker.delegate = self;
-    
-    [self presentModalViewController: cameraRollPicker animated:YES];
+	void (^showPicker)() = ^{
+		UIImagePickerController *cameraRollPicker = [[UIImagePickerController_Always alloc] init];
+		
+		cameraRollPicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+		cameraRollPicker.delegate = self;
+		
+		[self presentModalViewController: cameraRollPicker animated:YES];
+	};
+	
+	if([UIDevice currentDevice].systemVersion.floatValue < 6.0) {
+		// TODO: TEST!
+		// Assets library required to access something from the camera roll
+		// Assets library requires location access, so check before showing picker
+		ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+		[library enumerateGroupsWithTypes:ALAssetsGroupLibrary
+							   usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+								   *stop = YES;
+								   showPicker();
+							   }
+							 failureBlock:^(NSError *error) {
+								 if([error.domain isEqualToString:ALAssetsLibraryErrorDomain]) {
+									 switch(error.code) {
+										 case ALAssetsLibraryAccessUserDeniedError: {
+											 WACameraRollAccessDeniedViewController *controller = [WACameraRollAccessDeniedViewController controllerWithReason:@"Accessing the photo library requires access to your location, you can enable this in Location Services."];
+											 [self presentModalViewController:controller animated:YES];
+											 return;
+										 }
+										 case ALAssetsLibraryAccessGloballyDeniedError: {
+											 WACameraRollAccessDeniedViewController *controller = [WACameraRollAccessDeniedViewController controllerWithReason:@"Accessing the photo library requires access to your location, you can enable this in Location Services."];
+											 [self presentModalViewController:controller animated:YES];
+											 return;
+										 }
+										 default: {
+											 break;
+										 }
+									 }
+								 }
+								 
+									// TODO: error, wansn't what we were expecting
+							 }];
+	}
+	else {
+		showPicker();
+	}
 }
 
 #pragma mark - UIImagePickerControllerDelegate
