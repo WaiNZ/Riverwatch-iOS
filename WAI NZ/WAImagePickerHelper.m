@@ -15,7 +15,10 @@
 
 + (void)showImagePickerForCameraRollInController:(UIViewController *)controller withPickerDelegate:(id<UINavigationControllerDelegate,UIImagePickerControllerDelegate>)delegate {
 	void (^showPicker)() = ^{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincompatible-pointer-types"
 		UIImagePickerController *cameraRollPicker = [[UIImagePickerController_Always alloc] init];
+#pragma clang diagnostic pop
 		
 		cameraRollPicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
 		cameraRollPicker.delegate = delegate;
