@@ -56,6 +56,9 @@ static const int kSectionSubmitRows = 1;
 		submission = _submission;
 		self.navigationItem.title = @"Submission";
 		ENABLE_SUBMISSION_UPDATE_NOTIFICATION;
+        locationManager = [[CLLocationManager alloc] init];
+        locationManager.delegate = self;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
 	}
 	return self;
 }
@@ -83,6 +86,10 @@ static const int kSectionSubmitRows = 1;
 		[mapPleaseSpecifyView removeFromSuperview];
 		mapPleaseSpecifyView = nil;
 	}
+
+
+
+
 }
 
 - (void)viewDidUnload {
@@ -102,6 +109,7 @@ static const int kSectionSubmitRows = 1;
 	shadeViewTop = nil;
 	mapSidePanel = nil;
 	mapPleaseSpecifyView = nil;
+    pinButton = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -315,7 +323,7 @@ static const int kSectionSubmitRows = 1;
 	}
 	
     [mapView setRegion:region animated:animated];
-		
+    
     NSLog(@"lat is: %f", mapView.region.center.latitude);
     NSLog(@"long is: %f", mapView.region.center.longitude);
 }
@@ -584,6 +592,7 @@ static const int kSectionSubmitRows = 1;
 	else {
 		pinView.annotation = annotation;
 	}
+    [pinView setRightCalloutAccessoryView:pinButton];
 	pinView.draggable = YES;
 	pinView.canShowCallout = YES;
 	pinView.selected = editingMap;
@@ -597,4 +606,37 @@ static const int kSectionSubmitRows = 1;
 	}
 }
 
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"New latitude: %f", newLocation.coordinate.latitude);
+    NSLog(@"New longitude: %f", newLocation.coordinate.longitude);
+}
+
+- (IBAction)pinButtonPressed:(id)sender {
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Use current location", @"Revert to original location", nil];
+    
+    [sheet showInView:mapView];
+    }
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"Button %d", buttonIndex);
+    switch (buttonIndex) {
+        case 0:
+            [locationManager startUpdatingLocation];
+            [submission setCoordinate:locationManager.location.coordinate];
+            [locationManager stopUpdatingLocation];
+            [mapView setCenterCoordinate:submission.coordinate animated:YES];
+            break;
+            
+        case 1:
+            [submission setCoordinate:[submission submissionPhotoAtIndex:0].location.coordinate];
+            [mapView setCenterCoordinate:submission.coordinate animated:YES];
+            break;
+        default:
+            break;
+    }
+}
 @end
