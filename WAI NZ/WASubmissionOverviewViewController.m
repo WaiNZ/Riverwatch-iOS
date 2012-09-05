@@ -28,6 +28,20 @@ static const int kTakePhotoButton = 0;
 static const int kUseExistingPhotoButton = 1;
 
 
+static const int kNumberofSections = 3;
+
+static const int kSectionDetails = 0;
+static const int kSectionDetailsRows = 2;
+static const int kRowTags = 0;
+static const int kRowDescription = 1;
+
+static const int kSectionEmail = 1;
+static const int kRowIncludeEmail = 0;
+static const int kRowEmailField = 1;
+
+static const int kSectionSubmit = 2;
+static const int kSectionSubmitRows = 1;
+
 @interface WASubmissionOverviewViewController ()
 
 -(void) loadPhotoViews;
@@ -102,10 +116,10 @@ static const int kUseExistingPhotoButton = 1;
 	[mainTableView beginUpdates];
 	// Update the table
 	if(slider.on){
-		[mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:2]] withRowAnimation:UITableViewRowAnimationAutomatic];
+		[mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:kSectionEmail inSection:kRowEmailField]] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
 	else {
-		[mainTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:2]] withRowAnimation:UITableViewRowAnimationAutomatic];
+		[mainTableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:kSectionEmail inSection:kRowEmailField]] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
 	// Make sure we dont end up resursing
 	DISABLE_SUBMISSION_UPDATE_NOTIFICATION;
@@ -354,20 +368,28 @@ static const int kUseExistingPhotoButton = 1;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 4;
+    return kNumberofSections;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    if(section == kSectionDetails){
+        return @"Details";
+    }
+    else{
+        return nil;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     switch (section) {
-		case 0:
-			return 1;
-		case 1:
-			return 1;
-		case 2:
+		case kSectionDetails:
+			return kSectionDetailsRows;
+		case kSectionEmail:
 			return submission.anonymous?1:2;
-		case 3:
-			return 1;
+		case kSectionSubmit:
+			return kSectionSubmitRows;
 		default:
 			return 0;
 	}
@@ -377,7 +399,7 @@ static const int kUseExistingPhotoButton = 1;
 	NSString *cellIdentifier;
 	UITableViewCellStyle cellStyle;
 	
-	if((indexPath.section == 0 && indexPath.row == 0) || (indexPath.section == 1 && indexPath.row == 0)) {
+	if((indexPath.section == kSectionDetails && indexPath.row == kRowTags) || (indexPath.section == kSectionDetails && indexPath.row == kRowDescription)) {
 		cellIdentifier = @"WA_UITableViewCellStyleValue1_Cell";
 		cellStyle = UITableViewCellStyleValue1;
 	}
@@ -399,32 +421,36 @@ static const int kUseExistingPhotoButton = 1;
 	cell.accessoryView = nil;
 	
 	switch (indexPath.section) {
-		case 0:
-			cell.textLabel.text = @"Tags";
-			cell.detailTextLabel.text = [submission tagsAsString];
-			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-			break;
-		case 1:
-			cell.textLabel.text = @"Description";
-			cell.detailTextLabel.text = submission.descriptionText;
-			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-			break;
-		case 2:
+		case kSectionDetails:
+            switch(indexPath.row) {
+                case kRowTags:
+                    cell.textLabel.text = @"Tags";
+                    cell.detailTextLabel.text = [submission tagsAsString];
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+                    break;
+                case kRowDescription:
+                    cell.textLabel.text = @"Description";
+                    cell.detailTextLabel.text = submission.descriptionText;
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+                    break;
+            }
+            break;
+		case kSectionEmail:
 			switch (indexPath.row) {
-				case 0:
+				case kRowIncludeEmail:
 					cell.textLabel.text = @"Include my email";
 					cell.accessoryView = slider;
 					slider.on = !submission.anonymous;
 					break;
-				case 1:
+				case kRowEmailField:
 					cell = emailCell;
 					emailField.text = submission.email;
 					break;
 			}
 			break;
-		case 3:
+		case kSectionSubmit:
 			cell.textLabel.text = @"Submit";
 			cell.textLabel.textAlignment = UITextAlignmentCenter;
 			cell.selectionStyle = UITableViewCellSelectionStyleBlue;
@@ -437,15 +463,15 @@ static const int kUseExistingPhotoButton = 1;
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if(indexPath.section == 0 && indexPath.row ==0){
+	if(indexPath.section == kSectionDetails && indexPath.row ==kRowTags){
 		WASubmissionTagEditorViewController *controller = [[WASubmissionTagEditorViewController alloc] initWithSubmission:submission];
 		[self.navigationController pushViewController:controller animated:YES];
 	}
-    if(indexPath.section == 1 && indexPath.row ==0){
+    if(indexPath.section == kSectionDetails && indexPath.row ==kRowDescription){
 		WASubmissionDescriptionViewController *controller = [[WASubmissionDescriptionViewController alloc] initWithSubmission:submission];
 		[self.navigationController pushViewController:controller animated:YES];
 	}
-	else if(indexPath.section == 3 && indexPath.row == 0) {
+	else if(indexPath.section == kSectionSubmit && indexPath.row == kSectionSubmitRows-1) {
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
 		
 		UIAlertView *verificationAlert = [submission verify];
