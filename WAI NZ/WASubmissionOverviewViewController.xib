@@ -555,10 +555,10 @@ AAgACAAIAAEAAQABAAE</bytes>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUITapGestureRecognizer" id="618464060"/>
-			<object class="IBUIButton" id="726006116">
+			<object class="IBUIButton" id="958958861">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
-				<string key="NSFrameSize">{72, 37}</string>
+				<string key="NSFrameSize">{30, 30}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView"/>
@@ -567,8 +567,6 @@ AAgACAAIAAEAAQABAAE</bytes>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUIContentHorizontalAlignment">0</int>
 				<int key="IBUIContentVerticalAlignment">0</int>
-				<int key="IBUIButtonType">1</int>
-				<string key="IBUINormalTitle">Get Loc</string>
 				<reference key="IBUIHighlightedTitleColor" ref="555203781"/>
 				<object class="NSColor" key="IBUINormalTitleColor">
 					<int key="NSColorSpace">1</int>
@@ -576,7 +574,11 @@ AAgACAAIAAEAAQABAAE</bytes>
 				</object>
 				<object class="NSColor" key="IBUINormalTitleShadowColor">
 					<int key="NSColorSpace">3</int>
-					<bytes key="NSWhite">MC41AA</bytes>
+					<bytes key="NSWhite">MQA</bytes>
+				</object>
+				<object class="NSCustomResource" key="IBUINormalImage">
+					<string key="NSClassName">NSImage</string>
+					<string key="NSResourceName">loc_mark.png</string>
 				</object>
 				<object class="IBUIFontDescription" key="IBUIFontDescription">
 					<int key="type">2</int>
@@ -731,7 +733,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">pinButton</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="726006116"/>
+						<reference key="destination" ref="958958861"/>
 					</object>
 					<int key="connectionID">88</int>
 				</object>
@@ -833,7 +835,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">pinButtonPressed:</string>
-						<reference key="source" ref="726006116"/>
+						<reference key="source" ref="958958861"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -1023,7 +1025,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">87</int>
-						<reference key="object" ref="726006116"/>
+						<reference key="object" ref="958958861"/>
 						<reference key="parent" ref="0"/>
 					</object>
 				</array>
@@ -1058,6 +1060,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 				<string key="82.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="85.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="87.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="0.0" key="87.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
@@ -1140,6 +1143,10 @@ AAgACAAIAAEAAQABAAE</bytes>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NS.key.0">loc_mark.png</string>
+			<string key="NS.object.0">{30, 30}</string>
+		</object>
 		<string key="IBCocoaTouchPluginVersion">1498</string>
 	</data>
 </archive>
