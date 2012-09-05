@@ -42,6 +42,9 @@ static const int kUseExistingPhotoButton = 1;
 		submission = _submission;
 		self.navigationItem.title = @"Submission";
 		ENABLE_SUBMISSION_UPDATE_NOTIFICATION;
+        locationManager = [[CLLocationManager alloc] init];
+        locationManager.delegate = self;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
 	}
 	return self;
 }
@@ -69,6 +72,10 @@ static const int kUseExistingPhotoButton = 1;
 		[mapPleaseSpecifyView removeFromSuperview];
 		mapPleaseSpecifyView = nil;
 	}
+    
+
+    
+    
 }
 
 - (void)viewDidUnload {
@@ -88,6 +95,7 @@ static const int kUseExistingPhotoButton = 1;
 	shadeViewTop = nil;
 	mapSidePanel = nil;
 	mapPleaseSpecifyView = nil;
+    pinButton = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -558,6 +566,7 @@ static const int kUseExistingPhotoButton = 1;
 	else {
 		pinView.annotation = annotation;
 	}
+    [pinView setRightCalloutAccessoryView:pinButton];
 	pinView.draggable = YES;
 	pinView.canShowCallout = YES;
 	pinView.selected = editingMap;
@@ -571,4 +580,19 @@ static const int kUseExistingPhotoButton = 1;
 	}
 }
 
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"New latitude: %f", newLocation.coordinate.latitude);
+    NSLog(@"New longitude: %f", newLocation.coordinate.longitude);
+}
+
+- (IBAction)pinButtonPressed:(id)sender {
+    [locationManager startUpdatingLocation];
+    [submission setCoordinate:locationManager.location.coordinate];
+    [locationManager stopUpdatingLocation];
+    [mapView setCenterCoordinate:submission.coordinate animated:YES];
+    
+}
 @end
