@@ -371,6 +371,8 @@ static const int kSectionSubmitRows = 1;
 	// Update the content size of the scrollview
 	frame.origin.x += kPhotoSpacing;
     photoScrollView.contentSize = CGSizeMake(frame.origin.x +4, frame.size.height);
+	frame.origin.x -= frame.size.width - 4;
+	[photoScrollView scrollRectToVisible:frame animated:YES];
 }
 
 
