@@ -29,10 +29,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+	mainTableView.tableHeaderView = headerView;
+	mainTableView.tableFooterView = footerView;
 }
 
 - (void)viewDidUnload {
+	mainTableView = nil;
+	headerView = nil;
+	footerView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -42,21 +47,52 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - Actions
+#pragma mark - UITableViewDataSource/UITableViewDelegate
 
-- (IBAction)takePhoto:(id)sender {
-    UIImagePickerController *photoPicker = [[UIImagePickerController alloc] init];
-    // TODO: check if the camera is available
-    
-    photoPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-	photoPicker.delegate = self;
-    
-    [self presentModalViewController:photoPicker animated:YES];
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	return 2;
 }
 
-- (IBAction)choosePhoto:(id)sender {
-	[WAImagePickerHelper showImagePickerForCameraRollInController:self
-											   withPickerDelegate:self];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	static NSString *const cellIdentifier = @"cellIdentifier";
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+	if(!cell) {
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+	}
+	
+	cell.textLabel.textAlignment = UITextAlignmentCenter;
+	switch (indexPath.section) {
+		case 0:
+			cell.textLabel.text = @"Take a photo";
+			break;
+		case 1:
+			cell.textLabel.text = @"Choose an existing photo";
+			break;
+	}
+	
+	return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	if(indexPath.section == 0) {
+		UIImagePickerController *photoPicker = [[UIImagePickerController alloc] init];
+		// TODO: check if the camera is available
+		
+		photoPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+		photoPicker.delegate = self;
+		
+		[self presentModalViewController:photoPicker animated:YES];
+	}
+	else if(indexPath.section == 1) {
+		[WAImagePickerHelper showImagePickerForCameraRollInController:self
+												   withPickerDelegate:self];
+	}
+	
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
