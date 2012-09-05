@@ -11,8 +11,10 @@
 /**
  The home controller for the WAI NZ application. This controller is the first screen presented to the user.
  */
-@interface WAHomeViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
-    
+@interface WAHomeViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITableViewDataSource, UITableViewDelegate> {
+	__unsafe_unretained IBOutlet UITableView *mainTableView;
+	IBOutlet UIView *headerView;
+	IBOutlet UIView *footerView;
 }
 
 @end

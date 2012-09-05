@@ -18,7 +18,7 @@ static NSArray *kAllowedTags;
 
 + (void)initialize {
 	if(self.class == WASubmissionTagEditorViewController.class) {
-		kAllowedTags = @[@"Cow", @"Pollution", @"Runoff"];
+		kAllowedTags = @[@"Cow", @"Pollution", @"Runoff",@"Paint",@"Drain",@"Waterway"];
 	}
 }
 - (id)initWithSubmission:(WASubmission *)_submission {

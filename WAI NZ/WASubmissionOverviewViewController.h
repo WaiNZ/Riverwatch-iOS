@@ -29,7 +29,7 @@
  Of these the all but the time the submission was made can be edited by the
  user.
  */
-@interface WASubmissionOverviewViewController : UITableViewController <UINavigationControllerDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,MKMapViewDelegate> {
+@interface WASubmissionOverviewViewController : UITableViewController <UINavigationControllerDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,MKMapViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate> {
 	__unsafe_unretained IBOutlet UITableView *mainTableView;
 	IBOutlet UITableViewCell *emailCell;
 	IBOutlet UITextField *emailField;
@@ -49,7 +49,12 @@
 	__unsafe_unretained IBOutlet UIView *mapSidePanel;
 	__unsafe_unretained IBOutlet UIView *mapPleaseSpecifyView;
 	BOOL editingMap;
+    
+    CLLocationManager *locationManager;
+
+    IBOutlet UIButton *pinButton;
 }
+- (IBAction)pinButtonPressed:(id)sender;
 
 /**
  Initilize a WASubmissionOverviewViewController with the specified submission
@@ -57,7 +62,6 @@
  @param _submission the submission to display in this controller
  */
 - (id)initWithSubmission:(WASubmission *)_submission;
-
 
 
 @end
