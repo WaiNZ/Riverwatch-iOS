@@ -117,6 +117,9 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
             case RKRequestUnexpectedResponseError:
                 unsuccessfulStatusMessage.text = @"The application received an unexpected message from the server, please try again";
                 break;
+            case RKObjectLoaderUnexpectedResponseError:
+                unsuccessfulStatusMessage.text = @"The application received an unexpected message from the server, please try again";
+                break;
             case RKRequestConnectionTimeoutError:
                 unsuccessfulStatusMessage.text = @"The connection timed out, please try again";
                 break;
