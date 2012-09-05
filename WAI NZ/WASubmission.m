@@ -274,7 +274,7 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
     time_t last = [self latestTimestamp];
     
     time_t photoTime = photo.timestamp.unsignedLongValue;
-    
+    NSLog(@"Verifying photo timestamp");
     if((photoTime - early < 86400) ||
        (last - photoTime > 86400) ||
        (abs(photoTime - last) < 86400) ||
