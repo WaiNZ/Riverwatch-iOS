@@ -86,10 +86,6 @@ static const int kSectionSubmitRows = 1;
 		[mapPleaseSpecifyView removeFromSuperview];
 		mapPleaseSpecifyView = nil;
 	}
-
-
-
-
 }
 
 - (void)viewDidUnload {
@@ -186,6 +182,8 @@ static const int kSectionSubmitRows = 1;
 	
 	// Disable scrolling
 	mainTableView.scrollEnabled = NO;
+	mapView.scrollEnabled = YES;
+	mapView.zoomEnabled = YES;
 	
 	oldStatusBarStyle = [UIApplication sharedApplication].statusBarStyle;
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:YES];
@@ -247,6 +245,8 @@ static const int kSectionSubmitRows = 1;
 						 
 						 // Reanable scrolling
 						 mainTableView.scrollEnabled = YES;
+						 mapView.scrollEnabled = NO;
+						 mapView.zoomEnabled = NO;
 						 
 						 // Center map
 						 [self updateMapView:YES];
