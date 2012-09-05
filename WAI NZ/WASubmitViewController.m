@@ -112,6 +112,21 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error {
 	self.view = unsuccessfulView;
 	self.navigationItem.title = @"Oh dear...";
+    if ([error.domain isEqualToString:@"org.restkit.RestKit.ErrorDomain"]) {
+        switch (error.code) {
+            case RKRequestUnexpectedResponseError:
+                unsuccessfulStatusMessage.text = @"The application received an unexpected message from the server, please try again";
+                break;
+            case RKRequestConnectionTimeoutError:
+                unsuccessfulStatusMessage.text = @"The connection timed out, please try again";
+                break;
+            case RKRequestBaseURLOfflineError:
+                unsuccessfulStatusMessage.text = @"The application was unable to connect to the server, please check your internet connection and try again";
+                break;
+            default:
+                unsuccessfulStatusMessage.text = [NSString stringWithFormat:@"An unexpected error (%d) occured. Please try again.",error.code];
+        }
+    }else unsuccessfulStatusMessage.text = @"An unexpected error occured. Please try again";
 	self.navigationItem.hidesBackButton = NO;
 }
 
