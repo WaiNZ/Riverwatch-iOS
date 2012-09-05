@@ -86,6 +86,8 @@ static const int kSectionSubmitRows = 1;
 		[mapPleaseSpecifyView removeFromSuperview];
 		mapPleaseSpecifyView = nil;
 	}
+	
+	photoLabel.textColor = [WAStyleHelper tableViewHeaderTextColor];
 }
 
 - (void)viewDidUnload {
@@ -369,6 +371,8 @@ static const int kSectionSubmitRows = 1;
 	// Update the content size of the scrollview
 	frame.origin.x += kPhotoSpacing;
     photoScrollView.contentSize = CGSizeMake(frame.origin.x +4, frame.size.height);
+	frame.origin.x -= frame.size.width - 4;
+	[photoScrollView scrollRectToVisible:frame animated:YES];
 }
 
 
@@ -633,7 +637,6 @@ static const int kSectionSubmitRows = 1;
 {
     switch (buttonIndex) {
         case 0: {
-            NSTimeInterval diff = 100;
             [locationManager startUpdatingLocation];
             break;
         }

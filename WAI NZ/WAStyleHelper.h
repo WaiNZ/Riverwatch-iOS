@@ -27,4 +27,6 @@
  */
 + (CGFloat)topAlignLabel:(UILabel *)label;
 
++ (UIColor *)tableViewHeaderTextColor;
+
 @end

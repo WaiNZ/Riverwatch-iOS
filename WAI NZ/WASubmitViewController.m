@@ -11,6 +11,7 @@
 #import "WASubmission.h"
 #import "WASubmissionResponse.h"
 #import "RKObjectManager+WAI.h"
+#import "WAStyleHelper.h"
 
 static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 
@@ -45,6 +46,9 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     inProgressStatusMessage.text = @"Uploading...";
+	successfulStatusMessage.textColor=[WAStyleHelper tableViewHeaderTextColor];
+	unsuccessfulStatusMessage.textColor=[WAStyleHelper tableViewHeaderTextColor];
+	inProgressStatusMessage.textColor=[WAStyleHelper tableViewHeaderTextColor];
     self.navigationItem.hidesBackButton = YES;
 }
 

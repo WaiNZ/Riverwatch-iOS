@@ -11,6 +11,7 @@
 #import "UIAlertView+Blocks.h"
 #import <RestKit/RestKit.h>
 
+
 #define POST_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] postNotificationName:kWASubmissionUpdatedNotification object:self]
 
 NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotification";
@@ -100,17 +101,41 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 								otherButtonTitles:nil];
 	}
 	
-	// TODO: email address
+    if(!anonymous){
+        if(! [self NSStringIsValidEmail:(email)]){
+            return [[UIAlertView alloc] initWithTitle:@"Invalid email address"
+                                              message:@"We didn't recognise your email address, please check it is correct and try again."
+										 delegate:nil
+								cancelButtonTitle:@"Ok"
+								otherButtonTitles:nil];
+        }
+    }
 	
 	return nil;
 }
 
+
+-(BOOL) NSStringIsValidEmail:(NSString *)checkString{
+    BOOL stricterFilter = YES; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
+    NSString *stricterFilterString = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSString *laxString = @".+@.+\\.[A-Za-z]{2}[A-Za-z]*";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
+}
+
+
 #pragma mark - Getters/Setters
 
 - (void)addSubmissionPhoto:(WASubmissionPhoto *)photo {
-    [self verifyPhotoTimestamp:(photo)];
-    [photos addObject:photo];
-	POST_UPDATE_NOTIFICATION;
+    UIAlertView *result = [self verifyPhotoTimestamp:(photo)];
+	if(result == Nil){
+		[photos addObject:photo];
+		POST_UPDATE_NOTIFICATION;
+	}
+	else{
+		[result show];
+	}
 }
 
 - (void)removeSubmissionPhoto:(int)index {
@@ -271,20 +296,26 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 
 - (UIAlertView *) verifyPhotoTimestamp:(WASubmissionPhoto *)photo{
     time_t early = [self timestamp];
+	NSLog(@"Current earliest photo time is %ld",early);
     time_t last = [self latestTimestamp];
-    
-    time_t photoTime = photo.timestamp.unsignedLongValue;
-    NSLog(@"Verifying photo timestamp");
+	NSLog(@"Current last photo time is %ld",last);
+
+	time_t photoTime = photo.timestamp.unsignedLongValue;
+    NSLog(@"Verifying photo timestamp: %ld",photoTime);
     
     time_t max = MAX(photoTime, last);
+	NSLog(@"Max time is %ld",max);
+
     time_t min = MIN(photoTime, early);
-    
+    NSLog(@"Min time is: %ld",min);
+	
+	NSLog(@"Difference is: %ld", max-min);
     
     /*(photoTime - early < 86400) ||
      (last - photoTime > 86400) ||
      (abs(photoTime - last) < 86400) ||
      (abs(early - photoTime) < 86400)*/
-    if(max - min > 86400){
+    if((max - min) > 86400){
         return [[UIAlertView alloc] initWithTitle:@"Photo times are too different"
 										  message:@"The photos sent to WAI NZ must all have been taken within a 24 hour period, please submit this photo separately."
 										 delegate:nil

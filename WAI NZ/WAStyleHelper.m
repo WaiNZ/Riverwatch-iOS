@@ -22,4 +22,13 @@
     return diff;
 }
 
++ (UIColor *)tableViewHeaderTextColor {
+	CGColorSpaceRef device = CGColorSpaceCreateDeviceRGB();
+	CGColorRef color = CGColorCreate(device, (CGFloat[]){0.298039, 0.337255, 0.423529,1});
+	CGColorSpaceRelease(device);
+	UIColor *uicolor = [[UIColor alloc] initWithCGColor:color];
+	CGColorRelease(color);
+	return uicolor;
+}
+
 @end
