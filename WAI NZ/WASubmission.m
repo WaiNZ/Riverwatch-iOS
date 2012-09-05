@@ -108,6 +108,7 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 #pragma mark - Getters/Setters
 
 - (void)addSubmissionPhoto:(WASubmissionPhoto *)photo {
+    [self verifyPhotoTimestamp:(photo)];
     [photos addObject:photo];
 	POST_UPDATE_NOTIFICATION;
 }
@@ -255,6 +256,39 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 		}
 	}
 	return ret;
+}
+
+- (time_t) latestTimestamp{
+    time_t ret = LONG_MIN;
+    for(WASubmissionPhoto *photo in photos) {
+		if(photo.timestamp) {
+			ret = MAX(ret, photo.timestamp.longValue);
+		}
+    }
+    return ret;
+}
+
+
+- (UIAlertView *) verifyPhotoTimestamp:(WASubmissionPhoto *)photo{
+    time_t early = [self timestamp];
+    time_t last = [self latestTimestamp];
+    
+    time_t photoTime = photo.timestamp.unsignedLongValue;
+    
+    if((photoTime - early < 86400) ||
+       (last - photoTime > 86400) ||
+       (abs(photoTime - last) < 86400) ||
+       (abs(early - photoTime) < 86400)
+       ){
+        return [[UIAlertView alloc] initWithTitle:@"Photo times are too different"
+										  message:@"The photos sent to WAI NZ must all have been taken within a 24 hour period, please submit this photo separately."
+										 delegate:nil
+								cancelButtonTitle:@"Ok"
+								otherButtonTitles:nil];
+    }
+
+    return nil;
+    
 }
 
 #pragma mark - Private Getters/Setters
