@@ -127,6 +127,12 @@ extern NSString *const kWASubmissionUpdatedNotification;
 
 -(BOOL) NSStringIsValidEmail:(NSString *)checkString;
 
+- (time_t) latestTimestamp;
+
+- (time_t)timestamp;
+
+- (UIAlertView *) verifyPhotoTimestamp:(WASubmissionPhoto *)photo;
+
 /** The description the user has entered */
 @property (nonatomic, strong) NSString *descriptionText;
 /** The email address to be submitted to the council if the submission is not anonymous */
