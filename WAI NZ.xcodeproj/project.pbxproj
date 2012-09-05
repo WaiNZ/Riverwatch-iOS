@@ -54,6 +54,7 @@
 		A168E23C15F321FC00B181C8 /* WAImagePickerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A168E23B15F321FC00B181C8 /* WAImagePickerHelper.m */; };
 		A16E121D15F30422006DC62C /* WASubmissionTagEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A16E121C15F30422006DC62C /* WASubmissionTagEditorViewController.m */; };
 		A16E122115F305AF006DC62C /* WASubmissionTagEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A16E122015F305AF006DC62C /* WASubmissionTagEditorViewController.xib */; };
+		A17A698615F6DC59000F8D47 /* NSObject+Async.m in Sources */ = {isa = PBXBuildFile; fileRef = A17A698515F6DC59000F8D47 /* NSObject+Async.m */; };
 		A17B969315F1D4A1007E7E01 /* WAStyleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A17B969215F1D4A1007E7E01 /* WAStyleHelper.m */; };
 		A17B96A715F20CA8007E7E01 /* WASubmissionResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A17B96A615F20CA8007E7E01 /* WASubmissionResponse.m */; };
 		A17B96AB15F21B07007E7E01 /* RKObjectManager+WAI.m in Sources */ = {isa = PBXBuildFile; fileRef = A17B96AA15F21B07007E7E01 /* RKObjectManager+WAI.m */; };
@@ -192,6 +193,8 @@
 		A16E121C15F30422006DC62C /* WASubmissionTagEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionTagEditorViewController.m; sourceTree = "<group>"; };
 		A16E122015F305AF006DC62C /* WASubmissionTagEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionTagEditorViewController.xib; sourceTree = "<group>"; };
 		A16E9D9D15DBB2EC00E5353C /* MJGAvalibility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MJGAvalibility.h; sourceTree = "<group>"; };
+		A17A698415F6DC59000F8D47 /* NSObject+Async.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Async.h"; sourceTree = "<group>"; };
+		A17A698515F6DC59000F8D47 /* NSObject+Async.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Async.m"; sourceTree = "<group>"; };
 		A17B969115F1D4A1007E7E01 /* WAStyleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAStyleHelper.h; sourceTree = "<group>"; };
 		A17B969215F1D4A1007E7E01 /* WAStyleHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAStyleHelper.m; sourceTree = "<group>"; };
 		A17B96A515F20CA8007E7E01 /* WASubmissionResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionResponse.h; sourceTree = "<group>"; };
@@ -536,6 +539,8 @@
 				A17B96AA15F21B07007E7E01 /* RKObjectManager+WAI.m */,
 				A168E23A15F321FC00B181C8 /* WAImagePickerHelper.h */,
 				A168E23B15F321FC00B181C8 /* WAImagePickerHelper.m */,
+				A17A698415F6DC59000F8D47 /* NSObject+Async.h */,
+				A17A698515F6DC59000F8D47 /* NSObject+Async.m */,
 				A10A5B5615F0DB8E001A8184 /* Vendor */,
 			);
 			name = Utilities;
@@ -751,6 +756,7 @@
 				A16E121D15F30422006DC62C /* WASubmissionTagEditorViewController.m in Sources */,
 				A168E23615F31A9900B181C8 /* WACameraRollAccessDeniedViewController.m in Sources */,
 				A168E23C15F321FC00B181C8 /* WAImagePickerHelper.m in Sources */,
+				A17A698615F6DC59000F8D47 /* NSObject+Async.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -856,7 +862,6 @@
 				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WAI NZ/WAI NZ-Prefix.pch";
-				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -879,7 +884,6 @@
 				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WAI NZ/WAI NZ-Prefix.pch";
-				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

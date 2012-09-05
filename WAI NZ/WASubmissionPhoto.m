@@ -14,6 +14,12 @@
 #import <RestKit/NSData+Base64.h>
 #import "UIImage+Resize.h"
 #import "WAAppDelegate.h"
+#import <dispatch/dispatch.h>
+
+#define WAIT_FOR_DISK_SAVE [saveToDiskLock lockWhenCondition:kSaveToDiskLockOk]; [saveToDiskLock unlock];
+
+static const NSInteger kSaveToDiskLockLocked = 0;
+static const NSInteger kSaveToDiskLockOk = 1;
 
 @implementation WASubmissionPhoto
 
@@ -37,12 +43,24 @@
         filename = [NSString stringWithFormat:@"%p",self];
         location = loc;
 		size = photo.size;
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *pathToDocuments=[paths objectAtIndex:0];
-        NSString *savedImagePath = [pathToDocuments stringByAppendingPathComponent:filename];
-        NSData *photoData = UIImageJPEGRepresentation(photo, 0.9f);
-        [photoData writeToFile:savedImagePath atomically:YES];
-        thumbImage = [photo thumbnailImage:(90*((WAAppDelegate *)[UIApplication sharedApplication].delegate).window.screen.scale) transparentBorder:0 cornerRadius:0 interpolationQuality:kCGInterpolationDefault];
+		saveToDiskLock = [[NSConditionLock alloc] initWithCondition:kSaveToDiskLockLocked];
+		thumbImage = [photo thumbnailImage:(90*((WAAppDelegate *)[UIApplication sharedApplication].delegate).window.screen.scale) transparentBorder:0 cornerRadius:0 interpolationQuality:kCGInterpolationDefault];
+		
+		// Save to disk in background thread
+        dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+		dispatch_async(globalQueue, ^{
+			[saveToDiskLock lock];
+			
+			NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+			NSString *pathToDocuments=[paths objectAtIndex:0];
+			NSString *savedImagePath = [pathToDocuments stringByAppendingPathComponent:filename];
+			NSData *photoData = UIImageJPEGRepresentation(photo, 0.9f);
+			[photoData writeToFile:savedImagePath atomically:YES];
+			
+			NSLog(@"Finished writing photo to disk");
+			
+			[saveToDiskLock unlockWithCondition:kSaveToDiskLockOk];
+		});
     }
     return self;
 }
@@ -188,10 +206,19 @@
 }
 
 - (UIImage *) fullsizeImage{
-    if(fullsizeImage==NULL){
-        fullsizeImage=[self retrieveFullsizeImage];
-    }
-        return fullsizeImage;
+	WAIT_FOR_DISK_SAVE;
+	
+	@synchronized(self) {
+		if(fullsizeImage==NULL){
+			fullsizeImage=[self retrieveFullsizeImage];
+		}
+	}
+		
+	return fullsizeImage;
+}
+
+- (UIImage *)thumbImage {
+	return thumbImage;
 }
 
 - (NSString *)base64String {
@@ -202,6 +229,7 @@
 												 interpolationQuality:kCGInterpolationDefault];
 	}
 	
+	// TODO: just return data on disk? faster?
 	return [UIImageJPEGRepresentation(scaledImage, kJPEGCompressionQuality) base64EncodedString];
 }
 

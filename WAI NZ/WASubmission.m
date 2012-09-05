@@ -82,11 +82,17 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 								cancelButtonTitle:@"Ok"
 								otherButtonTitles:nil];
 	}
-	
-	if(location.latitude < kNewZealandRegion.center.latitude - kNewZealandRegion.span.latitudeDelta ||
-	   location.latitude > kNewZealandRegion.center.latitude + kNewZealandRegion.span.latitudeDelta ||
-	   location.latitude < kNewZealandRegion.center.longitude - kNewZealandRegion.span.longitudeDelta ||
-	   location.latitude > kNewZealandRegion.center.longitude + kNewZealandRegion.span.longitudeDelta) { // TODO: chattams?
+	NSLog(@"location lat: %f ", location.latitude );
+    NSLog(@"NZRegion lat-span: %f", kNewZealandRegion.center.latitude - kNewZealandRegion.span.latitudeDelta);
+    NSLog(@"NZRegion lat+span: %f", kNewZealandRegion.center.latitude + kNewZealandRegion.span.latitudeDelta);
+    NSLog(@"location long: %f ", location.longitude );
+    NSLog(@"NZRegion long-span: %f", kNewZealandRegion.center.longitude - kNewZealandRegion.span.longitudeDelta);
+    NSLog(@"NZRegion long+span: %f", kNewZealandRegion.center.longitude + kNewZealandRegion.span.longitudeDelta);
+    
+	if((location.latitude < (kNewZealandRegion.center.latitude - kNewZealandRegion.span.latitudeDelta)) ||
+	   (location.latitude > (kNewZealandRegion.center.latitude + kNewZealandRegion.span.latitudeDelta)) ||
+	   (location.longitude < (kNewZealandRegion.center.longitude - kNewZealandRegion.span.longitudeDelta)) ||
+	   (location.longitude > (kNewZealandRegion.center.longitude + kNewZealandRegion.span.longitudeDelta))) { // TODO: chattams?
 		return [[UIAlertView alloc] initWithTitle:@"Submissions from NZ only"
 										  message:@"WAI NZ only accepts submissions from New Zealand, sorry about that."
 										 delegate:nil

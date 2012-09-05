@@ -10,6 +10,7 @@
 #import "WASubmission.h"
 #import "UINavigationBar+Animation.h"
 #import "UIImageView+Layout.h"
+#import "NSObject+Async.h"
 
 static const CGFloat photoSpacer = 20;
 #define PHOTO_PAN_MAX (self.view.bounds.size.width + photoSpacer)
@@ -78,7 +79,28 @@ static const CGFloat photoSpacer = 20;
 	
 	centerView.frame = self.subviewFrame;
 	[self.view addSubview:centerView];
-	centerImageView.image = [submission submissionPhotoAtIndex:currentPhoto].fullsizeImage;
+	
+	[self setImage:currentPhoto onView:centerImageView];
+}
+
+- (void)setImage:(NSInteger)photoIndex onView:(UIImageView *)imageView {
+	imageView.image = nil;
+	imageView.tag = photoIndex;
+	[imageView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+	UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	spinner.center = CGPointMake(imageView.bounds.size.width/2, imageView.bounds.size.height/2);
+	[imageView addSubview:spinner];
+	[spinner startAnimating];
+	[[submission submissionPhotoAtIndex:photoIndex] accessGetterConcurrently:@selector(fullsizeImage)
+																  withObject:nil
+																onMainThread:YES
+																	callback:^(id returnedValue) {
+																		[spinner stopAnimating];
+																		[spinner removeFromSuperview];
+																		if(imageView.tag == photoIndex) {
+																			[imageView setAndFitToImage:returnedValue];
+																		}
+																	}];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -142,7 +164,7 @@ static const CGFloat photoSpacer = 20;
 								// Save view positions and set them to what is needed for animations
 								CGPoint oldCenter = centerView.center;
 								[self _setOffset:0];
-								[(*imageViewToShift) setAndFitToImage:[submission submissionPhotoAtIndex:currentPhoto].fullsizeImage];
+								[self setImage:currentPhoto onView:(*imageViewToShift)];
 								[self.view addSubview:(*viewToShift)];
 								
 								[UIView animateWithDuration:kAnimationDuration
@@ -189,12 +211,12 @@ static const CGFloat photoSpacer = 20;
 			
 			if(canSwipeLeft){
 				[self.view addSubview:leftView];
-				[leftImageView setAndFitToImage:[submission submissionPhotoAtIndex:currentPhoto-1].fullsizeImage];
+				[self setImage:currentPhoto-1 onView:leftImageView];
 			}
 		
 			if(canSwipeRight){
 				[self.view addSubview:rightView];
-				[rightImageView setAndFitToImage:[submission submissionPhotoAtIndex:currentPhoto+1].fullsizeImage];
+				[self setImage:currentPhoto+1 onView:rightImageView];
 			}
 			
 			break;

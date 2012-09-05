@@ -31,6 +31,7 @@ typedef enum {
     WAGeolocation *location;
 	WASubmissionPhotoSize photoScaleSize;
 	CGSize size;
+	NSConditionLock *saveToDiskLock;
 }
 
 /**
