@@ -79,8 +79,8 @@
 		A1F0299C15E08FAF00BC9B28 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0299B15E08FAF00BC9B28 /* AssetsLibrary.framework */; };
 		A1F029A015E0956700BC9B28 /* NSDate+TimeConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F0299F15E0956700BC9B28 /* NSDate+TimeConversions.m */; };
 		A1F881CD15F19ED900E5C044 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F881CC15F19ED900E5C044 /* CoreLocation.framework */; };
-		E290F4FD15F6F0D20063F434 /* loc_mark.png in Resources */ = {isa = PBXBuildFile; fileRef = E290F4FB15F6F0D20063F434 /* loc_mark.png */; };
-		E290F4FE15F6F0D20063F434 /* loc_mark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E290F4FC15F6F0D20063F434 /* loc_mark@2x.png */; };
+		E290F50115F6F72D0063F434 /* loc_mark.png in Resources */ = {isa = PBXBuildFile; fileRef = E290F4FF15F6F72D0063F434 /* loc_mark.png */; };
+		E290F50215F6F72D0063F434 /* loc_mark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E290F50015F6F72D0063F434 /* loc_mark@2x.png */; };
 		E2A3B40615DB0A79008AABEC /* WASubmission.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A3B40515DB0A79008AABEC /* WASubmission.m */; };
 		E2A3B40A15DB0E93008AABEC /* WASubmissionPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A3B40915DB0E93008AABEC /* WASubmissionPhoto.m */; };
 		E2B761F915F0553900D18C67 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2B761F815F0553800D18C67 /* MapKit.framework */; };
@@ -226,8 +226,8 @@
 		A1F0299E15E0956700BC9B28 /* NSDate+TimeConversions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeConversions.h"; sourceTree = "<group>"; };
 		A1F0299F15E0956700BC9B28 /* NSDate+TimeConversions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeConversions.m"; sourceTree = "<group>"; };
 		A1F881CC15F19ED900E5C044 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		E290F4FB15F6F0D20063F434 /* loc_mark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = loc_mark.png; path = ../../../../Desktop/loc_mark.png; sourceTree = "<group>"; };
-		E290F4FC15F6F0D20063F434 /* loc_mark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loc_mark@2x.png"; path = "../../../../Desktop/loc_mark@2x.png"; sourceTree = "<group>"; };
+		E290F4FF15F6F72D0063F434 /* loc_mark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = loc_mark.png; path = ../../../../Desktop/loc_mark.png; sourceTree = "<group>"; };
+		E290F50015F6F72D0063F434 /* loc_mark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loc_mark@2x.png"; path = "../../../../Desktop/loc_mark@2x.png"; sourceTree = "<group>"; };
 		E2A3B40415DB0A79008AABEC /* WASubmission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmission.h; sourceTree = "<group>"; };
 		E2A3B40515DB0A79008AABEC /* WASubmission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmission.m; sourceTree = "<group>"; };
 		E2A3B40815DB0E93008AABEC /* WASubmissionPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionPhoto.h; sourceTree = "<group>"; };
@@ -450,8 +450,8 @@
 		A168E23115F31A6B00B181C8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E290F4FB15F6F0D20063F434 /* loc_mark.png */,
-				E290F4FC15F6F0D20063F434 /* loc_mark@2x.png */,
+				E290F4FF15F6F72D0063F434 /* loc_mark.png */,
+				E290F50015F6F72D0063F434 /* loc_mark@2x.png */,
 				A168E22D15F31A6800B181C8 /* lock-large.png */,
 				A168E22E15F31A6800B181C8 /* lock-large@2x.png */,
 			);
@@ -676,8 +676,8 @@
 				A168E23015F31A6800B181C8 /* lock-large@2x.png in Resources */,
 				A168E23715F31A9900B181C8 /* WACameraRollAccessDeniedViewController.xib in Resources */,
 				A19E497D15F35CEA00F98028 /* iTunesArtwork@2x in Resources */,
-				E290F4FD15F6F0D20063F434 /* loc_mark.png in Resources */,
-				E290F4FE15F6F0D20063F434 /* loc_mark@2x.png in Resources */,
+				E290F50115F6F72D0063F434 /* loc_mark.png in Resources */,
+				E290F50215F6F72D0063F434 /* loc_mark@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

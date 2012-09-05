@@ -72,10 +72,10 @@ static const int kUseExistingPhotoButton = 1;
 		[mapPleaseSpecifyView removeFromSuperview];
 		mapPleaseSpecifyView = nil;
 	}
-    
 
-    
-    
+
+
+
 }
 
 - (void)viewDidUnload {
@@ -309,7 +309,7 @@ static const int kUseExistingPhotoButton = 1;
 	}
 	
     [mapView setRegion:region animated:animated];
-		
+    
     NSLog(@"lat is: %f", mapView.region.center.latitude);
     NSLog(@"long is: %f", mapView.region.center.longitude);
 }
@@ -589,10 +589,28 @@ static const int kUseExistingPhotoButton = 1;
 }
 
 - (IBAction)pinButtonPressed:(id)sender {
-    [locationManager startUpdatingLocation];
-    [submission setCoordinate:locationManager.location.coordinate];
-    [locationManager stopUpdatingLocation];
-    [mapView setCenterCoordinate:submission.coordinate animated:YES];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Use current location", @"Revert to original location", nil];
     
+    [sheet showInView:mapView];
+    }
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"Button %d", buttonIndex);
+    switch (buttonIndex) {
+        case 0:
+            [locationManager startUpdatingLocation];
+            [submission setCoordinate:locationManager.location.coordinate];
+            [locationManager stopUpdatingLocation];
+            [mapView setCenterCoordinate:submission.coordinate animated:YES];
+            break;
+            
+        case 1:
+            [submission setCoordinate:[submission submissionPhotoAtIndex:0].location.coordinate];
+            [mapView setCenterCoordinate:submission.coordinate animated:YES];
+            break;
+        default:
+            break;
+    }
 }
 @end
