@@ -371,6 +371,16 @@ static const int kSectionSubmitRows = 1;
     return kNumberofSections;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    if(section == kSectionDetails){
+        return @"Details";
+    }
+    else{
+        return nil;
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     switch (section) {
