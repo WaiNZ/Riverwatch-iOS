@@ -395,6 +395,8 @@ static const int kUseExistingPhotoButton = 1;
 	
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	cell.textLabel.textAlignment = UITextAlignmentLeft;
+	cell.accessoryType = UITableViewCellAccessoryNone;
+	cell.accessoryView = nil;
 	
 	switch (indexPath.section) {
 		case 0:
