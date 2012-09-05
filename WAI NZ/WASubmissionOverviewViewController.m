@@ -86,6 +86,8 @@ static const int kSectionSubmitRows = 1;
 		[mapPleaseSpecifyView removeFromSuperview];
 		mapPleaseSpecifyView = nil;
 	}
+	
+	photoLabel.textColor = [WAStyleHelper tableViewHeaderTextColor];
 }
 
 - (void)viewDidUnload {
@@ -633,7 +635,6 @@ static const int kSectionSubmitRows = 1;
 {
     switch (buttonIndex) {
         case 0: {
-            NSTimeInterval diff = 100;
             [locationManager startUpdatingLocation];
             break;
         }
