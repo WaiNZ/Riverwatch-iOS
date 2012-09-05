@@ -705,6 +705,8 @@
 				A141F4AF15F6F44E00D1D0B9 /* WAI_logo@2x.png in Resources */,
 				A141F4B215F6F5B700D1D0B9 /* syzygy_logo.png in Resources */,
 				A141F4B315F6F5B700D1D0B9 /* syzygy_logo@2x.png in Resources */,
+				E290F50115F6F72D0063F434 /* loc_mark.png in Resources */,
+				E290F50215F6F72D0063F434 /* loc_mark@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
