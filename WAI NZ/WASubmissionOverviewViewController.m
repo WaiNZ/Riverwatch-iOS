@@ -612,29 +612,39 @@ static const int kSectionSubmitRows = 1;
 {
     NSLog(@"New latitude: %f", newLocation.coordinate.latitude);
     NSLog(@"New longitude: %f", newLocation.coordinate.longitude);
+    [submission setCoordinate:locationManager.location.coordinate];
+    [locationManager stopUpdatingLocation];
+    [mapView setCenterCoordinate:submission.coordinate animated:YES];
 }
 
 - (IBAction)pinButtonPressed:(id)sender {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Use current location", @"Revert to original location", nil];
+    UIActionSheet *sheet;
+    NSLog(@"orig long: %f lat: %f", submission.location.longitude, submission.location.latitude);
+    if ([submission submissionPhotoAtIndex:0].location.latitude == 0.0 && [submission submissionPhotoAtIndex:0].location.longitude == 0.0) {
+        sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Use current location", nil];
+    }else {
+        sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Use current location", @"Revert to original location", nil];
+    }
     
     [sheet showInView:mapView];
-    }
+}
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"Button %d", buttonIndex);
     switch (buttonIndex) {
-        case 0:
+        case 0: {
+            NSTimeInterval diff = 100;
             [locationManager startUpdatingLocation];
-            [submission setCoordinate:locationManager.location.coordinate];
-            [locationManager stopUpdatingLocation];
-            [mapView setCenterCoordinate:submission.coordinate animated:YES];
             break;
-            
+        }
         case 1:
-            [submission setCoordinate:[submission submissionPhotoAtIndex:0].location.coordinate];
-            [mapView setCenterCoordinate:submission.coordinate animated:YES];
+        {
+            if ([[actionSheet buttonTitleAtIndex:1] isEqualToString:@"Revert to original location"]) {
+                [submission setCoordinate:[submission submissionPhotoAtIndex:0].location.coordinate];
+                [mapView setCenterCoordinate:submission.coordinate animated:YES];
+            }
             break;
+        }
         default:
             break;
     }
