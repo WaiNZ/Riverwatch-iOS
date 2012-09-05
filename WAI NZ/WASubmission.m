@@ -108,9 +108,14 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 #pragma mark - Getters/Setters
 
 - (void)addSubmissionPhoto:(WASubmissionPhoto *)photo {
-    [self verifyPhotoTimestamp:(photo)];
-    [photos addObject:photo];
-	POST_UPDATE_NOTIFICATION;
+    UIAlertView *result = [self verifyPhotoTimestamp:(photo)];
+	if(result == Nil){
+		[photos addObject:photo];
+		POST_UPDATE_NOTIFICATION;
+	}
+	else{
+		[result show];
+	}
 }
 
 - (void)removeSubmissionPhoto:(int)index {
@@ -271,20 +276,26 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 
 - (UIAlertView *) verifyPhotoTimestamp:(WASubmissionPhoto *)photo{
     time_t early = [self timestamp];
+	NSLog(@"Current earliest photo time is %ld",early);
     time_t last = [self latestTimestamp];
-    
-    time_t photoTime = photo.timestamp.unsignedLongValue;
-    NSLog(@"Verifying photo timestamp");
+	NSLog(@"Current last photo time is %ld",last);
+
+	time_t photoTime = photo.timestamp.unsignedLongValue;
+    NSLog(@"Verifying photo timestamp: %ld",photoTime);
     
     time_t max = MAX(photoTime, last);
+	NSLog(@"Max time is %ld",max);
+
     time_t min = MIN(photoTime, early);
-    
+    NSLog(@"Min time is: %ld",min);
+	
+	NSLog(@"Difference is: %ld", max-min);
     
     /*(photoTime - early < 86400) ||
      (last - photoTime > 86400) ||
      (abs(photoTime - last) < 86400) ||
      (abs(early - photoTime) < 86400)*/
-    if(max - min > 86400){
+    if((max - min) > 86400){
         return [[UIAlertView alloc] initWithTitle:@"Photo times are too different"
 										  message:@"The photos sent to WAI NZ must all have been taken within a 24 hour period, please submit this photo separately."
 										 delegate:nil
