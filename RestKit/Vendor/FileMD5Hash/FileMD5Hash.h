@@ -30,7 +30,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #elif TARGET_OS_MAC
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 #endif
 #endif
 
