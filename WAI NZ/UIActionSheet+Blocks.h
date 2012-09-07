@@ -29,6 +29,7 @@ typedef void (^UIActionSheetCallback)(NSInteger index);
  @param cancelButtonTitle the title for the cancel button
  @param destructiveButtonTitle the title for the destructive button (red)
  @param otherButtonTitles the titles for the other buttons
+ @param ... more buttons titles
  */
 - (id)initWithTitle:(NSString *)title
 		   callback:(UIActionSheetCallback)callback
