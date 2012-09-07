@@ -18,7 +18,10 @@
 
 + (RKObjectMapping *)objectMapping;
 
+/** The status of the response */
 @property (nonatomic, strong) NSString *status;
+/** The error message of the response */
 @property (nonatomic, strong) NSString *errorMessage;
+/** The url of the reponse */
 @property (nonatomic, strong) NSURL *url;
 @end
