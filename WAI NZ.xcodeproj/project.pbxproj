@@ -86,6 +86,7 @@
 		A1B90F8E15EDDFCD003419AF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B90F8D15EDDFCD003419AF /* QuartzCore.framework */; };
 		A1B90F9D15EDDFF0003419AF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B90F9C15EDDFF0003419AF /* MobileCoreServices.framework */; };
 		A1C0C57815D77A2F00A25C58 /* Tools in Resources */ = {isa = PBXBuildFile; fileRef = A1C0C57715D77A2F00A25C58 /* Tools */; };
+		A1EA090515F9C4AE00BAF08C /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EA090415F9C4AE00BAF08C /* libOCMock.a */; };
 		A1EB129115D76037004ECF71 /* WAFakeImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */; };
 		A1F0299C15E08FAF00BC9B28 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0299B15E08FAF00BC9B28 /* AssetsLibrary.framework */; };
 		A1F029A015E0956700BC9B28 /* NSDate+TimeConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F0299F15E0956700BC9B28 /* NSDate+TimeConversions.m */; };
@@ -257,6 +258,14 @@
 		A1B90F8D15EDDFCD003419AF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A1B90F9C15EDDFF0003419AF /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A1C0C57715D77A2F00A25C58 /* Tools */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tools; sourceTree = SOURCE_ROOT; };
+		A1EA090415F9C4AE00BAF08C /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = "WAI NZTests/OCMock/libOCMock.a"; sourceTree = "<group>"; };
+		A1EA090A15F9C5B200BAF08C /* WAI NZTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WAI NZTests-Prefix.pch"; sourceTree = "<group>"; };
+		A1EA091415F9C79B00BAF08C /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
+		A1EA091515F9C79B00BAF08C /* OCMArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMArg.h; sourceTree = "<group>"; };
+		A1EA091615F9C79B00BAF08C /* OCMConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMConstraint.h; sourceTree = "<group>"; };
+		A1EA091715F9C79B00BAF08C /* OCMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMock.h; sourceTree = "<group>"; };
+		A1EA091815F9C79B00BAF08C /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
+		A1EA091915F9C79B00BAF08C /* OCMockRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockRecorder.h; sourceTree = "<group>"; };
 		A1EB128E15D76037004ECF71 /* WAFakeImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAFakeImagePickerController.h; sourceTree = "<group>"; };
 		A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAFakeImagePickerController.m; sourceTree = "<group>"; };
 		A1F0299B15E08FAF00BC9B28 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -304,6 +313,7 @@
 				A121CACD15F9A51B00FD7ED7 /* libSimpleHTTPd.a in Frameworks */,
 				A12A54A215D741990025D32A /* SenTestingKit.framework in Frameworks */,
 				A12A54A315D741990025D32A /* UIKit.framework in Frameworks */,
+				A1EA090515F9C4AE00BAF08C /* libOCMock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +367,7 @@
 		A12A548815D741980025D32A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A1EA090415F9C4AE00BAF08C /* libOCMock.a */,
 				A182BDED15F9A92A003A87DF /* CoreFoundation.framework */,
 				A1F881CC15F19ED900E5C044 /* CoreLocation.framework */,
 				E2B761F815F0553800D18C67 /* MapKit.framework */,
@@ -405,6 +416,7 @@
 		A12A54A715D741990025D32A /* WAI NZTests */ = {
 			isa = PBXGroup;
 			children = (
+				A1EA091A15F9C7A000BAF08C /* Vendor */,
 				A121CABF15F9A40300FD7ED7 /* WASubmitTests.h */,
 				A121CAC015F9A40300FD7ED7 /* WASubmitTests.m */,
 				A12A54A815D741990025D32A /* Supporting Files */,
@@ -417,6 +429,7 @@
 			children = (
 				A12A54A915D741990025D32A /* WAI NZTests-Info.plist */,
 				A12A54AA15D741990025D32A /* InfoPlist.strings */,
+				A1EA090A15F9C5B200BAF08C /* WAI NZTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -585,6 +598,28 @@
 				A1B90F7415EDDA58003419AF /* RestKitResources.bundle */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A1EA091315F9C79B00BAF08C /* OCMock */ = {
+			isa = PBXGroup;
+			children = (
+				A1EA091415F9C79B00BAF08C /* NSNotificationCenter+OCMAdditions.h */,
+				A1EA091515F9C79B00BAF08C /* OCMArg.h */,
+				A1EA091615F9C79B00BAF08C /* OCMConstraint.h */,
+				A1EA091715F9C79B00BAF08C /* OCMock.h */,
+				A1EA091815F9C79B00BAF08C /* OCMockObject.h */,
+				A1EA091915F9C79B00BAF08C /* OCMockRecorder.h */,
+			);
+			name = OCMock;
+			path = OCMock/OCMock;
+			sourceTree = "<group>";
+		};
+		A1EA091A15F9C7A000BAF08C /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				A1EA091315F9C79B00BAF08C /* OCMock */,
+			);
+			name = Vendor;
 			sourceTree = "<group>";
 		};
 		A1EB128C15D76019004ECF71 /* Utilities */ = {
@@ -1005,9 +1040,20 @@
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "WAI NZ/WAI NZ-Prefix.pch";
-				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../Headers\"";
+				GCC_PREFIX_HEADER = "WAI NZTests/WAI NZTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/WAI NZTests/OCMock/\"",
+					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"",
+				);
 				INFOPLIST_FILE = "WAI NZTests/WAI NZTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/WAI NZTests/OCMock\"",
+				);
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"\"$(SRCROOT)/WAI NZTests/OCMock/libOCMock.a\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -1023,9 +1069,20 @@
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "WAI NZ/WAI NZ-Prefix.pch";
-				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../Headers\"";
+				GCC_PREFIX_HEADER = "WAI NZTests/WAI NZTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/WAI NZTests/OCMock/\"",
+					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"",
+				);
 				INFOPLIST_FILE = "WAI NZTests/WAI NZTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/WAI NZTests/OCMock\"",
+				);
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"\"$(SRCROOT)/WAI NZTests/OCMock/libOCMock.a\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;

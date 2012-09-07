@@ -10,9 +10,12 @@
 
 #import "WASubmitViewController.h"
 #import "WASubmission.h"
+#import <OCMock/OCMock.h>
 
 @interface WASubmitViewController (TestPrivate)
 - (void)sendSubmission;
+- (void)setMessage:(NSString *)message;
+- (void)setNavigationTitle:(NSString *)title;
 @end
 
 @interface WASubmission (TestPrivate)
@@ -20,11 +23,11 @@
 @end
 @implementation WASubmission (TestPrivate)
 
-NSString *const baseSubmissionString = @"{\"council_submission\":{\"anonymous\":@anonymous@},\"udid\":\"@udid@\",\"photo_data\":[],\"user_description\":\"\",\"tags\":[@tags@],\"timestamp\":@timestamp@}";
+NSString *const kBaseSubmissionString = @"{\"council_submission\":{\"anonymous\":@anonymous@},\"udid\":\"@udid@\",\"photo_data\":[],\"user_description\":\"\",\"tags\":[@tags@],\"timestamp\":@timestamp@}";
+NSString *const kResponseBodyOk = @"{\"status\":\"OK\",\"error_message\":\"\",\"url\":\"http://google.com\"}";
 
 - (NSString *)jsonString {
-	return [self applyTokens:baseSubmissionString
-					  tokens:@{
+	return [self applyTokens:@{
 			@"@anonymous@":self.anonymous?@"true":@"false",
 			@"@udid@":@"",
 			@"@tags@":@"\"Cow\"",
@@ -32,7 +35,9 @@ NSString *const baseSubmissionString = @"{\"council_submission\":{\"anonymous\":
 		}];
 }
 
-- (NSString *)applyTokens:(NSString *)string tokens:(NSDictionary *)tokens {
+- (NSString *)applyTokens:(NSDictionary *)tokens {
+	NSString *string = kBaseSubmissionString;
+	
 	for(NSString *key in tokens) {
 		string = [string stringByReplacingOccurrencesOfString:key withString:[tokens objectForKey:key]];
 	}
@@ -96,18 +101,26 @@ static int portNumber = 1111;
 	backgroundRunLoop = nil;
 }
 
-- (void)testSimpleSubmit {
+- (void)testSimpleSubmitWithSuccess {
 	WASubmission *submission = [[WASubmission alloc] init];
 	submission.anonymous = YES;
 	[submission addTag:@"Cow"];
 	
 	WASubmitViewController *controller = [[WASubmitViewController alloc] initWithSubmission:submission];
+	OCMockObject *mock = [OCMockObject partialMockForObject:controller];
+	
+	[[[mock stub] andThrow:DONT_CALL_EXCEPTION] setMessage:[OCMArg any]];
+	[[mock expect] setNavigationTitle:kWASubmitTitleSuccess];
 	
 	SimpleHTTPResponse *response = [[SimpleHTTPResponse alloc] init];
+	[response setContentType:@"application/json"];
+	[response setContentString:kResponseBodyOk];
 	
 	[self expectPostData:[submission jsonString] response:response exec:^{
 		[controller sendSubmission];
 	}];
+	
+	[mock verify];
 }
 
 - (void)expectPostData:(NSString *)string response:(SimpleHTTPResponse *)response exec:(void (^)(void))exec {
