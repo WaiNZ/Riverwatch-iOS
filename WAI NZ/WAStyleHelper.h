@@ -27,8 +27,18 @@
  */
 + (CGFloat)topAlignLabel:(UILabel *)label;
 
+/**
+ This returns the correct color to assign to the table header text
+ 
+ @return the UIColor used for table header text
+ */
 + (UIColor *)tableViewHeaderTextColor;
 
+/**
+ Returns the dark blue color that is used for the application
+ 
+ @return the UIColor used throughtout the application for WAI NZ
+ */
 + (UIColor *)waiDarkBlueColor;
 
 @end

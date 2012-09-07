@@ -287,7 +287,7 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 }
 
 /**
- Gets the lastest timestamp from the submission photos
+ Gets the latest timestamp from the submission photos
  */
 - (time_t) latestTimestamp{
     time_t ret = LONG_MIN;
