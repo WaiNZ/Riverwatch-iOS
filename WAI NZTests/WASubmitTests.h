@@ -10,9 +10,6 @@
 #import <SimpleHTTPd/SimpleHTTPd.h>
 
 @interface WASubmitTests : SenTestCase <SimpleHTTPWillRespond> {
-	NSThread *thread;
-	NSConditionLock *startLock;
-	NSRunLoop *backgroundRunLoop;
 	SimpleHTTPResponder *server;
 	
 	SimpleHTTPResponse *(^currentPOSTExecuter)(SimpleHTTPRequest *);

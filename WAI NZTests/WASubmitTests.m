@@ -54,30 +54,6 @@ static int portNumber = 1111;
 - (void)setUp {
 	[super setUp];
 	
-	startLock = [[NSConditionLock alloc] initWithCondition:0];
-	
-	thread = [[NSThread alloc] initWithTarget:self
-									 selector:@selector(backgroundThread)
-									   object:nil];
-	[thread start];
-	
-	[startLock lockWhenCondition:1];
-	[startLock unlock];
-}
-
-- (void)backgroundThread {
-	[startLock lock];
-	
-	backgroundRunLoop = [NSRunLoop currentRunLoop];
-	[backgroundRunLoop addTimer:[NSTimer timerWithTimeInterval:0
-														target:self
-													  selector:@selector(unlockStartLock)
-													  userInfo:nil
-													   repeats:NO] forMode:NSRunLoopCommonModes];
-	[backgroundRunLoop run];
-}
-
-- (void)unlockStartLock {
 	server = [[SimpleHTTPResponder alloc] init];
 	server.delegate = self;
 	
@@ -88,17 +64,10 @@ static int portNumber = 1111;
 	
 	NSLog(@"Listening on port: %i", portNumber);
 	portNumber++;
-	
-	[startLock unlockWithCondition:1];
 }
 
 - (void)tearDown {
 	[super tearDown];
-	[thread cancel];
-	
-	thread = nil;
-	startLock = nil;
-	backgroundRunLoop = nil;
 }
 
 - (void)testSimpleSubmitWithSuccess {
