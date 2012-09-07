@@ -20,6 +20,7 @@
 #import <UIKit/UITableView.h>
 #import <QuartzCore/QuartzCore.h>
 #import "WAImagePickerHelper.h"
+#import "Logging.h"
 
 #define ENABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submissionUpdated) name:kWASubmissionUpdatedNotification object:submission];
 #define DISABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] removeObserver:self name:kWASubmissionUpdatedNotification object:submission]
@@ -70,6 +71,8 @@ static const int kSectionSubmitRows = 1;
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+    spinner.transform = CGAffineTransformMakeScale(0.6, 0.6);
+    
 	mapContainerView.layer.borderColor = mainTableView.separatorColor.CGColor;
 	mapContainerView.layer.borderWidth = 1;
 	
@@ -108,6 +111,7 @@ static const int kSectionSubmitRows = 1;
 	mapSidePanel = nil;
 	mapPleaseSpecifyView = nil;
     pinButton = nil;
+    spinner = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -589,7 +593,7 @@ static const int kSectionSubmitRows = 1;
 
 - (MKAnnotationView *)mapView:(MKMapView *)_mapView viewForAnnotation:(id<MKAnnotation>)annotation {
 	static NSString *const AnnotationViewIdentifier = @"WASubmissionAnnotationViewIdentifier";
-	MKPinAnnotationView *pinView = (MKPinAnnotationView *)[_mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationViewIdentifier];
+	pinView = (MKPinAnnotationView *)[_mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationViewIdentifier];
 	
 	if(!pinView) {
 		pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewIdentifier];
@@ -615,14 +619,24 @@ static const int kSectionSubmitRows = 1;
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation
 {
-    NSLog(@"New latitude: %f", newLocation.coordinate.latitude);
-    NSLog(@"New longitude: %f", newLocation.coordinate.longitude);
-    [submission setCoordinate:locationManager.location.coordinate];
-    [locationManager stopUpdatingLocation];
-    [mapView setCenterCoordinate:submission.coordinate animated:YES];
+    
+    NSTimeInterval dif = [locationManager.location.timestamp timeIntervalSinceDate:[NSDate date]];
+    if (abs(dif) < 300) {
+        LogDebug(@"New latitude: %f", newLocation.coordinate.latitude);
+        LogDebug(@"New longitude: %f", newLocation.coordinate.longitude);
+        [submission setCoordinate:locationManager.location.coordinate];
+        [locationManager stopUpdatingLocation];
+        [spinner stopAnimating];
+        [pinView setRightCalloutAccessoryView:nil];
+        [pinView setRightCalloutAccessoryView:pinButton];
+        [mapView setCenterCoordinate:submission.coordinate animated:YES];
+    } else LogDebug(@"Location is over 5 minutes old, not using it");
 }
 
 - (IBAction)pinButtonPressed:(id)sender {
+    [pinView setRightCalloutAccessoryView:nil];
+    [pinView setRightCalloutAccessoryView:spinner];
+    [spinner startAnimating];
     UIActionSheet *sheet;
     NSLog(@"orig long: %f lat: %f", submission.location.longitude, submission.location.latitude);
     if ([submission submissionPhotoAtIndex:0].location.latitude == 0.0 && [submission submissionPhotoAtIndex:0].location.longitude == 0.0) {
@@ -639,6 +653,7 @@ static const int kSectionSubmitRows = 1;
     switch (buttonIndex) {
         case 0: {
             [locationManager startUpdatingLocation];
+            //            [pinView setRightCalloutAccessoryView:spinner];
             break;
         }
         case 1:
@@ -646,6 +661,9 @@ static const int kSectionSubmitRows = 1;
             if ([[actionSheet buttonTitleAtIndex:1] isEqualToString:@"Revert to original location"]) {
                 [submission setCoordinate:[submission submissionPhotoAtIndex:0].location.coordinate];
                 [mapView setCenterCoordinate:submission.coordinate animated:YES];
+                [spinner stopAnimating];
+                [pinView setRightCalloutAccessoryView:nil];
+                [pinView setRightCalloutAccessoryView:pinButton];
             }
             break;
         }
