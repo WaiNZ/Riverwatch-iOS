@@ -26,6 +26,7 @@
  @return the amount that the label has been resized by
  */
 + (CGFloat)topAlignLabel:(UILabel *)label;
++ (CGFloat)bottomAlignLabel:(UILabel *)label;
 
 + (UIColor *)tableViewHeaderTextColor;
 

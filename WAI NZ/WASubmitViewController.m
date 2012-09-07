@@ -143,6 +143,7 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
                 unsuccessfulStatusMessage.text = [NSString stringWithFormat:@"An unexpected error (%d) occured. Please try again.",error.code];
         }
     }else unsuccessfulStatusMessage.text = @"An unexpected error occured. Please try again";
+    [WAStyleHelper bottomAlignLabel:unsuccessfulStatusMessage];
 	self.navigationItem.hidesBackButton = NO;
 }
 
