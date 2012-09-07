@@ -18,9 +18,10 @@
  Initilize a UIAlertView with a title, message and button names, with a
  block for the dismiss callback function.
  
- For a description of when the dismissCallback is called see -[UIAlertViewDelegate alertView:didDismissWithButtonIndex:] as this is
- what triggers the call to this callback, the buttonIndex parameter is passed
- right through, so 1 will be the ok button index (rightmost) and 0 will
+ For a description of when the dismissCallback is called see 
+        -[UIAlertViewDelegate alertView:didDismissWithButtonIndex:] 
+ as this is what triggers the call to this callback, the buttonIndex parameter
+ is passed right through, so 1 will be the ok button index (rightmost) and 0 will
  be the cancel button index (leftmost).
  
  @param title the title of the alert to display
