@@ -51,7 +51,10 @@
 	BOOL editingMap;
     
     CLLocationManager *locationManager;
+    
+    MKPinAnnotationView *pinView;
 
+    IBOutlet UIActivityIndicatorView *spinner;
     IBOutlet UIButton *pinButton;
 }
 - (IBAction)pinButtonPressed:(id)sender;
