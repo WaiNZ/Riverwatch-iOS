@@ -20,6 +20,7 @@
 #import <UIKit/UITableView.h>
 #import <QuartzCore/QuartzCore.h>
 #import "WAImagePickerHelper.h"
+#import "Logging.h"
 
 #define ENABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submissionUpdated) name:kWASubmissionUpdatedNotification object:submission];
 #define DISABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] removeObserver:self name:kWASubmissionUpdatedNotification object:submission]
@@ -618,14 +619,18 @@ static const int kSectionSubmitRows = 1;
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation
 {
-    NSLog(@"New latitude: %f", newLocation.coordinate.latitude);
-    NSLog(@"New longitude: %f", newLocation.coordinate.longitude);
-    [submission setCoordinate:locationManager.location.coordinate];
-    [locationManager stopUpdatingLocation];
-    [spinner stopAnimating];
-    [pinView setRightCalloutAccessoryView:nil];
-    [pinView setRightCalloutAccessoryView:pinButton];
-    [mapView setCenterCoordinate:submission.coordinate animated:YES];
+    
+    NSTimeInterval dif = [locationManager.location.timestamp timeIntervalSinceDate:[NSDate date]];
+    if (abs(dif) < 300) {
+        LogDebug(@"New latitude: %f", newLocation.coordinate.latitude);
+        LogDebug(@"New longitude: %f", newLocation.coordinate.longitude);
+        [submission setCoordinate:locationManager.location.coordinate];
+        [locationManager stopUpdatingLocation];
+        [spinner stopAnimating];
+        [pinView setRightCalloutAccessoryView:nil];
+        [pinView setRightCalloutAccessoryView:pinButton];
+        [mapView setCenterCoordinate:submission.coordinate animated:YES];
+    } else LogDebug(@"Location is over 5 minutes old, not using it");
 }
 
 - (IBAction)pinButtonPressed:(id)sender {
@@ -648,7 +653,7 @@ static const int kSectionSubmitRows = 1;
     switch (buttonIndex) {
         case 0: {
             [locationManager startUpdatingLocation];
-//            [pinView setRightCalloutAccessoryView:spinner];
+            //            [pinView setRightCalloutAccessoryView:spinner];
             break;
         }
         case 1:
