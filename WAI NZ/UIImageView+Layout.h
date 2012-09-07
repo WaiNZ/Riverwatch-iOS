@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ This interface extends the UIImageView to resize correctly within the superview
+ */
 @interface UIImageView (Layout)
 
 /**
