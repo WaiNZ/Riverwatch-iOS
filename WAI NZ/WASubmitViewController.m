@@ -142,6 +142,17 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 	self.view = successfulView;
 	self.navigationItem.title = @"Done";
 	self.navigationItem.rightBarButtonItem = doneButton;
+    WASubmissionResponse *response = object;
+    if ([response.status isEqualToString:@"OK"]) {
+        self.view = successfulView;
+        self.navigationItem.title = @"Done";
+        self.navigationItem.rightBarButtonItem = doneButton;
+    } else {
+        self.view = unsuccessfulView;
+        self.navigationItem.title = @"Oh dear...";
+        self.navigationItem.hidesBackButton = NO;
+        unsuccessfulStatusMessage.text = @"An unexpected server error occured, please try again";
+    }
     [submission unloadPhotos];
 }
 
