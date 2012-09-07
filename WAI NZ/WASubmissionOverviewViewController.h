@@ -57,6 +57,12 @@
     IBOutlet UIActivityIndicatorView *spinner;
     IBOutlet UIButton *pinButton;
 }
+
+/**
+ This interprets the pressing action on the pin in the map view so the user can move the pin to the desired location
+ 
+ @param sender the gesture recogniser associated with the action
+ */
 - (IBAction)pinButtonPressed:(id)sender;
 
 /**

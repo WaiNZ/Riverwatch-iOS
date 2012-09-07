@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "WASubmission.h"
 
+/**
+ The interface for the view to edit the tags for the submission, eg Cow, Runoff or Pollution
+ */
 @interface WASubmissionTagEditorViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
 	WASubmission *submission;
 }

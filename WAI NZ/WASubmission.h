@@ -120,17 +120,49 @@ extern NSString *const kWASubmissionUpdatedNotification;
  */
 - (BOOL)containsTag:(NSString *)tag;
 
+/**
+ This returns a string of the tags selected in the submission with ", " as the seperator
+ 
+ @return NSString the string containing the tags of the submission
+ */
 - (NSString *)tagsAsString;
 
 // TODO: category
+/**
+ This vefiries whether the information contained in the submission is valid including the email address(if provided) and the location of the submission
+ 
+ @return UIAlertView returns an UIAlertView if there is an error in the submission details, else nil
+ */
 - (UIAlertView *)verify;
 
+/**
+ Checks whether the email provided is valid
+ 
+ @param checkString the string containing the email to be checked
+ @return YES if valid, else NO
+ */
 -(BOOL) NSStringIsValidEmail:(NSString *)checkString;
 
+/**
+ Gets the latest timestamp from the submission photos
+ 
+ @return time_t the timestamp found to be the latest
+ */
 - (time_t) latestTimestamp;
 
+/**
+ Gets the earliest timestamp from the submission photos
+ 
+  @return time_t the timestamp found to be the earliest
+ */
 - (time_t)timestamp;
 
+/**
+ Checks whether the timestamp of the photo to be added will be within the 24 hour period of the submission
+ 
+ @param photo the photo that is to be added to the submission
+ @return UIAlertView returns an UIAlertView if the photo breaks the timestamp conditions, else nil
+*/
 - (UIAlertView *) verifyPhotoTimestamp:(WASubmissionPhoto *)photo;
 
 /** The description the user has entered */
