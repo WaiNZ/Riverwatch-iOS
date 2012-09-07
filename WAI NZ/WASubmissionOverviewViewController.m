@@ -483,6 +483,7 @@ static const int kSectionSubmitRows = 1;
 		[self.navigationController pushViewController:controller animated:YES];
 	}
     if(indexPath.section == kSectionDetails && indexPath.row ==kRowDescription){
+		[tableView endEditing:YES];
 		WASubmissionDescriptionViewController *controller = [[WASubmissionDescriptionViewController alloc] initWithSubmission:submission];
 		[self.navigationController pushViewController:controller animated:YES];
 	}

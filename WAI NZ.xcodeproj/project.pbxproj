@@ -160,6 +160,7 @@
 		A10C5C1315DB054B0028767F /* WASubmissionOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionOverviewViewController.h; sourceTree = "<group>"; };
 		A10C5C1415DB054B0028767F /* WASubmissionOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionOverviewViewController.m; sourceTree = "<group>"; };
 		A10C5C1515DB054B0028767F /* WASubmissionOverviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionOverviewViewController.xib; sourceTree = "<group>"; };
+		A121CAB115F99CF300FD7ED7 /* Logging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Logging.h; sourceTree = "<group>"; };
 		A12A548515D741980025D32A /* WAI NZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WAI NZ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A12A548915D741980025D32A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A12A548B15D741980025D32A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -288,6 +289,7 @@
 		A10A5B5615F0DB8E001A8184 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				A121CAB115F99CF300FD7ED7 /* Logging.h */,
 				A184847615F71F02000FB460 /* DDProgressView */,
 				A10A5B5715F0E8B8001A8184 /* UIImage+Alpha.h */,
 				A10A5B5815F0E8B8001A8184 /* UIImage+Alpha.m */,
@@ -904,6 +906,11 @@
 				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WAI NZ/WAI NZ-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"LOGGING_ENABLED=1",
+				);
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

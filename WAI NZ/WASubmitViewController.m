@@ -47,7 +47,6 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    inProgressStatusMessage.text = @"Uploading...";
 	successfulStatusMessage.textColor=[WAStyleHelper tableViewHeaderTextColor];
 	unsuccessfulStatusMessage.textColor=[WAStyleHelper tableViewHeaderTextColor];
 	inProgressStatusMessage.textColor=[WAStyleHelper tableViewHeaderTextColor];
