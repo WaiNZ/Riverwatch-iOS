@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /**
- This is a helper interface for adjusting the image layouts in the ImageView
+ This interface extends the UIImageView to resize correctly within the superview
  */
 @interface UIImageView (Layout)
 
