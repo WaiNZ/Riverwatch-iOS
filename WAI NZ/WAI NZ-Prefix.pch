@@ -39,3 +39,5 @@ static const size_t kSubmissionSizeScaleThreshhold = 1*1000*1000;
 typeof(x) concat(_tmp_swap_var, __LINE__) = x; \
 x = y; \
 y = concat(_tmp_swap_var, __LINE__);
+
+#import "Logging.h"
