@@ -12,6 +12,8 @@
 #import "WASubmissionResponse.h"
 #import "RKObjectManager+WAI.h"
 #import "WAStyleHelper.h"
+#import "DDProgressView.h"
+#import <QuartzCore/QuartzCore.h>
 
 static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 
@@ -50,6 +52,13 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 	unsuccessfulStatusMessage.textColor=[WAStyleHelper tableViewHeaderTextColor];
 	inProgressStatusMessage.textColor=[WAStyleHelper tableViewHeaderTextColor];
     self.navigationItem.hidesBackButton = YES;
+    [progressBar setOuterColor:[UIColor clearColor]];
+    [progressBar setInnerColor:[WAStyleHelper waiDarkBlueColor]];
+    [progressBar setEmptyColor:[UIColor lightGrayColor]];
+	progressBar.layer.shadowColor = [UIColor whiteColor].CGColor;
+	progressBar.layer.shadowOffset = CGSizeMake(0, 1);
+	progressBar.layer.shadowRadius = 0;
+	progressBar.layer.shadowOpacity = 1;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

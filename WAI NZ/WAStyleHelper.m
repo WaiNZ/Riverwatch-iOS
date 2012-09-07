@@ -31,4 +31,8 @@
 	return uicolor;
 }
 
++ (UIColor *)waiDarkBlueColor {
+	return [UIColor colorWithRed:32.0/255.0 green:58.0/255.0 blue:80.0/255.0 alpha:1];
+}
+
 @end

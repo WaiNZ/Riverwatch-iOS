@@ -295,26 +295,29 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 
 
 - (UIAlertView *) verifyPhotoTimestamp:(WASubmissionPhoto *)photo{
+    //The earliest timestamp
     time_t early = [self timestamp];
-	NSLog(@"Current earliest photo time is %ld",early);
+	//NSLog(@"Current earliest photo time is %ld",early);
+    //The latest timestamp
     time_t last = [self latestTimestamp];
-	NSLog(@"Current last photo time is %ld",last);
+	//NSLog(@"Current last photo time is %ld",last);
 
 	time_t photoTime = photo.timestamp.unsignedLongValue;
-    NSLog(@"Verifying photo timestamp: %ld",photoTime);
+    //NSLog(@"Verifying photo timestamp: %ld",photoTime);
     
     time_t max = MAX(photoTime, last);
-	NSLog(@"Max time is %ld",max);
+	//NSLog(@"Max time is %ld",max);
 
     time_t min = MIN(photoTime, early);
-    NSLog(@"Min time is: %ld",min);
+    //NSLog(@"Min time is: %ld",min);
 	
-	NSLog(@"Difference is: %ld", max-min);
+	//NSLog(@"Difference is: %ld", max-min);
     
     /*(photoTime - early < 86400) ||
      (last - photoTime > 86400) ||
      (abs(photoTime - last) < 86400) ||
      (abs(early - photoTime) < 86400)*/
+    //if the difference is greater than 24 hours
     if((max - min) > 86400){
         return [[UIAlertView alloc] initWithTitle:@"Photo times are too different"
 										  message:@"The photos sent to WAI NZ must all have been taken within a 24 hour period, please submit this photo separately."

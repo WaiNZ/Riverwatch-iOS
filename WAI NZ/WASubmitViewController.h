@@ -10,6 +10,7 @@
 #import <RestKit/RestKit.h>
 
 @class WASubmission;
+@class DDProgressView;
 
 /**
  This controller manages the uploading of a submission to WAI NZ
@@ -22,7 +23,7 @@
     __unsafe_unretained IBOutlet UILabel *successfulStatusMessage;
     __unsafe_unretained IBOutlet UILabel *inProgressStatusMessage;
     __unsafe_unretained IBOutlet UIButton *retryButton;
-    __unsafe_unretained IBOutlet UIProgressView *progressBar;
+    __unsafe_unretained IBOutlet DDProgressView *progressBar;
     __unsafe_unretained IBOutlet UILabel *unsuccessfulStatusMessage;
     
     IBOutlet UIBarButtonItem *doneButton;

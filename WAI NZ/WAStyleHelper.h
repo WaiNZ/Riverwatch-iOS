@@ -29,4 +29,6 @@
 
 + (UIColor *)tableViewHeaderTextColor;
 
++ (UIColor *)waiDarkBlueColor;
+
 @end
