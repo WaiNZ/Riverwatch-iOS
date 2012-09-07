@@ -26,6 +26,19 @@
  @return the amount that the label has been resized by
  */
 + (CGFloat)topAlignLabel:(UILabel *)label;
+
+/**
+ Resize a UILabel so that the text is bottom aligned.
+ 
+ This method returns the amount that the label has been resized
+ by, this is positive if the view has been expended, and negative
+ if it has been shrunk. For this reason this value can be used
+ to shift the views below the label by just adding it to the
+ frame.origin.y.
+ 
+ @param label the label to bottom align the text in.
+ @return the amount that the label has been resized by
+ */
 + (CGFloat)bottomAlignLabel:(UILabel *)label;
 
 /**
