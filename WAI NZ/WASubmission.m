@@ -273,6 +273,9 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	return parts;
 }
 
+/** 
+ Gets the earliest timestamp from the submission photos
+ */
 - (time_t)timestamp {
 	time_t ret = LONG_MAX;
 	for(WASubmissionPhoto *photo in photos) {
@@ -283,6 +286,9 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	return ret;
 }
 
+/**
+ Gets the lastest timestamp from the submission photos
+ */
 - (time_t) latestTimestamp{
     time_t ret = LONG_MIN;
     for(WASubmissionPhoto *photo in photos) {
@@ -297,21 +303,21 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 - (UIAlertView *) verifyPhotoTimestamp:(WASubmissionPhoto *)photo{
     //The earliest timestamp
     time_t early = [self timestamp];
-	//NSLog(@"Current earliest photo time is %ld",early);
+	//NSDebug(@"Current earliest photo time is %ld",early);
     //The latest timestamp
     time_t last = [self latestTimestamp];
-	//NSLog(@"Current last photo time is %ld",last);
+	//NSDebug(@"Current last photo time is %ld",last);
 
 	time_t photoTime = photo.timestamp.unsignedLongValue;
-    //NSLog(@"Verifying photo timestamp: %ld",photoTime);
+    //NSDebug(@"Verifying photo timestamp: %ld",photoTime);
     
     time_t max = MAX(photoTime, last);
-	//NSLog(@"Max time is %ld",max);
+	//NSDebug(@"Max time is %ld",max);
 
     time_t min = MIN(photoTime, early);
-    //NSLog(@"Min time is: %ld",min);
+    //NSDebug(@"Min time is: %ld",min);
 	
-	//NSLog(@"Difference is: %ld", max-min);
+	//NSDebug(@"Difference is: %ld", max-min);
     
     /*(photoTime - early < 86400) ||
      (last - photoTime > 86400) ||
