@@ -1,9 +1,9 @@
 //
 //  NSObject+Async.m
-//  77 Pieces
+//  WAI NZ
 //
 //  Created by Melby Ruarus on 4/09/12.
-//  Copyright (c) 2012 77 Pieces. All rights reserved.
+//  Copyright (c) 2012 Water Action Initiative New Zealand. All rights reserved.
 //
 
 #import "NSObject+Async.h"

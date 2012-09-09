@@ -7,15 +7,26 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		A1C0C53015D7779600A25C58 /* Documentation */ = {
+		A129EE8015FC34120064660A /* Private Documentation */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = A1C0C53115D7779600A25C58 /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildConfigurationList = A129EE8215FC34120064660A /* Build configuration list for PBXAggregateTarget "Private Documentation" */;
+			buildPhases = (
+				A129EE8115FC34120064660A /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "Private Documentation";
+			productName = Documentation;
+		};
+		A1C0C53015D7779600A25C58 /* Public Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A1C0C53115D7779600A25C58 /* Build configuration list for PBXAggregateTarget "Public Documentation" */;
 			buildPhases = (
 				A1C0C53415D7779C00A25C58 /* ShellScript */,
 			);
 			dependencies = (
 			);
-			name = Documentation;
+			name = "Public Documentation";
 			productName = Documentation;
 		};
 /* End PBXAggregateTarget section */
@@ -728,7 +739,8 @@
 			targets = (
 				A12A548415D741980025D32A /* WAI NZ */,
 				A12A549F15D741990025D32A /* WAI NZTests */,
-				A1C0C53015D7779600A25C58 /* Documentation */,
+				A1C0C53015D7779600A25C58 /* Public Documentation */,
+				A129EE8015FC34120064660A /* Private Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -821,6 +833,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		A129EE8115FC34120064660A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "WHOAMI=`whoami`\nmkdir -p /private/var/tmp/$WHOAMI/appledoc/\nOUTPUT=\"/private/var/tmp/$WHOAMI/appledoc/\"\nCOMPANY_ID=\"nz.ac.victoria.ecs.engr302\"\n\n\"$PROJECT_DIR/Tools/appledoc/appledoc\" \\\n--templates \"$PROJECT_DIR/Tools/appledoc/Templates\" \\\n--project-name \"WAI NZ\" \\\n--project-company \"Water Action Initiative New Zealand\" \\\n--company-id \"$COMPANY_ID\" \\\n--output \"$OUTPUT\" \\\n--ignore \"WAI NZTests\" \\\n--ignore \"RestKit\" \\\n--ignore \"WAI NZ/Vendor\" \\\n--logformat xcode \\\n--no-repeat-first-par \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--exit-threshold 3 \\\n\"$PROJECT_DIR\"\n\nexit $?";
+		};
 		A12A549E15D741990025D32A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -933,6 +958,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A129EE8315FC34120064660A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "Documentation copy";
+			};
+			name = Debug;
+		};
+		A129EE8415FC34120064660A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "Documentation copy";
+			};
+			name = Release;
+		};
 		A12A54B015D741990025D32A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1106,6 +1145,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A129EE8215FC34120064660A /* Build configuration list for PBXAggregateTarget "Private Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A129EE8315FC34120064660A /* Debug */,
+				A129EE8415FC34120064660A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A12A547F15D741980025D32A /* Build configuration list for PBXProject "WAI NZ" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1133,7 +1181,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A1C0C53115D7779600A25C58 /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+		A1C0C53115D7779600A25C58 /* Build configuration list for PBXAggregateTarget "Public Documentation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A1C0C53215D7779600A25C58 /* Debug */,
