@@ -1,0 +1,11 @@
+//
+//  WAI NZTests-Prefix.pch
+//  WAI NZ
+//
+//  Created by Melby Ruarus on 7/09/12.
+//  Copyright (c) 2012 Water Action Initiative New Zealand. All rights reserved.
+//
+
+#import "../WAI NZ/WAI NZ-Prefix.pch"
+
+#define DONT_CALL_EXCEPTION [[NSException alloc] initWithName:@"Not expecting method call!" reason:[NSString stringWithFormat:@"Not expecting method call! %i", __LINE__] userInfo:nil]

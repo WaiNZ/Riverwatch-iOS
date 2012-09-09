@@ -12,6 +12,14 @@
 @class WASubmission;
 @class DDProgressView;
 
+extern NSString *const kWASubmitTitleFail;
+extern NSString *const kWASubmitTitleSuccess;
+extern NSString *const kWASubmitMessageUnexpectedResponse;
+extern NSString *const kWASubmitMessageInternet;
+extern NSString *const kWASubmitMessageTimeout;
+extern NSString *const kWASubmitMessageUnexpected;
+extern NSString *const kWASubmitMessageUnexpectedServer;
+
 /**
  This controller manages the uploading of a submission to WAI NZ
  and presents a user interface to monitor the progress and report on any errors.

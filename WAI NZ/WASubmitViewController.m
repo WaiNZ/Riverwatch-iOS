@@ -15,6 +15,14 @@
 #import "DDProgressView.h"
 #import <QuartzCore/QuartzCore.h>
 
+NSString *const kWASubmitTitleFail = @"Oh dear...";
+NSString *const kWASubmitTitleSuccess = @"Done";
+NSString *const kWASubmitMessageUnexpectedResponse = @"The application received an unexpected response from the server, please try again";
+NSString *const kWASubmitMessageInternet = @"The application was unable to connect to the server, please check your internet connection and try again";
+NSString *const kWASubmitMessageTimeout = @"The connection timed out, please try again";
+NSString *const kWASubmitMessageUnexpected = @"An unexpected error occured. Please try again";
+NSString *const kWASubmitMessageUnexpectedServer = @"An unexpected server error occured, please try again";
+
 static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 
 @interface WASubmitViewController ()
@@ -97,6 +105,20 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 												 }];
 }
 
+/**
+ Sperate method to assist with unit testing
+ */
+- (void)setNavigationTitle:(NSString *)title {
+	self.navigationItem.title = title;
+}
+
+/**
+ Seperate method to assist with unit testing
+ */
+- (void)setMessage:(NSString *)message {
+	unsuccessfulStatusMessage.text = message;
+}
+
 #pragma mark - Actions
 
 - (IBAction)doneButtonPressed:(id)sender {
@@ -122,45 +144,52 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 }
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didFailWithError:(NSError *)error {
+	LogDebug(@"Object loader did fail %@", error);
+	
 	self.view = unsuccessfulView;
-	self.navigationItem.title = @"Oh dear...";
+	[self setNavigationTitle:kWASubmitTitleFail];
+	
     if ([error.domain isEqualToString:@"org.restkit.RestKit.ErrorDomain"]) {
         switch (error.code) {
             case RKRequestUnexpectedResponseError:
-                unsuccessfulStatusMessage.text = @"The application received an unexpected message from the server, please try again";
+                [self setMessage:kWASubmitMessageUnexpectedResponse];
                 break;
             case RKObjectLoaderUnexpectedResponseError:
-                unsuccessfulStatusMessage.text = @"The application received an unexpected message from the server, please try again";
+                [self setMessage:kWASubmitMessageUnexpectedResponse];
                 break;
             case RKRequestConnectionTimeoutError:
-                unsuccessfulStatusMessage.text = @"The connection timed out, please try again";
+                [self setMessage:kWASubmitMessageTimeout];
                 break;
             case RKRequestBaseURLOfflineError:
-                unsuccessfulStatusMessage.text = @"The application was unable to connect to the server, please check your internet connection and try again";
+                [self setMessage:kWASubmitMessageInternet];
                 break;
             default:
-                unsuccessfulStatusMessage.text = [NSString stringWithFormat:@"An unexpected error (%d) occured. Please try again.",error.code];
+                [self setMessage:kWASubmitMessageUnexpected];
         }
-    }else unsuccessfulStatusMessage.text = @"An unexpected error occured. Please try again";
+    }
+	else {
+		[self setMessage:kWASubmitMessageUnexpected];
+	}
+	
     [WAStyleHelper bottomAlignLabel:unsuccessfulStatusMessage];
 	self.navigationItem.hidesBackButton = NO;
 }
 
 - (void)objectLoader:(RKObjectLoader *)objectLoader didLoadObject:(id)object {
-	NSLog(@"%@", object);
+	LogDebug(@"Object loader did load: %@", object);
+	
 	self.view = successfulView;
-	self.navigationItem.title = @"Done";
 	self.navigationItem.rightBarButtonItem = doneButton;
     WASubmissionResponse *response = object;
     if ([response.status isEqualToString:@"OK"]) {
         self.view = successfulView;
-        self.navigationItem.title = @"Done";
+        [self setNavigationTitle:kWASubmitTitleSuccess];
         self.navigationItem.rightBarButtonItem = doneButton;
     } else {
         self.view = unsuccessfulView;
-        self.navigationItem.title = @"Oh dear...";
+        [self setNavigationTitle:kWASubmitTitleFail];
         self.navigationItem.hidesBackButton = NO;
-        unsuccessfulStatusMessage.text = @"An unexpected server error occured, please try again";
+        [self setMessage:kWASubmitMessageUnexpectedServer];
     }
     [submission unloadPhotos];
 }

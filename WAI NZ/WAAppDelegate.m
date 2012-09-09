@@ -19,11 +19,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Restkit setup
-	[RKObjectManager setSharedManager:[RKObjectManager managerWithBaseURLString:kRootURL]];
-	[RKObjectManager sharedManager].serializationMIMEType = RKMIMETypeJSON;
-	[[RKObjectManager sharedManager].router routeClass:[WASubmission class] toResourcePath:kResourceSubmitPath forMethod:RKRequestMethodPOST];
-	[[RKObjectManager sharedManager].mappingProvider setSerializationMapping:[[WASubmission objectMapping] inverseMapping] forClass:[WASubmission class]];
-	[[RKObjectManager sharedManager].mappingProvider setObjectMapping:[WASubmissionResponse objectMapping] forResourcePathPattern:kResourceSubmitPath];
+	[self configureRestKitWithBaseURL:kRootURL];
+	
 #if DEBUG
 	RKLogConfigureByName("RestKit/Network", RKLogLevelDebug);
 #endif
@@ -37,6 +34,14 @@
     self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)configureRestKitWithBaseURL:(NSString *)url {
+	[RKObjectManager setSharedManager:[RKObjectManager managerWithBaseURLString:url]];
+	[RKObjectManager sharedManager].serializationMIMEType = RKMIMETypeJSON;
+	[[RKObjectManager sharedManager].router routeClass:[WASubmission class] toResourcePath:kResourceSubmitPath forMethod:RKRequestMethodPOST];
+	[[RKObjectManager sharedManager].mappingProvider setSerializationMapping:[[WASubmission objectMapping] inverseMapping] forClass:[WASubmission class]];
+	[[RKObjectManager sharedManager].mappingProvider setObjectMapping:[WASubmissionResponse objectMapping] forResourcePathPattern:kResourceSubmitPath];
 }
 
 @synthesize window;

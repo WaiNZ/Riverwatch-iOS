@@ -634,9 +634,6 @@ static const int kSectionSubmitRows = 1;
 }
 
 - (IBAction)pinButtonPressed:(id)sender {
-    [pinView setRightCalloutAccessoryView:nil];
-    [pinView setRightCalloutAccessoryView:spinner];
-    [spinner startAnimating];
     UIActionSheet *sheet;
     NSLog(@"orig long: %f lat: %f", submission.location.longitude, submission.location.latitude);
     if ([submission submissionPhotoAtIndex:0].location.latitude == 0.0 && [submission submissionPhotoAtIndex:0].location.longitude == 0.0) {
@@ -653,7 +650,9 @@ static const int kSectionSubmitRows = 1;
     switch (buttonIndex) {
         case 0: {
             [locationManager startUpdatingLocation];
-            //            [pinView setRightCalloutAccessoryView:spinner];
+            [pinView setRightCalloutAccessoryView:nil];
+            [pinView setRightCalloutAccessoryView:spinner];
+            [spinner startAnimating];
             break;
         }
         case 1:
@@ -661,9 +660,7 @@ static const int kSectionSubmitRows = 1;
             if ([[actionSheet buttonTitleAtIndex:1] isEqualToString:@"Revert to original location"]) {
                 [submission setCoordinate:[submission submissionPhotoAtIndex:0].location.coordinate];
                 [mapView setCenterCoordinate:submission.coordinate animated:YES];
-                [spinner stopAnimating];
-                [pinView setRightCalloutAccessoryView:nil];
-                [pinView setRightCalloutAccessoryView:pinButton];
+
             }
             break;
         }
