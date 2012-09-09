@@ -148,6 +148,7 @@ static const NSInteger kSaveToDiskLockOk = 1;
 						 id tmpLocation = [asset valueForProperty:ALAssetPropertyLocation];
 						 if(tmpLocation && tmpLocation != ALErrorInvalidProperty) {
 							 location = [WAGeolocation geolocationWithCLLocation:tmpLocation];
+							 location.source = kWAGeolocationSourceDevice;
 						 }
 						 
 						 // All good

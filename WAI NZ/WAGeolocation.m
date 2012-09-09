@@ -52,6 +52,19 @@
 	return self;
 }
 
+#pragma mark - NSCopying
+///-----------------------------------------------------------------------------
+/// @name NSCopying
+///-----------------------------------------------------------------------------
+
+- (id)copyWithZone:(NSZone *)zone {
+	WAGeolocation *new = [[WAGeolocation alloc] init];
+	new.latitude = latitude;
+	new.longitude = longitude;
+	new.source = source;
+	
+	return new;
+}
 
 #pragma mark - MKAnnotation
 ///-----------------------------------------------------------------------------

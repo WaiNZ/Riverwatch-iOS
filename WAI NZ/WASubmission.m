@@ -82,12 +82,17 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	}
 }
 
+/**
+ Setting this resets the location source to kWAGeolocationSourceHuman,
+ if it needs to be kWAGeolocationSourceDevice then manually set this afterwards
+ */
 - (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
 	if(!location) {
 		location = [[WAGeolocation alloc] init];
 	}
 	
 	location.coordinate = newCoordinate;
+	location.source = kWAGeolocationSourceHuman;
 }
 
 - (NSString *)title {
@@ -291,7 +296,7 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 }
 
 - (void)setLocation:(WAGeolocation *)_location {
-	location = _location;
+	location = [_location copy];
 	POST_UPDATE_NOTIFICATION;
 }
 

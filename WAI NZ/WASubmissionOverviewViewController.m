@@ -714,6 +714,9 @@ static const int kSectionSubmitRows = 1;
         LogDebug(@"New latitude: %f", newLocation.coordinate.latitude);
         LogDebug(@"New longitude: %f", newLocation.coordinate.longitude);
         [submission setCoordinate:locationManager.location.coordinate];
+		if([locationManager.location.timestamp timeIntervalSince1970] - submission.latestTimestamp < 15*60) {
+			submission.location.source = kWAGeolocationSourceDevice;
+		}
         [locationManager stopUpdatingLocation];
         [spinner stopAnimating];
         [pinView setRightCalloutAccessoryView:nil];

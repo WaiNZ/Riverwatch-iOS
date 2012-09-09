@@ -154,7 +154,7 @@ extern NSString *const kWASubmissionUpdatedNotification;
 /** Whether the submission should include the email address when sent to the council */
 @property (nonatomic, getter=isAnonymous) BOOL anonymous;
 /** The location this submission was observed at */
-@property (nonatomic, strong) WAGeolocation *location;
+@property (nonatomic, copy) WAGeolocation *location;
 /** The time at which this submission was observed */
 @property (nonatomic, readonly) time_t timestamp;
 /** The udid of the device the submission was made on */

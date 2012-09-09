@@ -22,8 +22,7 @@ typedef enum {
  A photo data object that encapsulates the image data, timestamp,
  and location if available for a submission
  */
-@interface WASubmissionPhoto : NSObject 
-{
+@interface WASubmissionPhoto : NSObject {
     UIImage *thumbImage;
     UIImage *fullsizeImage;
     NSString *filename;
