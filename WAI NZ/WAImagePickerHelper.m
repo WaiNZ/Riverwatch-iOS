@@ -59,6 +59,7 @@
 							 }];
 	}
 	else {
+		// iOS 6, it should show the default denied access screen
 		showPicker();
 	}
 }

@@ -11,8 +11,15 @@
 #import <RestKit/RestKit.h>
 
 @interface WAGeolocation ()
+///-----------------------------------------------------------------------------
+/// @name Private getters/setters for restkit
+///-----------------------------------------------------------------------------
+
+/** A private getter/setter that wraps latitude with a NSNumber for restkit */
 @property (nonatomic, assign) NSNumber *_rk_latitude;
+/** A private getter/setter that wraps longitude with a NSNumber for restkit */
 @property (nonatomic, assign) NSNumber *_rk_longitude;
+/** A private getter/setter that wraps source with a NSNumber for restkit */
 @property (nonatomic, assign) NSString *_rk_source;
 @end
 
@@ -28,6 +35,9 @@
 }
 
 #pragma mark - Init/Dealloc
+///-----------------------------------------------------------------------------
+/// @name Init/Dealloc
+///-----------------------------------------------------------------------------
 
 + (id)geolocationWithCLLocation:(CLLocation *)location {
 	return [[self alloc] initWithCLLocation:location];
@@ -44,6 +54,9 @@
 
 
 #pragma mark - MKAnnotation
+///-----------------------------------------------------------------------------
+/// @name MKAnnotation
+///-----------------------------------------------------------------------------
 
 - (CLLocationCoordinate2D)coordinate {
 	return CLLocationCoordinate2DMake(latitude, longitude);
@@ -55,6 +68,9 @@
 }
 
 #pragma mark - Getters/Setters
+///-----------------------------------------------------------------------------
+/// @name Getters/Setters
+///-----------------------------------------------------------------------------
 
 - (NSNumber *)_rk_latitude {
 	return @(latitude);
@@ -97,6 +113,8 @@
 		source = kWAGeolocationSourceUnknown;
 	}
 }
+
+#pragma mark - Properties
 
 @synthesize latitude;
 @synthesize longitude;

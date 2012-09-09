@@ -59,13 +59,6 @@
 }
 
 /**
- This interprets the pressing action on the pin in the map view so the user can move the pin to the desired location
- 
- @param sender the gesture recogniser associated with the action
- */
-- (IBAction)pinButtonPressed:(id)sender;
-
-/**
  Initilize a WASubmissionOverviewViewController with the specified submission
  
  @param _submission the submission to display in this controller

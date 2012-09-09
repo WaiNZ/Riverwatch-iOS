@@ -30,6 +30,7 @@
   cancelButtonTitle:(NSString *)cancelButtonTitle
 	dismissCallback:(void (^)(NSInteger buttonIndex))dismissCallback {
 	
+	// Create a delegate object to forward to the block
 	__WAUIAlertViewBlockDelegate *delegate = [[__WAUIAlertViewBlockDelegate alloc] init];
 	delegate->callback = dismissCallback;
 	
@@ -40,6 +41,7 @@
 			 otherButtonTitles:okButtonTitle, nil];
 	
 	if(self) {
+		// Associate the delegate so it doesn't get deallocated during the lifetime of self
 		static const char blockDelegateKey;
 		objc_setAssociatedObject(self, &blockDelegateKey, delegate, OBJC_ASSOCIATION_RETAIN);
 	}

@@ -19,6 +19,11 @@
 
 @implementation WAHomeViewController
 
+#pragma mark - Init/Dealloc
+///-----------------------------------------------------------------------------
+/// @name Initilization
+///-----------------------------------------------------------------------------
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -26,6 +31,11 @@
     }
     return self;
 }
+
+#pragma mark - View lifecycle
+///-----------------------------------------------------------------------------
+/// @name View lifecycle
+///-----------------------------------------------------------------------------
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,6 +58,9 @@
 }
 
 #pragma mark - UITableViewDataSource/UITableViewDelegate
+///-----------------------------------------------------------------------------
+/// @name UITableViewDataSource/UITableViewDelegate
+///-----------------------------------------------------------------------------
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 2;
@@ -96,6 +109,9 @@
 }
 
 #pragma mark - UIImagePickerControllerDelegate
+///-----------------------------------------------------------------------------
+/// @name UIImagePickerControllerDelegate
+///-----------------------------------------------------------------------------
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	// Create a submission photo - this is async

@@ -21,6 +21,12 @@ static NSArray *kAllowedTags;
 		kAllowedTags = @[@"Cow", @"Pollution", @"Runoff",@"Paint",@"Drain",@"Waterway"];
 	}
 }
+
+#pragma mark - Init/Dealloc
+///-----------------------------------------------------------------------------
+/// @name Init/Dealloc
+///-----------------------------------------------------------------------------
+
 - (id)initWithSubmission:(WASubmission *)_submission {
 	self = [self init];
 	if(self) {
@@ -29,6 +35,11 @@ static NSArray *kAllowedTags;
 	}
 	return self;
 }
+
+#pragma mark - UIViewController
+///-----------------------------------------------------------------------------
+/// @name View lifecycle
+///-----------------------------------------------------------------------------
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,6 +56,9 @@ static NSArray *kAllowedTags;
 }
 
 #pragma mark - UITableViewDataSource
+///-----------------------------------------------------------------------------
+/// @name UITableViewDataSource
+///-----------------------------------------------------------------------------
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 1;
@@ -68,6 +82,9 @@ static NSArray *kAllowedTags;
 }
 
 #pragma mark - UITableViewDelegate
+///-----------------------------------------------------------------------------
+/// @name UITableViewDelegate
+///-----------------------------------------------------------------------------
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSString *tag = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;

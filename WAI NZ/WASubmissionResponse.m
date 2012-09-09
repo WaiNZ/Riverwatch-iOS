@@ -12,6 +12,10 @@
 
 @implementation WASubmissionResponse
 
+///-----------------------------------------------------------------------------
+/// @name Object mapping
+///-----------------------------------------------------------------------------
+
 + (RKObjectMapping *)objectMapping {
 	RKObjectMapping *objectMapping = [RKObjectMapping mappingForClass:[WASubmissionResponse class]];
 	[objectMapping mapKeyPath:@"status" toAttribute:@"status"];

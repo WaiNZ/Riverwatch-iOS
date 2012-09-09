@@ -20,10 +20,18 @@
 	NSURL *url;
 }
 
+///-----------------------------------------------------------------------------
+/// @name Object mapping
+///-----------------------------------------------------------------------------
+
 /**
  Get the object mapping for this class
  */
 + (RKObjectMapping *)objectMapping;
+
+///-----------------------------------------------------------------------------
+/// @name Attributes
+///-----------------------------------------------------------------------------
 
 /** The status message, should be "OK" or "ERROR" */
 @property (nonatomic, strong) NSString *status;

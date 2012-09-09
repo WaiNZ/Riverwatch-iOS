@@ -13,6 +13,10 @@
  */
 @interface WAStyleHelper : NSObject
 
+///-----------------------------------------------------------------------------
+/// @name Aligning views
+///-----------------------------------------------------------------------------
+
 /**
  Resize a UILabel so that the text is top aligned.
  
@@ -40,6 +44,10 @@
  @return the amount that the label has been resized by
  */
 + (CGFloat)bottomAlignLabel:(UILabel *)label;
+
+///-----------------------------------------------------------------------------
+/// @name Colors
+///-----------------------------------------------------------------------------
 
 /**
  This returns the correct color to assign to the table header text

@@ -31,6 +31,11 @@
 	return self;
 	
 }
+
+///-----------------------------------------------------------------------------
+/// @name View lifecycle
+///-----------------------------------------------------------------------------
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -59,6 +64,10 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+///-----------------------------------------------------------------------------
+/// @name Dismissing
+///-----------------------------------------------------------------------------
 
 - (IBAction)cancel:(id)sender {
 	[self dismissModalViewControllerAnimated:YES];
