@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A1C0C53015D7779600A25C58"
-               BuildableName = "Documentation"
+               BuildableName = "Public Documentation"
                BlueprintName = "Public Documentation"
                ReferencedContainer = "container:WAI NZ.xcodeproj">
             </BuildableReference>

@@ -14,6 +14,7 @@
 	[[RKObjectManager sharedManager] postObject:object
 									 usingBlock:^(RKObjectLoader *loader) {
 										 loader.objectMapping = [self.mappingProvider objectMappingForClass:[object class]];
+										 // Set the target object to nil to allow restkit auto class matching to occur
 										 loader.targetObject = nil;
 										 block(loader);
 									 }];

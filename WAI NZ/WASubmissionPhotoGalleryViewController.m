@@ -21,6 +21,8 @@ static const CGFloat photoSpacer = 20;
 
 @implementation WASubmissionPhotoGalleryViewController
 
+#pragma mark - Init/Dealloc
+
 - (id)initWithSubmission:(WASubmission *)_submission andPhotoIndex:(int)index {
 	self = [self init];
 	if(self) {
@@ -36,6 +38,8 @@ static const CGFloat photoSpacer = 20;
    
     return self;
 }
+
+#pragma mark - UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -83,26 +87,6 @@ static const CGFloat photoSpacer = 20;
 	[self setImage:currentPhoto onView:centerImageView];
 }
 
-- (void)setImage:(NSInteger)photoIndex onView:(UIImageView *)imageView {
-	imageView.image = nil;
-	imageView.tag = photoIndex;
-	[imageView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-	UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-	spinner.center = CGPointMake(imageView.bounds.size.width/2, imageView.bounds.size.height/2);
-	[imageView addSubview:spinner];
-	[spinner startAnimating];
-	[[submission submissionPhotoAtIndex:photoIndex] accessGetterConcurrently:@selector(fullsizeImage)
-																  withObject:nil
-																onMainThread:YES
-																	callback:^(id returnedValue) {
-																		[spinner stopAnimating];
-																		[spinner removeFromSuperview];
-																		if(imageView.tag == photoIndex) {
-																			[imageView setAndFitToImage:returnedValue];
-																		}
-																	}];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
 	[centerImageView fitToImage];
 }
@@ -116,11 +100,45 @@ static const CGFloat photoSpacer = 20;
 	[super viewWillDisappear:animated];
 }
 
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - Utilities
+
+/**
+ Conveniance method for asynchronously setting the iamge property on a image view
+ 
+ @param photoIndex the index of the photo to set
+ @param imageView the imageView to set the image on
+ */
+- (void)setImage:(NSInteger)photoIndex onView:(UIImageView *)imageView {
+	// Reset the iamge property
+	imageView.image = nil;
+	imageView.tag = photoIndex;
+	// Remove all subviews
+	[imageView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+	// Add the spinner
+	UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	spinner.center = CGPointMake(imageView.bounds.size.width/2, imageView.bounds.size.height/2);
+	[imageView addSubview:spinner];
+	[spinner startAnimating];
+	// Set asynchronously
+	[[submission submissionPhotoAtIndex:photoIndex] accessGetterConcurrently:@selector(fullsizeImage)
+																  withObject:nil
+																onMainThread:YES
+																	callback:^(id returnedValue) {
+																		[spinner stopAnimating];
+																		[spinner removeFromSuperview];
+																		if(imageView.tag == photoIndex) {
+																			[imageView setAndFitToImage:returnedValue];
+																		}
+																	}];
+}
+
+/**
+ The frame of subviews
+ */
 - (CGRect)subviewFrame {
 	// TODO: other orrientations, etc
 	CGRect bounds = self.view.bounds;
@@ -129,6 +147,11 @@ static const CGFloat photoSpacer = 20;
 	return bounds;
 }
 
+/**
+ Set the offset of all the image views, left, center and right
+ 
+ @param offset the pixel offset to apply to all the frame.origin.x properties
+ */
 - (void)_setOffset:(CGFloat)offset {
 	// Set frames of left, center, right views
 	CGRect bounds = self.subviewFrame;
@@ -146,6 +169,50 @@ static const CGFloat photoSpacer = 20;
 	rightView.frame = rightFrame;
 }
 
+/**
+ Show the nav/status bar
+ */
+- (void)showBars {
+	[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+	[UIView animateWithDuration:kStatusbarFadeAnimationDuration
+					 animations:^{
+						 self.navigationController.navigationBar.alpha = 1;
+					 }];
+}
+
+/**
+ Hide the nav/status bar
+ */
+- (void)hideBars {
+	[UIView animateWithDuration:kStatusbarFadeAnimationDuration
+					 animations:^{
+						 self.navigationController.navigationBar.alpha = 0;
+					 }];
+	[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+}
+
+#pragma mark - Actions
+/**
+ Hide/show the nav/status bar
+ */
+- (void)toggleBars {
+	if ([UIApplication sharedApplication].statusBarHidden) {
+		[self showBars];
+	} else {
+		[self hideBars];
+	}
+}
+
+- (IBAction)tapOnView:(id)sender {
+	[self toggleBars];
+}
+
+
+/**
+ Delete the currently visible photo
+ 
+ @param sender the object that initiated the delete
+ */
 - (IBAction)deleteCurrentPhoto:(id)sender{
 	// Try to remove the photo
 	[submission removeSubmissionPhotoAtIndex:currentPhoto
@@ -194,6 +261,13 @@ static const CGFloat photoSpacer = 20;
 							}];
 }
 
+#pragma mark - Gestures
+
+/**
+ Called whenever the view is panned
+ 
+ @param sender the gesture that recognized the pan
+ */
 - (IBAction)viewPanned:(UIPanGestureRecognizer *)sender {
 	CGFloat offset = [sender translationInView:self.view].x;
 	CGFloat velocity = [sender velocityInView:self.view].x;
@@ -282,34 +356,6 @@ static const CGFloat photoSpacer = 20;
 	}
 }
 
-- (void)showBars {
-	[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
-	[UIView animateWithDuration:kStatusbarFadeAnimationDuration
-					 animations:^{
-						 self.navigationController.navigationBar.alpha = 1;
-					 }];
-}
-
-- (void)hideBars {
-	[UIView animateWithDuration:kStatusbarFadeAnimationDuration
-					 animations:^{
-						 self.navigationController.navigationBar.alpha = 0;
-					 }];
-	[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
-}
-
-- (void)toggleBars {
-	if ([UIApplication sharedApplication].statusBarHidden) {
-		[self showBars];
-	} else {
-		[self hideBars];
-	}
-}
-
-- (IBAction)tapOnView:(id)sender {
-	[self toggleBars];
-}
-
 #pragma mark - UIScrollViewDelegate
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {	
@@ -345,11 +391,11 @@ static const CGFloat photoSpacer = 20;
 }
 
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
-    
     if(centerView.zoomScale > centerView.minimumZoomScale)
         [centerView setZoomScale:centerView.minimumZoomScale animated:YES];
     else
         [centerView setZoomScale:centerView.maximumZoomScale animated:YES];
     [self hideBars];
 }
+
 @end

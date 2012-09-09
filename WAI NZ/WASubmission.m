@@ -273,9 +273,6 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	return parts;
 }
 
-/** 
- Gets the earliest timestamp from the submission photos
- */
 - (time_t)timestamp {
 	time_t ret = LONG_MAX;
 	for(WASubmissionPhoto *photo in photos) {
@@ -286,9 +283,6 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	return ret;
 }
 
-/**
- Gets the latest timestamp from the submission photos
- */
 - (time_t) latestTimestamp{
     time_t ret = LONG_MIN;
     for(WASubmissionPhoto *photo in photos) {

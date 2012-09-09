@@ -22,12 +22,12 @@
 #import "WAImagePickerHelper.h"
 #import "Logging.h"
 
+// Macros to start/stop notification listening
 #define ENABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submissionUpdated) name:kWASubmissionUpdatedNotification object:submission];
 #define DISABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] removeObserver:self name:kWASubmissionUpdatedNotification object:submission]
 
 static const int kTakePhotoButton = 0;
 static const int kUseExistingPhotoButton = 1;
-
 
 static const int kNumberofSections = 3;
 
@@ -76,13 +76,16 @@ static const int kSectionSubmitRows = 1;
 	mapContainerView.layer.borderColor = mainTableView.separatorColor.CGColor;
 	mapContainerView.layer.borderWidth = 1;
 	
+	// Add the pin
 	[mapView addAnnotation:submission];
 	
+	// Update various views
 	[self loadPhotoViews];
     [self updatePhotoText];
     [self updateTimestampText];
     [self updateMapView:NO];
 	
+	// Set up the table
 	mainTableView.tableHeaderView = topView;
 	
 	if(submission.location) {
@@ -124,8 +127,8 @@ static const int kSectionSubmitRows = 1;
 #pragma mark - Actions
 - (IBAction)sliderChanged:(id)sender {
 	[mainTableView beginUpdates];
-	// Update the table
-	if(slider.on){
+	// Update the table with new cells
+	if(slider.on) {
 		[mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:kSectionEmail inSection:kRowEmailField]] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
 	else {
@@ -329,9 +332,6 @@ static const int kSectionSubmitRows = 1;
 	}
 	
     [mapView setRegion:region animated:animated];
-    
-    NSLog(@"lat is: %f", mapView.region.center.latitude);
-    NSLog(@"long is: %f", mapView.region.center.longitude);
 }
 
 - (void)loadPhotoViews {
@@ -617,8 +617,7 @@ static const int kSectionSubmitRows = 1;
 
 - (void)locationManager:(CLLocationManager *)manager
     didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation
-{
+           fromLocation:(CLLocation *)oldLocation {
     
     NSTimeInterval dif = [locationManager.location.timestamp timeIntervalSinceDate:[NSDate date]];
     if (abs(dif) < 300) {
@@ -633,6 +632,11 @@ static const int kSectionSubmitRows = 1;
     } else LogDebug(@"Location is over 5 minutes old, not using it");
 }
 
+/**
+ This interprets the pressing action on the pin in the map view so the user can move the pin to the desired location
+ 
+ @param sender the gesture recogniser associated with the action
+ */
 - (IBAction)pinButtonPressed:(id)sender {
     UIActionSheet *sheet;
     NSLog(@"orig long: %f lat: %f", submission.location.longitude, submission.location.latitude);
@@ -647,6 +651,7 @@ static const int kSectionSubmitRows = 1;
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
+	// This is the location actionsheet, not the resize one
     switch (buttonIndex) {
         case 0: {
             [locationManager startUpdatingLocation];

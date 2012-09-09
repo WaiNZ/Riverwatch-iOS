@@ -21,6 +21,9 @@ static NSArray *kAllowedTags;
 		kAllowedTags = @[@"Cow", @"Pollution", @"Runoff",@"Paint",@"Drain",@"Waterway"];
 	}
 }
+
+#pragma mark - Init/Dealloc
+
 - (id)initWithSubmission:(WASubmission *)_submission {
 	self = [self init];
 	if(self) {
@@ -29,6 +32,8 @@ static NSArray *kAllowedTags;
 	}
 	return self;
 }
+
+#pragma mark - UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
