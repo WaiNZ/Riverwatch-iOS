@@ -34,9 +34,9 @@
 }
 
 - (void)dealloc {
-    [data release];
-    
-    [super dealloc];
+	[data release];
+	
+	[super dealloc];
 }
 
 - (void)addHeader:(NSString *)key withValue:(NSString *)value
