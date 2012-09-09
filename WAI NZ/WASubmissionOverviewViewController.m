@@ -718,7 +718,7 @@ static const int kSectionSubmitRows = 1;
         [spinner stopAnimating];
         [pinView setRightCalloutAccessoryView:nil];
         [pinView setRightCalloutAccessoryView:pinButton];
-        [mapView setCenterCoordinate:submission.coordinate animated:YES];
+        [self updateMapView:YES];
     } else LogDebug(@"Location is over 5 minutes old, not using it");
 }
 
