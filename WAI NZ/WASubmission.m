@@ -17,11 +17,24 @@
 NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotification";
 
 @interface WASubmission ()
+
+#pragma mark - Private properties for restkit
+///-----------------------------------------------------------------------------
+/// @name Private properties for restkit mapping
+///-----------------------------------------------------------------------------
+
+/** A private getter/setter that wraps timestamp with a NSNumber for restkit */
 @property (nonatomic, assign) NSNumber *_rk_timestamp;
+/** A private getter/setter that wraps council submission data for restkit */
 @property (nonatomic, assign) NSDictionary *_rk_councilSubmission;
 @end
 
 @implementation WASubmission
+
+#pragma mark - Object Mapping
+///-----------------------------------------------------------------------------
+/// @name Object mapping
+///-----------------------------------------------------------------------------
 
 + (RKObjectMapping *)objectMapping {
 	RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[WASubmission class]];
@@ -35,6 +48,11 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	
 	return mapping;
 }
+
+#pragma mark - Initilization
+///-----------------------------------------------------------------------------
+/// @name Initilization
+///-----------------------------------------------------------------------------
 
 - (id)init {
     self = [super init];
@@ -51,6 +69,9 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 }
 
 #pragma mark - MKAnnotation
+///-----------------------------------------------------------------------------
+/// @name MKAnnotation
+///-----------------------------------------------------------------------------
 
 - (CLLocationCoordinate2D)coordinate {
 	if(location) {
@@ -73,7 +94,10 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	return @"Drag me to specify the location";
 }
 
-#pragma mark - Actions
+#pragma mark - Verification
+///-----------------------------------------------------------------------------
+/// @name Verification
+///-----------------------------------------------------------------------------
 
 - (UIAlertView *)verify {
 	if(!location) {
@@ -114,7 +138,17 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	return nil;
 }
 
+#pragma mark - Utilities
+///-----------------------------------------------------------------------------
+/// @name Utilities
+///-----------------------------------------------------------------------------
 
+/**
+ Checks whether the email provided is valid
+ 
+ @param checkString the string containing the email to be checked
+ @return YES if valid, else NO
+ */
 -(BOOL) NSStringIsValidEmail:(NSString *)checkString{
     BOOL stricterFilter = YES; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
     NSString *stricterFilterString = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
@@ -331,6 +365,9 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 }
 
 #pragma mark - Private Getters/Setters
+///-----------------------------------------------------------------------------
+/// @name Private Getters/Setters
+///-----------------------------------------------------------------------------
 
 - (NSNumber *)_rk_timestamp {
 	return @(self.timestamp);
@@ -355,6 +392,8 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 	anonymous = [[_rk_councilSubmission objectForKey:@"anonymous"] boolValue];
 	email = [_rk_councilSubmission objectForKey:@"email_address"];
 }
+
+#pragma mark - Properties
 
 @synthesize descriptionText;
 @synthesize email;

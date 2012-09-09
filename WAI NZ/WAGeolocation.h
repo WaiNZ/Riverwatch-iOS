@@ -33,11 +33,19 @@ typedef enum {
 	WAGeolocationSource source;
 }
 
+///-----------------------------------------------------------------------------
+/// @name Object mapping
+///-----------------------------------------------------------------------------
+
 /**
  The RKObjectMapping that can be used to serialize/deserialize
  this class using RestKit.
  */
 + (RKObjectMapping *)objectMapping;
+
+///-----------------------------------------------------------------------------
+/// @name Convenience constructors
+///-----------------------------------------------------------------------------
 
 /**
  A convenience method to create a WAGeolocation from a CLLocation
@@ -46,12 +54,20 @@ typedef enum {
  */
 + (id)geolocationWithCLLocation:(CLLocation *)location;
 
+///-----------------------------------------------------------------------------
+/// @name Initilization
+///-----------------------------------------------------------------------------
+
 /**
  Initilize a WAGeolocation using a CLLocation
  
  @param location the location object to use for lat/lng information
  */
 - (id)initWithCLLocation:(CLLocation *)location;
+
+///-----------------------------------------------------------------------------
+/// @name Attributes
+///-----------------------------------------------------------------------------
 
 /** The latitude of this location */
 @property (nonatomic, assign) CLLocationDegrees latitude;

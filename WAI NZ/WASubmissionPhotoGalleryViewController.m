@@ -22,6 +22,9 @@ static const CGFloat photoSpacer = 20;
 @implementation WASubmissionPhotoGalleryViewController
 
 #pragma mark - Init/Dealloc
+///-----------------------------------------------------------------------------
+/// @name Init/Dealloc
+///-----------------------------------------------------------------------------
 
 - (id)initWithSubmission:(WASubmission *)_submission andPhotoIndex:(int)index {
 	self = [self init];
@@ -39,7 +42,10 @@ static const CGFloat photoSpacer = 20;
     return self;
 }
 
-#pragma mark - UIViewController
+#pragma mark - View lifecycle
+///-----------------------------------------------------------------------------
+/// @name View lifecycle
+///-----------------------------------------------------------------------------
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -105,6 +111,9 @@ static const CGFloat photoSpacer = 20;
 }
 
 #pragma mark - Utilities
+///-----------------------------------------------------------------------------
+/// @name Utility methods
+///-----------------------------------------------------------------------------
 
 /**
  Conveniance method for asynchronously setting the iamge property on a image view
@@ -192,6 +201,10 @@ static const CGFloat photoSpacer = 20;
 }
 
 #pragma mark - Actions
+///-----------------------------------------------------------------------------
+/// @name Actions
+///-----------------------------------------------------------------------------
+
 /**
  Hide/show the nav/status bar
  */
@@ -203,10 +216,14 @@ static const CGFloat photoSpacer = 20;
 	}
 }
 
+/**
+ The iamge was tapped
+ 
+ @param sender the object that caled this method
+ */
 - (IBAction)tapOnView:(id)sender {
 	[self toggleBars];
 }
-
 
 /**
  Delete the currently visible photo
@@ -262,6 +279,9 @@ static const CGFloat photoSpacer = 20;
 }
 
 #pragma mark - Gestures
+///-----------------------------------------------------------------------------
+/// @name Gesture handling
+///-----------------------------------------------------------------------------
 
 /**
  Called whenever the view is panned
@@ -357,6 +377,9 @@ static const CGFloat photoSpacer = 20;
 }
 
 #pragma mark - UIScrollViewDelegate
+///-----------------------------------------------------------------------------
+/// @name Photo scrolling/zooming
+///-----------------------------------------------------------------------------
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {	
 	if(scrollView == centerView) {
@@ -366,6 +389,9 @@ static const CGFloat photoSpacer = 20;
 	return nil;
 }
 
+/**
+ Center the iamge view in the scrollview when zomming
+ */
 - (void)centerScrollViewContents {
 	// From http://www.raywenderlich.com/10518/how-to-use-uiscrollview-to-scroll-and-zoom-content
     CGSize boundsSize = centerView.bounds.size;
@@ -390,6 +416,11 @@ static const CGFloat photoSpacer = 20;
 	[self centerScrollViewContents];
 }
 
+/**
+ This will recognise the double tap gesture to be a zoom on the image in the photo gallery
+ 
+ @param gestureRecognizer the UIGestureRecognizer that will handle the double tap action
+ */
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
     if(centerView.zoomScale > centerView.minimumZoomScale)
         [centerView setZoomScale:centerView.minimumZoomScale animated:YES];

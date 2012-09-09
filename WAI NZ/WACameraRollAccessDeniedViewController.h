@@ -17,14 +17,27 @@
 	__unsafe_unretained IBOutlet UILabel *reasonLabel;
 }
 
+///-----------------------------------------------------------------------------
+/// @name Convenience methods
+///-----------------------------------------------------------------------------
+
  /**
  initializer for WACameraRollAccessDeniedViewController, taking an NSString with the reason the access was denied, returns inside a NavigationViewController 
+  
  @param reason reason the access was denied, to be shown on screen.
  */
 + (id)controllerWithReason:(NSString *)reason;
 
+///-----------------------------------------------------------------------------
+/// @name Initilizing
+///-----------------------------------------------------------------------------
+
 /**
  initializer for WACameraRollAccessDeniedViewController, taking an NSString with the reason the access was denied
+ 
+ This method does not wrap the controller in a navigation controller, so either
+ use +controllerWithReason: or do this manually
+ 
  @param reason reason the access was denied, to be shown on screen.
  */
 - (id)initWithReason:(NSString *)reason;

@@ -23,6 +23,11 @@ static const NSInteger kSaveToDiskLockOk = 1;
 
 @implementation WASubmissionPhoto
 
+#pragma mark - Object mapping
+///-----------------------------------------------------------------------------
+/// @name Object mapping
+///-----------------------------------------------------------------------------
+
 + (RKObjectMapping *)objectMapping {
 	RKObjectMapping *mapping = [RKObjectMapping mappingForClass:[WASubmissionPhoto class]];
 	[mapping mapKeyPath:@"timestamp" toAttribute:@"timestamp"];
@@ -31,6 +36,11 @@ static const NSInteger kSaveToDiskLockOk = 1;
 	
 	return mapping;
 }
+
+#pragma mark - Initilization
+///-----------------------------------------------------------------------------
+/// @name Initilization
+///-----------------------------------------------------------------------------
 
 - (id)initWithPhoto:(UIImage *)photo timestamp:(time_t)time location:(WAGeolocation *)loc {
     self = [super init];
@@ -162,7 +172,13 @@ static const NSInteger kSaveToDiskLockOk = 1;
 }
 
 #pragma mark - Utilities
+///-----------------------------------------------------------------------------
+/// @name Utilities
+///-----------------------------------------------------------------------------
 
+/**
+ Load the full sized image from the disk
+ */
 - (UIImage *) retrieveFullsizeImage{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,     NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -170,6 +186,11 @@ static const NSInteger kSaveToDiskLockOk = 1;
     UIImage *img = [UIImage imageWithContentsOfFile:getImagePath];
     return img;
 }
+
+#pragma mark - Caching
+///-----------------------------------------------------------------------------
+/// @name Caching
+///-----------------------------------------------------------------------------
 
 -(void) removePhotoFromDisk{
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -181,7 +202,13 @@ static const NSInteger kSaveToDiskLockOk = 1;
 }
 
 #pragma mark - Getters/Setters
+///-----------------------------------------------------------------------------
+/// @name Getters/Setters
+///-----------------------------------------------------------------------------
 
+/**
+ Estimate the pixel width/height of the image after scalling
+ */
 - (CGSize)estimatedImageSize:(WASubmissionPhotoSize)photoScale {
 	CGSize scaledSize;
 	switch(photoScale) {
@@ -221,6 +248,14 @@ static const NSInteger kSaveToDiskLockOk = 1;
 	return thumbImage;
 }
 
+#pragma mark - Private getters/setters for restkit
+///-----------------------------------------------------------------------------
+/// @name Private getters/setters for restkit
+///-----------------------------------------------------------------------------
+
+/**
+ Private getter used by the restkit object mapping to get the image data as base64
+ */
 - (NSString *)base64String {
 	UIImage *scaledImage = self.fullsizeImage;
 	if(photoScaleSize != kWASubmissionPhotoSizeActual) {
