@@ -20,6 +20,14 @@
  */
 @interface WAAppDelegate : UIResponder <UIApplicationDelegate>
 
+/**
+ Configure restkit with the mappings and routings required
+ for this application, using the specified base url
+ 
+ @param url the base url of the api
+ */
+- (void)configureRestKitWithBaseURL:(NSString *)url;
+
 /** The main application window */
 @property (strong, nonatomic) UIWindow *window;
 

@@ -11,6 +11,7 @@
 #import "WASubmitViewController.h"
 #import "WASubmission.h"
 #import <OCMock/OCMock.h>
+#import "WAAppDelegate.h"
 
 @interface WASubmitViewController (TestPrivate)
 - (void)sendSubmission;
@@ -60,7 +61,8 @@ static int portNumber = 1111;
 	[server listen:portNumber];
 	[server startListening];
 	
-	[RKObjectManager sharedManager].client.baseURL = [RKURL URLWithBaseURLString:[NSString stringWithFormat:@"http://localhost:%i", portNumber]];
+	WAAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+	[delegate configureRestKitWithBaseURL:[NSString stringWithFormat:@"http://localhost:%i", portNumber]];
 	
 	NSLog(@"Listening on port: %i", portNumber);
 	portNumber++;
@@ -75,15 +77,48 @@ static int portNumber = 1111;
 	submission.anonymous = YES;
 	[submission addTag:@"Cow"];
 	
-	WASubmitViewController *controller = [[WASubmitViewController alloc] initWithSubmission:submission];
-	OCMockObject *mock = [OCMockObject partialMockForObject:controller];
-	
-	[[[mock stub] andThrow:DONT_CALL_EXCEPTION] setMessage:[OCMArg any]];
-	[[mock expect] setNavigationTitle:kWASubmitTitleSuccess];
-	
 	SimpleHTTPResponse *response = [[SimpleHTTPResponse alloc] init];
 	[response setContentType:@"application/json"];
 	[response setContentString:kResponseBodyOk];
+	
+	[self runTestOnWASubmitControllerWithSubmission:submission
+										   response:response
+								   shouldSetMessage:NO
+									   withArgument:nil
+						   shouldSetNavigationTitle:YES
+									   withArgument:kWASubmitTitleSuccess];
+}
+
+#pragma mark - Utilities
+
+/**
+ Test that a WASubmitController behaves as expected given a submission and response
+ from the server.
+ 
+ if setMessage is nil then messageArg can be anything, same follows for setNavigationTitle
+ 
+ @param submission the submission to submit
+ @param response the response for the server to return
+ @param setMessage whether the -[WASubmitController setMessage:] method should be called, if false the test will fail if it is
+ @param messageArg the argument that should be expected to the -[WASubmitController setMessage:] method, to match any argument [OCMArg any] should be used
+ @param setNavigationTitle whether the -[WASubmitController setNavigationTitle:navigationArg:] method should be called, if false the test will fail if it is
+ @param navigationArg the argument that should be expected to the -[WASubmitController setNavigationTitle:] method, to match any argument [OCMArg any] should be used
+ */
+- (void)runTestOnWASubmitControllerWithSubmission:(WASubmission *)submission
+										 response:(SimpleHTTPResponse *)response
+								 shouldSetMessage:(BOOL)setMessage
+									 withArgument:(id)messageArg
+						 shouldSetNavigationTitle:(BOOL)setNavigationTitle
+									 withArgument:(id)navigationArg {
+	WASubmitViewController *controller = [[WASubmitViewController alloc] initWithSubmission:submission];
+	OCMockObject *mock = [OCMockObject partialMockForObject:controller];
+	
+	
+	id messageMock = setMessage?[mock expect]:[[mock stub] andThrow:DONT_CALL_EXCEPTION];
+	id navigationMock = setNavigationTitle?[mock expect]:[[mock stub] andThrow:DONT_CALL_EXCEPTION];
+	
+	[messageMock setMessage:setMessage?messageArg:[OCMArg any]];
+	[navigationMock setNavigationTitle:setNavigationTitle?navigationArg:[OCMArg any]];
 	
 	[self expectPostData:[submission jsonString] response:response exec:^{
 		[controller sendSubmission];
