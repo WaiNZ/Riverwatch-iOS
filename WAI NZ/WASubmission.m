@@ -90,10 +90,7 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
     NSLog(@"NZRegion long-span: %f", kNewZealandRegion.center.longitude - kNewZealandRegion.span.longitudeDelta);
     NSLog(@"NZRegion long+span: %f", kNewZealandRegion.center.longitude + kNewZealandRegion.span.longitudeDelta);
     
-	if((location.latitude < (kNewZealandRegion.center.latitude - kNewZealandRegion.span.latitudeDelta)) ||
-	   (location.latitude > (kNewZealandRegion.center.latitude + kNewZealandRegion.span.latitudeDelta)) ||
-	   (location.longitude < (kNewZealandRegion.center.longitude - kNewZealandRegion.span.longitudeDelta)) ||
-	   (location.longitude > (kNewZealandRegion.center.longitude + kNewZealandRegion.span.longitudeDelta))) { // TODO: chattams?
+	if(![self locationIsInNewZealand:location]) {
 		return [[UIAlertView alloc] initWithTitle:@"Submissions from NZ only"
 										  message:@"WAI NZ only accepts submissions from New Zealand, sorry about that."
 										 delegate:nil
@@ -122,6 +119,15 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
     NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:checkString];
+}
+
+-(BOOL) locationIsInNewZealand:(WAGeolocation *) loc{
+    if((loc.latitude < (kNewZealandRegion.center.latitude - kNewZealandRegion.span.latitudeDelta)) ||
+	   (loc.latitude > (kNewZealandRegion.center.latitude + kNewZealandRegion.span.latitudeDelta)) ||
+	   (loc.longitude < (kNewZealandRegion.center.longitude - kNewZealandRegion.span.longitudeDelta)) ||
+	   (loc.longitude > (kNewZealandRegion.center.longitude + kNewZealandRegion.span.longitudeDelta))) { // TODO: chattams?
+		return NO;
+	} else return YES;
 }
 
 

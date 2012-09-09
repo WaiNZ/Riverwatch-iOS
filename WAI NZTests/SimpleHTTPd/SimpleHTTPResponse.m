@@ -16,7 +16,7 @@
 		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 		[dateFormatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
 		
-		data = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+		data = [[NSMutableDictionary dictionaryWithObjectsAndKeys:
 			[NSMutableDictionary dictionaryWithObjectsAndKeys:
 				@"text/html", @"Content-type",
 				[dateFormatter stringFromDate:[NSDate date]], @"Date",
@@ -27,10 +27,16 @@
 			[NSNumber numberWithInt:200], @"code",
 			[NSData data], @"content",
 			nil
-		];
+		] retain];
 	}
 	
 	return self;
+}
+
+- (void)dealloc {
+    [data release];
+    
+    [super dealloc];
 }
 
 - (void)addHeader:(NSString *)key withValue:(NSString *)value
