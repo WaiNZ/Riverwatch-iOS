@@ -7,15 +7,26 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		A1C0C53015D7779600A25C58 /* Documentation */ = {
+		A129EE8015FC34120064660A /* Private Documentation */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = A1C0C53115D7779600A25C58 /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildConfigurationList = A129EE8215FC34120064660A /* Build configuration list for PBXAggregateTarget "Private Documentation" */;
+			buildPhases = (
+				A129EE8115FC34120064660A /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "Private Documentation";
+			productName = Documentation;
+		};
+		A1C0C53015D7779600A25C58 /* Public Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A1C0C53115D7779600A25C58 /* Build configuration list for PBXAggregateTarget "Public Documentation" */;
 			buildPhases = (
 				A1C0C53415D7779C00A25C58 /* ShellScript */,
 			);
 			dependencies = (
 			);
-			name = Documentation;
+			name = "Public Documentation";
 			productName = Documentation;
 		};
 /* End PBXAggregateTarget section */
@@ -28,6 +39,7 @@
 		A10A5B5F15F0E8B8001A8184 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A10A5B5C15F0E8B8001A8184 /* UIImage+RoundedCorner.m */; };
 		A10C5C1615DB054B0028767F /* WASubmissionOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A10C5C1415DB054B0028767F /* WASubmissionOverviewViewController.m */; };
 		A10C5C1715DB054B0028767F /* WASubmissionOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A10C5C1515DB054B0028767F /* WASubmissionOverviewViewController.xib */; };
+		A1216AAB15FC2FAC00D43C57 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1216AAA15FC2FAC00D43C57 /* libOCMock.a */; };
 		A121CAC115F9A40300FD7ED7 /* WASubmitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A121CAC015F9A40300FD7ED7 /* WASubmitTests.m */; };
 		A121CACD15F9A51B00FD7ED7 /* libSimpleHTTPd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A121CACA15F9A50A00FD7ED7 /* libSimpleHTTPd.a */; };
 		A12A548A15D741980025D32A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A12A548915D741980025D32A /* UIKit.framework */; };
@@ -86,7 +98,6 @@
 		A1B90F8E15EDDFCD003419AF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B90F8D15EDDFCD003419AF /* QuartzCore.framework */; };
 		A1B90F9D15EDDFF0003419AF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B90F9C15EDDFF0003419AF /* MobileCoreServices.framework */; };
 		A1C0C57815D77A2F00A25C58 /* Tools in Resources */ = {isa = PBXBuildFile; fileRef = A1C0C57715D77A2F00A25C58 /* Tools */; };
-		A1EA090515F9C4AE00BAF08C /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EA090415F9C4AE00BAF08C /* libOCMock.a */; };
 		A1EB129115D76037004ECF71 /* WAFakeImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */; };
 		A1F0299C15E08FAF00BC9B28 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0299B15E08FAF00BC9B28 /* AssetsLibrary.framework */; };
 		A1F029A015E0956700BC9B28 /* NSDate+TimeConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F0299F15E0956700BC9B28 /* NSDate+TimeConversions.m */; };
@@ -180,6 +191,7 @@
 		A10C5C1315DB054B0028767F /* WASubmissionOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionOverviewViewController.h; sourceTree = "<group>"; };
 		A10C5C1415DB054B0028767F /* WASubmissionOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionOverviewViewController.m; sourceTree = "<group>"; };
 		A10C5C1515DB054B0028767F /* WASubmissionOverviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionOverviewViewController.xib; sourceTree = "<group>"; };
+		A1216AAA15FC2FAC00D43C57 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = "WAI NZTests/OCMock/libOCMock.a"; sourceTree = "<group>"; };
 		A121CAB115F99CF300FD7ED7 /* Logging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Logging.h; sourceTree = "<group>"; };
 		A121CABF15F9A40300FD7ED7 /* WASubmitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmitTests.h; sourceTree = "<group>"; };
 		A121CAC015F9A40300FD7ED7 /* WASubmitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmitTests.m; sourceTree = "<group>"; };
@@ -259,7 +271,6 @@
 		A1B90F8D15EDDFCD003419AF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A1B90F9C15EDDFF0003419AF /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A1C0C57715D77A2F00A25C58 /* Tools */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tools; sourceTree = SOURCE_ROOT; };
-		A1EA090415F9C4AE00BAF08C /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = "WAI NZTests/OCMock/libOCMock.a"; sourceTree = "<group>"; };
 		A1EA090A15F9C5B200BAF08C /* WAI NZTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WAI NZTests-Prefix.pch"; sourceTree = "<group>"; };
 		A1EA091415F9C79B00BAF08C /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
 		A1EA091515F9C79B00BAF08C /* OCMArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMArg.h; sourceTree = "<group>"; };
@@ -316,7 +327,7 @@
 				A121CACD15F9A51B00FD7ED7 /* libSimpleHTTPd.a in Frameworks */,
 				A12A54A215D741990025D32A /* SenTestingKit.framework in Frameworks */,
 				A12A54A315D741990025D32A /* UIKit.framework in Frameworks */,
-				A1EA090515F9C4AE00BAF08C /* libOCMock.a in Frameworks */,
+				A1216AAB15FC2FAC00D43C57 /* libOCMock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +381,7 @@
 		A12A548815D741980025D32A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A1EA090415F9C4AE00BAF08C /* libOCMock.a */,
+				A1216AAA15FC2FAC00D43C57 /* libOCMock.a */,
 				A182BDED15F9A92A003A87DF /* CoreFoundation.framework */,
 				A1F881CC15F19ED900E5C044 /* CoreLocation.framework */,
 				E2B761F815F0553800D18C67 /* MapKit.framework */,
@@ -733,7 +744,8 @@
 			targets = (
 				A12A548415D741980025D32A /* WAI NZ */,
 				A12A549F15D741990025D32A /* WAI NZTests */,
-				A1C0C53015D7779600A25C58 /* Documentation */,
+				A1C0C53015D7779600A25C58 /* Public Documentation */,
+				A129EE8015FC34120064660A /* Private Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -826,6 +838,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		A129EE8115FC34120064660A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "WHOAMI=`whoami`\nmkdir -p /private/var/tmp/$WHOAMI/appledoc/\nOUTPUT=\"/private/var/tmp/$WHOAMI/appledoc/\"\nCOMPANY_ID=\"nz.ac.victoria.ecs.engr302\"\n\n\"$PROJECT_DIR/Tools/appledoc/appledoc\" \\\n--templates \"$PROJECT_DIR/Tools/appledoc/Templates\" \\\n--project-name \"WAI NZ\" \\\n--project-company \"Water Action Initiative New Zealand\" \\\n--company-id \"$COMPANY_ID\" \\\n--output \"$OUTPUT\" \\\n--ignore \"WAI NZTests\" \\\n--ignore \"RestKit\" \\\n--ignore \"WAI NZ/Vendor\" \\\n--logformat xcode \\\n--no-repeat-first-par \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--exit-threshold 3 \\\n\"$PROJECT_DIR\"\n\nexit $?";
+		};
 		A12A549E15D741990025D32A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -939,6 +964,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A129EE8315FC34120064660A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "Documentation copy";
+			};
+			name = Debug;
+		};
+		A129EE8415FC34120064660A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "Documentation copy";
+			};
+			name = Release;
+		};
 		A12A54B015D741990025D32A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1112,6 +1151,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A129EE8215FC34120064660A /* Build configuration list for PBXAggregateTarget "Private Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A129EE8315FC34120064660A /* Debug */,
+				A129EE8415FC34120064660A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A12A547F15D741980025D32A /* Build configuration list for PBXProject "WAI NZ" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1139,7 +1187,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A1C0C53115D7779600A25C58 /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+		A1C0C53115D7779600A25C58 /* Build configuration list for PBXAggregateTarget "Public Documentation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A1C0C53215D7779600A25C58 /* Debug */,
