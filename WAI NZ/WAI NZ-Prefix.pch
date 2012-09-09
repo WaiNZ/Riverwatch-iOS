@@ -25,8 +25,8 @@ static const CGFloat kFlickVelocity = 400;
 
 static const CGFloat kJPEGCompressionQuality = 0.8;
 
-static NSString *const kRootURL = @"http://localhost:8080/";
-//static NSString *const kRootURL = @"http://50.112.250.8/"; // Tesseract
+//static NSString *const kRootURL = @"http://localhost:8080/";
+static NSString *const kRootURL = @"http://50.112.250.8/"; // Tesseract
 //static NSString *const kResourceSubmitPath = @"apiv1/submit";
 static NSString *const kResourceSubmitPath = @"api/image"; // Tesseract
 
