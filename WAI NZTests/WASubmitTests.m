@@ -24,6 +24,7 @@
 @end
 @implementation WASubmission (TestPrivate)
 
+NSString *const kMIMETypeJSON = @"application/json";
 NSString *const kBaseSubmissionString = @"{\"council_submission\":{\"anonymous\":@anonymous@},\"udid\":\"@udid@\",\"photo_data\":[],\"user_description\":\"\",\"tags\":[@tags@],\"timestamp\":@timestamp@}";
 NSString *const kResponseBodyOk = @"{\"status\":\"OK\",\"error_message\":\"\",\"url\":\"http://google.com\"}";
 
@@ -78,7 +79,7 @@ static int portNumber = 1111;
 	[submission addTag:@"Cow"];
 	
 	SimpleHTTPResponse *response = [[SimpleHTTPResponse alloc] init];
-	[response setContentType:@"application/json"];
+	[response setContentType:kMIMETypeJSON];
 	[response setContentString:kResponseBodyOk];
 	
 	[self runTestOnWASubmitControllerWithSubmission:submission
@@ -87,6 +88,23 @@ static int portNumber = 1111;
 									   withArgument:nil
 						   shouldSetNavigationTitle:YES
 									   withArgument:kWASubmitTitleSuccess];
+}
+
+- (void)testSimpleSubmitWithJunk {
+	WASubmission *submission = [[WASubmission alloc] init];
+	submission.anonymous = YES;
+	[submission addTag:@"Cow"];
+	
+	SimpleHTTPResponse *response = [[SimpleHTTPResponse alloc] init];
+	[response setContentType:kMIMETypeJSON];
+	[response setContentString:@"asdjhhjasdhjfkasdf"];
+	
+	[self runTestOnWASubmitControllerWithSubmission:submission
+										   response:response
+								   shouldSetMessage:YES
+									   withArgument:kWASubmitMessageUnexpected
+						   shouldSetNavigationTitle:YES
+									   withArgument:kWASubmitTitleFail];
 }
 
 #pragma mark - Utilities
@@ -113,18 +131,35 @@ static int portNumber = 1111;
 	WASubmitViewController *controller = [[WASubmitViewController alloc] initWithSubmission:submission];
 	OCMockObject *mock = [OCMockObject partialMockForObject:controller];
 	
-	
-	id messageMock = setMessage?[mock expect]:[[mock stub] andThrow:DONT_CALL_EXCEPTION];
-	id navigationMock = setNavigationTitle?[mock expect]:[[mock stub] andThrow:DONT_CALL_EXCEPTION];
-	
-	[messageMock setMessage:setMessage?messageArg:[OCMArg any]];
-	[navigationMock setNavigationTitle:setNavigationTitle?navigationArg:[OCMArg any]];
-	
-	[self expectPostData:[submission jsonString] response:response exec:^{
-		[controller sendSubmission];
-	}];
-	
-	[mock verify];
+	@try {
+		[[mock stub] setMessage:[OCMArg checkWithBlock:^(id arg) {
+			if(setMessage) {
+				STAssertEqualObjects(arg, messageArg, @"Argument to setMessage wrong");
+			}
+			else {
+				STFail([NSString stringWithFormat:@"-[setMessage:@\"%@\"] should not have been called", arg]);
+			}
+			
+			return YES;
+		}]];
+		[[mock stub] setNavigationTitle:[OCMArg checkWithBlock:^(id arg) {
+			if(setNavigationTitle) {
+				STAssertEqualObjects(arg, navigationArg, @"Argument to setNavigationTitle wrong");
+			}
+			else {
+				STFail([NSString stringWithFormat:@"-[setNavigationTitle:@\"%@\"] should not have been called", arg]);
+			}
+			
+			return YES;
+		}]];
+		
+		[self expectPostData:[submission jsonString] response:response exec:^{
+			[controller sendSubmission];
+		}];
+	}
+	@finally {
+		[(id)mock stop];
+	}
 }
 
 - (void)expectPostData:(NSString *)string response:(SimpleHTTPResponse *)response exec:(void (^)(void))exec {
