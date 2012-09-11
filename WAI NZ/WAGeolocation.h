@@ -26,12 +26,16 @@ typedef enum {
  to detail the source of the location information, be it user entered
  of from the device using GPS or WiFi triangulation see source.
  */
-@interface WAGeolocation : NSObject <MKAnnotation> {
+@interface WAGeolocation : NSObject <MKAnnotation, NSCopying> {
 	CLLocationDegrees latitude;
 	CLLocationDegrees longitude;
 	
 	WAGeolocationSource source;
 }
+
+///-----------------------------------------------------------------------------
+/// @name Object mapping
+///-----------------------------------------------------------------------------
 
 /**
  The RKObjectMapping that can be used to serialize/deserialize
@@ -39,19 +43,35 @@ typedef enum {
  */
 + (RKObjectMapping *)objectMapping;
 
+///-----------------------------------------------------------------------------
+/// @name Convenience constructors
+///-----------------------------------------------------------------------------
+
 /**
  A convenience method to create a WAGeolocation from a CLLocation
+ 
+ The source type is kWAGeolocationSourceUnknown by default
  
  @param location the location object to use for lat/lng information
  */
 + (id)geolocationWithCLLocation:(CLLocation *)location;
 
+///-----------------------------------------------------------------------------
+/// @name Initilization
+///-----------------------------------------------------------------------------
+
 /**
  Initilize a WAGeolocation using a CLLocation
+ 
+ The source type is kWAGeolocationSourceUnknown by default
  
  @param location the location object to use for lat/lng information
  */
 - (id)initWithCLLocation:(CLLocation *)location;
+
+///-----------------------------------------------------------------------------
+/// @name Attributes
+///-----------------------------------------------------------------------------
 
 /** The latitude of this location */
 @property (nonatomic, assign) CLLocationDegrees latitude;
@@ -65,6 +85,8 @@ typedef enum {
  - kWAGeolocationSourceUnknown
  - kWAGeolocationSourceHuman
  - kWAGeolocationSourceDevice
+ 
+ Defaults to kWAGeolocationSourceUnknown
  */
 @property (nonatomic, assign) WAGeolocationSource source;
 @end

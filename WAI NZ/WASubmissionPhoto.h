@@ -22,8 +22,7 @@ typedef enum {
  A photo data object that encapsulates the image data, timestamp,
  and location if available for a submission
  */
-@interface WASubmissionPhoto : NSObject 
-{
+@interface WASubmissionPhoto : NSObject {
     UIImage *thumbImage;
     UIImage *fullsizeImage;
     NSString *filename;
@@ -34,11 +33,21 @@ typedef enum {
 	NSConditionLock *saveToDiskLock;
 }
 
+#pragma mark - Object mapping
+///-----------------------------------------------------------------------------
+/// @name Object mapping
+///-----------------------------------------------------------------------------
+
 /**
  The RKObjectMapping that can be used to serialize/deserialize
  this class using RestKit.
  */
 + (RKObjectMapping *)objectMapping;
+
+#pragma mark - Initlization
+///-----------------------------------------------------------------------------
+/// @name Initilization
+///-----------------------------------------------------------------------------
 
 /**
  A convenience method for creating a WASubmissionPhoto from
@@ -79,19 +88,17 @@ typedef enum {
  */
 - (id)initWithPhoto:(UIImage *)image timestamp:(time_t)timestamp location:(WAGeolocation *)location;
 
+#pragma mark - Attributes
+///-----------------------------------------------------------------------------
+/// @name Attributes
+///-----------------------------------------------------------------------------
+
 /**
  Estimate of the file size after the image is resized
  
  @param photoScale the resize size to estimate for
  */
 - (size_t)estimatedFileSize:(WASubmissionPhotoSize)photoScale;
-
-
-/**
- Removes the contained photo from disk
- */
-
-- (void) removePhotoFromDisk;
 
 /** The location this photo was taken at, may be nil */
 @property (atomic, readonly) WAGeolocation *location;
@@ -107,4 +114,15 @@ typedef enum {
 @property (atomic, assign) WASubmissionPhotoSize photoScaleSize;
 /** The size of the image, does not include resizing */
 @property (nonatomic, readonly) CGSize size;
+
+#pragma mark - Caching
+///-----------------------------------------------------------------------------
+/// @name Caching
+///-----------------------------------------------------------------------------
+
+/**
+ Removes the contained photo from disk
+ */
+- (void)removePhotoFromDisk;
+
 @end

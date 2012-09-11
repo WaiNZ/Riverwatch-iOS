@@ -10,12 +10,23 @@
 
 @class RKObjectMapping;
 
+/**
+ A model object that represents a response from the WAI NZ API after a submission
+ has been submitted.
+ */
 @interface WASubmissionResponse : NSObject {
 	NSString *status;
 	NSString *errorMessage;
 	NSURL *url;
 }
 
+///-----------------------------------------------------------------------------
+/// @name Object mapping
+///-----------------------------------------------------------------------------
+
+/**
+ Get the object mapping for this class
+ */
 + (RKObjectMapping *)objectMapping;
 
 /** The status of the response */

@@ -15,6 +15,11 @@
 
 @implementation WASubmissionDescriptionViewController
 
+#pragma mark - Init/Dealloc
+///-----------------------------------------------------------------------------
+/// @name Init/Dealloc
+///-----------------------------------------------------------------------------
+
 - (id)initWithSubmission:(WASubmission *)_submission {
     self = [super init];
     if (self) {
@@ -25,6 +30,11 @@
     }
     return self;
 }
+
+#pragma mark - View lifecycle
+///-----------------------------------------------------------------------------
+/// @name View lifecycle
+///-----------------------------------------------------------------------------
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -58,6 +68,9 @@
 }
 
 #pragma mark - keyboard
+///-----------------------------------------------------------------------------
+/// @name Keyboard notifications
+///-----------------------------------------------------------------------------
 
 - (void)keyboardDidShow:(NSNotification *)notif {
     originalDescriptionTextFrame = descriptionText.frame;

@@ -31,11 +31,21 @@ extern NSString *const kWASubmissionUpdatedNotification;
     
 }
 
+#pragma mark - Object Mapping
+///-----------------------------------------------------------------------------
+/// @name Object mapping
+///-----------------------------------------------------------------------------
+
 /**
  The RKObjectMapping that can be used to serialize/deserialize
  this class using RestKit.
  */
 + (RKObjectMapping *)objectMapping;
+
+#pragma mark - Editing submissions
+///-----------------------------------------------------------------------------
+/// @name Editing submissions
+///-----------------------------------------------------------------------------
 
 /**
  Add the specified WASubmissionPhoto to this submission
@@ -68,21 +78,6 @@ extern NSString *const kWASubmissionUpdatedNotification;
  */
 - (void)removeSubmissionPhotoAtIndex:(int)index withConfirmation:(void (^)(int index))callback;
 /**
- Get the WASubmissionPhoto at the speicifed index
- 
- @param index the index of the photo to retreive
- @return the WASubmissionPhoto at the specified index
- 
- // TODO: exception, return nil...
- */
-- (WASubmissionPhoto *)submissionPhotoAtIndex:(int)index;
-
-/**
- Clear the photo files form disk upon submission
-*/
-- (void)unloadPhotos;
-
-/**
  Add a tag to this submission
  
  @param tag the tag to add
@@ -97,6 +92,27 @@ extern NSString *const kWASubmissionUpdatedNotification;
  */
 - (void)removeTag:(NSString *)tag;
 /**
+ Set the submission photo size of all the photos in the submission
+ 
+ @param photoScaleSize the scale size to set all the photos to
+ */
+- (void)setPhotoScaleSize:(WASubmissionPhotoSize)photoScaleSize;
+
+#pragma mark - Attribtues
+///-----------------------------------------------------------------------------
+/// @name Attributes
+///-----------------------------------------------------------------------------
+
+/**
+ Get the WASubmissionPhoto at the speicifed index
+ 
+ @param index the index of the photo to retreive
+ @return the WASubmissionPhoto at the specified index
+ 
+ // TODO: exception, return nil...
+ */
+- (WASubmissionPhoto *)submissionPhotoAtIndex:(int)index;
+/**
  Get the tag at the specified index
  
  @param index the index of the tag to retreive
@@ -105,13 +121,6 @@ extern NSString *const kWASubmissionUpdatedNotification;
  // TODO: exception, return nil...
  */
 - (NSString *)tagAtIndex:(int)index;
-
-/**
- Set the submission photo size of all the photos in the submission
- 
- @param photoScaleSize the scale size to set all the photos to
- */
-- (void)setPhotoScaleSize:(WASubmissionPhotoSize)photoScaleSize;
 /**
  Check to see if a tag is attached to the submission
  
@@ -119,51 +128,24 @@ extern NSString *const kWASubmissionUpdatedNotification;
  @return YES if the submission is tagged with the specified tag, NO otherwise
  */
 - (BOOL)containsTag:(NSString *)tag;
-
 /**
  This returns a string of the tags selected in the submission with ", " as the seperator
  
  @return NSString the string containing the tags of the submission
  */
 - (NSString *)tagsAsString;
-
-// TODO: category
-/**
- This vefiries whether the information contained in the submission is valid including the email address(if provided) and the location of the submission
- 
- @return UIAlertView returns an UIAlertView if there is an error in the submission details, else nil
- */
-- (UIAlertView *)verify;
-
-/**
- Checks whether the email provided is valid
- 
- @param checkString the string containing the email to be checked
- @return YES if valid, else NO
- */
--(BOOL) NSStringIsValidEmail:(NSString *)checkString;
-
 /**
  Gets the latest timestamp from the submission photos
  
  @return time_t the timestamp found to be the latest
  */
-- (time_t) latestTimestamp;
-
+- (time_t)latestTimestamp;
 /**
  Gets the earliest timestamp from the submission photos
  
-  @return time_t the timestamp found to be the earliest
+ @return time_t the timestamp found to be the earliest
  */
 - (time_t)timestamp;
-
-/**
- Checks whether the timestamp of the photo to be added will be within the 24 hour period of the submission
- 
- @param photo the photo that is to be added to the submission
- @return UIAlertView returns an UIAlertView if the photo breaks the timestamp conditions, else nil
-*/
-- (UIAlertView *) verifyPhotoTimestamp:(WASubmissionPhoto *)photo;
 
 /** The description the user has entered */
 @property (nonatomic, strong) NSString *descriptionText;
@@ -172,7 +154,7 @@ extern NSString *const kWASubmissionUpdatedNotification;
 /** Whether the submission should include the email address when sent to the council */
 @property (nonatomic, getter=isAnonymous) BOOL anonymous;
 /** The location this submission was observed at */
-@property (nonatomic, strong) WAGeolocation *location;
+@property (nonatomic, copy) WAGeolocation *location;
 /** The time at which this submission was observed */
 @property (nonatomic, readonly) time_t timestamp;
 /** The udid of the device the submission was made on */
@@ -181,4 +163,35 @@ extern NSString *const kWASubmissionUpdatedNotification;
 @property (nonatomic, readonly) NSInteger numberOfSubmissionPhotos;
 /** The number of tags on this submission */
 @property (nonatomic, readonly) NSInteger numberOfTags;
+
+#pragma mark - Caching
+///-----------------------------------------------------------------------------
+/// @name Caching
+///-----------------------------------------------------------------------------
+
+/**
+ Clear the photo files form disk upon submission
+*/
+- (void)unloadPhotos;
+
+#pragma mark - Verification
+///-----------------------------------------------------------------------------
+/// @name Verification
+///-----------------------------------------------------------------------------
+
+// TODO: category
+/**
+ This vefiries whether the information contained in the submission is valid including the email address(if provided) and the location of the submission
+ 
+ @return UIAlertView returns an UIAlertView if there is an error in the submission details, else nil
+ */
+- (UIAlertView *)verify;
+/**
+ Checks whether the timestamp of the photo to be added will be within the 24 hour period of the submission
+ 
+ @param photo the photo that is to be added to the submission
+ @return UIAlertView returns an UIAlertView if the photo breaks the timestamp conditions, else nil
+*/
+- (UIAlertView *) verifyPhotoTimestamp:(WASubmissionPhoto *)photo;
+
 @end

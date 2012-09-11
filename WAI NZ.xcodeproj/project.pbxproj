@@ -7,15 +7,26 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		A1C0C53015D7779600A25C58 /* Documentation */ = {
+		A129EE8015FC34120064660A /* Private Documentation */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = A1C0C53115D7779600A25C58 /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildConfigurationList = A129EE8215FC34120064660A /* Build configuration list for PBXAggregateTarget "Private Documentation" */;
+			buildPhases = (
+				A129EE8115FC34120064660A /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "Private Documentation";
+			productName = Documentation;
+		};
+		A1C0C53015D7779600A25C58 /* Public Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A1C0C53115D7779600A25C58 /* Build configuration list for PBXAggregateTarget "Public Documentation" */;
 			buildPhases = (
 				A1C0C53415D7779C00A25C58 /* ShellScript */,
 			);
 			dependencies = (
 			);
-			name = Documentation;
+			name = "Public Documentation";
 			productName = Documentation;
 		};
 /* End PBXAggregateTarget section */
@@ -91,6 +102,8 @@
 		A1F0299C15E08FAF00BC9B28 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0299B15E08FAF00BC9B28 /* AssetsLibrary.framework */; };
 		A1F029A015E0956700BC9B28 /* NSDate+TimeConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F0299F15E0956700BC9B28 /* NSDate+TimeConversions.m */; };
 		A1F881CD15F19ED900E5C044 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F881CC15F19ED900E5C044 /* CoreLocation.framework */; };
+		E23D58D015FC2E7300F7FCDD /* WALocationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E23D58CF15FC2E7300F7FCDD /* WALocationTests.m */; };
+		E23D58E415FC4A3400F7FCDD /* WAPhotoTimestampTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E23D58E315FC4A3400F7FCDD /* WAPhotoTimestampTests.m */; };
 		E290F51215F6F9DB0063F434 /* loc_mark.png in Resources */ = {isa = PBXBuildFile; fileRef = E290F51015F6F9DB0063F434 /* loc_mark.png */; };
 		E290F51315F6F9DB0063F434 /* loc_mark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E290F51115F6F9DB0063F434 /* loc_mark@2x.png */; };
 		E2A3B40615DB0A79008AABEC /* WASubmission.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A3B40515DB0A79008AABEC /* WASubmission.m */; };
@@ -272,6 +285,10 @@
 		A1F0299E15E0956700BC9B28 /* NSDate+TimeConversions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeConversions.h"; sourceTree = "<group>"; };
 		A1F0299F15E0956700BC9B28 /* NSDate+TimeConversions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeConversions.m"; sourceTree = "<group>"; };
 		A1F881CC15F19ED900E5C044 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E23D58CE15FC2E7300F7FCDD /* WALocationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALocationTests.h; sourceTree = "<group>"; };
+		E23D58CF15FC2E7300F7FCDD /* WALocationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALocationTests.m; sourceTree = "<group>"; };
+		E23D58E215FC4A3400F7FCDD /* WAPhotoTimestampTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAPhotoTimestampTests.h; path = "../WAI NZ/WAPhotoTimestampTests.h"; sourceTree = "<group>"; };
+		E23D58E315FC4A3400F7FCDD /* WAPhotoTimestampTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WAPhotoTimestampTests.m; path = "../WAI NZ/WAPhotoTimestampTests.m"; sourceTree = "<group>"; };
 		E290F51015F6F9DB0063F434 /* loc_mark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loc_mark.png; sourceTree = "<group>"; };
 		E290F51115F6F9DB0063F434 /* loc_mark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loc_mark@2x.png"; sourceTree = "<group>"; };
 		E2A3B40415DB0A79008AABEC /* WASubmission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmission.h; sourceTree = "<group>"; };
@@ -416,10 +433,14 @@
 		A12A54A715D741990025D32A /* WAI NZTests */ = {
 			isa = PBXGroup;
 			children = (
+				E23D58E215FC4A3400F7FCDD /* WAPhotoTimestampTests.h */,
+				E23D58E315FC4A3400F7FCDD /* WAPhotoTimestampTests.m */,
 				A1EA091A15F9C7A000BAF08C /* Vendor */,
 				A121CABF15F9A40300FD7ED7 /* WASubmitTests.h */,
 				A121CAC015F9A40300FD7ED7 /* WASubmitTests.m */,
 				A12A54A815D741990025D32A /* Supporting Files */,
+				E23D58CE15FC2E7300F7FCDD /* WALocationTests.h */,
+				E23D58CF15FC2E7300F7FCDD /* WALocationTests.m */,
 			);
 			path = "WAI NZTests";
 			sourceTree = "<group>";
@@ -728,7 +749,8 @@
 			targets = (
 				A12A548415D741980025D32A /* WAI NZ */,
 				A12A549F15D741990025D32A /* WAI NZTests */,
-				A1C0C53015D7779600A25C58 /* Documentation */,
+				A1C0C53015D7779600A25C58 /* Public Documentation */,
+				A129EE8015FC34120064660A /* Private Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -821,6 +843,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		A129EE8115FC34120064660A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "WHOAMI=`whoami`\nmkdir -p /private/var/tmp/$WHOAMI/appledoc/\nOUTPUT=\"/private/var/tmp/$WHOAMI/appledoc/\"\nCOMPANY_ID=\"nz.ac.victoria.ecs.engr302\"\n\n\"$PROJECT_DIR/Tools/appledoc/appledoc\" \\\n--templates \"$PROJECT_DIR/Tools/appledoc/Templates\" \\\n--project-name \"WAI NZ\" \\\n--project-company \"Water Action Initiative New Zealand\" \\\n--company-id \"$COMPANY_ID\" \\\n--output \"$OUTPUT\" \\\n--ignore \"WAI NZTests\" \\\n--ignore \"RestKit\" \\\n--ignore \"WAI NZ/Vendor\" \\\n--logformat xcode \\\n--no-repeat-first-par \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--exit-threshold 3 \\\n\"$PROJECT_DIR\"\n\nexit $?";
+		};
 		A12A549E15D741990025D32A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -890,6 +925,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A121CAC115F9A40300FD7ED7 /* WASubmitTests.m in Sources */,
+				E23D58D015FC2E7300F7FCDD /* WALocationTests.m in Sources */,
+				E23D58E415FC4A3400F7FCDD /* WAPhotoTimestampTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -933,6 +970,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A129EE8315FC34120064660A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "Documentation copy";
+			};
+			name = Debug;
+		};
+		A129EE8415FC34120064660A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "Documentation copy";
+			};
+			name = Release;
+		};
 		A12A54B015D741990025D32A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1106,6 +1157,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A129EE8215FC34120064660A /* Build configuration list for PBXAggregateTarget "Private Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A129EE8315FC34120064660A /* Debug */,
+				A129EE8415FC34120064660A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A12A547F15D741980025D32A /* Build configuration list for PBXProject "WAI NZ" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1133,7 +1193,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A1C0C53115D7779600A25C58 /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+		A1C0C53115D7779600A25C58 /* Build configuration list for PBXAggregateTarget "Public Documentation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A1C0C53215D7779600A25C58 /* Debug */,

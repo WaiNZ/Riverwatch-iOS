@@ -55,12 +55,5 @@
  */
 - (id)initWithSubmission:(WASubmission *)_submission andPhotoIndex:(int)index;
 
-/**
- This will recognise the double tap gesture to be a zoom on the image in the photo gallery
- 
- @param gestureRecognizer the UIGestureRecognizer that will handle the double tap action
- */
-- (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer;
-
 
 @end

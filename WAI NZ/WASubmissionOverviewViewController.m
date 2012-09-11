@@ -22,12 +22,12 @@
 #import "WAImagePickerHelper.h"
 #import "Logging.h"
 
+// Macros to start/stop notification listening
 #define ENABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submissionUpdated) name:kWASubmissionUpdatedNotification object:submission];
 #define DISABLE_SUBMISSION_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] removeObserver:self name:kWASubmissionUpdatedNotification object:submission]
 
 static const int kTakePhotoButton = 0;
 static const int kUseExistingPhotoButton = 1;
-
 
 static const int kNumberofSections = 3;
 
@@ -50,6 +50,11 @@ static const int kSectionSubmitRows = 1;
 
 @implementation WASubmissionOverviewViewController
 
+#pragma mark - Init/Dealloc
+///-----------------------------------------------------------------------------
+/// @name Init/Dealloc
+///-----------------------------------------------------------------------------
+
 - (id)initWithSubmission:(WASubmission *)_submission {
 	self = [self initWithNibName:@"WASubmissionOverviewViewController" bundle:nil];
 	if(self) {
@@ -68,6 +73,10 @@ static const int kSectionSubmitRows = 1;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+///-----------------------------------------------------------------------------
+/// @name View lifecycle
+///-----------------------------------------------------------------------------
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
@@ -76,13 +85,16 @@ static const int kSectionSubmitRows = 1;
 	mapContainerView.layer.borderColor = mainTableView.separatorColor.CGColor;
 	mapContainerView.layer.borderWidth = 1;
 	
+	// Add the pin
 	[mapView addAnnotation:submission];
 	
+	// Update various views
 	[self loadPhotoViews];
     [self updatePhotoText];
     [self updateTimestampText];
     [self updateMapView:NO];
 	
+	// Set up the table
 	mainTableView.tableHeaderView = topView;
 	
 	if(submission.location) {
@@ -122,10 +134,20 @@ static const int kSectionSubmitRows = 1;
 }
 
 #pragma mark - Actions
+///-----------------------------------------------------------------------------
+/// @name Actions
+///-----------------------------------------------------------------------------
+
+/**
+ Called when the on/off switch for whether to include an email in
+ the submission is changed
+ 
+ @param sender the object that sent this message
+ */
 - (IBAction)sliderChanged:(id)sender {
 	[mainTableView beginUpdates];
-	// Update the table
-	if(slider.on){
+	// Update the table with new cells
+	if(slider.on) {
 		[mainTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:kSectionEmail inSection:kRowEmailField]] withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
 	else {
@@ -138,6 +160,11 @@ static const int kSectionSubmitRows = 1;
 	[mainTableView endUpdates];
 }
 
+/**
+ The add additional photo photo button was tapped
+ 
+ @param sender the object that sent this message 
+ */
 - (IBAction)addAdditionalPhoto:(id)sender {
 	// Show the action sheet asking about source of the image
     UIActionSheet *addSheet = [[UIActionSheet alloc] initWithTitle:@"Add a photo"
@@ -162,11 +189,21 @@ static const int kSectionSubmitRows = 1;
     [addSheet showInView:self.view];
 }
 
+/**
+ Called when a photo in the thumbnail list was tapped
+ 
+ @param sender the object that sent this message
+ */
 - (IBAction)photoTapped:(UITapGestureRecognizer *)sender {
 	WASubmissionPhotoGalleryViewController *gallery = [[WASubmissionPhotoGalleryViewController alloc] initWithSubmission:submission andPhotoIndex:sender.view.tag];
 	[self.navigationController pushViewController:gallery animated:YES];
 }
 
+/**
+ Show the edit map ui
+ 
+ @param sender the object that sent this message
+ */
 - (IBAction)editMap:(id)sender {
 	// View for greying out the background
 	CGRect shadeViewFrame = self.view.window.bounds;
@@ -209,7 +246,9 @@ static const int kSectionSubmitRows = 1;
 }
 
 /**
- Comming back from a map editing session
+ Comming back from a map editing session, when the shade view was tapped
+ 
+ @param sender the object that sent this message
  */
 - (IBAction)shadeViewTapped:(id)sender {
 	// Prepare the frame for the animation
@@ -266,6 +305,11 @@ static const int kSectionSubmitRows = 1;
 					 }];
 }
 
+/**
+ Called whenever the submission object has its properties changed
+ 
+ Called when the kWASubmissionUpdatedNotification notification is posted
+ */
 - (void)submissionUpdated {
 	[mainTableView reloadData];
 	
@@ -275,8 +319,31 @@ static const int kSectionSubmitRows = 1;
     [self updateMapView:YES];
 }
 
-#pragma mark - Utilities
+/**
+ This interprets the pressing action on the pin in the map view so the user can move the pin to the desired location
+ 
+ @param sender the gesture recogniser associated with the action
+ */
+- (IBAction)pinButtonPressed:(id)sender {
+    UIActionSheet *sheet;
+    NSLog(@"orig long: %f lat: %f", submission.location.longitude, submission.location.latitude);
+    if ([submission submissionPhotoAtIndex:0].location.latitude == 0.0 && [submission submissionPhotoAtIndex:0].location.longitude == 0.0) {
+        sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Use current location", nil];
+    }else {
+        sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Use current location", @"Revert to original location", nil];
+    }
+    
+    [sheet showInView:mapView];
+}
 
+#pragma mark - Utilities
+///-----------------------------------------------------------------------------
+/// @name Utility methods
+///-----------------------------------------------------------------------------
+
+/**
+ Update the number of photos attached text
+ */
 - (void)updatePhotoText {
     NSString *newText;
     if([submission numberOfSubmissionPhotos]>1){
@@ -288,6 +355,9 @@ static const int kSectionSubmitRows = 1;
     [photoLabel setText:newText];
 }
 
+/**
+ Update the timestamp text
+ */
 - (void)updateTimestampText {
     NSDateFormatter *formatter;
     NSString *dateString;
@@ -313,6 +383,11 @@ static const int kSectionSubmitRows = 1;
 	[WAStyleHelper topAlignLabel:timestampLabel];
 }
 
+/**
+ Update the position of the map view
+ 
+ @param animated whether the setting of the location should be animated
+ */
 - (void)updateMapView:(BOOL)animated {
     WAGeolocation *loc = submission.location;
 	
@@ -329,11 +404,11 @@ static const int kSectionSubmitRows = 1;
 	}
 	
     [mapView setRegion:region animated:animated];
-    
-    NSLog(@"lat is: %f", mapView.region.center.latitude);
-    NSLog(@"long is: %f", mapView.region.center.longitude);
 }
 
+/**
+ Create all the thumbnail photo views
+ */
 - (void)loadPhotoViews {
 	for(UIView *view in photoScrollView.subviews) {
 		[view removeFromSuperview]; // TODO: be carefull of scrollbars!
@@ -381,6 +456,9 @@ static const int kSectionSubmitRows = 1;
 
 
 #pragma mark - Table view data source
+///-----------------------------------------------------------------------------
+/// @name UITableViewDataSource
+///-----------------------------------------------------------------------------
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
@@ -477,6 +555,9 @@ static const int kSectionSubmitRows = 1;
 }
 
 #pragma mark - Table view delegate
+///-----------------------------------------------------------------------------
+/// @name UITableViewDelegate
+///-----------------------------------------------------------------------------
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if(indexPath.section == kSectionDetails && indexPath.row ==kRowTags){
@@ -556,6 +637,9 @@ static const int kSectionSubmitRows = 1;
 }
 
 #pragma mark - textField delegate
+///-----------------------------------------------------------------------------
+/// @name UITextFieldDelegate
+///-----------------------------------------------------------------------------
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	[textField resignFirstResponder];
@@ -570,6 +654,9 @@ static const int kSectionSubmitRows = 1;
 }
 
 #pragma mark - UIImagePickerControllerDelegate
+///-----------------------------------------------------------------------------
+/// @name UIImagePickerControllerDelegate
+///-----------------------------------------------------------------------------
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [WASubmissionPhoto photoWithMediaPickingInfo:info
@@ -590,6 +677,9 @@ static const int kSectionSubmitRows = 1;
 }
 
 #pragma mark - MKMapViewDelegate
+///-----------------------------------------------------------------------------
+/// @name MKMapViewDelegate
+///-----------------------------------------------------------------------------
 
 - (MKAnnotationView *)mapView:(MKMapView *)_mapView viewForAnnotation:(id<MKAnnotation>)annotation {
 	static NSString *const AnnotationViewIdentifier = @"WASubmissionAnnotationViewIdentifier";
@@ -617,36 +707,31 @@ static const int kSectionSubmitRows = 1;
 
 - (void)locationManager:(CLLocationManager *)manager
     didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation
-{
+           fromLocation:(CLLocation *)oldLocation {
     
     NSTimeInterval dif = [locationManager.location.timestamp timeIntervalSinceDate:[NSDate date]];
     if (abs(dif) < 300) {
         LogDebug(@"New latitude: %f", newLocation.coordinate.latitude);
         LogDebug(@"New longitude: %f", newLocation.coordinate.longitude);
         [submission setCoordinate:locationManager.location.coordinate];
+		if([locationManager.location.timestamp timeIntervalSince1970] - submission.latestTimestamp < 15*60) {
+			submission.location.source = kWAGeolocationSourceDevice;
+		}
         [locationManager stopUpdatingLocation];
         [spinner stopAnimating];
         [pinView setRightCalloutAccessoryView:nil];
         [pinView setRightCalloutAccessoryView:pinButton];
-        [mapView setCenterCoordinate:submission.coordinate animated:YES];
+        [self updateMapView:YES];
     } else LogDebug(@"Location is over 5 minutes old, not using it");
 }
 
-- (IBAction)pinButtonPressed:(id)sender {
-    UIActionSheet *sheet;
-    NSLog(@"orig long: %f lat: %f", submission.location.longitude, submission.location.latitude);
-    if ([submission submissionPhotoAtIndex:0].location.latitude == 0.0 && [submission submissionPhotoAtIndex:0].location.longitude == 0.0) {
-        sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Use current location", nil];
-    }else {
-        sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Use current location", @"Revert to original location", nil];
-    }
-    
-    [sheet showInView:mapView];
-}
+#pragma mark - UIActionSheetDelegate
+///-----------------------------------------------------------------------------
+/// @name UIActionSheetDelegate
+///-----------------------------------------------------------------------------
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+	// This is the location actionsheet, not the resize one
     switch (buttonIndex) {
         case 0: {
             [locationManager startUpdatingLocation];

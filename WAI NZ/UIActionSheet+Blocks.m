@@ -30,6 +30,8 @@
   cancelButtonTitle:(NSString *)cancelButtonTitle
 destructiveButtonTitle:(NSString *)destructiveButtonTitle
   otherButtonTitles:(NSString *)otherButtonTitles, ... {
+	
+	// Create a delegate to forward to the block
 	__UIActionSheet_Block_Delegate *delegate = [[__UIActionSheet_Block_Delegate alloc] init];
 	delegate->callback = callback;
 	
@@ -40,9 +42,11 @@ destructiveButtonTitle:(NSString *)destructiveButtonTitle
 			 otherButtonTitles:nil];
 	
 	if(self) {
+		// Associate the delegate with self so it isn't deallocated during this lifetime
 		static char key;
 		objc_setAssociatedObject(self, &key, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 		
+		// Add the buttons
 		va_list args;
 		va_start(args, otherButtonTitles);
 		NSString  *otherButtonTitle;

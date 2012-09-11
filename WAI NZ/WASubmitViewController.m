@@ -32,6 +32,9 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 @implementation WASubmitViewController
 
 #pragma mark - Init/Dealloc
+///-----------------------------------------------------------------------------
+/// @name Init/Dealloc
+///-----------------------------------------------------------------------------
 
 - (id)initWithSubmission:(WASubmission *)_submission {
 	self = [self init];
@@ -51,6 +54,9 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 }
 
 #pragma mark - View lifecycle
+///-----------------------------------------------------------------------------
+/// @name View lifecycle
+///-----------------------------------------------------------------------------
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -94,7 +100,13 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 }
 
 #pragma mark - Utilities
+///-----------------------------------------------------------------------------
+/// @name Utility methods
+///-----------------------------------------------------------------------------
 
+/**
+ Post the submission to the WAI NZ API
+ */
 - (void)sendSubmission {
 	submissionProgress = 0;
     
@@ -106,25 +118,42 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 }
 
 /**
- Sperate method to assist with unit testing
+ Set the title of the navigation bar
+ 
+ @param title the text to set the navigation title to
  */
 - (void)setNavigationTitle:(NSString *)title {
 	self.navigationItem.title = title;
 }
 
 /**
- Seperate method to assist with unit testing
+ Set the error message text
+ 
+ @param message the text to set the unsuccessfulStatusMessage message to
  */
 - (void)setMessage:(NSString *)message {
 	unsuccessfulStatusMessage.text = message;
 }
 
 #pragma mark - Actions
+///-----------------------------------------------------------------------------
+/// @name Actions
+///-----------------------------------------------------------------------------
 
+/**
+ The done button int he top-right navigation bar pressed
+ 
+ @param sender the object that called this
+ */
 - (IBAction)doneButtonPressed:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+/**
+ The retry button was pressed
+ 
+ @param sender the object that called this method
+ */
 - (IBAction)retryButtonPressed:(id)sender {
     self.view = inProgressView;
     self.navigationItem.hidesBackButton = YES;
@@ -132,6 +161,9 @@ static const CGFloat kSubmissionUpdateInterval = 0.033; // every 3%
 }
 
 #pragma mark - RKObjectLoaderDelegate
+///-----------------------------------------------------------------------------
+/// @name RKObjectLoaderDelegate
+///-----------------------------------------------------------------------------
 
 - (void)request:(RKRequest *)request didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
 	// Update the progress
