@@ -107,6 +107,24 @@ static int portNumber = 1111;
 									   withArgument:kWASubmitTitleFail];
 }
 
+//- (void)testSimpleSubmitWithInternalError {
+//	WASubmission *submission = [[WASubmission alloc] init];
+//	submission.anonymous = YES;
+//	[submission addTag:@"Cow"];
+//	
+//	SimpleHTTPResponse *response = [[SimpleHTTPResponse alloc] init];
+//    [response setResponseCode:500];
+//	[response setContentType:kMIMETypeJSON];
+//	[response setContentString:@"Internal server error"];
+//	
+//	[self runTestOnWASubmitControllerWithSubmission:submission
+//										   response:response
+//								   shouldSetMessage:YES
+//									   withArgument:kWASubmitMessageUnexpected
+//						   shouldSetNavigationTitle:YES
+//									   withArgument:kWASubmitTitleFail];
+//}
+
 #pragma mark - Utilities
 
 /**
