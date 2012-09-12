@@ -35,12 +35,9 @@
 - (void)tearDown {
 	[super tearDown];
 }
-/*
- 
- numberOfSubmissionPhotos is always returning 0
  
 - (void) testPhotoCount {
-    WASubmission *testSubmission = [WASubmission alloc];
+    WASubmission *testSubmission = [[WASubmission alloc] init];
     WASubmissionPhoto *firstPhoto = [[WASubmissionPhoto alloc] initWithPhoto:nil timestamp:100000 location:nil];
     WASubmissionPhoto *secondPhoto = [[WASubmissionPhoto alloc] initWithPhoto:nil timestamp:143200 location:nil];
     
@@ -63,7 +60,6 @@
 - (void) testPhotoIndex {
     WASubmission *testSubmission = [[WASubmission alloc] init];
     WASubmissionPhoto *firstPhoto = [[WASubmissionPhoto alloc] initWithPhoto:nil timestamp:100000 location:nil];
-    WASubmissionPhoto *secondPhoto = [[WASubmissionPhoto alloc] initWithPhoto:nil timestamp:143200 location:nil];
     
     [testSubmission addSubmissionPhoto:firstPhoto];
     int count = [testSubmission numberOfSubmissionPhotos];
@@ -75,7 +71,7 @@
     
 }
 
-*/
+
 
 -(void) testAddTagNumberOfTags{
     WASubmission *testSubmission = [[WASubmission alloc] init];
