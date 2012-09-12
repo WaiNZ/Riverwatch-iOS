@@ -103,6 +103,7 @@
 		A1F029A015E0956700BC9B28 /* NSDate+TimeConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F0299F15E0956700BC9B28 /* NSDate+TimeConversions.m */; };
 		A1F881CD15F19ED900E5C044 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F881CC15F19ED900E5C044 /* CoreLocation.framework */; };
 		CED6D78515FFF60000F84B4A /* WAEmailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CED6D78415FFF5FF00F84B4A /* WAEmailTests.m */; };
+		CED6D7881600019600F84B4A /* WASubmissionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CED6D7871600019500F84B4A /* WASubmissionTests.m */; };
 		E23D58D015FC2E7300F7FCDD /* WALocationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E23D58CF15FC2E7300F7FCDD /* WALocationTests.m */; };
 		E23D58E415FC4A3400F7FCDD /* WAPhotoTimestampTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E23D58E315FC4A3400F7FCDD /* WAPhotoTimestampTests.m */; };
 		E290F51215F6F9DB0063F434 /* loc_mark.png in Resources */ = {isa = PBXBuildFile; fileRef = E290F51015F6F9DB0063F434 /* loc_mark.png */; };
@@ -288,6 +289,8 @@
 		A1F881CC15F19ED900E5C044 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CED6D78315FFF5FF00F84B4A /* WAEmailTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAEmailTests.h; sourceTree = "<group>"; };
 		CED6D78415FFF5FF00F84B4A /* WAEmailTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAEmailTests.m; sourceTree = "<group>"; };
+		CED6D7861600019500F84B4A /* WASubmissionTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WASubmissionTests.h; path = "../WAI NZ/WASubmissionTests.h"; sourceTree = "<group>"; };
+		CED6D7871600019500F84B4A /* WASubmissionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WASubmissionTests.m; path = "../WAI NZ/WASubmissionTests.m"; sourceTree = "<group>"; };
 		E23D58CE15FC2E7300F7FCDD /* WALocationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WALocationTests.h; sourceTree = "<group>"; };
 		E23D58CF15FC2E7300F7FCDD /* WALocationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WALocationTests.m; sourceTree = "<group>"; };
 		E23D58E215FC4A3400F7FCDD /* WAPhotoTimestampTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WAPhotoTimestampTests.h; path = "../WAI NZ/WAPhotoTimestampTests.h"; sourceTree = "<group>"; };
@@ -436,6 +439,8 @@
 		A12A54A715D741990025D32A /* WAI NZTests */ = {
 			isa = PBXGroup;
 			children = (
+				CED6D7861600019500F84B4A /* WASubmissionTests.h */,
+				CED6D7871600019500F84B4A /* WASubmissionTests.m */,
 				E23D58E215FC4A3400F7FCDD /* WAPhotoTimestampTests.h */,
 				E23D58E315FC4A3400F7FCDD /* WAPhotoTimestampTests.m */,
 				A1EA091A15F9C7A000BAF08C /* Vendor */,
@@ -933,6 +938,7 @@
 				E23D58D015FC2E7300F7FCDD /* WALocationTests.m in Sources */,
 				E23D58E415FC4A3400F7FCDD /* WAPhotoTimestampTests.m in Sources */,
 				CED6D78515FFF60000F84B4A /* WAEmailTests.m in Sources */,
+				CED6D7881600019600F84B4A /* WASubmissionTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
