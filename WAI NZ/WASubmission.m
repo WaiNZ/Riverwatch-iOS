@@ -276,8 +276,6 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
         }
     }
     return FALSE;
-    
-   // return [tags containsObject:tag];
 }
 
 - (void)setDescriptionText:(NSString *)_descriptionText {
