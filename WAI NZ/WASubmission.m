@@ -96,7 +96,7 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
 }
 
 - (NSString *)title {
-	return @"Drag me to specify the location";
+	return @"Drag to specify the location";
 }
 
 #pragma mark - Verification
