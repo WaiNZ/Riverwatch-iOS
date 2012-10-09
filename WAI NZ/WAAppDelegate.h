@@ -28,6 +28,14 @@
  */
 - (void)configureRestKitWithBaseURL:(NSString *)url;
 
+/**
+ Get the application UUID
+ 
+ NOTE: only call this method after -applicationDidFinishLaunching has run
+ */
++ (NSString *)uuid;
+
+
 /** The main application window */
 @property (strong, nonatomic) UIWindow *window;
 

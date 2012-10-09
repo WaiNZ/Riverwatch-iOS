@@ -83,6 +83,7 @@
 		A184847B15F71F1E000FB460 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A184847A15F71F1E000FB460 /* LICENSE */; };
 		A189878315F084340037A4DD /* NSNumber+FormatSI.m in Sources */ = {isa = PBXBuildFile; fileRef = A189878215F084340037A4DD /* NSNumber+FormatSI.m */; };
 		A19E497D15F35CEA00F98028 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = A19E497C15F35CEA00F98028 /* iTunesArtwork@2x */; };
+		A1A55F3B1624D43B00ABAF09 /* NSString+UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A55F3A1624D43B00ABAF09 /* NSString+UUID.m */; };
 		A1B7B59315F06083002CEE04 /* UINavigationBar+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B7B59215F06083002CEE04 /* UINavigationBar+Animation.m */; };
 		A1B8C9DD15E466720027D9D3 /* icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B8C9D815E466720027D9D3 /* icon_57.png */; };
 		A1B8C9DE15E466720027D9D3 /* icon_72.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B8C9D915E466720027D9D3 /* icon_72.png */; };
@@ -257,6 +258,8 @@
 		A189878115F084340037A4DD /* NSNumber+FormatSI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+FormatSI.h"; sourceTree = "<group>"; };
 		A189878215F084340037A4DD /* NSNumber+FormatSI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+FormatSI.m"; sourceTree = "<group>"; };
 		A19E497C15F35CEA00F98028 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
+		A1A55F391624D43B00ABAF09 /* NSString+UUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UUID.h"; sourceTree = "<group>"; };
+		A1A55F3A1624D43B00ABAF09 /* NSString+UUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UUID.m"; sourceTree = "<group>"; };
 		A1B7B59115F06083002CEE04 /* UINavigationBar+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Animation.h"; sourceTree = "<group>"; };
 		A1B7B59215F06083002CEE04 /* UINavigationBar+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Animation.m"; sourceTree = "<group>"; };
 		A1B8C9D815E466720027D9D3 /* icon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_57.png; sourceTree = "<group>"; };
@@ -679,6 +682,8 @@
 				A168E23B15F321FC00B181C8 /* WAImagePickerHelper.m */,
 				A17A698415F6DC59000F8D47 /* NSObject+Async.h */,
 				A17A698515F6DC59000F8D47 /* NSObject+Async.m */,
+				A1A55F391624D43B00ABAF09 /* NSString+UUID.h */,
+				A1A55F3A1624D43B00ABAF09 /* NSString+UUID.m */,
 				A10A5B5615F0DB8E001A8184 /* Vendor */,
 			);
 			name = Utilities;
@@ -927,6 +932,7 @@
 				A168E23C15F321FC00B181C8 /* WAImagePickerHelper.m in Sources */,
 				A17A698615F6DC59000F8D47 /* NSObject+Async.m in Sources */,
 				A184847915F71F10000FB460 /* DDProgressView.m in Sources */,
+				A1A55F3B1624D43B00ABAF09 /* NSString+UUID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

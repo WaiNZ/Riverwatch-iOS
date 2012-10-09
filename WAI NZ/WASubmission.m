@@ -10,6 +10,7 @@
 
 #import "UIAlertView+Blocks.h"
 #import <RestKit/RestKit.h>
+#import "WAAppDelegate.h"
 
 
 #define POST_UPDATE_NOTIFICATION [[NSNotificationCenter defaultCenter] postNotificationName:kWASubmissionUpdatedNotification object:self]
@@ -63,7 +64,7 @@ NSString *const kWASubmissionUpdatedNotification = @"kWASubmissionUpdatedNotific
         email = @"";
         anonymous = NO;
         location = nil;
-		udid = @"";
+		udid = [WAAppDelegate uuid];
     }
     return self;
 }

@@ -14,10 +14,25 @@
 #import "WASubmission.h"
 #import "WASubmissionResponse.h"
 #import "WAStyleHelper.h"
+#import "NSString+UUID.h"
+
+#define UUID_USER_DEFAULTS_KEY @"App_UUID"
 
 @implementation WAAppDelegate
 
++ (NSString *)uuid {
+	return [[NSUserDefaults standardUserDefaults] objectForKey:UUID_USER_DEFAULTS_KEY];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	// UUID setup
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:UUID_USER_DEFAULTS_KEY] == nil) {
+        [defaults setObject:[NSString uuid] forKey:UUID_USER_DEFAULTS_KEY];
+        [defaults synchronize];
+    }
+	
 	// Restkit setup
 	[self configureRestKitWithBaseURL:kRootURL];
 	
