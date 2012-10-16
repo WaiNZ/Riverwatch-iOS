@@ -18,7 +18,9 @@
  		(WAAppDelegate *)[UIApplication sharedApplication].delegate
  
  */
-@interface WAAppDelegate : UIResponder <UIApplicationDelegate>
+@interface WAAppDelegate : UIResponder <UIApplicationDelegate, UIGestureRecognizerDelegate> {
+	UIView *touchView;
+}
 
 /**
  Configure restkit with the mappings and routings required

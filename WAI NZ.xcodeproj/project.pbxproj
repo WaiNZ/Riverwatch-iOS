@@ -37,6 +37,7 @@
 		A10A5B5D15F0E8B8001A8184 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = A10A5B5815F0E8B8001A8184 /* UIImage+Alpha.m */; };
 		A10A5B5E15F0E8B8001A8184 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A10A5B5A15F0E8B8001A8184 /* UIImage+Resize.m */; };
 		A10A5B5F15F0E8B8001A8184 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = A10A5B5C15F0E8B8001A8184 /* UIImage+RoundedCorner.m */; };
+		A10B82DB162BDE12003D1387 /* WPTouchStatusGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B82D9162BDE12003D1387 /* WPTouchStatusGestureRecognizer.m */; };
 		A10C5C1615DB054B0028767F /* WASubmissionOverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A10C5C1415DB054B0028767F /* WASubmissionOverviewViewController.m */; };
 		A10C5C1715DB054B0028767F /* WASubmissionOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A10C5C1515DB054B0028767F /* WASubmissionOverviewViewController.xib */; };
 		A1216AAB15FC2FAC00D43C57 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1216AAA15FC2FAC00D43C57 /* libOCMock.a */; };
@@ -98,7 +99,6 @@
 		A1B90F8C15EDDD4F003419AF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B90F8B15EDDD4F003419AF /* Security.framework */; };
 		A1B90F8E15EDDFCD003419AF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B90F8D15EDDFCD003419AF /* QuartzCore.framework */; };
 		A1B90F9D15EDDFF0003419AF /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B90F9C15EDDFF0003419AF /* MobileCoreServices.framework */; };
-		A1C0C57815D77A2F00A25C58 /* Tools in Resources */ = {isa = PBXBuildFile; fileRef = A1C0C57715D77A2F00A25C58 /* Tools */; };
 		A1EB129115D76037004ECF71 /* WAFakeImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1EB128F15D76037004ECF71 /* WAFakeImagePickerController.m */; };
 		A1F0299C15E08FAF00BC9B28 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1F0299B15E08FAF00BC9B28 /* AssetsLibrary.framework */; };
 		A1F029A015E0956700BC9B28 /* NSDate+TimeConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F0299F15E0956700BC9B28 /* NSDate+TimeConversions.m */; };
@@ -192,6 +192,8 @@
 		A10A5B5A15F0E8B8001A8184 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		A10A5B5B15F0E8B8001A8184 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		A10A5B5C15F0E8B8001A8184 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		A10B82D9162BDE12003D1387 /* WPTouchStatusGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPTouchStatusGestureRecognizer.m; sourceTree = "<group>"; };
+		A10B82DA162BDE12003D1387 /* WPTouchStatusGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPTouchStatusGestureRecognizer.h; sourceTree = "<group>"; };
 		A10C5C1315DB054B0028767F /* WASubmissionOverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WASubmissionOverviewViewController.h; sourceTree = "<group>"; };
 		A10C5C1415DB054B0028767F /* WASubmissionOverviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WASubmissionOverviewViewController.m; sourceTree = "<group>"; };
 		A10C5C1515DB054B0028767F /* WASubmissionOverviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WASubmissionOverviewViewController.xib; sourceTree = "<group>"; };
@@ -417,6 +419,8 @@
 			children = (
 				A12A549815D741980025D32A /* WAAppDelegate.h */,
 				A12A549915D741980025D32A /* WAAppDelegate.m */,
+				A10B82D9162BDE12003D1387 /* WPTouchStatusGestureRecognizer.m */,
+				A10B82DA162BDE12003D1387 /* WPTouchStatusGestureRecognizer.h */,
 				A1EB128C15D76019004ECF71 /* Utilities */,
 				A12A54BC15D7420B0025D32A /* Controllers */,
 				A12A54E115D7478A0025D32A /* Models */,
@@ -825,7 +829,6 @@
 				A12A54CF15D742EA0025D32A /* WASubmitViewController.xib in Resources */,
 				A12A54DA15D743480025D32A /* WASubmissionDescriptionViewController.xib in Resources */,
 				A12A54E015D7438D0025D32A /* WASubmissionPhotoGalleryViewController.xib in Resources */,
-				A1C0C57815D77A2F00A25C58 /* Tools in Resources */,
 				A10C5C1715DB054B0028767F /* WASubmissionOverviewViewController.xib in Resources */,
 				A1B8C9DD15E466720027D9D3 /* icon_57.png in Resources */,
 				A1B8C9DE15E466720027D9D3 /* icon_72.png in Resources */,
@@ -933,6 +936,7 @@
 				A17A698615F6DC59000F8D47 /* NSObject+Async.m in Sources */,
 				A184847915F71F10000FB460 /* DDProgressView.m in Sources */,
 				A1A55F3B1624D43B00ABAF09 /* NSString+UUID.m in Sources */,
+				A10B82DB162BDE12003D1387 /* WPTouchStatusGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
