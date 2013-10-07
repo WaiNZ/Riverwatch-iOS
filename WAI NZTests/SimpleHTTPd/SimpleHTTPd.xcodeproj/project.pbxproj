@@ -1,0 +1,313 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 44;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A157082715F9A5AF00E45E61 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A157082615F9A5AF00E45E61 /* Foundation.framework */; };
+		A157083215F9A5D500E45E61 /* SimpleHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1BB2AB0CEDCFED00DA5506 /* SimpleHTTPConnection.m */; };
+		A157083315F9A5D500E45E61 /* SimpleHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1BB2AD0CEDCFED00DA5506 /* SimpleHTTPRequest.m */; };
+		A157083415F9A5D500E45E61 /* SimpleHTTPResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1BB2AF0CEDCFED00DA5506 /* SimpleHTTPResponder.m */; };
+		A157083515F9A5D500E45E61 /* SimpleHTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1BB2B10CEDCFED00DA5506 /* SimpleHTTPResponse.m */; };
+		A157083615F9A5D500E45E61 /* SimpleHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1BB2B30CEDCFED00DA5506 /* SimpleHTTPServer.m */; };
+		A182BDE715F9A8A4003A87DF /* SimpleHTTPConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = FA1BB2AA0CEDCFED00DA5506 /* SimpleHTTPConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A182BDE815F9A8A4003A87DF /* SimpleHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = FA1BB2AC0CEDCFED00DA5506 /* SimpleHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A182BDE915F9A8A4003A87DF /* SimpleHTTPResponder.h in Headers */ = {isa = PBXBuildFile; fileRef = FA1BB2AE0CEDCFED00DA5506 /* SimpleHTTPResponder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A182BDEA15F9A8A4003A87DF /* SimpleHTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = FA1BB2B00CEDCFED00DA5506 /* SimpleHTTPResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A182BDEB15F9A8A4003A87DF /* SimpleHTTPServer.h in Headers */ = {isa = PBXBuildFile; fileRef = FA1BB2B20CEDCFED00DA5506 /* SimpleHTTPServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A182BDEC15F9A8A4003A87DF /* SimpleHTTPd.h in Headers */ = {isa = PBXBuildFile; fileRef = FA1BB2FD0CEDD2AB00DA5506 /* SimpleHTTPd.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A157082215F9A5AF00E45E61 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A157082415F9A5AF00E45E61 /* libSimpleHTTPd.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSimpleHTTPd.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A157082615F9A5AF00E45E61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		FA1BB2AA0CEDCFED00DA5506 /* SimpleHTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleHTTPConnection.h; sourceTree = "<group>"; };
+		FA1BB2AB0CEDCFED00DA5506 /* SimpleHTTPConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleHTTPConnection.m; sourceTree = "<group>"; };
+		FA1BB2AC0CEDCFED00DA5506 /* SimpleHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleHTTPRequest.h; sourceTree = "<group>"; };
+		FA1BB2AD0CEDCFED00DA5506 /* SimpleHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleHTTPRequest.m; sourceTree = "<group>"; };
+		FA1BB2AE0CEDCFED00DA5506 /* SimpleHTTPResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleHTTPResponder.h; sourceTree = "<group>"; };
+		FA1BB2AF0CEDCFED00DA5506 /* SimpleHTTPResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleHTTPResponder.m; sourceTree = "<group>"; };
+		FA1BB2B00CEDCFED00DA5506 /* SimpleHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleHTTPResponse.h; sourceTree = "<group>"; };
+		FA1BB2B10CEDCFED00DA5506 /* SimpleHTTPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleHTTPResponse.m; sourceTree = "<group>"; };
+		FA1BB2B20CEDCFED00DA5506 /* SimpleHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleHTTPServer.h; sourceTree = "<group>"; };
+		FA1BB2B30CEDCFED00DA5506 /* SimpleHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleHTTPServer.m; sourceTree = "<group>"; };
+		FA1BB2FD0CEDD2AB00DA5506 /* SimpleHTTPd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleHTTPd.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A157082115F9A5AF00E45E61 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A157082715F9A5AF00E45E61 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A157082415F9A5AF00E45E61 /* libSimpleHTTPd.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* SimpleHTTPd */ = {
+			isa = PBXGroup;
+			children = (
+				FA1BB2AA0CEDCFED00DA5506 /* SimpleHTTPConnection.h */,
+				FA1BB2AB0CEDCFED00DA5506 /* SimpleHTTPConnection.m */,
+				FA1BB2AC0CEDCFED00DA5506 /* SimpleHTTPRequest.h */,
+				FA1BB2AD0CEDCFED00DA5506 /* SimpleHTTPRequest.m */,
+				FA1BB2AE0CEDCFED00DA5506 /* SimpleHTTPResponder.h */,
+				FA1BB2AF0CEDCFED00DA5506 /* SimpleHTTPResponder.m */,
+				FA1BB2B00CEDCFED00DA5506 /* SimpleHTTPResponse.h */,
+				FA1BB2B10CEDCFED00DA5506 /* SimpleHTTPResponse.m */,
+				FA1BB2B20CEDCFED00DA5506 /* SimpleHTTPServer.h */,
+				FA1BB2B30CEDCFED00DA5506 /* SimpleHTTPServer.m */,
+				FA1BB2FD0CEDD2AB00DA5506 /* SimpleHTTPd.h */,
+				089C1665FE841158C02AAC07 /* Resources */,
+				A157082515F9A5AF00E45E61 /* Frameworks */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = SimpleHTTPd;
+			sourceTree = "<group>";
+		};
+		089C1665FE841158C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8DC2EF5A0486A6940098B216 /* Info.plist */,
+				089C1666FE841158C02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A157082515F9A5AF00E45E61 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A157082615F9A5AF00E45E61 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A182BDE615F9A88E003A87DF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A182BDE715F9A8A4003A87DF /* SimpleHTTPConnection.h in Headers */,
+				A182BDE815F9A8A4003A87DF /* SimpleHTTPRequest.h in Headers */,
+				A182BDE915F9A8A4003A87DF /* SimpleHTTPResponder.h in Headers */,
+				A182BDEA15F9A8A4003A87DF /* SimpleHTTPResponse.h in Headers */,
+				A182BDEB15F9A8A4003A87DF /* SimpleHTTPServer.h in Headers */,
+				A182BDEC15F9A8A4003A87DF /* SimpleHTTPd.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		A157082315F9A5AF00E45E61 /* SimpleHTTPd */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A157082F15F9A5AF00E45E61 /* Build configuration list for PBXNativeTarget "SimpleHTTPd" */;
+			buildPhases = (
+				A157082015F9A5AF00E45E61 /* Sources */,
+				A157082115F9A5AF00E45E61 /* Frameworks */,
+				A182BDE615F9A88E003A87DF /* Headers */,
+				A157082215F9A5AF00E45E61 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimpleHTTPd;
+			productName = SimpleHTTPd;
+			productReference = A157082415F9A5AF00E45E61 /* libSimpleHTTPd.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "SimpleHTTPd" */;
+			compatibilityVersion = "Xcode 3.0";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* SimpleHTTPd */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A157082315F9A5AF00E45E61 /* SimpleHTTPd */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A157082015F9A5AF00E45E61 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A157083215F9A5D500E45E61 /* SimpleHTTPConnection.m in Sources */,
+				A157083315F9A5D500E45E61 /* SimpleHTTPRequest.m in Sources */,
+				A157083415F9A5D500E45E61 /* SimpleHTTPResponder.m in Sources */,
+				A157083515F9A5D500E45E61 /* SimpleHTTPResponse.m in Sources */,
+				A157083615F9A5D500E45E61 /* SimpleHTTPServer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C1666FE841158C02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C1667FE841158C02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB91B208733DA50010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+			};
+			name = Debug;
+		};
+		1DEB91B308733DA50010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+			};
+			name = Release;
+		};
+		A157083015F9A5AF00E45E61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/SimpleHTTPd.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = ../../Headers/SimpleHTTPd/Private;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = ../../Headers/SimpleHTTPd;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A157083115F9A5AF00E45E61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/SimpleHTTPd.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = ../../Headers/SimpleHTTPd/Private;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = ../../Headers/SimpleHTTPd;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "SimpleHTTPd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91B208733DA50010E9CD /* Debug */,
+				1DEB91B308733DA50010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A157082F15F9A5AF00E45E61 /* Build configuration list for PBXNativeTarget "SimpleHTTPd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A157083015F9A5AF00E45E61 /* Debug */,
+				A157083115F9A5AF00E45E61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}
